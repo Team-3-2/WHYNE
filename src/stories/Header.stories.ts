@@ -1,7 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-
-import { fn } from 'storybook/test';
-
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import { Header } from './Header';
 
 const meta = {
@@ -14,9 +11,9 @@ const meta = {
     layout: 'fullscreen',
   },
   args: {
-    onLogin: fn(),
-    onLogout: fn(),
-    onCreateAccount: fn(),
+    onLogin: () => {},
+    onLogout: () => {},
+    onCreateAccount: () => {},
   },
 } satisfies Meta<typeof Header>;
 
