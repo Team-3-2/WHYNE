@@ -5,13 +5,13 @@
 - 목표: 프로젝트 완성
 
 ## 팀원 정보 및 역할
-- 준열(대장님): 팀 리딩, 랜딩 페이지, 와인 상세 페이지
+- 준열: 팀 리딩, 랜딩 페이지, 와인 상세 페이지
 - 휘태: 로그인, 회원가입, 리뷰 남기기/와인 등록하기 모달
 - 연수: 마이페이지(내가 등록한 와인), notion 문서화
 - 지권: 마이페이지(내가 쓴 후기)
 - 정훈: 와인 목록 페이지
 
-> Wiki 준비중
+> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
 
 ## Core Time
 - 데일리 스크럼  
@@ -19,15 +19,15 @@
   - 화요일 일요일: 오후 1시 30분 (20~30분 진행)
 - 집중 코딩 (모각코)  
   - 9:00 ~ 18:00 (zep 활용)
-
-> Wiki 준비중
+ 
+> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
 
 ## Branch 전략
 - `main` → 배포
 - `develop` → 통합 브랜치
 - `feature/*`, `design/*`, `chore/*` → 작업 브랜치 → PR → develop → main
 
-> Wiki 준비중
+> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%EB%B8%8C%EB%9E%9C%EC%B9%98-%EC%BB%A8%EB%B2%A4%EC%85%98)
 
 ## 기술 스택
 - Next.js, React, TypeScript
@@ -36,13 +36,13 @@
 - husky + lint-staged
 - Vercel (배포)
 
-> Wiki 준비중
+> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
 
-## CI/CD
+## 깃허브 액션
 - Vercel 배포  
 - Chromatic으로 Storybook 배포 (develop 기준)  
 
-> Wiki 준비중
+> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%EA%B9%83%ED%97%88%EB%B8%8C-%EC%95%A1%EC%85%98)
 
 ## 프로젝트 관리
 - README: 프로젝트 개요 / 기술 스택 / 실행 방법
@@ -50,7 +50,7 @@
 - Notion: 회의록, 멘토링 피드백, 참고 자료
 - GitHub Project: 일정 / TODO 관리
 
-> Wiki 준비중
+> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B4%80%EB%A6%AC)
 
 ## 실행 방법
 ```bash
@@ -81,4 +81,4 @@ src
  ┣ types        # 전역 타입 정의 (TypeScript 인터페이스, 타입)
  ┗ utils        # 공통 유틸리티 함수
 ```
-> Wiki 준비중
+> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%ED%8F%B4%EB%8D%94-%EA%B5%AC%EC%A1%B0)
