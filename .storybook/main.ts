@@ -1,19 +1,19 @@
-import type { StorybookConfig } from '@storybook/nextjs';
+import type { StorybookConfig } from "@storybook/nextjs";
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|mdc|ts|tsx)'],
-  addons: ['@storybook/addon-a11y', '@storybook/addon-docs'],
+  stories: ["../src/**/*.stories.@(js|jsx|mdc|ts|tsx)"],
+  addons: ["@storybook/addon-a11y", "@storybook/addon-docs"],
   framework: {
-    name: '@storybook/nextjs',
+    name: "@storybook/nextjs",
     options: {
       builder: {
-        name: '@storybook/builder-webpack5',
+        name: "@storybook/builder-webpack5",
         options: {},
       },
     },
   },
   typescript: {
     check: false,
-    reactDocgen: 'react-docgen-typescript',
+    reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) =>

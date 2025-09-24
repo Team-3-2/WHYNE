@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
-import { Page } from './Page';
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { Page } from "./Page";
 
 const meta: Meta<typeof Page> = {
-  title: 'Example/Page',
+  title: "Example/Page",
   component: Page,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 };
 
