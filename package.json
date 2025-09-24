@@ -9,7 +9,8 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "axios": "^1.12.2",
@@ -31,6 +32,7 @@
     "@types/react-dom": "^19",
     "ajv": "^8.17.1",
     "autoprefixer": "^10.4.21",
+    "chromatic": "^13.2.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
     "eslint-plugin-storybook": "^9.1.8",
