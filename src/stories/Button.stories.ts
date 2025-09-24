@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
-import { Button } from './Button';
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { Button } from "./Button";
 
 const meta: Meta<typeof Button> = {
-  title: 'Example/Button',
+  title: "Example/Button",
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
-    onClick: { action: 'clicked' }, // fn() 대신 { action: 'clicked' } 사용
+    onClick: { action: "clicked" }, // fn() 대신 { action: 'clicked' } 사용
   },
 };
 
@@ -19,26 +19,26 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     primary: true,
-    label: 'Button',
+    label: "Button",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    label: 'Button',
+    label: "Button",
   },
 };
 
 export const Large: Story = {
   args: {
-    size: 'large',
-    label: 'Button',
+    size: "large",
+    label: "Button",
   },
 };
 
 export const Small: Story = {
   args: {
-    size: 'small',
-    label: 'Button',
+    size: "small",
+    label: "Button",
   },
 };
