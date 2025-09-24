@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family:
+      var(--font-sf-pro),
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      sans-serif;
+  }
+}
+
+:root {
+  --color-black: #1a1918;
+  --color-white: #ffffff;
+  --color-gray-100: #fafafa;
+  --color-gray-300: #d1d1d1;
+  --color-gray-600: #8c8c8b;
+  --color-gray-800: #484746;
+  --color-primary: #1a1918;
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-primary);
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
