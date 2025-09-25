@@ -13,6 +13,7 @@ export default {
         white: "#FFFFFF",
         default: "#31302F",
         secondary: "#A3A3A3",
+        tertiary: "#BABABA",
         gray100: "#FAFAFA",
         gray300: "#D1D1D1",
         gray600: "#8C8C8B",
