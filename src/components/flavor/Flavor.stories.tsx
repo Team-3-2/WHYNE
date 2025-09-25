@@ -18,9 +18,9 @@ export default meta;
 type Story = StoryObj<typeof Flavor>;
 
 const ITEMS = [
-  { label: "체리", img: "/images/test_flavor.jpg" },
-  { label: "체리", img: "/images/test_flavor.jpg" },
-  { label: "체리", img: "/images/test_flavor.jpg" },
+  { label: "체리", img: "/images/test/test_flavor.jpg" },
+  { label: "체리", img: "/images/test/test_flavor.jpg" },
+  { label: "체리", img: "/images/test/test_flavor.jpg" },
 ];
 
 export const Default: Story = {

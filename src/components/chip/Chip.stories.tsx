@@ -29,7 +29,7 @@ export const Default: Story = {
 export const WithImage: Story = {
   args: {
     label: "후추",
-    img: "/images/test_chip.jpg",
+    img: "/images/test/test_chip.jpg",
   },
   decorators: [
     (Story) => (

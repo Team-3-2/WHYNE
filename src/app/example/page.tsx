@@ -16,16 +16,16 @@ const Page = () => {
       </div>
       <div className="flex-center gap-4">
         <Chip label="후추" />
-        <Chip label="후추" img="/images/test_chip.jpg" />
+        <Chip label="후추" img="/images/test/test_chip.jpg" />
       </div>
       <div>
         <Flavor
           count={5}
           items={[
-            { label: "체리", img: "/images/test_flavor.jpg" },
-            { label: "체리", img: "/images/test_flavor.jpg" },
-            { label: "체리", img: "/images/test_flavor.jpg" },
-            { label: "체리", img: "/images/test_flavor.jpg" },
+            { label: "체리", img: "/images/test/test_flavor.jpg" },
+            { label: "체리", img: "/images/test/test_flavor.jpg" },
+            { label: "체리", img: "/images/test/test_flavor.jpg" },
+            { label: "체리", img: "/images/test/test_flavor.jpg" },
           ]}
         />
       </div>
