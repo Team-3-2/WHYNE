@@ -17,6 +17,11 @@ export default {
         gray800: "#484746",
         primary: "#1A1918",
       },
+      screens: {
+        mobile: { max: "743px" },
+        tablet: { min: "744px", max: "1279px" },
+        pc: { min: "1280px" },
+      },
       fontSize: {
         "title-hero": ["32px", { lineHeight: "46px", fontWeight: "700" }],
         "title-page-md": ["40px", { lineHeight: "52px", fontWeight: "700" }],
