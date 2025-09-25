@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { sfPro } from "./fonts";
 import "./globals.css";
-import { Header } from "@/components";
+import { Gnb } from "@/components";
 
 export const metadata: Metadata = {
   title: "Wine App",
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={sfPro.variable}>
       <body className="mt-20">
-        <Header />
+        <Gnb />
         {children}
       </body>
     </html>

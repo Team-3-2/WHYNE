@@ -1,18 +1,18 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import Header from "./Header";
+import Gnb from "./Gnb";
 
 const meta = {
-  title: "Components/Header",
-  component: Header,
+  title: "Components/Gnb",
+  component: Gnb,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof Gnb>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
-  render: () => <Header />,
+  render: () => <Gnb />,
 };
