@@ -1,13 +1,15 @@
+import { AromaKey } from "@/types/AromaType";
 import Image from "next/image";
+import { aromaMap } from "./aroma-map";
 
 interface FlavorItemProps {
-  label: string;
-  img: string;
+  aroma: AromaKey;
 }
 
-const FlavorItem = ({ label, img }: FlavorItemProps) => {
+const FlavorItem = ({ aroma }: FlavorItemProps) => {
+  const { img, label } = aromaMap[aroma];
   return (
-    <div className="flex w-[90px] flex-col items-center gap-[14px] tablet:w-[100px] pc:w-[100px]">
+    <div className="flex shrink-0 flex-col items-center gap-[14px] tablet:w-[100px] pc:w-[100px]">
       <Image
         src={img}
         alt={label}
@@ -22,7 +24,7 @@ const FlavorItem = ({ label, img }: FlavorItemProps) => {
 
 interface FlavorProps {
   count: number;
-  items: FlavorItemProps[];
+  items: AromaKey[];
 }
 
 const Flavor = ({ count, items }: FlavorProps) => {
@@ -40,9 +42,7 @@ const Flavor = ({ count, items }: FlavorProps) => {
       <div className="scrollbar-hide w-[calc(3*90px+2*14px+16px)] overflow-x-auto tablet:w-[calc(4*100px+2*14px+2*16px)] pc:w-[calc(4*100px+2*14px+2*16px)]">
         <div className="flex flex-nowrap gap-4">
           {items.map((item, index) => (
-            <div key={index} className="shrink-0">
-              <FlavorItem label={item.label} img={item.img} />
-            </div>
+            <FlavorItem aroma={item} key={index} />
           ))}
         </div>
       </div>

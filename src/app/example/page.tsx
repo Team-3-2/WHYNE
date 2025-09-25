@@ -22,10 +22,25 @@ const Page = () => {
         <Flavor
           count={5}
           items={[
-            { label: "체리", img: "/images/test/test_flavor.jpg" },
-            { label: "체리", img: "/images/test/test_flavor.jpg" },
-            { label: "체리", img: "/images/test/test_flavor.jpg" },
-            { label: "체리", img: "/images/test/test_flavor.jpg" },
+            "CHERRY",
+            "OAK",
+            "VANILLA",
+            "PEPPER",
+            "BAKING",
+            "GRASS",
+            "APPLE",
+            "PEACH",
+            "CITRUS",
+            "TROPICAL",
+            "MINERAL",
+            "FLOWER",
+            "TOBACCO",
+            "EARTH",
+            "CHOCOLATE",
+            "SPICE",
+            "CARAMEL",
+            "LEATHER",
+            "EMPTY",
           ]}
         />
       </div>

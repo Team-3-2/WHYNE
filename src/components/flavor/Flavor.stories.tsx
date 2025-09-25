@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import Flavor from "./Flavor";
+import { AromaKey } from "@/types/AromaType";
 
 const meta: Meta<typeof Flavor> = {
   title: "Components/Flavor",
@@ -10,18 +11,17 @@ const meta: Meta<typeof Flavor> = {
   tags: ["autodocs"],
   argTypes: {
     count: { control: "number", description: "참여 인원 수 표시" },
-    items: { control: "object", description: "향 아이템 목록 (label, img)" },
+    items: {
+      control: "object",
+      description: "향 아이템 키 목록 (AromaKey[])",
+    },
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof Flavor>;
 
-const ITEMS = [
-  { label: "체리", img: "/images/test/test_flavor.jpg" },
-  { label: "체리", img: "/images/test/test_flavor.jpg" },
-  { label: "체리", img: "/images/test/test_flavor.jpg" },
-];
+const ITEMS: AromaKey[] = ["CHERRY", "PEPPER", "EMPTY"];
 
 export const Default: Story = {
   args: {
