@@ -11,13 +11,14 @@ export default {
       colors: {
         black: "#111111",
         white: "#FFFFFF",
-        default: "#31302F",
-        secondary: "#A3A3A3",
         gray100: "#FAFAFA",
         gray300: "#D1D1D1",
         gray600: "#8C8C8B",
         gray800: "#484746",
         primary: "#1A1918",
+        default: "#31302F",
+        secondary: "#A3A3A3",
+        whiteHover: "#F2F2F2",
       },
       screens: {
         mobile: { max: "743px" },
