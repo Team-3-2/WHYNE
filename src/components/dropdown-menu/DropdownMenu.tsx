@@ -1,20 +1,28 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import { cn } from "@/lib/utils";
 
+type Size = "small" | "large";
 interface DropdownMenuProps {
-  size: "small" | "large";
+  size?: Size;
 }
 
-const DropdownMenu = ({ size = "large" }: DropdownMenuProps) => {
+const style = {
+  itemBase:
+    "flex-center h-full w-full rounded-md text-[16px] leading-[26px] text-gray800 transition-colors hover:bg-whiteHover active:bg-gray200",
+};
+
+function DropdownMenu({ size = "large" }: DropdownMenuProps) {
   const pathname = usePathname();
 
-  const isActive = (path: string) => {
-    return pathname === path;
-  };
+  const isActive = (href?: string) => Boolean(href && pathname === href);
+
+  const items: { label: string; href?: string; onClick?: () => void }[] = [
+    { label: "마이페이지", href: "/my-page" },
+    { label: "로그아웃", onClick: () => console.log("logout") },
+  ];
 
   return (
     <div
@@ -23,20 +31,26 @@ const DropdownMenu = ({ size = "large" }: DropdownMenuProps) => {
         size === "small" ? "h-[92px] w-[101px]" : "h-[90px] w-[126px]"
       )}
     >
-      <Link
-        href="/my-page"
-        className={cn(
-          "flex-center h-full w-full rounded-md text-[16px] leading-[26px] text-gray800 transition-colors hover:bg-whiteHover",
-          isActive("/my-page") && "bg-gray800 text-white"
-        )}
-      >
-        마이페이지
-      </Link>
-      <button className="flex-center active:bg-gray200 h-full w-full rounded-md text-[16px] leading-[26px] text-gray800 transition-colors hover:bg-whiteHover">
-        로그아웃
-      </button>
+      {items.map(({ label, href, onClick }) =>
+        href ? (
+          <Link
+            key={label}
+            href={href}
+            className={cn(
+              style.itemBase,
+              isActive(href) && "bg-gray800 text-white"
+            )}
+          >
+            {label}
+          </Link>
+        ) : (
+          <button key={label} onClick={onClick} className={style.itemBase}>
+            {label}
+          </button>
+        )
+      )}
     </div>
   );
-};
+}
 
 export default DropdownMenu;
