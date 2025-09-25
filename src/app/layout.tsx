@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { sfPro } from "./fonts";
 import "./globals.css";
+import { Header } from "@/components";
 
 export const metadata: Metadata = {
   title: "Wine App",
@@ -13,8 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={sfPro.variable}>
-      <body className="antialiased">{children}</body>
+    <html lang="ko" className={sfPro.variable}>
+      <body className="mt-20">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
