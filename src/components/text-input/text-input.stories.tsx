@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import { ModalTextInput, TextInput } from "./text-input";
+import TextInput from "./text-input";
 
 const meta: Meta<typeof TextInput> = {
   title: "Components/text-input",
@@ -42,8 +42,10 @@ export const LongText: Story = {
 };
 
 export const ModalInputError: Story = {
-  render: (args) => <ModalTextInput {...args} />,
   args: {
+    title: "",
+    placeholder: "",
     errorMsg: "에러가 발생했습니다",
+    variant: "modal",
   },
 };
