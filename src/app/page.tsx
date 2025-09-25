@@ -1,4 +1,25 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+const fetchPost = async (): Promise<Post[]> => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  return response.json();
+};
+
 export default function Home() {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: fetchPost,
+  });
+
   return (
     <main className="min-h-screen bg-white p-8">
       <div className="mx-auto max-w-6xl space-y-12">
@@ -189,6 +210,19 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* tanstack query test */}
+        <section>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <div>
+              {data?.map((post) => {
+                return <div key={post.id}>Title: {post.title}</div>;
+              })}
+            </div>
+          )}
         </section>
       </div>
     </main>
