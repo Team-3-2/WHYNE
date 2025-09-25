@@ -1,9 +1,9 @@
-import { DropdownMenu, Header } from "@/components";
+import { Chip, DropdownMenu, Header } from "@/components";
 import React from "react";
 
 const Page = () => {
   return (
-    <div className="flex-col-center">
+    <div className="flex-col-center gap-4">
       <Header
         review="5,446"
         title="Sentinel Carbernet Sauvignon 2016"
@@ -13,6 +13,10 @@ const Page = () => {
       <div className="flex-center gap-4">
         <DropdownMenu size="small" />
         <DropdownMenu size="large" />
+      </div>
+      <div className="flex-center gap-4">
+        <Chip label="후추" />
+        <Chip label="후추" img="/images/test_chip.jpg" />
       </div>
     </div>
   );
