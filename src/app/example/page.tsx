@@ -1,4 +1,4 @@
-import { Chip, DropdownMenu, Header } from "@/components";
+import { Chip, DropdownMenu, Flavor, Header } from "@/components";
 import React from "react";
 
 const Page = () => {
@@ -17,6 +17,17 @@ const Page = () => {
       <div className="flex-center gap-4">
         <Chip label="후추" />
         <Chip label="후추" img="/images/test_chip.jpg" />
+      </div>
+      <div>
+        <Flavor
+          count={5}
+          items={[
+            { label: "체리", img: "/images/test_flavor.jpg" },
+            { label: "체리", img: "/images/test_flavor.jpg" },
+            { label: "체리", img: "/images/test_flavor.jpg" },
+            { label: "체리", img: "/images/test_flavor.jpg" },
+          ]}
+        />
       </div>
     </div>
   );
