@@ -13,11 +13,13 @@ export default {
         white: "#FFFFFF",
         default: "#31302F",
         secondary: "#A3A3A3",
+        tertiary: "#BABABA",
         gray100: "#FAFAFA",
         gray300: "#D1D1D1",
         gray600: "#8C8C8B",
         gray800: "#484746",
         primary: "#1A1918",
+        danger: "#ff6b6b",
       },
       screens: {
         mobile: { max: "743px" },
