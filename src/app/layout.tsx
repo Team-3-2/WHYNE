@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={sfPro.variable}>
-      <body className="mt-20">
+      <body className="mt-32">
         <Gnb />
         {children}
       </body>
