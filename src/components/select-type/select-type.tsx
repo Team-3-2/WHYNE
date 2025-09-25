@@ -25,7 +25,7 @@ const TypeInput = ({ name }: { name: WineType }) => {
     <div
       className={cn(
         "h-[38px]",
-        "rounded-full border border-border-secondary",
+        "border-border-secondary rounded-full border",
         "flex items-center",
         "bg-white",
         "pc:h-[48px]"
@@ -45,7 +45,7 @@ const TypeInput = ({ name }: { name: WineType }) => {
           "flex items-center justify-center gap-[6px]",
           "cursor-pointer rounded-full",
           "text-default hover:bg-gray100",
-          "peer peer-checked:bg-gray800 peer-checked:text-white"
+          "peer-checked:bg-gray800 peer peer-checked:text-white"
         )}
       >
         <Image
@@ -68,9 +68,9 @@ const SelectType = ({ isError, ...props }: SelectTypeValue) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
-        <p className="text-body-sm tracking-[-0.02em] text-default">타입</p>
+        <p className="text-default text-body-sm tracking-[-0.02em]">타입</p>
         {isError && (
-          <p className="text-component-notes-md tracking-[-0.02em] text-danger">
+          <p className="text-danger text-component-notes-md tracking-[-0.02em]">
             와인 타입은 필수 입력이에요
           </p>
         )}
