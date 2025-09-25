@@ -4,17 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-type Size = "small" | "large";
-interface DropdownMenuProps {
-  size?: Size;
-}
-
 const style = {
   itemBase:
     "flex-center h-full w-full rounded-md text-[16px] leading-[26px] text-gray800 transition-colors hover:bg-whiteHover active:bg-gray200",
 };
 
-function DropdownMenu({ size = "large" }: DropdownMenuProps) {
+function DropdownMenu() {
   const pathname = usePathname();
 
   const isActive = (href?: string) => Boolean(href && pathname === href);
@@ -28,7 +23,9 @@ function DropdownMenu({ size = "large" }: DropdownMenuProps) {
     <div
       className={cn(
         "flex-col-center rounded-[4px] border border-gray300 p-[3px] shadow-md",
-        size === "small" ? "h-[92px] w-[101px]" : "h-[90px] w-[126px]"
+        "h-[92px] w-[101px]",
+        "tablet:h-[90px] tablet:w-[126px]",
+        "pc:h-[90px] pc:w-[126px]"
       )}
     >
       {items.map(({ label, href, onClick }) =>

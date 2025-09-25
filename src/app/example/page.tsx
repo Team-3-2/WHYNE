@@ -11,8 +11,7 @@ const Page = () => {
         price="64,990"
       />
       <div className="flex-center gap-4">
-        <DropdownMenu size="small" />
-        <DropdownMenu size="large" />
+        <DropdownMenu />
       </div>
       <div className="flex-center gap-4">
         <Chip label="후추" />
