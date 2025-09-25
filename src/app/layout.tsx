@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { sfPro } from "./fonts";
 import "./globals.css";
+import { Gnb } from "@/components";
 import QueryProvider from "@/providers/query-provider";
 
 export const metadata: Metadata = {
@@ -14,9 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={sfPro.variable}>
-      <body className="antialiased">
-        <QueryProvider>{children}</QueryProvider>
+    <html lang="ko" className={sfPro.variable}>
+      <body className="mt-32">
+        <QueryProvider>
+          <Gnb />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );
