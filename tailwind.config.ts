@@ -13,7 +13,6 @@ export default {
         white: "#FFFFFF",
         default: "#31302F",
         secondary: "#A3A3A3",
-        tertiary: "#BABABA",
         gray100: "#FAFAFA",
         gray300: "#D1D1D1",
         gray600: "#8C8C8B",
@@ -22,6 +21,10 @@ export default {
         neutral200: "#F2F2F2",
         neutral400: "#BABABA",
         danger: "#ff6b6b",
+        border: {
+          secondary: "#F2F2F2",
+          tertiary: "#BABABA",
+        },
       },
       screens: {
         mobile: { max: "743px" },
