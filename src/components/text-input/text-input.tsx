@@ -1,13 +1,12 @@
 import { cn } from "@/lib/utils";
 import { ComponentProps } from "react";
+import Icon from "../icon/Icon";
 
 interface InputValue extends ComponentProps<"input"> {
-  placeholder: string;
-  errorMsg: string;
-}
-
-interface TextInputValue extends InputValue {
-  title: string;
+  placeholder?: string;
+  isError?: boolean;
+  errorMsg?: string;
+  title?: string;
   variant?: "default" | "modal";
 }
 
@@ -17,7 +16,13 @@ interface TextInputValue extends InputValue {
  * @param errorMsg 표출할 에러 메시지
  * @returns
  */
-const Input = ({ placeholder, errorMsg, className, ...props }: InputValue) => {
+const Input = ({
+  placeholder,
+  isError,
+  errorMsg,
+  className,
+  ...props
+}: InputValue) => {
   {
     /* TODO(휘태): 에러 아이콘 넣기 */
   }
@@ -28,11 +33,11 @@ const Input = ({ placeholder, errorMsg, className, ...props }: InputValue) => {
         "w-[303px]",
         "px-4 py-3",
         "rounded border border-gray-300",
-        "text-default text-[14px] leading-5 tracking-[0.02em]",
+        "text-[14px] leading-5 tracking-[0.02em] text-gray-900",
         "placeholder:text-tertiary placeholder:text-body-sm placeholder:font-normal",
         "focus:outline-none",
         "pc:w-[400px] pc:text-[16px] pc:leading-6 pc:placeholder:text-body-md pc:placeholder:font-normal",
-        errorMsg && "border-danger border-2"
+        isError && "border-2 border-red-400"
       )}
       type="text"
       placeholder={placeholder || "내용을 입력해주세요"}
@@ -52,46 +57,85 @@ const Input = ({ placeholder, errorMsg, className, ...props }: InputValue) => {
 const TextInput = ({
   title,
   placeholder,
+  isError,
   errorMsg,
   variant = "default",
-}: TextInputValue) => {
+  ...props
+}: InputValue) => {
   return (
     <>
       <div className={cn("flex flex-col gap-2")}>
+        {/* 타입이 모달일 때 */}
         {variant === "modal" && (
           <>
             <div className="flex gap-2">
               <label
                 className={
-                  "text-body-sm font-bold tracking-[0.02em] text-gray-800"
+                  "text-body-sm font-bold tracking-[0.02em] text-gray-950"
                 }
               >
                 {title || "제목"}
               </label>
-              {errorMsg && (
-                <p className="text-danger text-body-sm">{errorMsg}</p>
+              {isError && (
+                <p className="text-body-sm text-red-400">{errorMsg}</p>
               )}
             </div>
-            <Input placeholder={placeholder} errorMsg={errorMsg} />
+            <div className="relative flex w-[303px] items-center pc:w-[400px]">
+              <Input
+                placeholder={placeholder}
+                errorMsg={errorMsg}
+                isError={isError}
+                {...props}
+              />
+              <Icon
+                className="absolute right-0 mr-[14px]"
+                icon="AlertIcon"
+                color="danger400"
+                size={"sm"}
+              />
+            </div>
           </>
         )}
 
+        {/* 기본 타입일 때 */}
         {variant === "default" && (
           <>
             <label
               htmlFor="text-input"
               className={
-                "text-body-sm font-bold tracking-[0.02em] text-gray-800"
+                "text-body-sm font-bold tracking-[0.02em] text-gray-950"
               }
             >
               {title || "제목"}
             </label>
-            <Input placeholder={placeholder} errorMsg={errorMsg} />
+            {isError ? (
+              <div className="relative flex w-[303px] items-center pc:w-[400px]">
+                <Input
+                  placeholder={placeholder}
+                  errorMsg={errorMsg}
+                  isError={isError}
+                  {...props}
+                />
+                <Icon
+                  className="absolute right-0 mr-[14px]"
+                  icon="AlertIcon"
+                  color="danger400"
+                  size={"sm"}
+                />
+              </div>
+            ) : (
+              <Input
+                placeholder={placeholder}
+                errorMsg={errorMsg}
+                isError={isError}
+                {...props}
+              />
+            )}
           </>
         )}
       </div>
-      {variant === "default" && errorMsg && (
-        <p className="text-danger mt-1 text-body-sm">{errorMsg}</p>
+      {variant === "default" && isError && (
+        <p className="mt-1 text-body-sm text-red-400">{errorMsg}</p>
       )}
     </>
   );

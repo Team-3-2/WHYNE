@@ -1,6 +1,6 @@
 "use client";
 
-import { SelectType } from "@/components";
+import { SelectType, TextInput } from "@/components";
 import Header from "@/components/header/Header";
 import React, { ChangeEvent } from "react";
 
@@ -21,6 +21,17 @@ const Page = () => {
         <SelectType isError={false} onChange={handleChange} />
         <br />
         <SelectType isError={true} />
+      </section>
+
+      <br />
+      <section>
+        <TextInput onChange={handleChange} />
+        <br />
+        <TextInput
+          onChange={handleChange}
+          isError={true}
+          errorMsg="에러입니다"
+        />
       </section>
     </div>
   );
