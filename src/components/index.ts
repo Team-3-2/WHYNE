@@ -5,3 +5,4 @@ export { default as Chip } from "./chip/Chip";
 export { default as Flavor } from "./flavor/Flavor";
 export { TextInput, ModalTextInput } from "./text-input/text-input";
 export { default as SelectType } from "./select-type/select-type";
+export { default as Icon } from "./icon/Icon";

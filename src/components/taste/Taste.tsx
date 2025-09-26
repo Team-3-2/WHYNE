@@ -23,7 +23,7 @@ const Taste = ({ type, data, taste, onChange }: TasteProps) => {
         {/* 왼쪽: type */}
         <div
           className={cn(
-            "truncate rounded-md bg-neutral200 px-1 py-1 text-center text-body-sm text-gray600",
+            "truncate rounded-md bg-gray-200 px-1 py-1 text-center text-body-sm text-gray-600",
             "w-[53px] tablet:w-[70px] pc:w-[70px]"
           )}
           title={type}
@@ -41,7 +41,7 @@ const Taste = ({ type, data, taste, onChange }: TasteProps) => {
           className={cn(
             "truncate px-1 py-1 text-center text-body-sm",
             "w-[68px] tablet:w-[80px] pc:w-[80px]",
-            data === 0 ? "text-neutral400" : "text-black"
+            data === 0 ? "text-gray-400" : "text-black"
           )}
           title={taste}
         >

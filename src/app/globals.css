@@ -42,6 +42,14 @@ body {
   .flex-col-center {
     @apply flex flex-col items-center justify-center;
   }
+
+  [class*="text-"] svg path,
+  [class*="text-"] svg circle,
+  [class*="text-"] svg rect,
+  [class*="text-"] svg polygon {
+    fill: currentColor;
+    /* stroke: currentColor; */
+  }
 }
 
 /* 스크롤바 숨기기 */
