@@ -1,7 +1,13 @@
+"use client";
+
+import { SelectType } from "@/components";
 import Header from "@/components/header/Header";
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 const Page = () => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+  };
   return (
     <div>
       <Header
@@ -11,7 +17,11 @@ const Page = () => {
         price="64,990"
       />
 
-      <section></section>
+      <section>
+        <SelectType isError={false} onChange={handleChange} />
+        <br />
+        <SelectType isError={true} />
+      </section>
     </div>
   );
 };
