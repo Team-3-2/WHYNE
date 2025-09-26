@@ -33,10 +33,10 @@ const BlockGauge = ({
             "flex-1 shrink-0 basis-0",
             index === 0 && "rounded-l-md",
             index === 5 && "rounded-r-md",
-            index < level ? color : "bg-neutral200",
+            index < level ? color : "bg-gray-200",
             onChange && [
               "cursor-pointer hover:opacity-80",
-              "focus:outline-none focus:ring-2 focus:ring-gray600",
+              "focus:outline-none focus:ring-2 focus:ring-gray-600",
             ]
           )}
           onClick={() => handleClick(index)}
