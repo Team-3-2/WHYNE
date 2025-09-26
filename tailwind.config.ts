@@ -19,6 +19,8 @@ export default {
         default: "#31302F",
         secondary: "#A3A3A3",
         whiteHover: "#F2F2F2",
+        neutral200: "#F2F2F2",
+        neutral400: "#BABABA",
       },
       screens: {
         mobile: { max: "743px" },
