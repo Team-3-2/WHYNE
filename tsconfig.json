@@ -27,7 +27,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/app/myprofile/_components/profile-sidebar"
   ],
   "exclude": ["node_modules"]
 }
