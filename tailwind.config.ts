@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        black: "#111111",
+        black: "#1A1918",
         white: "#FFFFFF",
         gray100: "#FAFAFA",
         gray300: "#D1D1D1",
@@ -21,6 +21,32 @@ export default {
         whiteHover: "#F2F2F2",
         neutral200: "#F2F2F2",
         neutral400: "#BABABA",
+        gray: {
+          100: "#fafafa",
+          150: "#f7f7f7",
+          200: "#f2f2f2",
+          300: "#d1d1d1",
+          400: "#bababa",
+          500: "#a3a3a3",
+          600: "#8c8c8b",
+          800: "#484746",
+          850: "#373737",
+          900: "#31302f",
+          950: "#2d3034",
+          1000: "#1e1e1e",
+          1050: "#14171c",
+          1100: "#101318",
+        },
+        red: {
+          100: "#900b09",
+          200: "#c00f0c",
+          300: "#ff4242",
+          400: "#ff6b6b",
+        },
+        purple: {
+          100: "6a42db",
+          200: "9747ff",
+        },
       },
       screens: {
         mobile: { max: "743px" },

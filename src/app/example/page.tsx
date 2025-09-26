@@ -1,7 +1,12 @@
-import { Chip, DropdownMenu, Flavor, Header } from "@/components";
-import React from "react";
+"use client";
+
+import { Chip, DropdownMenu, Flavor, Header, SelectType } from "@/components";
+import React, { ChangeEvent } from "react";
 
 const Page = () => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+  };
   return (
     <div className="flex-col-center gap-4">
       <Header
@@ -43,6 +48,12 @@ const Page = () => {
           ]}
         />
       </div>
+
+      <section>
+        <SelectType isError={false} onChange={handleChange} />
+        <br />
+        <SelectType isError={true} />
+      </section>
     </div>
   );
 };
