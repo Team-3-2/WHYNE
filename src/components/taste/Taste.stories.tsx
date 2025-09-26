@@ -136,12 +136,6 @@ export const InteractiveWineProfile: Story = {
             />
           </ResponsiveTasteWrapper>
         </div>
-
-        {/* 현재 설정값 표시 */}
-        <div className="mt-6 rounded-lg bg-gray-50 p-3 text-xs">
-          <strong>현재 와인 프로필:</strong> 바디감 {bodyLevel}, 탄닌{" "}
-          {tanninLevel}, 당도 {sweetnessLevel}, 산미 {acidityLevel}
-        </div>
       </div>
     );
   },
