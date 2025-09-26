@@ -26,6 +26,7 @@ const Gnb = () => {
         "pc:rounded-1 pc:top-10 pc:h-[70px] pc:w-[1140px] pc:px-[60px] pc:py-[11px]"
       )}
     >
+      {/* TODO(지권): 로그인 상태 추가 */}
       {LinkMenu.map((menu, i) => (
         <Link
           key={i}
