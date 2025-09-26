@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        black: "#111111",
+        black: "#1A1918",
         white: "#FFFFFF",
         default: "#31302F",
         secondary: "#A3A3A3",
@@ -20,8 +20,6 @@ export default {
         gray600: "#8C8C8B",
         gray800: "#484746",
         primary: "#1A1918",
-        danger100: "#FF4242",
-        danger200: "#C00F0C",
       },
       screens: {
         mobile: { max: "743px" },
