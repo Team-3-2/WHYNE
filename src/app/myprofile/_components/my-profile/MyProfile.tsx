@@ -14,6 +14,7 @@ const MyProfile = () => {
       <ProfileSidebar />
       <div className="w-[849px]">
         <ProfileTabs tab={tab} setTab={setTab} />
+        <div></div>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const tabs = [
 
 const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
   return (
-    <section className="w-[849px]">
+    <section className="w-full">
       <div className="flex items-center gap-8 pb-[18px] pl-10">
         {tabs.map((item) => (
           <Link
