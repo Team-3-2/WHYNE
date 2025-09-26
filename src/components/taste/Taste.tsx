@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import BlockGauge, { type GaugeLevel } from "../gauge/block-gauge";
 
