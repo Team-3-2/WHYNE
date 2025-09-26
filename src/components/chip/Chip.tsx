@@ -13,8 +13,9 @@ const Chip = ({ img, label }: ChipProps) => {
   const [selected, setSelected] = useState(false);
 
   return (
-    <div
+    <button
       data-selected={selected}
+      aria-pressed={selected}
       className={cn(
         "flex-center h-[38px] cursor-pointer rounded-full border text-body-sm tracking-[-0.02em]",
         "transition-colors duration-150 ease-in-out hover:bg-gray100 hover:text-black",
@@ -36,7 +37,7 @@ const Chip = ({ img, label }: ChipProps) => {
         />
       )}
       <span>{label}</span>
-    </div>
+    </button>
   );
 };
 
