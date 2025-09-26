@@ -1,5 +1,62 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import redWine from "../../../public/images/wine-type/red.jpg";
+import whiteWine from "../../../public/images/wine-type/white.jpg";
+import sparklingWine from "../../../public/images/wine-type/sparkling.jpg";
+
+const imgMap = {
+  Red: redWine,
+  White: whiteWine,
+  Sparkling: sparklingWine,
+} as const;
+
+type WineType = keyof typeof imgMap;
+
+const TypeInput = ({ name }: { name: WineType }) => {
+  const imgSrc = imgMap[name] || "";
+
+  return (
+    <div
+      className={cn(
+        "h-[38px]",
+        "rounded-full border border-border-secondary",
+        "flex items-center",
+        "bg-white",
+        "pc:h-[48px]"
+      )}
+    >
+      <input
+        type="radio"
+        id={name}
+        value={name}
+        name="wine-type"
+        className="peer hidden"
+      />
+      <label
+        htmlFor={name}
+        className={cn(
+          "py-[7px] pl-2 pr-3",
+          "flex items-center justify-center gap-[6px]",
+          "cursor-pointer rounded-full",
+          "text-default hover:bg-gray100",
+          "peer peer-checked:bg-gray800 peer-checked:text-white"
+        )}
+      >
+        <Image
+          className={cn("h-6 rounded-full object-cover", "pc:h-8 pc:w-8")}
+          src={imgSrc}
+          width={24}
+          height={24}
+          alt="레드와인"
+          draggable={false}
+        />
+        <span className="text-body-sm tracking-[-0.02em] pc:text-body-md">
+          {name}
+        </span>
+      </label>
+    </div>
+  );
+};
 
 const SelectType = ({ isError }: { isError: boolean }) => {
   return (
@@ -13,25 +70,9 @@ const SelectType = ({ isError }: { isError: boolean }) => {
         )}
       </div>
       <div className="flex gap-[10px]">
-        <div
-          className={cn(
-            "px-2 py-[7px]",
-            "rounded-full border border-border-secondary",
-            "flex items-center gap-[6px]",
-            "bg-white"
-          )}
-        >
-          <input type="radio" id="red" value={"RED"} className="hidden" />
-          <div className="h-6 w-6 bg-black"></div>
-          <label
-            htmlFor="red"
-            className={cn(
-              "inline-block text-body-sm tracking-[-0.02em] text-default"
-            )}
-          >
-            Red
-          </label>
-        </div>
+        <TypeInput name="Red" />
+        <TypeInput name="White" />
+        <TypeInput name="Sparkling" />
       </div>
     </div>
   );
