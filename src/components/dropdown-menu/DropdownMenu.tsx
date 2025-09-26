@@ -4,20 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
+interface DropdownMenuProps {
+  items: { label: string; href?: string; onClick?: () => void }[];
+}
+
 const style = {
   itemBase:
     "flex-center h-full w-full rounded-md text-[16px] leading-[26px] text-gray800 transition-colors hover:bg-whiteHover active:bg-gray200",
 };
 
-function DropdownMenu() {
+function DropdownMenu({ items }: DropdownMenuProps) {
   const pathname = usePathname();
 
   const isActive = (href?: string) => Boolean(href && pathname === href);
-
-  const items: { label: string; href?: string; onClick?: () => void }[] = [
-    { label: "마이페이지", href: "/my-page" },
-    { label: "로그아웃", onClick: () => console.log("logout") },
-  ];
 
   return (
     <div
