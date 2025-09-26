@@ -10,13 +10,12 @@ const MyProfile = () => {
   const [tab, setTab] = useState(searchParams.get("tab") || "review");
 
   return (
-    <div className="mx-auto flex items-start justify-center">
+    <main className="mx-auto flex items-start justify-center">
       <ProfileSidebar />
-      <div className="w-[849px]">
+      <article className="w-[849px]">
         <ProfileTabs tab={tab} setTab={setTab} />
-        <div></div>
-      </div>
-    </div>
+      </article>
+    </main>
   );
 };
 

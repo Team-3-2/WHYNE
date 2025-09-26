@@ -19,24 +19,24 @@ const tabs = [
 
 const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
   return (
-    <section className="w-full">
-      <div className="flex items-center gap-8 pb-[18px] pl-10">
-        {tabs.map((item) => (
-          <Link
-            key={item.href}
-            href={`/myprofile?tab=${item.href}`}
-            onClick={() => setTab(item.href)}
-            className={cn(
-              "!text-heading-md tracking-[-0.02em]",
-              tab === item.href ? "text-gray-900" : "text-gray-300"
-            )}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
-      <hr />
-    </section>
+    <nav
+      aria-label="프로필 탭 메뉴"
+      className="flex w-full items-center gap-8 pb-[18px] pl-10"
+    >
+      {tabs.map((item) => (
+        <Link
+          key={item.href}
+          href={`/myprofile?tab=${item.href}`}
+          onClick={() => setTab(item.href)}
+          className={cn(
+            "!text-heading-md tracking-[-0.02em]",
+            tab === item.href ? "text-gray-900" : "text-gray-300"
+          )}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </nav>
   );
 };
 
