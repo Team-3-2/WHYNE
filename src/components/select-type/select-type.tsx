@@ -44,8 +44,8 @@ const TypeInput = ({ name }: { name: WineType }) => {
           "py-[7px] pl-2 pr-3",
           "flex-center gap-[6px]",
           "cursor-pointer rounded-full",
-          "text-default hover:bg-gray100",
-          "peer-checked:bg-gray800 peer peer-checked:text-white"
+          "text-default hover:bg-gray-200",
+          "peer-checked:bg-gray-800 peer-checked:text-white"
         )}
       >
         <Image
@@ -70,7 +70,7 @@ const SelectType = ({ isError, ...props }: SelectTypeValue) => {
       <div className="flex items-center gap-2">
         <p className="text-default text-body-sm tracking-[-0.02em]">타입</p>
         {isError && (
-          <p className="text-danger text-component-notes-md tracking-[-0.02em]">
+          <p className="text-component-notes-md tracking-[-0.02em] text-red-400">
             와인 타입은 필수 입력이에요
           </p>
         )}
