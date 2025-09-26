@@ -14,9 +14,6 @@ const MyProfile = () => {
       <ProfileSidebar />
       <article className="w-full px-4 tablet:px-8 pc:w-[849px]">
         <ProfileTabs tab={tab} setTab={setTab} />
-        {Array.from({ length: 130 }).map((_, index) => (
-          <div key={index}>test</div>
-        ))}
       </article>
     </main>
   );
