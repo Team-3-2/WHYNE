@@ -19,6 +19,7 @@ export default {
         gray600: "#8C8C8B",
         gray800: "#484746",
         primary: "#1A1918",
+        danger: "#ff6b6b",
         neutral200: "#F2F2F2",
         neutral400: "#BABABA",
       },
