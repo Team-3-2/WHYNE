@@ -3,14 +3,19 @@ import Image from "next/image";
 import redWine from "../../../public/images/wine-type/red.jpg";
 import whiteWine from "../../../public/images/wine-type/white.jpg";
 import sparklingWine from "../../../public/images/wine-type/sparkling.jpg";
+import { ComponentProps } from "react";
 
 const imgMap = {
-  Red: redWine,
-  White: whiteWine,
-  Sparkling: sparklingWine,
+  RED: redWine,
+  WHITE: whiteWine,
+  SPARKLING: sparklingWine,
 } as const;
 
 type WineType = keyof typeof imgMap;
+
+interface SelectTypeValue extends ComponentProps<"input"> {
+  isError: boolean;
+}
 
 const TypeInput = ({ name }: { name: WineType }) => {
   const imgSrc = imgMap[name] || "";
@@ -58,7 +63,7 @@ const TypeInput = ({ name }: { name: WineType }) => {
   );
 };
 
-const SelectType = ({ isError }: { isError: boolean }) => {
+const SelectType = ({ isError, ...props }: SelectTypeValue) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
@@ -69,10 +74,10 @@ const SelectType = ({ isError }: { isError: boolean }) => {
           </p>
         )}
       </div>
-      <div className="flex gap-[10px]">
-        <TypeInput name="Red" />
-        <TypeInput name="White" />
-        <TypeInput name="Sparkling" />
+      <div className="flex gap-[10px]" {...props}>
+        <TypeInput name="RED" />
+        <TypeInput name="WHITE" />
+        <TypeInput name="SPARKLING" />
       </div>
     </div>
   );
