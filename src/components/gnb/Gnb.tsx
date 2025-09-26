@@ -11,7 +11,6 @@ const LinkMenu = [
   {
     name: "로그인",
     href: "/login",
-    ariaLabel: "로그인 페이지 이동",
     style: "underline-offset-2 hover:underline",
   },
 ];
