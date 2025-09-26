@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
   content: [
@@ -6,6 +7,7 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: ["ic-xs", "ic-sm", "ic-md", "ic-lg", "ic-xl", "ic-2xl"],
   theme: {
     extend: {
       colors: {
@@ -65,7 +67,20 @@ export default {
         "button-lg": ["16px", { lineHeight: "20px", fontWeight: "700" }],
         "button-md": ["14px", { lineHeight: "18px", fontWeight: "700" }],
       },
+      fill: ({ theme }) => theme("colors"),
+      stroke: ({ theme }) => theme("colors"),
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".ic-xs": { width: "16px", height: "16px" },
+        ".ic-sm": { width: "20px", height: "20px" },
+        ".ic-md": { width: "24px", height: "24px" },
+        ".ic-lg": { width: "32px", height: "32px" },
+        ".ic-xl": { width: "40px", height: "40px" },
+        ".ic-2xl": { width: "48px", height: "48px" },
+      });
+    }),
+  ],
 } satisfies Config;
