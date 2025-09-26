@@ -7,12 +7,15 @@ const iconVariants = cva("inline-block", {
   variants: {
     color: {
       default: "",
-      primary: "text-primary",
-      secondary: "text-secondary",
-      danger100: "text-danger100",
-      danger200: "text-danger200",
-      gray: "text-gray800",
-      black: "text-black",
+      primary: "text-black",
+      gray800: "text-gray800",
+      gray600: "text-gray600",
+      gray300: "text-gray300",
+      gray100: "text-gray100",
+      danger100: "text-red100",
+      danger200: "text-red200",
+      danger300: "text-red300",
+      danger400: "text-red400",
       white: "text-white",
     },
     size: {

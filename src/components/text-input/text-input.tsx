@@ -27,10 +27,10 @@ const Input = ({ placeholder, errorMsg }: InputValue) => {
         "px-4 py-3",
         "rounded border border-gray-300",
         "text-[14px] leading-5 tracking-[0.02em] text-default",
-        "placeholder:text-body-sm placeholder:font-normal placeholder:text-tertiary",
+        "placeholder:text-tertiary placeholder:text-body-sm placeholder:font-normal",
         "focus:outline-none",
         "pc:w-[400px] pc:text-[16px] pc:leading-6 pc:placeholder:text-body-md pc:placeholder:font-normal",
-        errorMsg && "border-2 border-danger"
+        errorMsg && "border-danger border-2"
       )}
       type="text"
       placeholder={placeholder ? placeholder : "내용을 입력해주세요"}
@@ -54,7 +54,7 @@ const TextInput = ({ title, placeholder, errorMsg }: TextInputValue) => {
         </p>
         <Input placeholder={placeholder} errorMsg={errorMsg} />
       </div>
-      {errorMsg && <p className="mt-1 text-body-sm text-danger">{errorMsg}</p>}
+      {errorMsg && <p className="text-danger mt-1 text-body-sm">{errorMsg}</p>}
     </>
   );
 };
@@ -73,7 +73,7 @@ const ModalTextInput = ({ title, placeholder, errorMsg }: TextInputValue) => {
         <p className={"text-body-sm font-bold tracking-[0.02em] text-gray-800"}>
           {title ? title : "제목"}
         </p>
-        {errorMsg && <p className="text-body-sm text-danger">{errorMsg}</p>}
+        {errorMsg && <p className="text-danger text-body-sm">{errorMsg}</p>}
       </div>
       <Input placeholder={placeholder} errorMsg={errorMsg} />
     </div>

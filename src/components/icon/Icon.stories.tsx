@@ -25,12 +25,15 @@ const meta = {
       options: [
         "default",
         "primary",
-        "secondary",
+        "gray800",
+        "gray600",
+        "gray300",
+        "gray100",
         "danger100",
         "danger200",
-        "gray",
+        "danger300",
+        "danger400",
         "white",
-        "black",
       ],
       description: "아이콘 색상",
     },
@@ -47,5 +50,46 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     icon: "AppleIcon",
+  },
+};
+
+export const IconChart: Story = {
+  args: {
+    icon: "AppleIcon",
+  },
+  render: () => {
+    const iconNames = Object.keys(ICON_MAP);
+
+    return (
+      <div className="p-4">
+        <h3 className="mb-4 text-center text-xl font-bold">아이콘 차트</h3>
+        <div className="mx-auto grid max-w-4xl grid-cols-6 gap-4">
+          {iconNames.map((iconName) => (
+            <div
+              key={iconName}
+              className="flex flex-col items-center rounded-lg border border-gray-200 p-3 transition-shadow hover:shadow-md"
+            >
+              <Icon
+                icon={iconName as keyof typeof ICON_MAP}
+                size="lg"
+                color="gray800"
+                className="mb-2"
+              />
+              <span className="break-words text-center text-xs text-gray-600">
+                {iconName}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  },
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        story: "아이콘 차트",
+      },
+    },
   },
 };
