@@ -1,6 +1,7 @@
 "use client";
 
 import { DropdownMenu, Icon } from "@/components";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -8,10 +9,17 @@ const ReviewItem = () => {
   const [optionMenu, setOptionMenu] = useState(false);
 
   return (
-    <div className="flex flex-col gap-[51px] border-t border-gray-300 py-[16px] pb-[28px] pt-[39px]">
+    <div
+      className={cn(
+        "flex flex-col gap-[51px] border-t border-gray-300 py-[16px] pb-[28px] pt-[39px]",
+        "tablet:gap-[54px]",
+        "pc:gap-[50px] pc:py-[40px] pc:pl-10 pc:pr-20"
+      )}
+    >
       <div className="flex w-full flex-col items-start justify-center gap-8 px-[14px]">
         <div className="flex w-full flex-col items-center justify-center gap-6">
-          <div className="flex w-full flex-col items-start gap-6">
+          <div className="flex w-full flex-col items-start gap-5">
+            {/*  */}
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-2">
@@ -49,16 +57,35 @@ const ReviewItem = () => {
                 )}
               </div>
             </div>
-            <div className="flex w-full items-center gap-2">
+            {/*  */}
+            <div
+              className={cn(
+                "flex w-full items-center gap-2 tablet:gap-4",
+                "tablet:gap-4",
+                "pc:gap-[17px]"
+              )}
+            >
               <Image
                 src="/images/test/test_wine.png"
                 alt=""
                 width={100}
                 height={100}
-                className="h-[60px] w-[46px]"
+                className="h-[60px] w-fit tablet:h-[80px] pc:h-[80px]"
               />
-              <div className="flex flex-col items-start">
-                <h2 className="text-body-md font-bold tracking-[-0.02em] text-gray-900">
+              <div
+                className={cn(
+                  "flex flex-col items-start gap-[2px]",
+                  "tablet:gap-[4px]",
+                  "pc:gap-[2px]"
+                )}
+              >
+                <h2
+                  className={cn(
+                    "text-body-md font-bold tracking-[-0.02em] text-gray-900",
+                    "tablet:text-body-lg",
+                    "pc:text-body-lg"
+                  )}
+                >
                   Sentinel Carbernet Sauvignon 2016
                 </h2>
                 <p className="text-body-sm tracking-[-0.02em] text-gray-500">
@@ -77,9 +104,11 @@ const ReviewItem = () => {
             어울리는 와인이었습니다.
           </p>
         </div>
+        {/*  */}
         <div className="min-h-[114px] w-full bg-black"></div>
       </div>
-      <button className="flex items-center gap-2 self-start rounded-[8px] border border-gray-300 py-[6px] pl-3 pr-[14px]">
+      {/*  */}
+      <button className="ml-[14px] flex items-center gap-2 self-start rounded-[8px] border border-gray-300 py-[6px] pl-3 pr-[14px]">
         {/* TODO(지권): 좋아요 활성화 아이콘 <Icon icon="LikeOnIcon" /> */}
         <Icon icon="LikeOffIcon" size="sm" />
         <span>24</span>
