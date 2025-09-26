@@ -6,7 +6,13 @@ const meta: Meta<typeof TextInput> = {
   component: TextInput,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: "공통으로 사용되는 Input 컴포넌트 입니다",
+      },
+    },
   },
+  tags: ["autodocs"],
   argTypes: {
     title: { control: { type: "text" } },
     placeholder: { control: { type: "text" } },
