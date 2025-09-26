@@ -7,15 +7,16 @@ import {
 } from "./style";
 
 interface ArrowButtonProps {
-  direction: "left" | "right";
+  direction: "prev" | "next";
   className?: string;
 }
 
 const ArrowButton = ({ direction, className, ...props }: ArrowButtonProps) => {
-  const iconName = direction === "left" ? "ArrowLeftIcon" : "ArrowRightIcon";
+  const iconName = direction === "prev" ? "ArrowLeftIcon" : "ArrowRightIcon";
+  const ariaLabel = direction === "prev" ? "이전으로 이동" : "다음으로 이동";
   return (
     <button
-      aria-label={direction === "left" ? "이전으로 이동" : "다음으로 이동"}
+      aria-label={ariaLabel}
       className={cn(
         COMMON_BUTTON_STYLES.base,
         BUTTON_SHAPE_VARIANTS.round,
