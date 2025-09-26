@@ -21,7 +21,11 @@ const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
   return (
     <nav
       aria-label="프로필 탭 메뉴"
-      className="flex w-full items-center gap-8 pb-[18px] pl-10"
+      className={cn(
+        "flex w-full items-center justify-start gap-5 pb-[14px] pl-1",
+        "tablet:gap-8 tablet:pb-[18px] tablet:pl-5",
+        "pc:h-[85px] pc:gap-8 pc:pb-[18px] pc:pl-10"
+      )}
     >
       {tabs.map((item) => (
         <Link
