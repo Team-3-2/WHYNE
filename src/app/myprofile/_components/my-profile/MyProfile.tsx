@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import ProfileSidebar from "../profile-sidebar/ProfileSidebar";
-import ProfileTabs from "../profile-tabs.tsx/ProfileTabs";
+import ProfileTabs from "../profile-tabs/ProfileTabs";
 
 const MyProfile = () => {
   const searchParams = useSearchParams();

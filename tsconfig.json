@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/myprofile/_components/profile-sidebar"
+    "src/app/myprofile/_components/profile-sidebar",
+    "src/app/myprofile/_components/profile-tabs"
   ],
   "exclude": ["node_modules"]
 }
