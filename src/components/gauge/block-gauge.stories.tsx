@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { useState } from "react";
-import BlockGauge from "./block-gauge";
+import BlockGauge, { type GaugeLevel } from "./block-gauge";
 
 const meta: Meta = {
   title: "Components/BlockGauge",
@@ -21,11 +21,6 @@ const meta: Meta = {
       description: "게이지 레벨 (0-6)",
       defaultValue: 3,
     },
-    maxBlocks: {
-      control: { type: "number", min: 1, max: 10 },
-      description: "전체 블록 수",
-      defaultValue: 6,
-    },
   },
   decorators: [
     (Story) => (
@@ -42,10 +37,11 @@ type Story = StoryObj<typeof meta>;
 
 export const ClickTest: Story = {
   render: () => {
-    const [level, setLevel] = useState(3);
+    const [level, setLevel] = useState<GaugeLevel>(3);
 
     return (
       <div>
+        <p className="mb-2 text-sm">레벨: {level}</p>
         <BlockGauge level={level} onChange={setLevel} />
       </div>
     );

@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
-import BlockGauge from "../gauge/block-gauge";
+import BlockGauge, { type GaugeLevel } from "../gauge/block-gauge";
 
 interface TasteProps {
   type: string;
-  data: number; // 0-6 사이의 값
+  data: GaugeLevel; // 0-6 사이의 값
   taste: string;
-  onChange?: (newLevel: number) => void;
+  onChange?: (newLevel: GaugeLevel) => void;
 }
 
 const Taste = ({ type, data, taste, onChange }: TasteProps) => {

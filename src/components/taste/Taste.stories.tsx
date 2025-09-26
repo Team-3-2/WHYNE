@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs";
 import { useState } from "react";
 import Taste from "./Taste";
 import { cn } from "@/lib/utils";
+import { GaugeLevel } from "../gauge/block-gauge";
 
 const meta: Meta = {
   title: "Components/Taste",
@@ -59,10 +60,10 @@ const ResponsiveTasteWrapper = ({
 
 export const InteractiveWineProfile: Story = {
   render: () => {
-    const [bodyLevel, setBodyLevel] = useState(4);
-    const [tanninLevel, setTanninLevel] = useState(2);
-    const [sweetnessLevel, setSweetnessLevel] = useState(1);
-    const [acidityLevel, setAcidityLevel] = useState(3);
+    const [bodyLevel, setBodyLevel] = useState<GaugeLevel>(4);
+    const [tanninLevel, setTanninLevel] = useState<GaugeLevel>(2);
+    const [sweetnessLevel, setSweetnessLevel] = useState<GaugeLevel>(1);
+    const [acidityLevel, setAcidityLevel] = useState<GaugeLevel>(3);
 
     return (
       <div>
