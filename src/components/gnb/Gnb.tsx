@@ -19,7 +19,7 @@ const Gnb = () => {
   return (
     <header
       className={cn(
-        "fixed left-1/2 top-0 flex -translate-x-1/2 items-center justify-between bg-black",
+        "fixed left-1/2 top-0 z-50 flex -translate-x-1/2 items-center justify-between bg-black",
         "h-[50px] w-full gap-[10px] px-5 py-[15px]",
         "tablet:rounded-1 tablet:top-10 tablet:h-[70px] tablet:w-[704px] tablet:px-[60px] tablet:py-[11px]",
         "pc:rounded-1 pc:top-10 pc:h-[70px] pc:w-[1140px] pc:px-[60px] pc:py-[11px]"
