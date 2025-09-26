@@ -42,7 +42,7 @@ const TypeInput = ({ name }: { name: WineType }) => {
         htmlFor={name}
         className={cn(
           "py-[7px] pl-2 pr-3",
-          "flex items-center justify-center gap-[6px]",
+          "flex-center gap-[6px]",
           "cursor-pointer rounded-full",
           "text-default hover:bg-gray100",
           "peer-checked:bg-gray800 peer peer-checked:text-white"
