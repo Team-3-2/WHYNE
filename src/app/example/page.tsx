@@ -1,5 +1,5 @@
+import { SelectType } from "@/components";
 import Header from "@/components/header/Header";
-import { ModalTextInput, TextInput } from "@/components/text-input/text-input";
 import React from "react";
 
 const Page = () => {
@@ -13,13 +13,9 @@ const Page = () => {
       />
 
       <section>
-        <TextInput title="" placeholder="" errorMsg="" />
-        <TextInput title="" placeholder="" errorMsg="에러가 발생했습니다." />
-        <ModalTextInput
-          title=""
-          placeholder=""
-          errorMsg="에러가 발생했습니다"
-        />
+        <SelectType isError={false} />
+        <br />
+        <SelectType isError={true} />
       </section>
     </div>
   );
