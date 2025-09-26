@@ -10,7 +10,7 @@ interface DropdownMenuProps {
 
 const style = {
   itemBase:
-    "flex-center h-full w-full rounded-md text-[16px] leading-[26px] text-gray800 transition-colors hover:bg-whiteHover active:bg-gray200",
+    "flex-center h-full w-full rounded-md text-[16px] leading-[26px] text-gray-800 transition-colors hover:bg-gray-200",
 };
 
 function DropdownMenu({ items }: DropdownMenuProps) {
@@ -21,7 +21,7 @@ function DropdownMenu({ items }: DropdownMenuProps) {
   return (
     <div
       className={cn(
-        "flex-col-center rounded-[4px] border border-gray300 p-[3px] shadow-md",
+        "flex-col-center rounded-[4px] border border-gray-300 p-[3px] shadow-md",
         "h-[92px] w-[101px]",
         "tablet:h-[90px] tablet:w-[126px]",
         "pc:h-[90px] pc:w-[126px]"
@@ -34,7 +34,7 @@ function DropdownMenu({ items }: DropdownMenuProps) {
             href={href}
             className={cn(
               style.itemBase,
-              isActive(href) && "bg-gray800 text-white"
+              isActive(href) && "bg-gray-800 text-white"
             )}
           >
             {label}

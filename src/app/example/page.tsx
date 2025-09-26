@@ -24,6 +24,12 @@ const Page = () => {
         />
         <DropdownMenu
           items={[
+            { label: "example", href: "/example" },
+            { label: "임시", onClick: () => console.log("임시") },
+          ]}
+        />
+        <DropdownMenu
+          items={[
             { label: "수정하기", onClick: () => console.log("수정하기") },
             { label: "삭제하기", onClick: () => console.log("삭제하기") },
           ]}
