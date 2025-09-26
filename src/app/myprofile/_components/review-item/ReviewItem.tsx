@@ -1,9 +1,24 @@
 "use client";
 
-import { DropdownMenu, Icon } from "@/components";
+import { Icon } from "@/components";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { useState } from "react";
+import ReviewRating from "./ReviewRating";
+import ReviewInfo from "./ReviewInfo";
+
+type ItemType = {
+  img: string;
+  name: string;
+  subName: string;
+  description: string;
+};
+
+interface ReviewItemProps {
+  Rate: string;
+  ReviewDate: string;
+  Item: ItemType[];
+  LikeCount: string;
+}
 
 const ReviewItem = () => {
   const [optionMenu, setOptionMenu] = useState(false);
@@ -20,79 +35,12 @@ const ReviewItem = () => {
         <div className="flex w-full flex-col items-center justify-center gap-6">
           <div className="flex w-full flex-col items-start gap-5">
             {/*  */}
-            <div className="flex w-full items-center justify-between">
-              <div className="flex items-center gap-4">
-                <span className="flex items-center gap-2">
-                  ⭐️⭐️⭐️⭐️⭐️
-                  <span className="text-body-lg font-bold tracking-[-0.02em] text-gray-900">
-                    5
-                  </span>
-                </span>
-                <span className="text-body-md tracking-[-0.02em] text-gray-500">
-                  10시간 전
-                </span>
-              </div>
-              <div className="relative inline-flex">
-                <button
-                  aria-label="옵션 메뉴"
-                  onClick={() => setOptionMenu((v) => !v)}
-                  className="p-1"
-                >
-                  <Icon icon="HamburgerIcon" size="md" />
-                </button>
-
-                {optionMenu && (
-                  <div
-                    id="post-option-menu"
-                    role="menu"
-                    className="absolute right-0 top-full z-50 mt-2"
-                  >
-                    <DropdownMenu
-                      items={[
-                        { label: "수정하기", onClick: () => {} },
-                        { label: "삭제하기", onClick: () => {} },
-                      ]}
-                    />
-                  </div>
-                )}
-              </div>
-            </div>
+            <ReviewRating
+              setOptionMenu={setOptionMenu}
+              optionMenu={optionMenu}
+            />
             {/*  */}
-            <div
-              className={cn(
-                "flex w-full items-center gap-2 tablet:gap-4",
-                "tablet:gap-4",
-                "pc:gap-[17px]"
-              )}
-            >
-              <Image
-                src="/images/test/test_wine.png"
-                alt=""
-                width={100}
-                height={100}
-                className="h-[60px] w-fit tablet:h-[80px] pc:h-[80px]"
-              />
-              <div
-                className={cn(
-                  "flex flex-col items-start gap-[2px]",
-                  "tablet:gap-[4px]",
-                  "pc:gap-[2px]"
-                )}
-              >
-                <h2
-                  className={cn(
-                    "text-body-md font-bold tracking-[-0.02em] text-gray-900",
-                    "tablet:text-body-lg",
-                    "pc:text-body-lg"
-                  )}
-                >
-                  Sentinel Carbernet Sauvignon 2016
-                </h2>
-                <p className="text-body-sm tracking-[-0.02em] text-gray-500">
-                  Western Cape, South Africa
-                </p>
-              </div>
-            </div>
+            <ReviewInfo />
           </div>
           <p className="text-body-md tracking-[-0.02em] text-gray-900">
             첫 모금에서 느껴지는 진한 블랙베리와 블랙커런트의 깊은 풍미가
