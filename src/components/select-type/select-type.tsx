@@ -19,6 +19,7 @@ interface SelectTypeValue extends ComponentProps<"input"> {
 
 const TypeInput = ({ name }: { name: WineType }) => {
   const imgSrc = imgMap[name] || "";
+  const typeName = name.slice(0, 1) + name.slice(1).toLowerCase();
 
   return (
     <div
@@ -56,7 +57,7 @@ const TypeInput = ({ name }: { name: WineType }) => {
           draggable={false}
         />
         <span className="text-body-sm tracking-[-0.02em] pc:text-body-md">
-          {name}
+          {typeName}
         </span>
       </label>
     </div>
