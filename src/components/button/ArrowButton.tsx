@@ -18,7 +18,7 @@ const ArrowButton = ({ direction, className, ...props }: ArrowButtonProps) => {
     <button
       aria-label={ariaLabel}
       className={cn(
-        COMMON_BUTTON_STYLES.base,
+        COMMON_BUTTON_STYLES,
         BUTTON_SHAPE_VARIANTS.round,
         BUTTON_STATE_VARIANTS.secondary,
         className

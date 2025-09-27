@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 import Icon from "../icon/Icon";
+import type { IconName } from "../icon/icon-map";
+
 import {
   COMMON_BUTTON_STYLES,
   BUTTON_SHAPE_VARIANTS,
@@ -7,7 +9,7 @@ import {
 } from "./style";
 
 interface IconButtonProps {
-  icon: keyof typeof import("../icon/icon-map").default;
+  icon: IconName;
   className?: string;
 }
 
@@ -15,8 +17,8 @@ const IconButton = ({ icon, className, ...props }: IconButtonProps) => {
   return (
     <button
       className={cn(
-        COMMON_BUTTON_STYLES.base,
-        BUTTON_SHAPE_VARIANTS.round,
+        COMMON_BUTTON_STYLES,
+        BUTTON_SHAPE_VARIANTS.square,
         BUTTON_STATE_VARIANTS.secondary,
         className
       )}
