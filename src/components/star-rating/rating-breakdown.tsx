@@ -1,7 +1,8 @@
 "use client";
-
+import { cn } from "@/lib/utils";
 import StarRating from "./star-rating";
 import ScoreBar from "./scorebar";
+import Button from "../button/basic-button";
 
 interface RatingBreakdownProps {
   average: number;
@@ -18,12 +19,24 @@ const RatingBreakdown = ({
   const totalReviews = reviewCounts.reduce((total, count) => total + count, 0);
 
   return (
-    <div className="relative">
-      <div className="flex mobile:items-center tablet:flex-row tablet:items-start pc:grid">
-        <div className="flex-1">
+    <div className="relative grid gap-y-[24px] pc:gap-y-[40px]">
+      <div
+        className={cn(
+          "grid grid-cols-[110px_auto] items-center gap-x-[20px]",
+          "items-start tablet:grid-cols-[280px_auto] tablet:gap-x-[77px]",
+          "items-start pc:grid pc:grid-cols-[auto] pc:gap-x-0 pc:gap-y-[40px]"
+        )}
+      >
+        <div>
           <StarRating rating={average} size="md2" totalScore />
         </div>
-        <div className="flex-1">
+        <div
+          className={cn(
+            "grid gap-y-[2px]",
+            "tablet:gap-y-[4px]",
+            "pc:gap-y-[8px]"
+          )}
+        >
           {[...Array(maxRating)].map((_, i) => {
             const score = maxRating - i;
             const count = distribution[score] ?? 0;
@@ -38,12 +51,14 @@ const RatingBreakdown = ({
           })}
         </div>
       </div>
-      <button
-        onClick={() => {}}
-        className="top-[80px] w-full tablet:absolute tablet:w-auto"
-      >
-        리뷰 남기기
-      </button>
+      <Button
+        label="리뷰 남기기"
+        onClick={() => alert("리뷰 작성 모달창!!")}
+        className={cn(
+          "w-full",
+          "tablet:absolute tablet:bottom-[-10px] tablet:mt-0 tablet:w-[280px]"
+        )}
+      />
     </div>
   );
 };

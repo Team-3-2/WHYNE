@@ -10,14 +10,24 @@ const Star = ({ fill, size = "sm" }: RatingStarProps) => {
 
   return (
     <div className="flex-center relative">
-      <Icon icon="StarIcon" size={size} color="gray300" />
+      <Icon
+        icon="StarIcon"
+        size={size}
+        color="gray300"
+        className="mobile:ic-sm"
+      />
       <div
         className="absolute left-0 top-0 h-full overflow-hidden"
         style={{
           width: `${widthPercent}%`,
         }}
       >
-        <Icon icon="StarIcon" size={size} color="default" />
+        <Icon
+          icon="StarIcon"
+          size={size}
+          color="default"
+          className="align-top mobile:ic-sm"
+        />
       </div>
     </div>
   );

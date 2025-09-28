@@ -33,7 +33,7 @@ const StarRating = ({
   return (
     <div
       className={cn(
-        `flex items-center gap-[8px] ${totalScore && TOTAL_SCORE_STYLES}`
+        `flex items-center gap-x-[8px] gap-y-[12px] ${totalScore && TOTAL_SCORE_STYLES}`
       )}
     >
       <div className="flex">
@@ -43,13 +43,15 @@ const StarRating = ({
       </div>
       {/* score 타입 */}
       {score && (
-        <span className="body-lg mt-[3px] text-default">{ratingValue}</span>
+        <span className="mt-[2px] text-body-lg text-default">
+          {ratingValue}
+        </span>
       )}
       {/* totalScore 타입 */}
       {totalScore && (
-        <div className="mt-[3px]">
+        <div className="text-[28px] font-bold leading-[32px] tracking-[-0.3px] pc:mt-[2px]">
           {ratingValue}
-          <span> / {maxRatingValue}</span>
+          <span className="text-gray-400"> / {maxRatingValue}</span>
         </div>
       )}
     </div>

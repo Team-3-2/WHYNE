@@ -8,8 +8,8 @@ const ScoreBar = ({ score, reviewCount, totalCount }: ScoreBarProps) => {
   const percent = totalCount === 0 ? 0 : (reviewCount / totalCount) * 100;
 
   return (
-    <div className="flex-center">
-      <span className="">{score}점</span>
+    <div className="grid grid-cols-[40px_auto] items-center">
+      <span className="text-body-md text-secondary">{score}점</span>
       <div
         role="progressbar"
         aria-label={`${score}점을 받은 리뷰 수는 ${reviewCount}개입니다.`}
