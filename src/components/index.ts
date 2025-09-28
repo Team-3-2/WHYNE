@@ -1,6 +1,6 @@
 export { default as Gnb } from "./gnb/gnb";
 export { default as Header } from "./header/header";
-export { default as DropdownMenu } from "./dropdown-menu/DropdownMenu";
+export { default as DropdownMenu } from "./dropdown-menu/dropdown-menu";
 export { default as Chip } from "./chip/Chip";
 export { default as Flavor } from "./flavor/flavor";
 export { default as TextInput } from "./text-input/text-input";
