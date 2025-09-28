@@ -13,7 +13,10 @@ const meta: Meta<typeof WineImg> = {
     },
   },
   tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    isError: { control: { type: "boolean" } },
+    errorMsg: { control: { type: "text" } },
+  },
 };
 
 export default meta;
@@ -22,4 +25,8 @@ type Story = StoryObj<typeof WineImg>;
 
 export const UploadWineImg: Story = {
   args: {},
+};
+
+export const ErrorWineImg: Story = {
+  args: { isError: true, errorMsg: "와인 사진은 필수 입력이에요" },
 };

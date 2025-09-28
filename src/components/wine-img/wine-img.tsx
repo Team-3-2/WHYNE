@@ -1,21 +1,23 @@
 import { cn } from "@/lib/utils";
 import Icon from "../icon/icon";
+import { ComponentProps } from "react";
 
-interface WineImgProps {
+interface WineImgProps extends ComponentProps<"input"> {
   isError?: boolean;
   errorMsg?: string;
 }
 
-const WineImg = () => {
+const WineImg = ({ isError, errorMsg, ...props }: WineImgProps) => {
   return (
-    <div>
+    <div className="flex items-end gap-2">
       <label htmlFor="wine-img" className="flex flex-col gap-2">
-        <p>와인 사진</p>
+        <p className="text-body-sm tracking-[-0.02em]">와인 사진</p>
         <div
           className={cn(
-            "h-[140px] w-[140px]",
-            "rounded-[4px] border border-gray-300",
-            "relative"
+            "relative h-[140px] w-[140px]",
+            "cursor-pointer rounded-[4px] border border-gray-300",
+            "hover:bg-gray-100 active:bg-gray-200",
+            isError && "border-2 border-red-400"
           )}
         >
           <Icon
@@ -25,7 +27,18 @@ const WineImg = () => {
           />
         </div>
       </label>
-      <input id="wine-img" type="file" accept="image/*" className="hidden" />
+      {isError && (
+        <p className="text-component-notes-md tracking-[-0.02em] text-red-400">
+          {errorMsg}
+        </p>
+      )}
+      <input
+        id="wine-img"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        {...props}
+      />
     </div>
   );
 };
