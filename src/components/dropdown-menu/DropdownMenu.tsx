@@ -21,7 +21,7 @@ function DropdownMenu({ items }: DropdownMenuProps) {
   return (
     <div
       className={cn(
-        "flex-col-center rounded-[4px] border border-gray-300 p-[3px] shadow-md",
+        "flex-col-center rounded-[4px] border border-gray-300 bg-white p-[3px] shadow-md",
         "h-[92px] w-[101px]",
         "tablet:h-[90px] tablet:w-[126px]",
         "pc:h-[90px] pc:w-[126px]"
