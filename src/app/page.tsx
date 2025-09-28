@@ -46,10 +46,14 @@ const Home = () => {
                 "text-heading-lg pc:text-heading-lg"
               )}
             >
-              <span>매달 새롭게 만나는</span>
-              <span>와인 추천 콘텐츠</span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                매달 새롭게 만나는
+              </span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">와인 추천 콘텐츠</span>
             </h2>
-            <p className="text-gray-600">매달 다양한 인기 와인을 만나보세요.</p>
+            <p className="pl-4 text-gray-600 tablet:pl-8 pc:pl-0">
+              매달 다양한 인기 와인을 만나보세요.
+            </p>
           </div>
           <div className="w-full pc:w-[725px]">
             <Image
@@ -75,12 +79,18 @@ const Home = () => {
                 "text-heading-lg pc:text-heading-lg"
               )}
             >
-              <span>다양한 필터로 찾는</span>
-              <span>내 맞춤 와인</span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                다양한 필터로 찾는
+              </span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">내 맞춤 와인</span>
             </h2>
             <div className="flex flex-col text-gray-600">
-              <span>와인 타입, 가격, 평점으로</span>
-              <span>나에게 맞는 와인을 쉽게 검색해요.</span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                와인 타입, 가격, 평점으로
+              </span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                나에게 맞는 와인을 쉽게 검색해요.
+              </span>
             </div>
           </div>
           <div className="w-full pc:w-[725px]">
@@ -107,12 +117,16 @@ const Home = () => {
                 "text-heading-lg pc:text-heading-lg"
               )}
             >
-              <span>직관적인</span>
-              <span>리뷰 시스템</span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">직관적인</span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">리뷰 시스템</span>
             </h2>
             <div className="flex flex-col text-gray-600">
-              <span>더 구체화된 리뷰 시스템으로</span>
-              <span>쉽고 빠르게 와인 리뷰를 살펴보세요.</span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                더 구체화된 리뷰 시스템으로
+              </span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                쉽고 빠르게 와인 리뷰를 살펴보세요.
+              </span>
             </div>
           </div>
           <div className="w-full pc:w-[725px]">
