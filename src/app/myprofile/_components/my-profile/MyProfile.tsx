@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import ProfileSidebar from "../profile-sidebar/ProfileSidebar";
+import ReviewItem from "../review-item/ReviewItem";
 import ProfileTabs from "../profile-tabs/ProfileTabs";
 
 const MyProfile = () => {
@@ -14,6 +15,10 @@ const MyProfile = () => {
       <ProfileSidebar />
       <article className="w-full px-4 tablet:px-8 pc:w-[849px]">
         <ProfileTabs tab={tab} setTab={setTab} />
+        {tab === "review" &&
+          Array.from({ length: 8 }).map((_, index) => (
+            <ReviewItem key={index} />
+          ))}
       </article>
     </main>
   );
