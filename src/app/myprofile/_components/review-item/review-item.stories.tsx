@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import ReviewItem from "./ReviewItem";
+import ReviewItem from "./review-item";
 
 const meta: Meta<typeof ReviewItem> = {
   title: "MY-PROFILE/ReviewItem",
