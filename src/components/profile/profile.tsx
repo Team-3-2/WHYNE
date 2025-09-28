@@ -10,6 +10,14 @@ interface ProfileProps extends ComponentProps<"input"> {
   className?: string;
 }
 
+/**
+ * 프로필 컴포넌트
+ * @author hwitae
+ * @param url 이미지 경로
+ * @param isEditing 이미지 업로드 기능 활성화 여부
+ * @param className 스타일
+ * @returns input
+ */
 const Profile = ({
   url,
   isEditing = true,
