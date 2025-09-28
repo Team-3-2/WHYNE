@@ -1,7 +1,7 @@
 import Image from "next/image";
 import DefaultProfile from "../../../public/images/profile/default-profile.svg";
 import { cn } from "@/lib/utils";
-import Icon from "../icon/Icon";
+import Icon from "../icon/icon";
 
 interface ProfileProps {
   url?: string;
