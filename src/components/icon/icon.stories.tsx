@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import Icon from "./Icon";
+import Icon from "./icon";
 import ICON_MAP from "./icon-map";
 
 const meta = {
@@ -17,7 +17,7 @@ const meta = {
     },
     size: {
       control: "select",
-      options: ["xs", "sm", "md", "lg", "xl", "2xl"],
+      options: ["xs", "sm", "md", "2md", "lg", "xl", "2xl"],
       description: "아이콘 크기",
     },
     color: {

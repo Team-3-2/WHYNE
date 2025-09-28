@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import Flavor from "./Flavor";
+import Flavor from "./flavor";
 import { AromaKey } from "@/types/AromaType";
 
 const meta: Meta<typeof Flavor> = {

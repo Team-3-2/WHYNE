@@ -31,10 +31,10 @@ const Flavor = ({ count, items }: FlavorProps) => {
   return (
     <div className="flex min-h-[197px] w-full flex-col items-start justify-between gap-[17px]">
       <div>
-        <h2 className="text-heading-lg tracking-[-0.48px] text-[#31302F]">
+        <h2 className="text-heading-lg tracking-[-0.48px] text-gray-900">
           어떤 향이 있나요?
         </h2>
-        <span className="text-body-sm tracking-[-0.28px] text-[#BABABA]">
+        <span className="text-body-sm tracking-[-0.28px] text-gray-400">
           (<span>{count}</span>명 참여)
         </span>
       </div>
