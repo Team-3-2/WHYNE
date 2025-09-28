@@ -27,9 +27,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/app/myprofile/_components/account-item",
-    "src/app/myprofile/_components/profile-tabs"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
