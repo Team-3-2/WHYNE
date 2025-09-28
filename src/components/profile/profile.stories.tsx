@@ -13,7 +13,11 @@ const meta: Meta<typeof Profile> = {
     },
   },
   tags: ["autodocs"],
-  argTypes: { url: { control: { type: "text" } } },
+  argTypes: {
+    url: { control: { type: "text" } },
+    isEditing: { control: { type: "text" } },
+    className: { control: { type: "text" } },
+  },
 };
 
 export default meta;
@@ -27,5 +31,20 @@ export const DefaultProfile: Story = {
 export const ImgProfile: Story = {
   args: {
     url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Synthetic_Production_of_Penicillin_TR1468.jpg/120px-Synthetic_Production_of_Penicillin_TR1468.jpg",
+  },
+};
+
+export const NotEditingProfile: Story = {
+  args: {
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Synthetic_Production_of_Penicillin_TR1468.jpg/120px-Synthetic_Production_of_Penicillin_TR1468.jpg",
+    isEditing: false,
+  },
+};
+
+export const StyledProfile: Story = {
+  args: {
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Synthetic_Production_of_Penicillin_TR1468.jpg/120px-Synthetic_Production_of_Penicillin_TR1468.jpg",
+    isEditing: false,
+    className: "border border-gray-800",
   },
 };
