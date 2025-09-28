@@ -1,3 +1,4 @@
+import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import {
   COMMON_BUTTON_STYLES,
@@ -11,9 +12,9 @@ import {
 import Icon from "../icon/icon";
 import type { IconName } from "../icon/icon-map";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: IconName;
-  type?: ButtonState;
+  appearance?: ButtonState;
   label?: string;
   shape?: ButtonShape;
   textColor?: ButtonTextColor;
@@ -22,7 +23,7 @@ interface ButtonProps {
 }
 
 const Button = ({
-  type = "default",
+  appearance = "default",
   icon,
   label,
   className,
@@ -34,13 +35,13 @@ const Button = ({
       className={cn(
         COMMON_BUTTON_STYLES,
         BUTTON_SHAPE_VARIANTS.default,
-        BUTTON_STATE_VARIANTS[type],
+        BUTTON_STATE_VARIANTS[appearance],
         className
       )}
       {...props}
     >
       {icon && <Icon icon={icon} />}
-      <span className={BUTTON_TEXT_COLOR_VARIANTS[type]}>{label}</span>
+      <span className={BUTTON_TEXT_COLOR_VARIANTS[appearance]}>{label}</span>
       {children}
     </button>
   );

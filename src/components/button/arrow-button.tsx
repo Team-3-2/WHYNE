@@ -1,3 +1,4 @@
+import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import Icon from "../icon/icon";
 import {
@@ -6,7 +7,7 @@ import {
   BUTTON_STATE_VARIANTS,
 } from "./style";
 
-interface ArrowButtonProps {
+interface ArrowButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   direction: "prev" | "next";
   className?: string;
 }
