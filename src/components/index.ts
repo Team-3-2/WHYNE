@@ -5,7 +5,6 @@ export { default as Chip } from "./chip/Chip";
 export { default as Flavor } from "./flavor/Flavor";
 export { default as TextInput } from "./text-input/text-input";
 export { default as SelectType } from "./select-type/select-type";
-export { default as Icon } from "./icon/Icon";
 export { default as BlockGauge } from "./gauge/block-gauge";
 export { default as DetailTaste } from "./taste/detail-taste";
 export { default as ReviewTaste } from "./taste/review-taste";
