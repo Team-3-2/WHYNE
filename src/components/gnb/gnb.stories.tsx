@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import Gnb from "./Gnb";
+import Gnb from "./gnb";
 
 const meta = {
   title: "Components/Gnb",

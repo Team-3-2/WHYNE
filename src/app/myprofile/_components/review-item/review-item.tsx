@@ -3,8 +3,8 @@
 import { Icon } from "@/components";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import ReviewRating from "./ReviewRating";
-import ReviewInfo from "./ReviewInfo";
+import ReviewRating from "./review-rating";
+import ReviewInfo from "./review-info";
 
 type ItemType = {
   img: string;
