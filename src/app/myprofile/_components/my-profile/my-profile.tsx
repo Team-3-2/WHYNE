@@ -18,11 +18,7 @@ const MyProfile = () => {
           Array.from({ length: 8 }).map((_, index) => (
             <ReviewItem key={index} />
           ))}
-        {tab === "account" && (
-          <div>
-            <AccountItem />
-          </div>
-        )}
+        {tab === "account" && <AccountItem />}
       </article>
     </main>
   );
