@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ComponentProps } from "react";
-import Icon from "../icon/Icon";
+import Icon from "../icon/icon";
 
 interface InputValue extends ComponentProps<"input"> {
   placeholder?: string;

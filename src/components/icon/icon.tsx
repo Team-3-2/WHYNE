@@ -22,6 +22,7 @@ const iconVariants = cva("inline-block", {
       xs: "ic-xs",
       sm: "ic-sm",
       md: "ic-md",
+      "2md": "ic-2md",
       lg: "ic-lg",
       xl: "ic-xl",
       "2xl": "ic-2xl",
