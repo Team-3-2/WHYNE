@@ -8,7 +8,7 @@ import {
   ButtonState,
   ButtonTextColor,
 } from "./style";
-import Icon from "../icon/Icon";
+import Icon from "../icon/icon";
 import type { IconName } from "../icon/icon-map";
 
 interface ButtonProps {

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Icon from "../icon/Icon";
+import Icon from "../icon/icon";
 import type { IconName } from "../icon/icon-map";
 
 import {

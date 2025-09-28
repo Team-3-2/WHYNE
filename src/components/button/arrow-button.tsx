@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Icon from "../icon/Icon";
+import Icon from "../icon/icon";
 import {
   COMMON_BUTTON_STYLES,
   BUTTON_SHAPE_VARIANTS,

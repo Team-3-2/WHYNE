@@ -68,7 +68,7 @@ const SelectType = ({ isError, ...props }: SelectTypeValue) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
-        <p className="text-default text-body-sm tracking-[-0.02em]">타입</p>
+        <p className="text-body-sm tracking-[-0.02em] text-default">타입</p>
         {isError && (
           <p className="text-component-notes-md tracking-[-0.02em] text-red-400">
             와인 타입은 필수 입력이에요
