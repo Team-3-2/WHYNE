@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import Chip from "./Chip";
+import Chip from "./chip";
 
 const meta: Meta<typeof Chip> = {
   title: "Components/Chip",

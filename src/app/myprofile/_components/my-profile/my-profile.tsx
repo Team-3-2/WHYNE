@@ -2,9 +2,9 @@
 
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import ProfileSidebar from "../profile-sidebar/ProfileSidebar";
-import ReviewItem from "../review-item/ReviewItem";
-import ProfileTabs from "../profile-tabs/ProfileTabs";
+import ProfileSidebar from "../profile-sidebar/profile-sidebar";
+import ReviewItem from "../review-item/review-item";
+import ProfileTabs from "../profile-tabs/profile-tabs";
 
 const MyProfile = () => {
   const searchParams = useSearchParams();
