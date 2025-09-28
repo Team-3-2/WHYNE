@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import ProfileTabs from "./ProfileTabs";
+import ProfileTabs from "./profile-tabs";
 
 const meta: Meta<typeof ProfileTabs> = {
   title: "My-profile/ProfileTabs",
