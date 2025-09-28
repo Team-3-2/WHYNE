@@ -3,6 +3,8 @@ import { sfPro } from "./fonts";
 import "./globals.css";
 import { Gnb } from "@/components";
 import QueryProvider from "@/providers/query-provider";
+import StarRating from "@/components/star-rating/star-rating";
+import RatingBreakdown from "@/components/star-rating/rating-breakdown";
 
 export const metadata: Metadata = {
   title: "Wine App",
@@ -18,6 +20,25 @@ export default function RootLayout({
     <html lang="ko" className={sfPro.variable}>
       <body className="mt-32">
         <QueryProvider>
+          <StarRating rating={4.3} />
+          <StarRating rating={4.1} score />
+          <StarRating rating={2} size="xs" score />
+          <StarRating rating={2} size="sm" score />
+          <StarRating rating={2} size="md" score />
+          <StarRating rating={4.1} size="md2" score />
+          <StarRating rating={3.5} size="lg" score />
+          <StarRating rating={3.5} size="xl" score />
+          <StarRating rating={3.5} size="2xl" score />
+          <RatingBreakdown
+            average={4.0}
+            distribution={{
+              5: 1,
+              4: 2,
+              3: 3,
+              2: 4,
+              1: 5,
+            }}
+          />
           <Gnb />
           {children}
         </QueryProvider>

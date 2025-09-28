@@ -7,7 +7,7 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: ["ic-xs", "ic-sm", "ic-md", "ic-2md", "ic-lg", "ic-xl", "ic-2xl"],
+  safelist: ["ic-xs", "ic-sm", "ic-md", "ic-md2", "ic-lg", "ic-xl", "ic-2xl"],
   theme: {
     extend: {
       colors: {
@@ -85,7 +85,7 @@ export default {
         ".ic-xs": { width: "16px", height: "16px" },
         ".ic-sm": { width: "20px", height: "20px" },
         ".ic-md": { width: "24px", height: "24px" },
-        ".ic-2md": { width: "28px", height: "28px" },
+        ".ic-md2": { width: "28px", height: "28px" },
         ".ic-lg": { width: "32px", height: "32px" },
         ".ic-xl": { width: "40px", height: "40px" },
         ".ic-2xl": { width: "48px", height: "48px" },
