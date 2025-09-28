@@ -23,8 +23,8 @@ const RatingBreakdown = ({
       <div
         className={cn(
           "grid grid-cols-[110px_auto] items-center gap-x-[20px]",
-          "items-start tablet:grid-cols-[280px_auto] tablet:gap-x-[77px]",
-          "items-start pc:grid pc:grid-cols-[auto] pc:gap-x-0 pc:gap-y-[40px]"
+          "tablet:grid-cols-[280px_auto] tablet:items-start tablet:gap-x-[77px]",
+          "pc:grid pc:grid-cols-[auto] pc:items-start pc:gap-x-0 pc:gap-y-[40px]"
         )}
       >
         <div>

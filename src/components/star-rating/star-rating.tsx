@@ -43,13 +43,13 @@ const StarRating = ({
       </div>
       {/* score 타입 */}
       {score && (
-        <span className="mt-[2px] text-body-lg text-default">
+        <span className="relative top-[3px] text-body-lg text-default">
           {ratingValue}
         </span>
       )}
       {/* totalScore 타입 */}
       {totalScore && (
-        <div className="text-[28px] font-bold leading-[32px] tracking-[-0.3px] pc:mt-[2px]">
+        <div className="text-[28px] font-bold leading-[32px] tracking-[-0.3px] pc:relative pc:top-[4px]">
           {ratingValue}
           <span className="text-gray-400"> / {maxRatingValue}</span>
         </div>
