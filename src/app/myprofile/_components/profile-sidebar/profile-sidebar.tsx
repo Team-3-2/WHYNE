@@ -6,9 +6,9 @@ const ProfileSidebar = () => {
   return (
     <section
       className={cn(
-        "mb-[60px] flex w-[300px] flex-col items-center justify-start gap-5",
+        "mx-auto mb-[60px] flex w-[300px] flex-col items-center justify-start gap-5",
         "tablet:mb-[34px] tablet:w-[400px]",
-        "pc:sticky pc:top-32 pc:mb-0 pc:h-[calc(100vh-50px-128px)] pc:w-[291px] pc:gap-6 pc:border-r-[1px] pc:px-[25px] pc:pt-10"
+        "pc:sticky pc:top-32 pc:mb-0 pc:h-[calc(100vh-50px-128px)] pc:w-[291px] pc:gap-6 pc:px-[25px] pc:pt-10"
       )}
     >
       <div className="flex-col-center gap-3 tablet:gap-4 pc:gap-5">

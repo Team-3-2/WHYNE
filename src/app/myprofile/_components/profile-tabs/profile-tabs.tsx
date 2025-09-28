@@ -15,6 +15,10 @@ const tabs = [
     label: "내가 등록한 와인 4",
     href: "registered",
   },
+  {
+    label: "내 계정",
+    href: "account",
+  },
 ];
 
 const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
