@@ -39,4 +39,5 @@ const ICON_MAP = {
   VanillaIcon: () => import("/public/icons/flavor/ic-vanilla.svg"),
 };
 
+export type IconName = keyof typeof ICON_MAP;
 export default ICON_MAP;
