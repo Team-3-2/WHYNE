@@ -18,6 +18,7 @@ const AccountItem = () => {
           alt="profile"
           width={164}
           height={164}
+          priority={true}
           className="h-[80px] w-[80px] cursor-pointer rounded-full tablet:h-[100px] tablet:w-[100px] pc:h-[164px] pc:w-[164px]"
         />
         <h1 className="font-bold tracking-[-0.02em] pc:text-heading-lg">
