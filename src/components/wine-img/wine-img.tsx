@@ -7,6 +7,13 @@ interface WineImgProps extends ComponentProps<"input"> {
   errorMsg?: string;
 }
 
+/**
+ * 와인 이미지 등록 컴포넌트
+ * @author hwitae
+ * @param isError 오류 여부
+ * @param errorMsg 표시할 에러 메시지
+ * @returns
+ */
 const WineImg = ({ isError, errorMsg, ...props }: WineImgProps) => {
   return (
     <div className="flex items-end gap-2">
