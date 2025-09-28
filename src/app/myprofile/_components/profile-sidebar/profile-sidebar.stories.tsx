@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import ProfileSidebar from "./ProfileSidebar";
+import ProfileSidebar from "./profile-sidebar";
 
 const meta: Meta<typeof ProfileSidebar> = {
   title: "My-profile/ProfileSidebar",
