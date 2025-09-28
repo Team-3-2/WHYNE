@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(js|jsx|mdc|ts|tsx)"],
   addons: ["@storybook/addon-a11y", "@storybook/addon-docs"],
@@ -11,6 +12,7 @@ const config: StorybookConfig = {
       },
     },
   },
+  staticDirs: ["../public"],
   typescript: {
     check: false,
     reactDocgen: "react-docgen-typescript",
@@ -36,4 +38,5 @@ const config: StorybookConfig = {
     return config;
   },
 };
+
 export default config;
