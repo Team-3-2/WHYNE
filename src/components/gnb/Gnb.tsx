@@ -1,8 +1,13 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Logo from "@/../public/logo.svg";
 
 const LinkMenu = [
-  { name: "WHYNE", href: "/" },
+  {
+    name: <Logo className="w-[100px]" />,
+    href: "/",
+    ariaLabel: "메인페이지 이동",
+  },
   {
     name: "로그인",
     href: "/login",
@@ -20,12 +25,16 @@ const Gnb = () => {
         "pc:rounded-1 pc:top-10 pc:h-[70px] pc:w-[1140px] pc:px-[60px] pc:py-[11px]"
       )}
     >
-      {/* TODO(지권): 로고 아이콘 추가 및 로그인 상태 추가 */}
-      {LinkMenu.map((menu) => (
+      {/* TODO(지권): 로그인 상태 추가 */}
+      {LinkMenu.map((menu, i) => (
         <Link
-          key={menu.name}
+          key={i}
           href={menu.href}
-          className={cn("leading-[26px] text-white", menu.style)}
+          aria-label={menu.ariaLabel}
+          className={cn(
+            "flex items-center leading-[26px] text-white",
+            menu.style
+          )}
         >
           {menu.name}
         </Link>
