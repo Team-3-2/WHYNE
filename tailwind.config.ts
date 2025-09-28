@@ -13,6 +13,14 @@ export default {
       colors: {
         black: "#1A1918",
         white: "#FFFFFF",
+        gray100: "#FAFAFA",
+        gray300: "#D1D1D1",
+        gray600: "#8C8C8B",
+        primary: "#1A1918",
+        default: "#31302F",
+        secondary: "#A3A3A3",
+        neutral200: "#F2F2F2",
+        neutral400: "#BABABA",
         gray: {
           100: "#fafafa",
           150: "#f7f7f7",
