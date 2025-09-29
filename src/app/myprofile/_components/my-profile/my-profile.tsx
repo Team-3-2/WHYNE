@@ -11,7 +11,7 @@ const MyProfile = () => {
   const [tab, setTab] = useState(searchParams.get("tab") || "review");
 
   return (
-    <main className="mx-auto flex w-full flex-col items-center justify-center pc:flex-row pc:items-start">
+    <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
       <article className="w-full px-4 tablet:px-8 pc:mx-[300px]">
         <ProfileTabs tab={tab} setTab={setTab} />
         {tab === "review" &&
