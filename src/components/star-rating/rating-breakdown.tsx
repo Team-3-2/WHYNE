@@ -37,7 +37,7 @@ const RatingBreakdown = ({
             "pc:gap-y-[8px]"
           )}
         >
-          {[...Array(maxRating)].map((_, i) => {
+          {Array.from({ length: maxRating }).map((_, i) => {
             const score = maxRating - i;
             const count = distribution[score] ?? 0;
             return (
