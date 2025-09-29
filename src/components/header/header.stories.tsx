@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import Header from "./Header";
+import Header from "./header";
 
 const meta: Meta<typeof Header> = {
-  title: "Components/Header",
+  title: "Components/header",
   component: Header,
   parameters: {
     layout: "centered",
@@ -29,7 +29,7 @@ export const Default: Story = {
 };
 
 export const ManyReviews: Story = {
-  name: "리뷰가 많은 경우",
+  name: "Many Reviews ",
   args: {
     review: "12,345",
     title: "도멘 드 라 로마네 콩티",
@@ -39,7 +39,7 @@ export const ManyReviews: Story = {
 };
 
 export const LongText: Story = {
-  name: "제목/설명이 긴 경우",
+  name: "Long Text ",
   args: {
     review: "87",
     title:

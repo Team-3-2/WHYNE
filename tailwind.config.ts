@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
   content: [
@@ -6,11 +7,20 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: ["ic-xs", "ic-sm", "ic-md", "ic-md2", "ic-lg", "ic-xl", "ic-2xl"],
   theme: {
     extend: {
       colors: {
         black: "#1A1918",
         white: "#FFFFFF",
+        gray100: "#FAFAFA",
+        gray300: "#D1D1D1",
+        gray600: "#8C8C8B",
+        primary: "#1A1918",
+        default: "#31302F",
+        secondary: "#A3A3A3",
+        neutral200: "#F2F2F2",
+        neutral400: "#BABABA",
         gray: {
           100: "#fafafa",
           150: "#f7f7f7",
@@ -65,7 +75,21 @@ export default {
         "button-lg": ["16px", { lineHeight: "20px", fontWeight: "700" }],
         "button-md": ["14px", { lineHeight: "18px", fontWeight: "700" }],
       },
+      fill: ({ theme }) => theme("colors"),
+      stroke: ({ theme }) => theme("colors"),
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".ic-xs": { width: "16px", height: "16px" },
+        ".ic-sm": { width: "20px", height: "20px" },
+        ".ic-md": { width: "24px", height: "24px" },
+        ".ic-md2": { width: "28px", height: "28px" },
+        ".ic-lg": { width: "32px", height: "32px" },
+        ".ic-xl": { width: "40px", height: "40px" },
+        ".ic-2xl": { width: "48px", height: "48px" },
+      });
+    }),
+  ],
 } satisfies Config;
