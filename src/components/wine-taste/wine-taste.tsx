@@ -8,6 +8,7 @@ import ReviewTasteItem from "./_components/review-taste-item";
 /**
  * 와인 맛 표시 통합 컴포넌트
  * 'detail' 또는 'review' 타입에 따라 다른 레이아웃과 스타일 적용
+ * @author junyeol
  */
 const WineTaste = ({ type, tastes, onChange }: WineTasteProps) => {
   // 변경 이벤트 핸들러

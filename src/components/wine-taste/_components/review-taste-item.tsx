@@ -7,6 +7,7 @@ import { TasteItemProps } from "../_types";
 /**
  * 리뷰 타입의 테이스팅 아이템 컴포넌트
  * 모바일 스타일로 고정되며, 부모 컴포넌트에서 그리드 레이아웃 적용
+ * @author junyeol
  */
 const ReviewTasteItem = ({ type, data, taste, onChange }: TasteItemProps) => {
   return (

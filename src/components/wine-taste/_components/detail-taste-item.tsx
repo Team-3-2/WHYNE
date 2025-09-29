@@ -7,6 +7,7 @@ import { TasteItemProps } from "../_types";
 /**
  * 디테일 타입의 테이스팅 아이템 컴포넌트
  * 모바일, 태블릿, PC에서 각각 다른 스타일 적용
+ * @author junyeol
  */
 const DetailTasteItem = ({ type, data, taste, onChange }: TasteItemProps) => {
   return (
