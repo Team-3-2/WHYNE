@@ -11,17 +11,39 @@ export const getTasteDescription = (
   type: string,
   level: GaugeLevel
 ): string => {
-  if (level === 0) return "없음";
-
   switch (type) {
     case "바디감":
-      return level <= 2 ? "가벼움" : level <= 4 ? "중간" : "진해요";
+      return level === 0
+        ? "가벼워요"
+        : level <= 2
+          ? "가벼움"
+          : level <= 4
+            ? "중간"
+            : "진해요";
     case "탄닌":
-      return level <= 2 ? "부드러움" : level <= 4 ? "적당함" : "떫어요";
+      return level === 0
+        ? "부드러워요"
+        : level <= 2
+          ? "부드러움"
+          : level <= 4
+            ? "적당함"
+            : "떫어요";
     case "당도":
-      return level <= 2 ? "약간 단맛" : level <= 4 ? "중간 단맛" : "달아요";
+      return level === 0
+        ? "약간 단맛"
+        : level <= 2
+          ? "약간 단맛"
+          : level <= 4
+            ? "중간 단맛"
+            : "달아요";
     case "산미":
-      return level <= 2 ? "부족함" : level <= 4 ? "적당함" : "많이셔요";
+      return level === 0
+        ? "산미 없음"
+        : level <= 2
+          ? "부족함"
+          : level <= 4
+            ? "적당함"
+            : "많이셔요";
     default:
       return "";
   }
