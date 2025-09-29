@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
-import ProfileSidebar from "./profile-sidebar";
+import AccountItem from "./account-item";
 
-const meta: Meta<typeof ProfileSidebar> = {
-  title: "My-profile/ProfileSidebar",
-  component: ProfileSidebar,
+const meta: Meta<typeof AccountItem> = {
+  title: "My-profile/AccountItem",
+  component: AccountItem,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",

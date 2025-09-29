@@ -15,6 +15,10 @@ const tabs = [
     label: "내가 등록한 와인 4",
     href: "registered",
   },
+  {
+    label: "내 계정",
+    href: "account",
+  },
 ];
 
 const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
@@ -22,9 +26,9 @@ const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
     <nav
       aria-label="프로필 탭 메뉴"
       className={cn(
-        "flex w-full items-center justify-start gap-5 pb-[14px] pl-1",
-        "tablet:gap-8 tablet:pb-[18px] tablet:pl-5",
-        "pc:h-[85px] pc:gap-8 pc:pb-[18px] pc:pl-10"
+        "sticky top-[50px] z-50 flex w-full items-center justify-start gap-5 bg-white pb-[14px] pl-1 pt-4",
+        "tablet:top-[110px] tablet:gap-8 tablet:pb-[18px] tablet:pl-5",
+        "pc:top-[110px] pc:h-[85px] pc:items-end pc:gap-8 pc:pb-[10px]"
       )}
     >
       {tabs.map((item) => (

@@ -2,13 +2,13 @@ import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-const ProfileSidebar = () => {
+const AccountItem = () => {
   return (
     <section
       className={cn(
-        "mb-[60px] flex w-[300px] flex-col items-center justify-start gap-5",
+        "mx-auto mb-[60px] flex w-[300px] flex-col items-center justify-start gap-5",
         "tablet:mb-[34px] tablet:w-[400px]",
-        "pc:sticky pc:top-32 pc:mb-0 pc:h-[calc(100vh-50px-128px)] pc:w-[291px] pc:gap-6 pc:border-r-[1px] pc:px-[25px] pc:pt-10"
+        "pc:sticky pc:top-32 pc:mb-0 pc:h-[calc(100vh-50px-128px)] pc:w-[291px] pc:justify-center pc:gap-6 pc:px-[25px] pc:pt-10"
       )}
     >
       <div className="flex-col-center gap-3 tablet:gap-4 pc:gap-5">
@@ -18,6 +18,7 @@ const ProfileSidebar = () => {
           alt="profile"
           width={164}
           height={164}
+          priority={true}
           className="h-[80px] w-[80px] cursor-pointer rounded-full tablet:h-[100px] tablet:w-[100px] pc:h-[164px] pc:w-[164px]"
         />
         <h1 className="font-bold tracking-[-0.02em] pc:text-heading-lg">
@@ -65,4 +66,4 @@ const ProfileSidebar = () => {
   );
 };
 
-export default ProfileSidebar;
+export default AccountItem;
