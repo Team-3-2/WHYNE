@@ -28,7 +28,7 @@ const ReviewItem = () => {
       className={cn(
         "flex flex-col gap-[51px] border-t border-gray-300 py-[16px] pb-[28px] pt-[39px]",
         "tablet:gap-[54px]",
-        "pc:gap-[50px] pc:py-[40px] pc:pl-10 pc:pr-20"
+        "pc:gap-[50px] pc:py-[40px]"
       )}
     >
       <div className="flex w-full flex-col items-start justify-center gap-8 px-[14px]">
