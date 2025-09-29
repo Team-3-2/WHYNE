@@ -2,23 +2,33 @@
 name: 'Chromatic Deployment'
 
 # Event for the workflow
-on: push
+on:
+  push:
+    branches:
+      - develop # develop 브랜치에 푸시될 때
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled] # PR 이벤트 종류
 
 # List of jobs
 jobs:
   chromatic:
     name: 'Run Chromatic'
     runs-on: ubuntu-latest
+
+    # develop 브랜치이거나 chromatic 라벨이 있을 때만 실행
+    if: |
+      github.ref == 'refs/heads/develop' || 
+      contains(github.event.pull_request.labels.*.name, 'chromatic')
+
     # Job steps
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - run: yarn
-        #👇 Adds Chromatic as a step in the workflow
+
       - uses: chromaui/action@latest
-        # Options required for Chromatic's GitHub Action
         with:
-          #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
