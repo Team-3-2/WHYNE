@@ -14,23 +14,23 @@ export const getTasteDescription = (
   switch (type) {
     case "바디감":
       return level === 0
-        ? "가벼워요"
+        ? "없음"
         : level <= 2
-          ? "가벼움"
+          ? "가벼워요"
           : level <= 4
             ? "중간"
             : "진해요";
     case "탄닌":
       return level === 0
-        ? "부드러워요"
+        ? "없음"
         : level <= 2
-          ? "부드러움"
+          ? "부드러워요"
           : level <= 4
             ? "적당함"
             : "떫어요";
     case "당도":
       return level === 0
-        ? "약간 단맛"
+        ? "없음"
         : level <= 2
           ? "약간 단맛"
           : level <= 4
