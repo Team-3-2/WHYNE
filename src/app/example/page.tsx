@@ -9,6 +9,7 @@ import {
   TextInput,
 } from "@/components";
 import Profile from "@/components/profile/profile";
+import Searchbar from "@/components/searchbar/searchbar";
 import WineImg from "@/components/wine-img/wine-img";
 import React, { ChangeEvent } from "react";
 
@@ -108,6 +109,10 @@ const Page = () => {
       <section>
         <WineImg />
         <WineImg isError={true} errorMsg="와인 사진은 필수" />
+      </section>
+
+      <section>
+        <Searchbar onChange={handleChange} />
       </section>
 
       <br />
