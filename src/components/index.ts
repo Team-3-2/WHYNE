@@ -10,3 +10,6 @@ export { default as BlockGauge } from "./gauge/block-gauge";
 export { default as DetailTaste } from "./taste/detail-taste";
 export { default as ReviewTaste } from "./taste/review-taste";
 export { default as Profile } from "./profile/profile";
+export { default as Button } from "./button/basic-button";
+export { default as ArrowButton } from "./button/arrow-button";
+export { default as IconButton } from "./button/icon-button";
