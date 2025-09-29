@@ -9,6 +9,7 @@ import {
   TextInput,
 } from "@/components";
 import Profile from "@/components/profile/profile";
+import WineImg from "@/components/wine-img/wine-img";
 import React, { ChangeEvent } from "react";
 
 const Page = () => {
@@ -101,6 +102,12 @@ const Page = () => {
       <section>
         <Profile />
         <Profile url="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Allosaurus_BW.jpg/120px-Allosaurus_BW.jpg" />
+      </section>
+
+      <br />
+      <section>
+        <WineImg />
+        <WineImg isError={true} errorMsg="와인 사진은 필수" />
       </section>
 
       <br />
