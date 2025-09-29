@@ -8,6 +8,7 @@ import {
   SelectType,
   TextInput,
 } from "@/components";
+import LikeButton from "@/components/button/like-button";
 import Profile from "@/components/profile/profile";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineImg from "@/components/wine-img/wine-img";
@@ -113,6 +114,10 @@ const Page = () => {
 
       <section>
         <Searchbar onChange={handleChange} />
+      </section>
+
+      <section>
+        <LikeButton />
       </section>
 
       <br />

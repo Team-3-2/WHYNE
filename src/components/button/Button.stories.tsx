@@ -131,3 +131,10 @@ export const Variations: Story = {
     layout: "fullscreen",
   },
 };
+
+export const Like: Story = {
+  args: {
+    icon: "LikeOffIcon",
+    appearance: "outline",
+  },
+};
