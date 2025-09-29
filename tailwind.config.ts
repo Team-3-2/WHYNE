@@ -34,8 +34,8 @@ export default {
           400: "#ff6b6b",
         },
         purple: {
-          100: "6a42db",
-          200: "9747ff",
+          100: "#6a42db",
+          200: "#9747ff",
         },
       },
       screens: {
