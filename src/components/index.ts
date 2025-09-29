@@ -15,3 +15,4 @@ export { default as ArrowButton } from "./button/arrow-button";
 export { default as IconButton } from "./button/icon-button";
 export { default as StarRating } from "./star-rating/star-rating";
 export { default as RatingBreakdown } from "./star-rating/rating-breakdown";
+export { default as Searchbar } from "./searchbar/searchbar";
