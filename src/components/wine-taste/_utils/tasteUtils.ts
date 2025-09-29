@@ -38,7 +38,7 @@ export const getTasteDescription = (
             : "달아요";
     case "산미":
       return level === 0
-        ? "산미 없음"
+        ? "없음"
         : level <= 2
           ? "부족함"
           : level <= 4
