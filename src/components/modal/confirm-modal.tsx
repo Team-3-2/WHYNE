@@ -1,9 +1,7 @@
 "use client";
 
 import Button from "../button/basic-button";
-import { useEffect, useRef } from "react";
 import Modal from "./modal";
-import { allowScroll, lockingScroll } from "@/lib/utils";
 
 interface ModalProps {
   isOpen: boolean;
