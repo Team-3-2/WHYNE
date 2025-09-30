@@ -2,7 +2,8 @@
 
 import Button from "../button/basic-button";
 import { useEffect, useRef } from "react";
-import DefaultModal from "./default-modal";
+import CommonModal from "./common-modal";
+import { allowScroll, lockingScroll } from "@/lib/utils";
 
 interface ModalProps {
   isOpen: boolean;
@@ -30,18 +31,8 @@ const ConfirmModal = ({
   onClose,
   onConfirm,
 }: ModalProps) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    if (!dialogRef.current?.open && isOpen) {
-      dialogRef.current?.showModal();
-    }
-  }, [dialogRef, isOpen]);
-
-  if (!isOpen) return null;
-
   return (
-    <DefaultModal ref={dialogRef} onCancel={onClose} className="px-4 pb-6 pt-8">
+    <CommonModal isOpen={isOpen} onCancel={onClose} className="px-4 pb-6 pt-8">
       <p className="text-heading-sm font-semibold text-gray-950">
         {msg.text || "모달 텍스트를 입력해주세요"}
       </p>
@@ -58,7 +49,7 @@ const ConfirmModal = ({
           label={msg.confirmMsg || "삭제하기"}
         />
       </div>
-    </DefaultModal>
+    </CommonModal>
   );
 };
 
