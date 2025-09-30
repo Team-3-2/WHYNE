@@ -9,7 +9,7 @@ import {
   TextInput,
 } from "@/components";
 import LikeButton from "@/components/button/like-button";
-import AlertModal from "@/components/modal/alert-modal";
+import ConfirmModal from "@/components/modal/confirm-modal";
 import Profile from "@/components/profile/profile";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineImg from "@/components/wine-img/wine-img";
@@ -19,6 +19,7 @@ const Page = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
+  const [open, setOpen] = useState(false);
   return (
     <div className="flex-col-center gap-4">
       <Header
@@ -123,7 +124,12 @@ const Page = () => {
       </section>
 
       <section>
-        <AlertModal isOpen={false} msg={{ text: "정말 삭제하시겠습니까?" }} />
+        <ConfirmModal
+          isOpen={open}
+          msg={{ text: "정말 삭제하시겠습니까?" }}
+          onClose={() => setOpen(false)}
+        />
+        <button onClick={() => setOpen(true)}>모달 열기</button>
       </section>
 
       <br />

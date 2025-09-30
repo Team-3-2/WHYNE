@@ -16,7 +16,7 @@ interface ModalProps {
   onConfirm?: () => void;
 }
 
-const AlertModal = ({
+const ConfirmModal = ({
   isOpen = false,
   msg,
   onClose,
@@ -41,7 +41,7 @@ const AlertModal = ({
         ""
       )}
       ref={dialogRef}
-      onCancel={(e) => e.preventDefault()}
+      onCancel={onClose}
     >
       <p className="text-heading-sm font-semibold">
         {msg.text || "모달 텍스트를 입력해주세요"}
@@ -53,13 +53,15 @@ const AlertModal = ({
           onClick={onClose}
           label={msg.cancelMsg || "취소"}
         ></Button>
-        <Button className="w-[136px]" onClick={onConfirm}>
-          {msg.confirmMsg || "삭제하기"}
-        </Button>
+        <Button
+          className="w-[136px]"
+          onClick={onConfirm}
+          label={msg.confirmMsg || "삭제하기"}
+        ></Button>
       </div>
     </dialog>,
     document.body
   );
 };
 
-export default AlertModal;
+export default ConfirmModal;
