@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Button from "../button/basic-button";
 import Modal from "./modal";
+import { allowScroll, lockingScroll } from "@/lib/utils";
 
 interface ModalProps {
   isOpen: boolean;
@@ -29,8 +31,27 @@ const ConfirmModal = ({
   onClose,
   onConfirm,
 }: ModalProps) => {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    let prevScrollY = window.scrollY;
+
+    if (!dialogRef.current?.open && isOpen) {
+      dialogRef.current?.showModal();
+      lockingScroll();
+    } else {
+      dialogRef.current?.close();
+    }
+
+    return () => {
+      allowScroll(prevScrollY);
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
   return (
-    <Modal isOpen={isOpen} onCancel={onClose} className="px-4 pb-6 pt-8">
+    <Modal ref={dialogRef} onCancel={onClose} className="px-4 pb-6 pt-8">
       <p className="text-heading-sm font-semibold text-gray-950">
         {msg.text || "모달 텍스트를 입력해주세요"}
       </p>
