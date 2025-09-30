@@ -7,11 +7,15 @@ import {
   Header,
   SelectType,
   TextInput,
+  Card,
 } from "@/components";
 import Profile from "@/components/profile/profile";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineImg from "@/components/wine-img/wine-img";
 import React, { ChangeEvent } from "react";
+import { recommendwinemock } from "@/mock";
+
+const DATA = recommendwinemock;
 
 const Page = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -113,6 +117,35 @@ const Page = () => {
 
       <section>
         <Searchbar onChange={handleChange} />
+      </section>
+
+      <section>
+        <h3 className="mb-[10px] text-body-lg">내가 등록한 와인</h3>
+        <div className="grid max-w-[800px] grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
+          {DATA.map((item) => (
+            <Card
+              key={item.id}
+              image={item.image}
+              name={item.name}
+              region={item.region}
+              price={item.price}
+            />
+          ))}
+        </div>
+        <h3 className="mb-[10px] text-body-lg">와인 목록 페이지</h3>
+        <div className="grid max-w-[800px] grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
+          {DATA.map((item) => (
+            <Card
+              key={item.id}
+              image={item.image}
+              avgRating={item.avgRating}
+              reviewCount={item.reviewCount}
+              name={item.name}
+              region={item.region}
+              recentReview={item.recentReview}
+            />
+          ))}
+        </div>
       </section>
 
       <br />
