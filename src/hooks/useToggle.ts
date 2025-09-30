@@ -1,5 +1,10 @@
 import { useState, useCallback } from "react";
 
+/**
+ * 토글 상태를 관리하는 훅입니다.
+ * @param initialValue : 토글의 초기 기본값: false
+ */
+
 type UseToggleReturn = {
   isOn: boolean;
   toggle: () => void;
