@@ -9,7 +9,7 @@ interface DefaultModalHandles {
 }
 
 /**
- * 모달 공통 디자인
+ * 모달 공통 디자인. ref를 받기 위해 forwardRef()로 작성
  * @author hwitae
  */
 const DefaultModal = forwardRef<HTMLDialogElement, DefaultModalHandles>(
