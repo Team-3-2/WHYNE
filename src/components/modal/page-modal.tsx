@@ -1,5 +1,7 @@
+import Modal from "./modal";
+
 const PageModal = () => {
-  return <div></div>;
+  return <Modal></Modal>;
 };
 
 export default PageModal;

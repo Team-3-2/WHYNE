@@ -2,7 +2,7 @@
 
 import Button from "../button/basic-button";
 import { useEffect, useRef } from "react";
-import CommonModal from "./common-modal";
+import Modal from "./modal";
 import { allowScroll, lockingScroll } from "@/lib/utils";
 
 interface ModalProps {
@@ -32,7 +32,7 @@ const ConfirmModal = ({
   onConfirm,
 }: ModalProps) => {
   return (
-    <CommonModal isOpen={isOpen} onCancel={onClose} className="px-4 pb-6 pt-8">
+    <Modal isOpen={isOpen} onCancel={onClose} className="px-4 pb-6 pt-8">
       <p className="text-heading-sm font-semibold text-gray-950">
         {msg.text || "모달 텍스트를 입력해주세요"}
       </p>
@@ -49,7 +49,7 @@ const ConfirmModal = ({
           label={msg.confirmMsg || "삭제하기"}
         />
       </div>
-    </CommonModal>
+    </Modal>
   );
 };
 

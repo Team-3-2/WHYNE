@@ -5,10 +5,10 @@ import { ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 interface CommonModalProps {
-  isOpen: boolean;
+  isOpen?: boolean;
   className?: string;
   onCancel?: () => void;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 /**
@@ -18,7 +18,7 @@ interface CommonModalProps {
  * @param onClose 취소 버튼 핸들러 함수
  * @returns <dialog>
  */
-const CommonModal = ({
+const Modal = ({
   isOpen = false,
   onCancel,
   className,
@@ -32,6 +32,8 @@ const CommonModal = ({
     if (isOpen) {
       dialogRef.current?.showModal();
       lockingScroll();
+    } else {
+      dialogRef.current?.close();
     }
 
     return () => {
@@ -58,4 +60,4 @@ const CommonModal = ({
   );
 };
 
-export default CommonModal;
+export default Modal;
