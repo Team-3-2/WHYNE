@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ConfirmModal from "./confirm-modal";
+import { useState } from "react";
 
 const meta: Meta<typeof ConfirmModal> = {
   title: "Components/Modal",
@@ -31,5 +32,19 @@ export const Alert: Story = {
     msg: { text: "정말 삭제하시겠습니까?" },
     onClose: () => {},
     onConfirm: () => {},
+  },
+  render: () => {
+    const [open, setOpen] = useState(true);
+    return (
+      <ConfirmModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={() => {
+          alert("삭제되었습니다.");
+          setOpen(false);
+        }}
+        msg={{ text: "정말 삭제하시겠습니까?" }}
+      />
+    );
   },
 };
