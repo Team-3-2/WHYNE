@@ -9,7 +9,7 @@ import { useEffect } from "react";
 type Event = MouseEvent | TouchEvent;
 
 const useClickOutside = (
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement | null>,
   onClickOutside: (event: Event) => void
 ) => {
   useEffect(() => {
