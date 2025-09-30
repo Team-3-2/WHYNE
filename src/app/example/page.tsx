@@ -9,10 +9,11 @@ import {
   TextInput,
 } from "@/components";
 import LikeButton from "@/components/button/like-button";
+import AlertModal from "@/components/modal/alert-modal";
 import Profile from "@/components/profile/profile";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineImg from "@/components/wine-img/wine-img";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 const Page = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -119,6 +120,10 @@ const Page = () => {
       <section>
         <LikeButton count={24} />
         <LikeButton count={24} isLike={true} />
+      </section>
+
+      <section>
+        <AlertModal isOpen={false} msg={{ text: "정말 삭제하시겠습니까?" }} />
       </section>
 
       <br />
