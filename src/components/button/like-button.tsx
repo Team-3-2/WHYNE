@@ -16,32 +16,29 @@ interface LikeButtonProps extends ComponentProps<"button"> {
  */
 const LikeButton = ({ isLike, count, ...props }: LikeButtonProps) => {
   return (
-    <div>
-      <Button
-        icon={isLike ? "LikeOnIcon" : "LikeOffIcon"}
-        appearance="outline"
-        aria-label="좋아요버튼"
+    <Button
+      icon={isLike ? "LikeOnIcon" : "LikeOffIcon"}
+      appearance="outline"
+      aria-label="좋아요버튼"
+      className={cn(
+        "h-8 cursor-pointer gap-[2px] rounded-lg py-1 pl-2 pr-3",
+        "tablet:h-8 tablet:gap-[2px]",
+        "pc:h-9 pc:gap-[4px] pc:py-[6px] pc:pl-3 pc:pr-[14px]",
+        isLike && "border border-red-200"
+      )}
+      iconClassName={cn("mobile:ic-sm", "tablet:ic-sm", "pc:ic-md")}
+      iconColor={isLike ? "danger200" : "default"}
+      {...props}
+    >
+      <span
         className={cn(
-          "cursor-pointer rounded-lg py-1 pl-2 pr-3",
-          "mobile:h-8 mobile:gap-[2px]",
-          "tablet:h-8 tablet:gap-[2px]",
-          "pc:h-9 pc:gap-[4px] pc:py-[6px] pc:pl-3 pc:pr-[14px]",
-          isLike && "border border-red-200"
+          "text-body-lg font-normal tracking-[-0.02em]",
+          isLike && "text-lg text-red-200"
         )}
-        iconClassName={cn("mobile:ic-sm", "tablet:ic-sm", "pc:ic-md")}
-        iconColor={isLike ? "danger200" : "default"}
-        {...props}
       >
-        <span
-          className={cn(
-            "text-body-lg font-normal tracking-[-0.02em]",
-            isLike && "text-lg text-red-200"
-          )}
-        >
-          {count}
-        </span>
-      </Button>
-    </div>
+        {count}
+      </span>
+    </Button>
   );
 };
 
