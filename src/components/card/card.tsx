@@ -53,7 +53,7 @@ const Card = ({
       <div className="flex-center aspect-[1/1] w-full overflow-hidden bg-gray-200 p-[12%]">
         <img
           src={image}
-          alt={`와인 이미지: ${name}`}
+          alt={`${name} 와인 이미지`}
           className="h-full"
           loading="lazy"
         />
@@ -97,7 +97,7 @@ const Card = ({
             icon="HamburgerIcon"
             aria-label={isMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
             onClick={toggleMenu}
-            className="active:text-color-transparent h-[26px] w-[26px] border-0 text-[#9FACBD] active:bg-gray-100 tablet:h-[26px] tablet:w-[26px]"
+            className="active:text-color-transparent h-[26px] w-[26px] border-0 text-[#9FACBD] active:bg-gray-100 tablet:h-[26px] tablet:w-[26px] pc:h-[26px] pc:w-[26px]"
           />
           {isMenuOpen && (
             <DropdownMenu
