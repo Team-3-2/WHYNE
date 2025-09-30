@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
 import ICON_MAP from "./icon-map";
 
-const iconVariants = cva("inline-block", {
+export const iconVariants = cva("inline-block", {
   variants: {
     color: {
       default: "",
