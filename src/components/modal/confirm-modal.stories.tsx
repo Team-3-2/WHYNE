@@ -8,7 +8,7 @@ const meta: Meta<typeof ConfirmModal> = {
     layout: "centered",
     docs: {
       description: {
-        component: "확인 모달 컴포넌트 입니다.",
+        component: "확인 모달 컴포넌트 입니다. ESC를 누르면 모달이 닫힙니다.",
       },
     },
   },

@@ -128,6 +128,10 @@ const Page = () => {
           isOpen={open}
           msg={{ text: "정말 삭제하시겠습니까?" }}
           onClose={() => setOpen(false)}
+          onConfirm={() => {
+            alert("삭제되었습니다.");
+            setOpen(false);
+          }}
         />
         <button onClick={() => setOpen(true)}>모달 열기</button>
       </section>

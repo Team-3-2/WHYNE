@@ -1,9 +1,8 @@
 "use client";
 
-import { createPortal } from "react-dom";
 import Button from "../button/basic-button";
-import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
+import DefaultModal from "./default-modal";
 
 interface ModalProps {
   isOpen: boolean;
@@ -32,18 +31,9 @@ const ConfirmModal = ({
 
   if (!isOpen) return null;
 
-  return createPortal(
-    <dialog
-      className={cn(
-        "flex-col-center gap-6 bg-white",
-        "px-4 pb-6 pt-8",
-        "rounded-2xl border border-gray-200",
-        ""
-      )}
-      ref={dialogRef}
-      onCancel={onClose}
-    >
-      <p className="text-heading-sm font-semibold">
+  return (
+    <DefaultModal ref={dialogRef} onCancel={onClose} className="px-4 pb-6 pt-8">
+      <p className="text-heading-sm font-semibold text-gray-950">
         {msg.text || "모달 텍스트를 입력해주세요"}
       </p>
       <div className="flex gap-2">
@@ -52,15 +42,14 @@ const ConfirmModal = ({
           className="w-[136px]"
           onClick={onClose}
           label={msg.cancelMsg || "취소"}
-        ></Button>
+        />
         <Button
           className="w-[136px]"
           onClick={onConfirm}
           label={msg.confirmMsg || "삭제하기"}
-        ></Button>
+        />
       </div>
-    </dialog>,
-    document.body
+    </DefaultModal>
   );
 };
 
