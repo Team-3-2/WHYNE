@@ -29,7 +29,7 @@ const Modal = ({
   useEffect(() => {
     let prevScrollY = window.scrollY;
 
-    if (isOpen) {
+    if (!dialogRef.current?.open && isOpen) {
       dialogRef.current?.showModal();
       lockingScroll();
     } else {
