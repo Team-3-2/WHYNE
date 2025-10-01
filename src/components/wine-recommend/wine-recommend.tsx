@@ -30,7 +30,7 @@ const WineRecommend = () => {
           onClick={() => setIndex(index - 1)} */}
         <div
           className={cn(
-            "flex flex-row gap-8 overflow-x-auto",
+            "flex flex-row gap-8 mobile:overflow-x-auto",
             "tablet:grid tablet:max-h-[320px] tablet:grid-cols-3 tablet:grid-rows-1 tablet:gap-1 tablet:overflow-hidden",
             "pc:grid pc:grid-cols-4 pc:grid-rows-1 pc:gap-[85px]"
           )}
