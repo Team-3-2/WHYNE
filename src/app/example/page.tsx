@@ -8,7 +8,10 @@ import {
   Header,
   SelectType,
   TextInput,
+  Card,
 } from "@/components";
+import LikeButton from "@/components/button/like-button";
+import ConfirmModal from "@/components/modal/confirm-modal";
 import Profile from "@/components/profile/profile";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineImg from "@/components/wine-img/wine-img";
@@ -18,6 +21,9 @@ import WineTaste, {
 } from "@/components/wine-taste";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import React, { ChangeEvent, useState } from "react";
+import { recommendwinemock } from "@/mock";
+
+const DATA = recommendwinemock;
 
 // WineTaste 테스트 컴포넌트 - 완전히 분리
 const WineTasteTest = () => {
@@ -116,7 +122,7 @@ const Page = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
-
+  const [open, setOpen] = useState(false);
   return (
     <>
       {/* 스타일 격리를 위해 완전히 별도의 영역에 WineTasteTest 컴포넌트 배치 */}
@@ -224,6 +230,51 @@ const Page = () => {
         </section>
         <br />
       </div>
+      <section>
+        <Searchbar onChange={handleChange} />
+      </section>
+
+      <section>
+        <h3 className="mb-[10px] text-body-lg">내가 등록한 와인</h3>
+        <div className="grid max-w-[800px] grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
+          {DATA.map((item) => (
+            <Card
+              key={item.id}
+              image={item.image}
+              name={item.name}
+              region={item.region}
+              price={item.price}
+            />
+          ))}
+        </div>
+        <h3 className="mb-[10px] text-body-lg">와인 목록 페이지</h3>
+        <div className="grid max-w-[800px] grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
+          {DATA.map((item) => (
+            <Card
+              key={item.id}
+              image={item.image}
+              avgRating={item.avgRating}
+              reviewCount={item.reviewCount}
+              name={item.name}
+              region={item.region}
+              recentReview={item.recentReview}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <ConfirmModal
+          isOpen={open}
+          msg={{ text: "정말 삭제하시겠습니까?" }}
+          onClose={() => setOpen(false)}
+          onConfirm={() => {
+            alert("삭제되었습니다.");
+            setOpen(false);
+          }}
+        />
+        <button onClick={() => setOpen(true)}>모달 열기</button>
+      </section>
 
       <br />
       <section>
@@ -239,6 +290,11 @@ const Page = () => {
             aria-label="옵션 메뉴"
           />
         </div>
+      </section>
+
+      <section>
+        <LikeButton count={642304} />
+        <LikeButton count={5024} isLike={true} />
       </section>
 
       <br />
