@@ -60,7 +60,7 @@ const ReviewItem = () => {
             어울리는 와인이었습니다.
           </p>
         </div>
-        <WineTaste type="review" tastes={initialTastes} onChange={() => {}} />
+        <WineTaste type="review" tastes={initialTastes} />
       </div>
       <LikeButton
         count={24}
