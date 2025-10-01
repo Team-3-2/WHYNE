@@ -1,5 +1,5 @@
 import { recommendwinemock } from "@/mock";
-import ArrowButton from "@/components/button/arrow-button";
+import ArrowButton from "@/components/button/carousel-nav-button";
 const data = recommendwinemock;
 
 const WineRecommend = () => {
