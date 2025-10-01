@@ -1,5 +1,7 @@
 "use client";
 import { useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import useToggle from "@/hooks/use-toggle";
 import useClickOutside from "@/hooks/use-click-outside";
 import StarRating from "../star-rating/star-rating";
@@ -15,6 +17,9 @@ import DropdownMenu from "../dropdown-menu/dropdown-menu";
  * @param region : 와인 지역
  * @param price : 가격
  * @param recentReview : 최신 리뷰
+ * @param href : 카드 클릭 시 링크 연결
+ * @param actionMenu : 액션 메뉴 표시 여부 (수정,삭제)
+ 
  */
 
 interface CardProps {
@@ -25,6 +30,8 @@ interface CardProps {
   region?: string;
   price?: number;
   recentReview?: RecentReview | null;
+  href?: string;
+  actionMenu?: boolean;
 }
 
 interface RecentReview {
@@ -39,6 +46,8 @@ const Card = ({
   region,
   price,
   recentReview,
+  href,
+  actionMenu = false,
 }: CardProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const {
@@ -48,13 +57,15 @@ const Card = ({
   } = useToggle(false);
   useClickOutside(menuRef, () => closeMenu());
 
-  return (
+  const CardContent = (
     <div className="relative w-full">
-      <div className="flex-center aspect-[1/1] w-full overflow-hidden bg-gray-200 p-[12%]">
-        <img
+      <div className="flex-center relative aspect-[1/1] w-full overflow-hidden bg-gray-200 p-[12%]">
+        <Image
           src={image}
+          width={400}
+          height={400}
           alt={`${name} 와인 이미지`}
-          className="h-full"
+          className="h-full w-auto"
           loading="lazy"
         />
       </div>
@@ -92,37 +103,50 @@ const Card = ({
             </div>
           </div>
         )}
-        <div className="absolute right-0 top-0 z-10" ref={menuRef}>
-          <IconButton
-            icon="HamburgerIcon"
-            aria-label={isMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
-            onClick={toggleMenu}
-            className="active:text-color-transparent h-[26px] w-[26px] border-0 text-[#9FACBD] active:bg-gray-100 tablet:h-[26px] tablet:w-[26px] pc:h-[26px] pc:w-[26px]"
-          />
-          {isMenuOpen && (
-            <DropdownMenu
-              className="absolute right-0 top-[100%] mt-[19px] pc:mt-[25px]"
-              items={[
-                {
-                  label: "수정하기",
-                  onClick: () => {
-                    closeMenu();
-                    console.log("수정 모달창 열기");
-                  },
-                },
-                {
-                  label: "삭제하기",
-                  onClick: () => {
-                    closeMenu();
-                    console.log("삭제하기");
-                  },
-                },
-              ]}
+        {actionMenu && (
+          <div className="absolute right-0 top-0 z-10" ref={menuRef}>
+            <IconButton
+              icon="HamburgerIcon"
+              aria-label={isMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+              }}
+              className="active:text-color-transparent h-[26px] w-[26px] border-0 text-[#9FACBD] active:bg-gray-100 tablet:h-[26px] tablet:w-[26px] pc:h-[26px] pc:w-[26px]"
             />
-          )}
-        </div>
+            {isMenuOpen && (
+              <DropdownMenu
+                className="absolute right-0 top-[100%] mt-[19px] pc:mt-[25px]"
+                items={[
+                  {
+                    label: "수정하기",
+                    onClick: () => {
+                      closeMenu();
+                      console.log("수정 모달창 열기");
+                    },
+                  },
+                  {
+                    label: "삭제하기",
+                    onClick: () => {
+                      closeMenu();
+                      console.log("삭제하기");
+                    },
+                  },
+                ]}
+              />
+            )}
+          </div>
+        )}
       </div>
     </div>
+  );
+  return href ? (
+    <Link href={href} className="block">
+      {CardContent}
+    </Link>
+  ) : (
+    CardContent
   );
 };
 

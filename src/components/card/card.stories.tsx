@@ -27,6 +27,7 @@ export const 내가등록한와인: Story = {
           name={DATA[1].name}
           region={DATA[1].region}
           price={DATA[1].price}
+          actionMenu
         />
       </div>
     </div>
@@ -54,6 +55,7 @@ export const 와인목록페이지: Story = {
           name={DATA[1].name}
           region={DATA[1].region}
           recentReview={DATA[1].recentReview}
+          href={`/detail/${DATA[1].id}`}
         />
       </div>
     </div>
