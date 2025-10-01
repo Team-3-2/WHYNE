@@ -199,7 +199,7 @@ const Page = () => {
         <section>
           <SelectType isError={false} onChange={handleChange} />
           <br />
-          <SelectType isError={true} />
+          <SelectType isError={true} className="flex-col" />
         </section>
 
         <br />
