@@ -28,6 +28,7 @@ const TypeInput = ({ name }: { name: WineType }) => {
         "border-border-secondary rounded-full border",
         "flex items-center",
         "bg-white",
+        "tablet:h-[48px]",
         "pc:h-[48px]"
       )}
     >
@@ -49,14 +50,18 @@ const TypeInput = ({ name }: { name: WineType }) => {
         )}
       >
         <Image
-          className={cn("h-6 rounded-full object-cover", "pc:h-8 pc:w-8")}
+          className={cn(
+            "h-6 rounded-full object-cover",
+            "tablet:h-8 tablet:w-8",
+            "pc:h-8 pc:w-8"
+          )}
           src={imgSrc}
           width={24}
           height={24}
           alt="레드와인"
           draggable={false}
         />
-        <span className="text-body-sm tracking-[-0.02em] pc:text-body-md">
+        <span className="text-body-sm tracking-[-0.02em] tablet:text-body-md pc:text-body-md">
           {typeName}
         </span>
       </label>
