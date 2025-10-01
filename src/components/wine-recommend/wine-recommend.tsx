@@ -1,3 +1,5 @@
+"use client";
+
 import { recommendwinemock } from "@/mock";
 import ArrowButton from "@/components/button/arrow-button";
 import { cn } from "@/lib/utils";
