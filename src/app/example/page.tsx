@@ -10,6 +10,7 @@ import {
   TextInput,
   Card,
 } from "@/components";
+import LikeButton from "@/components/button/like-button";
 import Profile from "@/components/profile/profile";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineImg from "@/components/wine-img/wine-img";
@@ -275,6 +276,11 @@ const Page = () => {
             aria-label="옵션 메뉴"
           />
         </div>
+      </section>
+
+      <section>
+        <LikeButton count={642304} />
+        <LikeButton count={5024} isLike={true} />
       </section>
 
       <br />
