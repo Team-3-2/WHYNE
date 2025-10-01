@@ -56,7 +56,14 @@ const ConfirmModal = ({
       onCancel={onClose}
       className="px-4 pb-6 pt-8 tablet:gap-8 pc:gap-8"
     >
-      <p className="text-heading-sm font-semibold tracking-[-0.02em] text-gray-950 tablet:text-heading-md pc:text-heading-md">
+      <p
+        className={cn(
+          "text-heading-sm font-semibold tracking-[-0.02em] text-gray-950",
+          "whitespace-pre-wrap text-center",
+          "tablet:text-heading-md",
+          "pc:text-heading-md"
+        )}
+      >
         {msg.text || "모달 텍스트를 입력해주세요"}
       </p>
       <div className={cn("flex gap-2")}>
