@@ -1,196 +1,152 @@
-export default function Home() {
+import Image from "next/image";
+import Button from "@/components/button/basic-button";
+import { cn } from "@/lib/utils";
+
+const Home = () => {
   return (
-    <main className="min-h-screen bg-white p-8">
-      <div className="mx-auto max-w-6xl space-y-12">
-        {/* 제목 */}
-        <header className="text-center">
-          <h1 className="mb-4 text-title-hero text-primary">
-            SF Pro 폰트 & 커스텀 컬러 테스트
-          </h1>
-          <p className="text-body-md text-gray600">
-            피그마 디자인 시스템 적용 확인
-          </p>
-        </header>
-
-        {/* 폰트 타이포그래피 테스트 */}
-        <section>
-          <h2 className="mb-6 border-b border-gray300 pb-2 text-2xl font-bold text-gray800">
-            📝 Typography (SF Pro 폰트)
-          </h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {/* Title 스타일 */}
-            <div className="space-y-4">
-              <h3 className="text-gray700 mb-3 text-lg font-semibold">
-                Title 스타일
-              </h3>
-              <div className="space-y-2">
-                <h1 className="text-title-hero text-primary">
-                  Title Hero (32px Bold)
-                </h1>
-                <h1 className="text-title-page-md text-primary">
-                  Title Page MD (40px Bold)
-                </h1>
-                <h1 className="text-title-page-sm text-primary">
-                  Title Page SM (32px Bold)
-                </h1>
-              </div>
-            </div>
-
-            {/* Heading 스타일 */}
-            <div className="space-y-4">
-              <h3 className="text-gray700 mb-3 text-lg font-semibold">
-                Heading 스타일
-              </h3>
-              <div className="space-y-2">
-                <h2 className="text-heading-lg text-primary">
-                  Heading LG (24px SemiBold)
-                </h2>
-                <h3 className="text-heading-md text-primary">
-                  Heading MD (20px Bold)
-                </h3>
-                <h4 className="text-heading-sm text-primary">
-                  Heading SM (18px Bold)
-                </h4>
-              </div>
-            </div>
-
-            {/* Body 스타일 */}
-            <div className="space-y-4">
-              <h3 className="text-gray700 mb-3 text-lg font-semibold">
-                Body 스타일
-              </h3>
-              <div className="space-y-2">
-                <p className="text-body-lg text-gray800">
-                  Body Large (18px SemiBold) - 나만의 와인창고, Whyne
-                </p>
-                <p className="text-body-md text-gray600">
-                  Body Medium (16px Medium) - 나만의 와인창고, Whyne
-                </p>
-                <p className="text-body-sm text-gray600">
-                  Body Small (14px Medium) - 나만의 와인창고, Whyne
-                </p>
-              </div>
-            </div>
-
-            {/* Caption & Component */}
-            <div className="space-y-4">
-              <h3 className="text-gray700 mb-3 text-lg font-semibold">
-                Caption & Component
-              </h3>
-              <div className="space-y-2">
-                <p className="text-caption text-gray600">
-                  Caption (12px Regular) - 나만의 와인창고, Whyne
-                </p>
-                <p className="text-component-notes-md text-gray600">
-                  Component Notes MD (12px Regular)
-                </p>
-                <p className="text-component-notes-sm text-gray600">
-                  Component Notes SM (10px Regular)
-                </p>
-              </div>
-            </div>
+    <>
+      {/* TODO(김준열): 메인 배너의 포함되는 텍스트의 위치가 조금 어색함 PR 피드백 이후 수정*/}
+      <div className="relative flex w-full justify-center overflow-hidden">
+        <Image
+          src="/images/landing/landing-banner.jpg"
+          alt="와인 추천 서비스 메인 배너"
+          width={1920}
+          height={730}
+          priority
+          style={{ minWidth: "1920px" }}
+        />
+        <div className="absolute inset-0 ml-12 flex items-start justify-start pt-24 tablet:ml-24 pc:ml-80 pc:pt-48">
+          <div className="text-white">
+            <h1
+              className={cn(
+                "flex flex-col leading-tight",
+                "text-title-page-sm tablet:text-title-page-sm pc:text-title-page-sm"
+              )}
+            >
+              <span>한 곳에서 관리하는</span>
+              <span>나만의 와인창고</span>
+            </h1>
           </div>
-        </section>
-
-        {/* 커스텀 색상 테스트 */}
-        <section>
-          <h2 className="mb-6 border-b border-gray300 pb-2 text-2xl font-bold text-gray800">
-            🎨 Custom Colors (피그마 색상)
-          </h2>
-
-          {/* 기본 색상 */}
-          <div className="mb-8">
-            <h3 className="text-gray700 mb-4 text-lg font-semibold">
-              기본 색상
-            </h3>
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              <div className="rounded-lg bg-black p-6 text-center text-white">
-                <div className="font-bold">Black</div>
-                <div className="mt-2 text-sm">#1A1918</div>
-              </div>
-              <div className="rounded-lg border-2 border-gray300 bg-white p-6 text-center text-black">
-                <div className="font-bold">White</div>
-                <div className="mt-2 text-sm">#FFFFFF</div>
-              </div>
-              <div className="rounded-lg bg-primary p-6 text-center text-white">
-                <div className="font-bold">Primary</div>
-                <div className="mt-2 text-sm">#1A1918</div>
-              </div>
-            </div>
-          </div>
-
-          {/* 그레이 스케일 */}
-          <div className="mb-8">
-            <h3 className="text-gray700 mb-4 text-lg font-semibold">
-              그레이스케일
-            </h3>
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              <div className="rounded-lg border bg-gray100 p-6 text-center text-black">
-                <div className="font-bold">Gray 100</div>
-                <div className="mt-2 text-sm">#FAFAFA</div>
-              </div>
-              <div className="rounded-lg bg-gray300 p-6 text-center text-black">
-                <div className="font-bold">Gray 300</div>
-                <div className="mt-2 text-sm">#D1D1D1</div>
-              </div>
-              <div className="rounded-lg bg-gray600 p-6 text-center text-white">
-                <div className="font-bold">Gray 600</div>
-                <div className="mt-2 text-sm">#8C8C8B</div>
-              </div>
-              <div className="rounded-lg bg-gray800 p-6 text-center text-white">
-                <div className="font-bold">Gray 800</div>
-                <div className="mt-2 text-sm">#484746</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 버튼 테스트 */}
-        <section>
-          <h2 className="mb-6 border-b border-gray300 pb-2 text-2xl font-bold text-gray800">
-            🔘 Button 스타일 테스트
-          </h2>
-          <div className="flex flex-wrap gap-4">
-            <button className="rounded-lg bg-primary px-6 py-3 text-button-lg text-white transition-opacity hover:opacity-90">
-              Button Large (16px Bold)
-            </button>
-            <button className="rounded bg-gray600 px-4 py-2 text-button-md text-white transition-opacity hover:opacity-90">
-              Button Medium (14px Bold)
-            </button>
-            <button className="rounded border-2 border-primary bg-white px-4 py-2 text-button-md text-primary transition-colors hover:bg-gray100">
-              Outline Button
-            </button>
-            <button className="rounded-lg bg-gray100 px-6 py-3 text-button-lg text-gray800 transition-colors hover:bg-gray300">
-              Light Button
-            </button>
-          </div>
-        </section>
-
-        {/* 실제 사용 예시 */}
-        <section>
-          <h2 className="mb-6 border-b border-gray300 pb-2 text-2xl font-bold text-gray800">
-            🍷 실제 사용 예시
-          </h2>
-          <div className="rounded-xl bg-gray100 p-8">
-            <div className="text-center">
-              <h1 className="mb-4 text-title-hero text-primary">
-                나만의 와인창고, Whyne
-              </h1>
-              <p className="mb-6 text-body-lg text-gray600">
-                프리미엄 와인 컬렉션을 관리하고 공유하세요
-              </p>
-              <div className="flex justify-center gap-4">
-                <button className="rounded-lg bg-primary px-8 py-4 text-button-lg text-white transition-opacity hover:opacity-90">
-                  시작하기
-                </button>
-                <button className="rounded-lg border-2 border-primary bg-white px-8 py-4 text-button-lg text-primary transition-colors hover:bg-gray100">
-                  더 알아보기
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
-    </main>
+
+      <main
+        className={cn("flex flex-col items-center pt-16", "gap-12 pc:gap-24")}
+      >
+        <section
+          className={cn(
+            "flex w-full max-w-6xl flex-col items-start gap-8 px-4",
+            "pc:flex-row pc:items-center pc:gap-36 pc:px-0"
+          )}
+        >
+          <div className="flex flex-col gap-4 text-left pc:flex-1">
+            <h2
+              className={cn(
+                "flex flex-col",
+                "text-heading-lg pc:text-heading-lg"
+              )}
+            >
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                매달 새롭게 만나는
+              </span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">와인 추천 콘텐츠</span>
+            </h2>
+            <p className="pl-4 text-gray-600 tablet:pl-8 pc:pl-0">
+              매달 다양한 인기 와인을 만나보세요.
+            </p>
+          </div>
+          <div className="w-full pc:w-[725px]">
+            <Image
+              src="/images/landing/landing-section-1.jpg"
+              alt="월간 와인 추천 콘텐츠 이미지"
+              width={725}
+              height={470}
+              className="h-auto w-full"
+            />
+          </div>
+        </section>
+
+        <section
+          className={cn(
+            "flex w-full max-w-6xl flex-col items-start gap-8 px-4",
+            "pc:flex-row-reverse pc:items-center pc:gap-36 pc:px-0"
+          )}
+        >
+          <div className="flex flex-col gap-4 text-left pc:flex-1">
+            <h2
+              className={cn(
+                "flex flex-col",
+                "text-heading-lg pc:text-heading-lg"
+              )}
+            >
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                다양한 필터로 찾는
+              </span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">내 맞춤 와인</span>
+            </h2>
+            <div className="flex flex-col text-gray-600">
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                와인 타입, 가격, 평점으로
+              </span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                나에게 맞는 와인을 쉽게 검색해요.
+              </span>
+            </div>
+          </div>
+          <div className="w-full pc:w-[725px]">
+            <Image
+              src="/images/landing/landing-section-2.jpg"
+              alt="와인 필터 및 검색 기능 이미지"
+              width={725}
+              height={470}
+              className="h-auto w-full"
+            />
+          </div>
+        </section>
+
+        <section
+          className={cn(
+            "flex w-full max-w-6xl flex-col items-start gap-8 px-4",
+            "pc:flex-row pc:items-center pc:gap-36 pc:px-0"
+          )}
+        >
+          <div className="flex flex-col gap-4 text-left pc:flex-1">
+            <h2
+              className={cn(
+                "flex flex-col",
+                "text-heading-lg pc:text-heading-lg"
+              )}
+            >
+              <span className="pl-4 tablet:pl-8 pc:pl-0">직관적인</span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">리뷰 시스템</span>
+            </h2>
+            <div className="flex flex-col text-gray-600">
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                더 구체화된 리뷰 시스템으로
+              </span>
+              <span className="pl-4 tablet:pl-8 pc:pl-0">
+                쉽고 빠르게 와인 리뷰를 살펴보세요.
+              </span>
+            </div>
+          </div>
+          <div className="w-full pc:w-[725px]">
+            <Image
+              src="/images/landing/landing-section-3.jpg"
+              alt="와인 리뷰 시스템 이미지"
+              width={725}
+              height={470}
+              className="h-auto w-full"
+            />
+          </div>
+        </section>
+      </main>
+
+      {/* TODO(김준열): 와인 보러가기 버튼 클릭시 /wines로 이동하게끔 추후에 연결 */}
+      <footer className="flex-center w-full px-16 py-16">
+        <Button label="와인 보러가기" className="h-[50px] w-[283px]" />
+      </footer>
+    </>
   );
-}
+};
+
+export default Home;

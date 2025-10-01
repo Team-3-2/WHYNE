@@ -33,3 +33,31 @@ body {
 * {
   box-sizing: border-box;
 }
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-col-center {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  [class*="text-"] svg path,
+  [class*="text-"] svg circle,
+  [class*="text-"] svg rect,
+  [class*="text-"] svg polygon {
+    fill: currentColor;
+    /* stroke: currentColor; */
+  }
+}
+
+/* 스크롤바 숨기기 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
