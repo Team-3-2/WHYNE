@@ -9,11 +9,14 @@ import {
   ButtonState,
   ButtonTextColor,
 } from "./style";
-import Icon from "../icon/icon";
+import Icon, { iconVariants } from "../icon/icon";
 import type { IconName } from "../icon/icon-map";
+import type { VariantProps } from "class-variance-authority";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: IconName;
+  iconClassName?: string;
+  iconColor?: VariantProps<typeof iconVariants>["color"];
   appearance?: ButtonState;
   label?: string;
   shape?: ButtonShape;
@@ -25,6 +28,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = ({
   appearance = "default",
   icon,
+  iconColor,
+  iconClassName,
   label,
   className,
   children,
@@ -40,7 +45,13 @@ const Button = ({
       )}
       {...props}
     >
-      {icon && <Icon icon={icon} />}
+      {icon && (
+        <Icon
+          icon={icon}
+          className={iconClassName}
+          color={iconColor ?? "default"}
+        />
+      )}
       <span className={BUTTON_TEXT_COLOR_VARIANTS[appearance]}>{label}</span>
       {children}
     </button>

@@ -3,6 +3,7 @@ import Button from "./basic-button";
 import IconButton from "./icon-button";
 import ArrowButton from "./arrow-button";
 import ICON_MAP from "../icon/icon-map";
+import LikeButton from "./like-button";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -129,5 +130,17 @@ export const Variations: Story = {
   ),
   parameters: {
     layout: "fullscreen",
+  },
+};
+
+export const DefaultLike: Story = {
+  render: () => {
+    return <LikeButton count={24} />;
+  },
+};
+
+export const Liked: Story = {
+  render: () => {
+    return <LikeButton count={24} isLike={true} />;
   },
 };
