@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Button from "../button/basic-button";
 import Modal from "./modal";
-import { allowScroll, lockingScroll } from "@/lib/utils";
+import { allowScroll, cn, lockingScroll } from "@/lib/utils";
 
 interface ModalProps {
   isOpen: boolean;
@@ -51,19 +51,32 @@ const ConfirmModal = ({
   if (!isOpen) return null;
 
   return (
-    <Modal ref={dialogRef} onCancel={onClose} className="px-4 pb-6 pt-8">
-      <p className="text-heading-sm font-semibold text-gray-950">
+    <Modal
+      ref={dialogRef}
+      onCancel={onClose}
+      className="px-4 pb-6 pt-8 tablet:gap-8 pc:gap-8"
+    >
+      <p className="text-heading-sm font-semibold tracking-[-0.02em] text-gray-950 tablet:text-heading-md pc:text-heading-md">
         {msg.text || "모달 텍스트를 입력해주세요"}
       </p>
-      <div className="flex gap-2">
+      <div className={cn("flex gap-2")}>
         <Button
           appearance="outline"
-          className="w-[136px]"
+          className={cn(
+            "h-[42px] w-[136px]",
+            "tablet:h-[50px] tablet:w-[156px]",
+            "pc:h-[50px] pc:w-[156px]"
+          )}
           onClick={onClose}
           label={msg.cancelMsg || "취소"}
         />
         <Button
-          className="w-[136px]"
+          className={cn(
+            "w-[136px]",
+            "mobile:h-[42px]",
+            "tablet:h-[50px] tablet:w-[156px]",
+            "pc:h-[50px] pc:w-[156px]"
+          )}
           onClick={onConfirm}
           label={msg.confirmMsg || "삭제하기"}
         />
