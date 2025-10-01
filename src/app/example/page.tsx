@@ -242,7 +242,7 @@ const Page = () => {
       </section>
 
       <br />
-    </div>
+    </>
   );
 };
 
