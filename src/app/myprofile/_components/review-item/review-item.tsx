@@ -44,12 +44,10 @@ const ReviewItem = () => {
       <div className="flex w-full flex-col items-start justify-center gap-8 px-[14px]">
         <div className="flex w-full flex-col items-center justify-center gap-6">
           <div className="flex w-full flex-col items-start gap-5">
-            {/*  */}
             <ReviewRating
               setOptionMenu={setOptionMenu}
               optionMenu={optionMenu}
             />
-            {/*  */}
             <ReviewInfo />
           </div>
           <p className="text-body-md tracking-[-0.02em] text-gray-900">
