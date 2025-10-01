@@ -11,7 +11,7 @@ const Searchbar = ({ ...props }: ComponentProps<"input">) => {
     <label
       htmlFor="searchbar"
       className={cn(
-        "px-[14px] py-[9px]",
+        "bg-white px-[14px] py-[9px]",
         "flex items-center gap-2",
         "rounded-[4px] border border-gray-300",
         "pc:px-[20px] pc:py-[12px]"
