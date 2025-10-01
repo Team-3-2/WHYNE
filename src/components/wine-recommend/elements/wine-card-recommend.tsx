@@ -11,7 +11,7 @@ const RecommendWineCard = ({ id, name, region, image }: RecommendWineProps) => {
   return (
     <div
       className={cn(
-        "relative flex h-[243px] w-[150px] shrink-0 select-text flex-col items-center",
+        "relative flex h-[243px] w-[150px] shrink-0 select-none flex-col items-center",
         "tablet:h-[320px] tablet:w-[201px]",
         "pc:h-[320px] pc:w-[201px]"
       )}
