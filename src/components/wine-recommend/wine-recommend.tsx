@@ -6,7 +6,8 @@ import { useState } from "react";
 import usePages from "./hooks/usePages";
 
 const data = recommendwinemock;
-
+const ArrowStyle =
+  "relative h-12 w-12 mobile:hidden pc:block tablet:block pc:top-[136px] tablet:top-[114px]";
 const WineRecommend = () => {
   const [index, setIndex] = useState<number>(0);
   const pages = usePages();
@@ -57,7 +58,7 @@ const WineRecommend = () => {
         >
           <ArrowButton
             direction="prev"
-            className="relative z-10 h-12 w-12 mobile:hidden tablet:left-16 tablet:top-[114px] tablet:block pc:left-0 pc:top-[136px] pc:block"
+            className={cn(ArrowStyle, "tablet:left-16 pc:left-0")}
             onClick={() => setIndex(index - 1)}
             disabled={index == 0}
           />
@@ -82,7 +83,7 @@ const WineRecommend = () => {
           </div>
           <ArrowButton
             direction="next"
-            className="relative z-10 h-12 w-12 mobile:hidden tablet:right-16 tablet:top-[114px] tablet:block pc:right-0 pc:top-[136px] pc:block"
+            className={cn(ArrowStyle, "tablet:right-16 pc:right-0")}
             onClick={() => setIndex(index + 1)}
             disabled={index + pages == 8}
           />
