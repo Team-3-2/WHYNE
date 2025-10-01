@@ -3,13 +3,35 @@ import ArrowButton from "@/components/button/arrow-button";
 import { cn } from "@/lib/utils";
 import RecommendWineCard from "./elements/wine-card-recommend";
 import { useState } from "react";
+import usePages from "./hooks/usePages";
 
 const data = recommendwinemock;
 
 const WineRecommend = () => {
   const [index, setIndex] = useState<number>(0);
-  const pages = 4;
+  const pages = usePages();
   const pagedata = data.slice(index, index + pages);
+
+  {
+    /*const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) {
+      return;
+    }
+    const onWheel = (e: WheelEvent) => {
+      if (!e.deltaY) return;
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+    el.addEventListener("wheel", onWheel);
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
+  가로/세로 스크롤 전환 함수인데 모바일이 아닐때 방지가 안되서 주석처리 하였습니다.
+   */
+  }
+
   return (
     <div
       className={cn(
