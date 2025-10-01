@@ -17,3 +17,4 @@ export { default as Searchbar } from "./searchbar/searchbar";
 export { default as ConfirmModal } from "./modal/confirm-modal";
 export { default as WineTaste } from "./wine-taste/wine-taste";
 export { default as Card } from "./card/card";
+export { default as LikeButton } from "./button/like-button";
