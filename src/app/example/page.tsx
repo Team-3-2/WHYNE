@@ -222,10 +222,27 @@ const Page = () => {
         <section>
           <Searchbar onChange={handleChange} />
         </section>
-
         <br />
       </div>
     </>
+      <br />
+      <section>
+        <div className="relative">
+          <DropdownMenu
+            className="absolute right-0 top-10 w-40"
+            itemClassName="px-3 py-2"
+            activeClassName="bg-black text-white"
+            items={[
+              { label: "수정하기", onClick: () => console.log("edit") },
+              { label: "상세보기", href: "/detail/1" },
+            ]}
+            aria-label="옵션 메뉴"
+          />
+        </div>
+      </section>
+
+      <br />
+    </div>
   );
 };
 
