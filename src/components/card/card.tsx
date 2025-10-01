@@ -74,9 +74,9 @@ const Card = ({
               {region}
             </div>
           </div>
-          {typeof price === "number" && (
+          {price !== undefined && (
             <div className="mt-[20px] text-heading-lg font-bold pc:mt-[24px]">
-              {price !== undefined && price !== null
+              {typeof price === "number"
                 ? price.toLocaleString() + "원"
                 : "가격 정보 없음"}
             </div>
