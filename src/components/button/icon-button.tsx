@@ -1,8 +1,8 @@
 import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
-import Icon from "../icon/icon";
+import Icon, { iconVariants } from "../icon/icon";
+import type { VariantProps } from "class-variance-authority";
 import type { IconName } from "../icon/icon-map";
-
 import {
   COMMON_BUTTON_STYLES,
   BUTTON_SHAPE_VARIANTS,
@@ -11,11 +11,21 @@ import {
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: IconName;
+  iconClassName?: string;
+  iconColor?: VariantProps<typeof iconVariants>["color"];
+  iconSize?: VariantProps<typeof iconVariants>["size"];
   className?: string;
   "aria-label": string; //접근성을 위해 아이콘 버튼 사용시 필수적으로 넣어주세요
 }
 
-const IconButton = ({ icon, className, ...props }: IconButtonProps) => {
+const IconButton = ({
+  icon,
+  iconColor,
+  iconSize,
+  iconClassName,
+  className,
+  ...props
+}: IconButtonProps) => {
   return (
     <button
       className={cn(
@@ -26,7 +36,12 @@ const IconButton = ({ icon, className, ...props }: IconButtonProps) => {
       )}
       {...props}
     >
-      <Icon icon={icon} />
+      <Icon
+        icon={icon}
+        className={iconClassName}
+        color={iconColor ?? "default"}
+        size={iconSize ?? "md"}
+      />
     </button>
   );
 };
