@@ -16,7 +16,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // 내가 등록한 와인
-export const 내가등록한와인: Story = {
+export const CardActionMenu: Story = {
   render: () => (
     <div className="p-6">
       <h3 className="mb-[10px] text-body-lg">내가 등록한 와인</h3>
@@ -42,7 +42,7 @@ export const 내가등록한와인: Story = {
 };
 
 // 와인 목록 페이지
-export const 와인목록페이지: Story = {
+export const CardReview: Story = {
   render: () => (
     <div className="p-6">
       <h3 className="mb-[10px] text-body-lg">와인 목록 페이지</h3>
