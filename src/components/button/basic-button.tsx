@@ -17,6 +17,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: IconName;
   iconClassName?: string;
   iconColor?: VariantProps<typeof iconVariants>["color"];
+  iconSize?: VariantProps<typeof iconVariants>["size"];
   appearance?: ButtonState;
   label?: string;
   shape?: ButtonShape;
@@ -29,6 +30,7 @@ const Button = ({
   appearance = "default",
   icon,
   iconColor,
+  iconSize,
   iconClassName,
   label,
   className,
@@ -50,6 +52,7 @@ const Button = ({
           icon={icon}
           className={iconClassName}
           color={iconColor ?? "default"}
+          size={iconSize ?? "md"}
         />
       )}
       <span className={BUTTON_TEXT_COLOR_VARIANTS[appearance]}>{label}</span>
