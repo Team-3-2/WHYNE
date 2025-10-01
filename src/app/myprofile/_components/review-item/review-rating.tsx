@@ -11,7 +11,7 @@ const ReviewRating = ({ setOptionMenu, optionMenu }: ReviewRatingProps) => {
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-2">
-          <StarRating rating={5} size="md" maxRating={5} />
+          <StarRating rating={5} size="sm" maxRating={5} />
           <span className="text-body-lg font-bold tracking-[-0.02em] text-gray-900">
             5
           </span>
