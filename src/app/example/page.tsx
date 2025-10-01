@@ -226,7 +226,7 @@ const Page = () => {
         </section>
 
         <section>
-          <Searchbar onChange={handleChange} />
+          <Searchbar onChange={handleChange} className="pc:w-[500px]" />
         </section>
         <br />
       </div>

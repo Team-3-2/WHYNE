@@ -6,7 +6,7 @@ import { ComponentProps } from "react";
  * 검색바 컴포넌트
  * @author hwitae
  */
-const Searchbar = ({ ...props }: ComponentProps<"input">) => {
+const Searchbar = ({ className, ...props }: ComponentProps<"input">) => {
   return (
     <label
       htmlFor="searchbar"
@@ -15,7 +15,8 @@ const Searchbar = ({ ...props }: ComponentProps<"input">) => {
         "flex items-center gap-2",
         "rounded-[4px] border border-gray-300",
         "tablet:px-[20px] tablet:py-[12px]",
-        "pc:px-[20px] pc:py-[12px]"
+        "pc:px-[20px] pc:py-[12px]",
+        className
       )}
     >
       <Icon icon="SearchIcon" size={"sm"} className="shrink-0 text-gray-900" />
