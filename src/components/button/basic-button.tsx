@@ -7,11 +7,22 @@ import {
   BUTTON_TEXT_COLOR_VARIANTS,
   ButtonShape,
   ButtonState,
-  ButtonTextColor,
 } from "./style";
 import Icon, { iconVariants } from "../icon/icon";
 import type { IconName } from "../icon/icon-map";
 import type { VariantProps } from "class-variance-authority";
+
+/**
+ * 기본 버튼 컴포넌트
+ * @param appearance : 버튼 스타일 (default | outline)
+ * @param icon : 버튼에 노출할 아이콘 이름
+ * @param iconColor : 아이콘 색상 (default | primary | danger | gray | black | white)
+ * @param iconSize : 아이콘 크기 (xs | sm | md | md2 | lg | xl | 2xl)
+ * @param iconClassName : 아이콘에 추가할 CSS 클래스
+ * @param label : 버튼에 표시할 텍스트
+ * @param className : 버튼에 추가할 CSS 클래스
+ * @param shape : 버튼의 모양 (default)
+ */
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: IconName;
@@ -21,7 +32,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   appearance?: ButtonState;
   label?: string;
   shape?: ButtonShape;
-  textColor?: ButtonTextColor;
   className?: string;
   children?: React.ReactNode;
 }

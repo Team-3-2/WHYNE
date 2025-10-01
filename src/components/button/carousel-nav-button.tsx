@@ -13,10 +13,10 @@ import {
  * 캐러셀 내비게이션 버튼 컴포넌트
  * @param slide : 슬라이드 방향 (prev | next)
  * @param className : 버튼 커스텀 클래스
- * @param customIcon : 커스텀 아이콘 (ArrowLeftIcon | ArrowRightIcon)
+ * @param customIcon : 커스텀 아이콘
  * @param iconClassName : 아이콘 커스텀 클래스
- * @param iconColor : 아이콘 색상 (기본값: default)
- * @param iconSize : 아이콘 크기 (기본값: md)
+ * @param iconColor : 아이콘 색상 (default | primary | danger | gray | black | white)
+ * @param iconSize : 아이콘 크기 (xs | sm | md | md2 | lg | xl | 2xl)
  * @param ariaLabel : 접근성 라벨 (이전으로 이동 | 다음으로 이동)
  */
 

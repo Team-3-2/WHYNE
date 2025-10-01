@@ -9,6 +9,17 @@ import {
   BUTTON_STATE_VARIANTS,
 } from "./style";
 
+/**
+ * 아이콘 버튼 컴포넌트
+ * @param icon : 버튼에 노출할 아이콘 이름
+ * @param iconColor : 아이콘 색상 (default | primary | danger | gray | black | white)
+ * @param iconSize : 아이콘 크기 (xs | sm | md | md2 | lg | xl | 2xl)
+ * @param iconClassName : 아이콘에 추가할 CSS 클래스
+ * @param label : 버튼에 표시할 텍스트
+ * @param className : 버튼에 추가할 CSS 클래스
+ * @param shape : 버튼의 모양 (default)
+ */
+
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: IconName;
   iconClassName?: string;
