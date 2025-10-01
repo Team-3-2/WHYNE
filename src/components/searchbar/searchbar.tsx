@@ -14,6 +14,7 @@ const Searchbar = ({ ...props }: ComponentProps<"input">) => {
         "bg-white px-[14px] py-[9px]",
         "flex items-center gap-2",
         "rounded-[4px] border border-gray-300",
+        "tablet:px-[20px] tablet:py-[12px]",
         "pc:px-[20px] pc:py-[12px]"
       )}
     >
