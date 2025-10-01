@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, formatCount } from "@/lib/utils";
 import Button from "./basic-button";
 import { ComponentProps } from "react";
 
@@ -14,16 +14,17 @@ interface LikeButtonProps extends ComponentProps<"button"> {
  * @param count 좋아요 개수
  * @returns button
  */
-const LikeButton = ({ isLike, count, ...props }: LikeButtonProps) => {
+const LikeButton = ({ isLike, count = 0, ...props }: LikeButtonProps) => {
   return (
     <Button
       icon={isLike ? "LikeOnIcon" : "LikeOffIcon"}
       appearance="outline"
-      aria-label="좋아요버튼"
+      aria-label={isLike ? "좋아요" : "좋아요 취소"}
+      aria-pressed={isLike}
       className={cn(
-        "h-8 cursor-pointer gap-[2px] rounded-lg py-1 pl-2 pr-3",
-        "tablet:h-8 tablet:gap-[2px]",
-        "pc:h-9 pc:gap-[4px] pc:py-[6px] pc:pl-3 pc:pr-[14px]",
+        "h-8 w-fit cursor-pointer gap-[2px] rounded-lg py-1 pl-2 pr-3",
+        "tablet:h-9 tablet:w-fit tablet:gap-[4px] tablet:py-[6px] tablet:pl-3 tablet:pr-[14px]",
+        "pc:h-9 pc:w-fit pc:gap-[4px] pc:py-[6px] pc:pl-3 pc:pr-[14px]",
         isLike && "border border-red-200"
       )}
       iconClassName={cn("mobile:ic-sm", "tablet:ic-sm", "pc:ic-md")}
@@ -32,11 +33,11 @@ const LikeButton = ({ isLike, count, ...props }: LikeButtonProps) => {
     >
       <span
         className={cn(
-          "text-body-lg font-normal tracking-[-0.02em]",
-          isLike && "text-lg text-red-200"
+          "text-lg font-normal tracking-[-0.02em]",
+          isLike ? "text-red-200" : "text-primary"
         )}
       >
-        {count}
+        {formatCount(count)}
       </span>
     </Button>
   );

@@ -1,27 +1,15 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import BlockGauge, { type GaugeLevel } from "../gauge/block-gauge";
+import BlockGauge from "@/components/gauge/block-gauge";
+import { TasteItemProps } from "../_types";
 
-// review-taste.tsx와 동일한 인터페이스 사용
-interface TasteData {
-  type: string;
-  data: GaugeLevel;
-  taste: string;
-}
-
-interface DetailTasteProps {
-  tastes: TasteData[];
-  onChange?: (index: number, newLevel: GaugeLevel) => void;
-}
-
-// 내부 아이템 컴포넌트
-const DetailTasteItem = ({
-  type,
-  data,
-  taste,
-  onChange,
-}: TasteData & { onChange?: (newLevel: GaugeLevel) => void }) => {
+/**
+ * 디테일 타입의 테이스팅 아이템 컴포넌트
+ * 모바일, 태블릿, PC에서 각각 다른 스타일 적용
+ * @author junyeol
+ */
+const DetailTasteItem = ({ type, data, taste, onChange }: TasteItemProps) => {
   return (
     <div
       className={cn(
@@ -31,7 +19,7 @@ const DetailTasteItem = ({
       )}
     >
       <div className="flex w-full items-center gap-3">
-        {/* 왼쪽: type */}
+        {/* 왼쪽: 맛 유형 라벨 */}
         <div
           className={cn(
             "truncate rounded-md bg-gray-200 px-1 py-1",
@@ -57,7 +45,7 @@ const DetailTasteItem = ({
           <BlockGauge level={data} onChange={onChange} />
         </div>
 
-        {/* 오른쪽: taste - data가 0일 때 색상 변경 */}
+        {/* 오른쪽: 맛 설명 (data가 0일 때 색상 변경) */}
         <div
           className={cn(
             "truncate px-1 py-1 text-center text-body-sm",
@@ -73,24 +61,4 @@ const DetailTasteItem = ({
   );
 };
 
-// 메인 컴포넌트
-const DetailTaste = ({ tastes, onChange }: DetailTasteProps) => {
-  return (
-    <div className="flex flex-col gap-4">
-      {tastes.map((taste, index) => (
-        <DetailTasteItem
-          key={taste.type}
-          type={taste.type}
-          data={taste.data}
-          taste={taste.taste}
-          onChange={
-            onChange ? (newLevel) => onChange(index, newLevel) : undefined
-          }
-        />
-      ))}
-    </div>
-  );
-};
-
-export default DetailTaste;
-export type { TasteData };
+export default DetailTasteItem;
