@@ -1,10 +1,11 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { forwardRef, ReactNode } from "react";
+import { ReactNode, Ref } from "react";
 import { createPortal } from "react-dom";
 
 interface ModalProps {
+  ref: Ref<HTMLDialogElement>;
   className?: string;
   onCancel?: () => void;
   children?: ReactNode;
@@ -18,26 +19,22 @@ interface ModalProps {
  * @returns <dialog>
  */
 
-const Modal = forwardRef<HTMLDialogElement, ModalProps>(
-  function Modal(props, ref) {
-    const { onCancel, children, className } = props;
-
-    return createPortal(
-      <dialog
-        className={cn(
-          "flex-col-center gap-6 bg-white",
-          "rounded-2xl border border-gray-200",
-          "shadow-[0_16px_32px_-4px_rgba(12,12,13,0.1)]",
-          className
-        )}
-        ref={ref}
-        onCancel={onCancel}
-      >
-        {children}
-      </dialog>,
-      document.body
-    );
-  }
-);
+const Modal = ({ ref, className, onCancel, children }: ModalProps) => {
+  return createPortal(
+    <dialog
+      className={cn(
+        "flex-col-center gap-6 bg-white",
+        "rounded-2xl border border-gray-200",
+        "shadow-[0_16px_32px_-4px_rgba(12,12,13,0.1)]",
+        className
+      )}
+      ref={ref}
+      onCancel={onCancel}
+    >
+      {children}
+    </dialog>,
+    document.body
+  );
+};
 
 export default Modal;
