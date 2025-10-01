@@ -101,6 +101,7 @@ const Card = ({
           />
           {isMenuOpen && (
             <DropdownMenu
+              className="absolute right-0 top-[100%] mt-[19px] pc:mt-[25px]"
               items={[
                 {
                   label: "수정하기",
