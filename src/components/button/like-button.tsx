@@ -14,12 +14,13 @@ interface LikeButtonProps extends ComponentProps<"button"> {
  * @param count 좋아요 개수
  * @returns button
  */
-const LikeButton = ({ isLike, count, ...props }: LikeButtonProps) => {
+const LikeButton = ({ isLike, count = 0, ...props }: LikeButtonProps) => {
   return (
     <Button
       icon={isLike ? "LikeOnIcon" : "LikeOffIcon"}
       appearance="outline"
-      aria-label="좋아요버튼"
+      aria-label={isLike ? "좋아요" : "좋아요 취소"}
+      aria-pressed={isLike}
       className={cn(
         "h-8 cursor-pointer gap-[2px] rounded-lg py-1 pl-2 pr-3",
         "tablet:h-8 tablet:gap-[2px]",
@@ -32,8 +33,8 @@ const LikeButton = ({ isLike, count, ...props }: LikeButtonProps) => {
     >
       <span
         className={cn(
-          "text-body-lg font-normal tracking-[-0.02em]",
-          isLike && "text-lg text-red-200"
+          "text-lg font-normal tracking-[-0.02em]",
+          isLike ? "text-red-200" : "text-primary"
         )}
       >
         {count}
