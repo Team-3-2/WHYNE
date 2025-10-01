@@ -61,3 +61,8 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* 모달 백드롭 색상 */
+dialog::backdrop {
+  background-color: rgba(16, 19, 24, 0.3);
+}
