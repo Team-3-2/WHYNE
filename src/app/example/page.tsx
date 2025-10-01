@@ -242,6 +242,11 @@ const Page = () => {
         </div>
       </section>
 
+      <section>
+        <LikeButton count={642304} />
+        <LikeButton count={5024} isLike={true} />
+      </section>
+
       <br />
     </>
   );
