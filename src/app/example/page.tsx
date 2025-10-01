@@ -224,7 +224,7 @@ const Page = () => {
         </section>
         <br />
       </div>
-    </>
+
       <br />
       <section>
         <div className="relative">
