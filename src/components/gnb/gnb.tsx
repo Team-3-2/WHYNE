@@ -1,6 +1,9 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Logo from "@/../public/logo.svg";
+import { usePathname } from "next/navigation";
 
 const LinkMenu = [
   {
@@ -16,6 +19,12 @@ const LinkMenu = [
 ];
 
 const Gnb = () => {
+  const pathname = usePathname();
+
+  const isHidden = pathname === "/login" || pathname === "/register";
+
+  if (isHidden) return null;
+
   return (
     <header
       className={cn(
