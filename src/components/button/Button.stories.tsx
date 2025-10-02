@@ -46,12 +46,6 @@ const meta: Meta<typeof Button> = {
       control: "text",
       description: "버튼에 들어가는 텍스트",
     },
-    textColor: {
-      description: "-",
-      table: {
-        category: "X",
-      },
-    },
     disabled: {
       control: "boolean",
       description: "비활성화 여부",
