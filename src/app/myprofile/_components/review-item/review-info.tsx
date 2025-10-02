@@ -13,9 +13,9 @@ const ReviewInfo = () => {
       <Image
         src="/images/test/test_wine.png"
         alt="와인 이미지"
-        width={100}
-        height={100}
-        className="h-[60px] w-fit tablet:h-[80px] pc:h-[80px]"
+        width={60}
+        height={60}
+        className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
       />
       <div
         className={cn(
