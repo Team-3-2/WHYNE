@@ -24,8 +24,16 @@ instance.interceptors.request.use(
   }
 );
 
-// instance.interceptors.response.use((config: AxiosResponse) => {
-
-// });
+instance.interceptors.response.use(
+  (response: AxiosResponse) => {
+    return response.data;
+  },
+  (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      console.error("Unauthorized!");
+    }
+    return Promise.reject();
+  }
+);
 
 export default instance;
