@@ -23,9 +23,6 @@ const Input = ({
   className,
   ...props
 }: InputValue) => {
-  {
-    /* TODO(휘태): 에러 아이콘 넣기 */
-  }
   return (
     <input
       id="text-input"
@@ -36,7 +33,8 @@ const Input = ({
         "text-[14px] leading-5 tracking-[0.02em] text-gray-900",
         "placeholder:text-tertiary placeholder:text-body-sm placeholder:font-normal",
         "focus:outline-none",
-        "pc:w-[400px] pc:text-[16px] pc:leading-6 pc:placeholder:text-body-md pc:placeholder:font-normal",
+        "tablet:w-[400px] tablet:text-body-md tablet:font-normal tablet:placeholder:text-body-md tablet:placeholder:font-normal",
+        "pc:w-[400px] pc:text-body-md pc:font-normal pc:placeholder:text-body-md pc:placeholder:font-normal",
         isError && "border-2 border-red-400"
       )}
       type="text"
@@ -80,7 +78,7 @@ const TextInput = ({
                 <p className="text-body-sm text-red-400">{errorMsg}</p>
               )}
             </div>
-            <div className="relative flex w-[303px] items-center pc:w-[400px]">
+            <div className="relative flex w-[303px] items-center tablet:w-[400px] pc:w-[400px]">
               <Input
                 placeholder={placeholder}
                 errorMsg={errorMsg}
@@ -109,7 +107,7 @@ const TextInput = ({
               {title || "제목"}
             </label>
             {isError ? (
-              <div className="relative flex w-[303px] items-center pc:w-[400px]">
+              <div className="relative flex w-[303px] items-center tablet:w-[400px] pc:w-[400px]">
                 <Input
                   placeholder={placeholder}
                   errorMsg={errorMsg}

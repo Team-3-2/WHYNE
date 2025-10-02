@@ -34,6 +34,7 @@ export const InputError: Story = {
   args: {
     title: "",
     placeholder: "",
+    isError: true,
     errorMsg: "에러가 발생했습니다",
   },
 };
@@ -51,6 +52,7 @@ export const ModalInputError: Story = {
   args: {
     title: "",
     placeholder: "",
+    isError: true,
     errorMsg: "에러가 발생했습니다",
     variant: "modal",
   },
