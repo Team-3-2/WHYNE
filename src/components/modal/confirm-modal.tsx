@@ -34,8 +34,6 @@ const ConfirmModal = ({
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    let prevScrollY = window.scrollY;
-
     if (!dialogRef.current?.open && isOpen) {
       dialogRef.current?.showModal();
       lockingScroll();
@@ -44,7 +42,7 @@ const ConfirmModal = ({
     }
 
     return () => {
-      allowScroll(prevScrollY);
+      allowScroll();
     };
   }, [isOpen]);
 
