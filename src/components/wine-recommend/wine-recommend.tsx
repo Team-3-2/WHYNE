@@ -1,5 +1,5 @@
 import { recommendwinemock } from "@/mock";
-import ArrowButton from "@/components/button/arrow-button";
+import CarouselNavButton from "../button/carousel-nav-button";
 const data = recommendwinemock;
 
 const WineRecommend = () => {
@@ -7,7 +7,7 @@ const WineRecommend = () => {
     <div>
       <h2>이번달 추천 와인</h2>
       <div>
-        <ArrowButton direction="prev" />
+        <CarouselNavButton slide="prev" />
         {/*disabled={isLoading}
           onClick={() => setIndex(index - 1)} */}
         {/*
@@ -22,7 +22,7 @@ const WineRecommend = () => {
           />
           ))}
         */}
-        <ArrowButton direction="next" />
+        <CarouselNavButton slide="next" />
         {/*        
           disabled={isLoading}
           onClick={() => setIndex(index + 1)}
