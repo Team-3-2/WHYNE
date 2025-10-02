@@ -21,7 +21,7 @@ const LinkMenu = [
 const Gnb = () => {
   const pathname = usePathname();
 
-  const isHidden = pathname === "/login" || pathname === "/register";
+  const isHidden = pathname === "/login" || pathname === "/signup";
 
   if (isHidden) return null;
 
