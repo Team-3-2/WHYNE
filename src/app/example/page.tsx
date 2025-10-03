@@ -199,7 +199,7 @@ const Page = () => {
         <section>
           <SelectType isError={false} onChange={handleChange} />
           <br />
-          <SelectType isError={true} />
+          <SelectType isError={true} className="flex-col" />
         </section>
 
         <br />
@@ -226,7 +226,7 @@ const Page = () => {
         </section>
 
         <section>
-          <Searchbar onChange={handleChange} />
+          <Searchbar onChange={handleChange} className="pc:w-[500px]" />
         </section>
         <br />
       </div>

@@ -15,6 +15,7 @@ type WineType = keyof typeof imgMap;
 
 interface SelectTypeValue extends ComponentProps<"input"> {
   isError: boolean;
+  className?: string;
 }
 
 const TypeInput = ({ name }: { name: WineType }) => {
@@ -24,10 +25,11 @@ const TypeInput = ({ name }: { name: WineType }) => {
   return (
     <div
       className={cn(
-        "h-[38px]",
+        "h-[38px] w-fit",
         "border-border-secondary rounded-full border",
         "flex items-center",
         "bg-white",
+        "tablet:h-[48px]",
         "pc:h-[48px]"
       )}
     >
@@ -45,18 +47,24 @@ const TypeInput = ({ name }: { name: WineType }) => {
           "flex-center gap-[6px]",
           "cursor-pointer rounded-full",
           "text-default hover:bg-gray-200",
-          "peer-checked:bg-gray-800 peer-checked:text-white"
+          "peer-checked:bg-gray-800 peer-checked:text-white",
+          "tablet:gap-2 tablet:py-2 tablet:pl-2 tablet:pr-4",
+          "pc:gap-2 pc:py-2 pc:pl-2 pc:pr-4"
         )}
       >
         <Image
-          className={cn("h-6 rounded-full object-cover", "pc:h-8 pc:w-8")}
+          className={cn(
+            "h-6 rounded-full object-cover",
+            "tablet:h-8 tablet:w-8",
+            "pc:h-8 pc:w-8"
+          )}
           src={imgSrc}
           width={24}
           height={24}
           alt="레드와인"
           draggable={false}
         />
-        <span className="text-body-sm tracking-[-0.02em] pc:text-body-md">
+        <span className="text-body-sm tracking-[-0.02em] tablet:text-body-md pc:text-body-md">
           {typeName}
         </span>
       </label>
@@ -64,7 +72,7 @@ const TypeInput = ({ name }: { name: WineType }) => {
   );
 };
 
-const SelectType = ({ isError, ...props }: SelectTypeValue) => {
+const SelectType = ({ isError, className, ...props }: SelectTypeValue) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
@@ -75,7 +83,7 @@ const SelectType = ({ isError, ...props }: SelectTypeValue) => {
           </p>
         )}
       </div>
-      <div className="flex gap-[10px]" {...props}>
+      <div className={cn("flex gap-[10px]", className)} {...props}>
         <TypeInput name="RED" />
         <TypeInput name="WHITE" />
         <TypeInput name="SPARKLING" />
