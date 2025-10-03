@@ -1,8 +1,8 @@
 import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
-import Icon, { iconVariants } from "../icon/icon";
+import Icon, { iconVariants } from "@/components/icon/icon";
 import type { VariantProps } from "class-variance-authority";
-import type { IconName } from "../icon/icon-map";
+import type { UnifiedIconName } from "@/components/icon/icon";
 import {
   COMMON_BUTTON_STYLES,
   BUTTON_SHAPE_VARIANTS,
@@ -21,7 +21,7 @@ import {
  */
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: IconName;
+  icon: UnifiedIconName;
   iconClassName?: string;
   iconColor?: VariantProps<typeof iconVariants>["color"];
   iconSize?: VariantProps<typeof iconVariants>["size"];
