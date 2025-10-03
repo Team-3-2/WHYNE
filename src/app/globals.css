@@ -44,7 +44,6 @@ body {
   }
 
   [class*="text-"] svg path,
-  [class*="text-"] svg circle,
   [class*="text-"] svg rect,
   [class*="text-"] svg polygon {
     fill: currentColor;

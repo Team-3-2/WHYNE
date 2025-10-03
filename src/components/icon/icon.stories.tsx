@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import Icon from "./icon";
 import ICON_MAP from "./icon-map";
+import STATIC_ICON_MAP from "./static-icon-map";
+
+const unifiedIconMap = {
+  ...STATIC_ICON_MAP,
+  ...ICON_MAP,
+};
 
 const meta = {
   title: "Components/Icon",
@@ -12,12 +18,12 @@ const meta = {
   argTypes: {
     icon: {
       control: "select",
-      options: Object.keys(ICON_MAP),
+      options: Object.keys(unifiedIconMap),
       description: "표시할 아이콘 이름",
     },
     size: {
       control: "select",
-      options: ["xs", "sm", "md", "2md", "lg", "xl", "2xl"],
+      options: ["xs", "sm", "md", "md2", "lg", "xl", "2xl"],
       description: "아이콘 크기",
     },
     color: {
@@ -58,19 +64,19 @@ export const IconChart: Story = {
     icon: "AppleIcon",
   },
   render: () => {
-    const iconNames = Object.keys(ICON_MAP);
+    const iconNames = Object.keys(unifiedIconMap);
 
     return (
       <div className="p-4">
         <h3 className="mb-4 text-center text-xl font-bold">아이콘 차트</h3>
-        <div className="mx-auto grid max-w-4xl grid-cols-6 gap-4">
+        <div className="mx-auto grid max-w-6xl grid-cols-6 gap-4">
           {iconNames.map((iconName) => (
             <div
               key={iconName}
               className="flex flex-col items-center rounded-lg border border-gray-200 p-3 transition-shadow hover:shadow-md"
             >
               <Icon
-                icon={iconName as keyof typeof ICON_MAP}
+                icon={iconName as keyof typeof unifiedIconMap}
                 size="lg"
                 color="gray800"
                 className="mb-2"
