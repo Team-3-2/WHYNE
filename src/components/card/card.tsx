@@ -9,7 +9,7 @@ import CardReview from "./card-review";
 import CardActionMenu from "./card-action-menu";
 
 /**
- * 카드 컴포넌트
+ * 카드 컴포넌트(카드 구성/레이아웃/페이지 링크 처리 역할)
  * @param image : 이미지 경로
  * @param blurDataURL : 블러 처리된 이미지 경로 (로딩 시 사용)
  * @param avgRating : 평균 별점
@@ -57,11 +57,7 @@ const Card = ({
 
   const content = (
     <div className="relative w-full">
-      <CardImage
-        src={image}
-        alt={`${name} 와인 이미지`}
-        blurDataURL={blurDataURL}
-      />
+      <CardImage src={image} alt={`${name} 이미지`} blurDataURL={blurDataURL} />
       <div className="relative mt-[24px]">
         <CardInfo
           name={name}

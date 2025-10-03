@@ -4,7 +4,7 @@ export const recommendwinemock = [
     name: "Château d'Yquem",
     region: "Sauternes, France",
     image:
-      "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/1435/1750149018549/16.png",
+      "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/1435/1750149018549/test.png",
     price: 100000,
     type: "WHITE",
     avgRating: 5,
