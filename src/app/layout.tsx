@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={sfPro.variable}>
-      <body className="mt-[60px] tablet:mt-[70px] pc:mt-[70px]">
+      <body>
         <QueryProvider>
           <Gnb />
           {children}
