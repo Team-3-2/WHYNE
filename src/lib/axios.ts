@@ -12,8 +12,33 @@ const instance = axios.create({
   },
 });
 
+/**
+ * refresh token을 사용하여 사용자를 다시 인증한다.
+ * @author hwitae
+ */
+const authRefreshToken = async () => {
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  if (!refreshToken) throw new Error("다시 로그인 해주세요");
+
+  try {
+    const response = await instance.post("/auth/refresh-token", {
+      refreshToken,
+    });
+    const newAccessToken = response.data;
+    sessionStorage.setItem("accessToken", newAccessToken);
+
+    return newAccessToken;
+  } catch (error) {
+    localStorage.removeItem("refreshToken");
+    throw new Error(`다시 로그인 해주세요 ${error}`);
+  }
+};
+
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    console.log(config);
+
     const accessToken = sessionStorage.getItem("accessToken");
 
     if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
@@ -28,11 +53,22 @@ instance.interceptors.response.use(
   (response: AxiosResponse) => {
     return response.data;
   },
-  (error: AxiosError) => {
+  async (error: AxiosError) => {
     if (error.response?.status === 401) {
       console.error("Unauthorized!");
+
+      const prevRequest = error.config as InternalAxiosRequestConfig;
+
+      try {
+        const newAccessToken = await authRefreshToken();
+        prevRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+        return instance(prevRequest);
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
-    return Promise.reject();
+    return Promise.reject(error);
   }
 );
 
