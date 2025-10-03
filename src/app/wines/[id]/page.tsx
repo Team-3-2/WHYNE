@@ -55,7 +55,7 @@ export default function WineDetailPage({
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 py-8">
         <div className="mb-8 rounded-lg bg-white p-6 shadow">
-          <h1 className="mb-2 text-3xl font-bold">와인 이름 (ID: {wineId})</h1>
+          <h1 className="mb-2 text-title-hero">와인 이름 (ID: {wineId})</h1>
         </div>
 
         <div className="rounded-lg bg-white p-6 shadow">
@@ -72,7 +72,7 @@ export default function WineDetailPage({
         <Modal
           ref={dialogRef}
           onCancel={handleClose}
-          className="!flex max-h-[90vh] w-full max-w-[520px] !flex-col !items-start !justify-start overflow-y-auto px-8 py-8"
+          className="!flex max-h-[90vh] max-w-[520px] !flex-col !items-start !justify-start overflow-y-auto px-8 py-8"
         >
           <ReviewForm
             wineId={wineId}

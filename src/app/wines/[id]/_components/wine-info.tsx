@@ -9,7 +9,7 @@ interface WineInfoProps {
 export default function WineInfo({ name, region, image }: WineInfoProps) {
   return (
     <div className="flex items-center gap-4">
-      <div className="flex h-[96px] w-[62px] flex-shrink-0 items-center justify-center rounded bg-gray-200">
+      <div className="flex-center h-[96px] w-[62px] flex-shrink-0 rounded bg-gray-200">
         {image ? (
           <Image
             src={image}
