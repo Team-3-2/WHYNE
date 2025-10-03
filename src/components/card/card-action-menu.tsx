@@ -1,24 +1,29 @@
 import IconButton from "@/components/button/icon-button";
 import DropdownMenu from "@/components/dropdown-menu/dropdown-menu";
 
+type DropdownItem = {
+  label: string;
+  href?: string;
+  onClick?: () => void;
+  className?: string;
+};
+
 /**
  * 카드 정보 우측 상단 액션 메뉴 컴포넌트
  * @param isOpen : 메뉴 열림 상태
  * @param toggleMenu : 메뉴 열림 상태 토글 함수
  * @param closeMenu : 메뉴 닫기 함수
+ * @param items : 드롭다운 메뉴 아이템 배열
  */
 
 interface CardActionMenuProps {
   isOpen: boolean;
   toggleMenu: () => void;
   closeMenu: () => void;
+  items: DropdownItem[];
 }
 
-const CardActionMenu = ({
-  isOpen,
-  toggleMenu,
-  closeMenu,
-}: CardActionMenuProps) => {
+const CardActionMenu = ({ isOpen, toggleMenu, items }: CardActionMenuProps) => {
   return (
     <>
       <IconButton
@@ -34,22 +39,7 @@ const CardActionMenu = ({
       {isOpen && (
         <DropdownMenu
           className="absolute right-0 top-[100%] mt-[19px] pc:mt-[25px]"
-          items={[
-            {
-              label: "수정하기",
-              onClick: () => {
-                closeMenu();
-                console.log("수정 모달창 열기");
-              },
-            },
-            {
-              label: "삭제하기",
-              onClick: () => {
-                closeMenu();
-                console.log("삭제하기");
-              },
-            },
-          ]}
+          items={items}
         />
       )}
     </>

@@ -73,6 +73,22 @@ const Card = ({
               isOpen={isMenuOpen}
               toggleMenu={toggleMenu}
               closeMenu={closeMenu}
+              items={[
+                {
+                  label: "수정하기",
+                  onClick: () => {
+                    closeMenu();
+                    console.log("수정 모달창 열기");
+                  },
+                },
+                {
+                  label: "삭제하기",
+                  onClick: () => {
+                    closeMenu();
+                    console.log("삭제하기");
+                  },
+                },
+              ]}
             />
           </div>
         )}
