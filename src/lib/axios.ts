@@ -37,8 +37,6 @@ const authRefreshToken = async () => {
 
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    console.log(config);
-
     const accessToken = sessionStorage.getItem("accessToken");
 
     if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
@@ -51,7 +49,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
-    return response.data;
+    return response;
   },
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
