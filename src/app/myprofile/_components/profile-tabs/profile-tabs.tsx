@@ -26,7 +26,7 @@ const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
     <nav
       aria-label="프로필 탭 메뉴"
       className={cn(
-        "sticky top-[60px] z-50 flex w-full items-center justify-start gap-5 bg-white pb-[14px] pl-1 pt-4",
+        "sticky top-[60px] z-40 flex w-full items-center justify-start gap-5 bg-white pb-[14px] pl-1 pt-4",
         "tablet:top-[70px] tablet:gap-8 tablet:pb-[18px] tablet:pl-5",
         "pc:top-[70px] pc:h-[85px] pc:items-end pc:gap-8 pc:pb-[10px]"
       )}
