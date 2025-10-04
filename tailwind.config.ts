@@ -21,6 +21,7 @@ export default {
         secondary: "#A3A3A3",
         neutral200: "#F2F2F2",
         neutral400: "#BABABA",
+        BgGray350: "rgba(217, 217, 217, 0.2)",
         gray: {
           100: "#fafafa",
           150: "#f7f7f7",
