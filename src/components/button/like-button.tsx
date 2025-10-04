@@ -18,7 +18,7 @@ const LikeButton = ({ isLike, count = 0, ...props }: LikeButtonProps) => {
   return (
     <Button
       icon={isLike ? "LikeOnIcon" : "LikeOffIcon"}
-      appearance="outline"
+      variant="outline"
       aria-label={isLike ? "좋아요" : "좋아요 취소"}
       aria-pressed={isLike}
       className={cn(
