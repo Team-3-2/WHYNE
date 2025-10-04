@@ -8,8 +8,8 @@ import {
   ButtonShape,
   ButtonState,
 } from "./style";
-import Icon, { iconVariants } from "../icon/icon";
-import type { IconName } from "../icon/icon-map";
+import Icon, { iconVariants } from "@/components/icon/icon";
+import type { UnifiedIconName } from "@/components/icon/icon";
 import type { VariantProps } from "class-variance-authority";
 
 /**
@@ -25,7 +25,7 @@ import type { VariantProps } from "class-variance-authority";
  */
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon?: IconName;
+  icon?: UnifiedIconName;
   iconClassName?: string;
   iconColor?: VariantProps<typeof iconVariants>["color"];
   iconSize?: VariantProps<typeof iconVariants>["size"];

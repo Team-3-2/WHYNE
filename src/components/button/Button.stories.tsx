@@ -5,7 +5,13 @@ import {
   CarouselNavButton,
   LikeButton,
 } from "@/components";
-import ICON_MAP from "../icon/icon-map";
+import ICON_MAP from "@/components/icon/icon-map";
+import STATIC_ICON_MAP from "@/components/icon/static-icon-map";
+
+const unifiedIconMap = {
+  ...STATIC_ICON_MAP,
+  ...ICON_MAP,
+};
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -27,7 +33,7 @@ const meta: Meta<typeof Button> = {
     },
     icon: {
       control: "select",
-      options: Object.keys(ICON_MAP),
+      options: Object.keys(unifiedIconMap),
       description: "버튼 아이콘",
     },
 

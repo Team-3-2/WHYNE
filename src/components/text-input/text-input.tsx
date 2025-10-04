@@ -88,7 +88,7 @@ const TextInput = ({
               <Icon
                 className="absolute right-0 mr-[14px]"
                 icon="AlertIcon"
-                color="danger400"
+                color="red400"
                 size={"sm"}
               />
             </div>
@@ -117,7 +117,7 @@ const TextInput = ({
                 <Icon
                   className="absolute right-0 mr-[14px]"
                   icon="AlertIcon"
-                  color="danger400"
+                  color="red400"
                   size={"sm"}
                 />
               </div>
