@@ -1,11 +1,12 @@
 "use client";
 
 import { recommendwinemock } from "@/mock";
-import ArrowButton from "@/components/button/arrow-button";
 import { cn } from "@/lib/utils";
 import RecommendWineCard from "./elements/wine-card-recommend";
 import { useState } from "react";
 import usePages from "./hooks/usePages";
+import CarouselNavButton from "../button/carousel-nav-button";
+const data = recommendwinemock;
 
 const data = recommendwinemock;
 const ArrowStyle =
@@ -58,8 +59,8 @@ const WineRecommend = () => {
             "relative flex w-full flex-row tablet:h-[320px] pc:h-[320px]"
           )}
         >
-          <ArrowButton
-            direction="prev"
+          <CarouselNavButton
+            slide="prev"
             className={cn(ArrowStyle, "tablet:left-16 pc:left-0")}
             onClick={() => setIndex(index - 1)}
             disabled={index == 0}
@@ -83,8 +84,8 @@ const WineRecommend = () => {
               />
             ))}
           </div>
-          <ArrowButton
-            direction="next"
+          <CarouselNavButton
+            slide="next"
             className={cn(ArrowStyle, "tablet:right-16 pc:right-0")}
             onClick={() => setIndex(index + 1)}
             disabled={index + pages == 8}
