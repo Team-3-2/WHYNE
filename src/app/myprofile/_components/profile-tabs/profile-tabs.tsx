@@ -40,6 +40,7 @@ const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
             "!text-heading-md tracking-[-0.02em]",
             tab === item.href ? "text-gray-900" : "text-gray-300"
           )}
+          replace
         >
           {item.label}
         </Link>
