@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { MyProfile } from "./_components";
-import Loader from "@/components/loader/Loader";
+import Loader from "@/components/loader/loader";
 
 const Page = () => {
   return (
