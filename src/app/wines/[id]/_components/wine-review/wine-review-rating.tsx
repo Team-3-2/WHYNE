@@ -1,10 +1,7 @@
 // app/wines/[id]/_components/reviews/wine-review-rating.tsx
-import StarRating from "@/components/star-rating/star-rating";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 
 interface WineReviewRatingProps {
-  rating: number;
   createdAt: string;
   user: {
     nickname: string;
@@ -13,7 +10,6 @@ interface WineReviewRatingProps {
 }
 
 export default function WineReviewRating({
-  rating,
   createdAt,
   user,
 }: WineReviewRatingProps) {
@@ -30,35 +26,32 @@ export default function WineReviewRating({
   };
 
   return (
-    <div className="flex w-full items-center justify-between">
-      <div className="flex items-center gap-4">
-        {/* 프로필 이미지 */}
-        <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-full bg-gray-200">
-          {user.image ? (
-            <Image
-              src={user.image}
-              alt={user.nickname}
-              width={40}
-              height={40}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <div className="flex-center h-full w-full text-gray-400">👤</div>
-          )}
-        </div>
-
-        {/* 닉네임 + 별점 + 시간 */}
-        <div className="flex flex-col gap-1">
-          <span className="text-body-md font-bold text-gray-900">
-            {user.nickname}
-          </span>
-          <div className="flex items-center gap-2">
-            <StarRating rating={rating} size="sm" maxRating={5} />
-            <span className="text-body-sm text-gray-500">
-              {getTimeAgo(createdAt)}
-            </span>
+    <div className="flex items-center gap-3">
+      {/* 프로필 이미지 */}
+      <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-200">
+        {user.image ? (
+          <Image
+            src={user.image}
+            alt={user.nickname}
+            width={48}
+            height={48}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="flex-center h-full w-full text-2xl text-gray-400">
+            👤
           </div>
-        </div>
+        )}
+      </div>
+
+      {/* 닉네임 + 시간 */}
+      <div className="flex flex-col">
+        <span className="text-body-lg font-bold text-gray-900">
+          {user.nickname}
+        </span>
+        <span className="text-body-sm text-gray-500">
+          {getTimeAgo(createdAt)}
+        </span>
       </div>
     </div>
   );

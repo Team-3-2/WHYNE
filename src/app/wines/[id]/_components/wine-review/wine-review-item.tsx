@@ -1,25 +1,59 @@
+// app/wines/[id]/_components/reviews/wine-review-item.tsx
 "use client";
 
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import LikeButton from "@/components/button/like-button";
 import WineTaste from "@/components/wine-taste/wine-taste";
+import Icon from "@/components/icon/icon";
 import { getTasteDescription } from "@/components/wine-taste";
+import { aromaMap } from "@/components/flavor/aroma-map";
 import type { TasteData } from "@/components/wine-taste";
 import type { GaugeLevel } from "@/components/gauge/block-gauge";
 import type { Review } from "@/types/wine";
+import type { AromaKey } from "@/types/AromaType";
 import WineReviewRating from "./wine-review-rating";
+import StarRating from "@/components/star-rating/star-rating";
 
 interface WineReviewItemProps {
   review: Review;
   isFirst?: boolean;
 }
 
+// AromaKey를 IconName으로 매핑
+function getAromaIconName(aroma: AromaKey): string {
+  const iconMap: Record<AromaKey, string> = {
+    CHERRY: "CherryIcon",
+    BERRY: "BerryIcon",
+    OAK: "OakIcon",
+    VANILLA: "VanillaIcon",
+    PEPPER: "PepperIcon",
+    BAKING: "BakingIcon",
+    GRASS: "GrassIcon",
+    APPLE: "AppleIcon",
+    PEACH: "PeachIcon",
+    CITRUS: "CitrusIcon",
+    TROPICAL: "TropicalIcon",
+    MINERAL: "MineralIcon",
+    FLOWER: "FlowerIcon",
+    TOBACCO: "TobaccoIcon",
+    EARTH: "EarthIcon",
+    CHOCOLATE: "ChocolateIcon",
+    SPICE: "SpiceIcon",
+    CARAMEL: "CaramelIcon",
+    LEATHER: "LeatherIcon",
+    EMPTY: "WineIcon", // fallback
+  };
+  return iconMap[aroma] || "WineIcon";
+}
+
 export default function WineReviewItem({
   review,
   isFirst = false,
 }: WineReviewItemProps) {
-  const [isLike, setIsLike] = useState(review.isLiked);
+  const initialIsLiked =
+    typeof review.isLiked === "boolean" ? review.isLiked : false;
+  const [isLike, setIsLike] = useState(initialIsLiked);
 
   const tastes: TasteData[] = [
     {
@@ -44,36 +78,62 @@ export default function WineReviewItem({
     },
   ];
 
-  // TODO: 좋아요 개수 API 없음 - 백엔드 확인 필요
-  // 임시로 0으로 표시
   const likeCount = 0;
 
   return (
     <div
       className={cn(
-        "flex flex-col gap-[51px] py-[16px] pb-[28px] pt-[39px]",
-        "tablet:gap-[54px]",
-        "pc:gap-[50px] pc:py-[40px]",
+        "flex flex-col gap-6 px-4 py-8",
+        "tablet:gap-8 tablet:py-10",
+        "pc:gap-6 pc:py-8",
         !isFirst && "border-t border-gray-300"
       )}
     >
-      <div className="flex w-full flex-col items-start justify-center gap-8 px-[14px]">
-        <div className="flex w-full flex-col items-center justify-center gap-6">
-          <WineReviewRating
-            rating={review.rating}
-            createdAt={review.createdAt}
-            user={review.user}
-          />
-
-          <p className="w-full text-body-md tracking-[-0.02em] text-gray-900">
-            {review.content}
-          </p>
-        </div>
-
-        <WineTaste type="review" tastes={tastes} />
+      {/* 1. 별점 (최상단) */}
+      <div className="flex items-center">
+        <StarRating rating={review.rating} size="sm" />
       </div>
 
-      {/* 좋아요 버튼 - 개수는 0으로 임시 표시 */}
+      {/* 2. 프로필 + 닉네임 + 시간 */}
+      <WineReviewRating createdAt={review.createdAt} user={review.user} />
+
+      {/* 3. 향 정보 */}
+      {review.aroma && review.aroma.length > 0 && (
+        <div className="flex flex-wrap items-center gap-1">
+          {review.aroma.map((aroma, index) => {
+            const aromaInfo = aromaMap[aroma];
+            if (!aromaInfo) return null;
+
+            return (
+              <div key={aroma} className="flex items-center">
+                <div className="flex items-center gap-3 px-1">
+                  <Icon
+                    icon={getAromaIconName(aroma) as any}
+                    size="sm"
+                    className="text-gray-700"
+                  />
+                  <span className="text-body-sm text-gray-500">
+                    {aromaInfo.label}
+                  </span>
+                </div>
+                {index < review.aroma.length - 1 && (
+                  <span className="text-gray-300">•</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* 4. 리뷰 내용 */}
+      <p className="text-body-md leading-relaxed tracking-[-0.02em] text-gray-900">
+        {review.content}
+      </p>
+
+      {/* 5. 맛 평가 */}
+      <WineTaste type="review" tastes={tastes} />
+
+      {/* 6. 좋아요 버튼 */}
       <LikeButton
         count={likeCount}
         isLike={isLike}

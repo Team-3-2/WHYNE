@@ -1,4 +1,4 @@
-// app/wines/[id]/_components/flavor-section.tsx
+// app/wines/[id]/_components/taste-flavor/flavor-section.tsx
 import Flavor from "@/components/flavor/flavor";
 import { cn } from "@/lib/utils";
 import type { AromaKey } from "@/types/AromaType";
@@ -33,30 +33,16 @@ export default function FlavorSection({
   reviews,
   reviewCount,
 }: FlavorSectionProps) {
-  let topAromas = getTopAromas(reviews);
+  const topAromas = getTopAromas(reviews);
 
-  // 임시: 향이 4개 미만일 때 더미 데이터로 채우기
-  if (topAromas.length < 4) {
-    const dummyAromas: AromaKey[] = ["BERRY", "OAK", "VANILLA", "CHOCOLATE"];
-    const displayAromas = [...topAromas];
-
-    for (const dummy of dummyAromas) {
-      if (displayAromas.length >= 4) break;
-      if (!displayAromas.includes(dummy)) {
-        displayAromas.push(dummy);
-      }
-    }
-
-    topAromas = displayAromas;
-  }
-
+  // 향이 없으면 렌더링하지 않음
   if (topAromas.length === 0) return null;
 
   return (
-    <div className="ml-12">
+    <div>
       <div
         className={cn(
-          "mb-6 flex items-center gap-60",
+          "mb-6 flex items-center justify-between",
           "w-[343px] tablet:w-[480px] pc:w-[480px]"
         )}
       >
