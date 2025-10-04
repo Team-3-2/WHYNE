@@ -25,11 +25,12 @@ const authRefreshToken = async () => {
     const response = await instance.post("/auth/refresh-token", {
       refreshToken,
     });
-    const newAccessToken = response.data;
-    sessionStorage.setItem("accessToken", newAccessToken);
+    const { accessToken: newAccessToken } = response.data;
 
+    sessionStorage.setItem("accessToken", newAccessToken);
     return newAccessToken;
   } catch (error) {
+    sessionStorage.setItem("accessToken", "");
     localStorage.removeItem("refreshToken");
     throw new Error(`다시 로그인 해주세요 ${error}`);
   }
@@ -59,6 +60,8 @@ instance.interceptors.response.use(
 
       try {
         const newAccessToken = await authRefreshToken();
+
+        instance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
         prevRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
         return instance(prevRequest);
