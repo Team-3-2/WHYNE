@@ -18,7 +18,7 @@ export const getTasteDescription = (
         : level <= 2
           ? "가벼워요"
           : level <= 4
-            ? "중간"
+            ? "적당해요"
             : "진해요";
     case "탄닌":
       return level === 0
@@ -26,24 +26,24 @@ export const getTasteDescription = (
         : level <= 2
           ? "부드러워요"
           : level <= 4
-            ? "적당함"
+            ? "적당해요"
             : "떫어요";
     case "당도":
       return level === 0
         ? "없음"
         : level <= 2
-          ? "약간 단맛"
+          ? "약간단맛"
           : level <= 4
-            ? "중간 단맛"
+            ? "중간단맛"
             : "달아요";
     case "산미":
       return level === 0
         ? "없음"
         : level <= 2
-          ? "부족함"
+          ? "순해요"
           : level <= 4
-            ? "적당함"
-            : "많이셔요";
+            ? "새콤해요"
+            : "상큼해요";
     default:
       return "";
   }
