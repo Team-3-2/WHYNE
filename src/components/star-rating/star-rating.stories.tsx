@@ -29,11 +29,11 @@ const meta: Meta<typeof StarRating> = {
       options: ["xs", "sm", "md", "md2", "lg", "xl", "2xl"],
       description: "별의 크기",
     },
-    score: {
+    showRating: {
       control: "boolean",
       description: "점수 표시 여부",
     },
-    totalScore: {
+    showRatingRatio: {
       control: "boolean",
       description: "총점 표시 여부 (점수/총점 형식)",
     },
@@ -46,17 +46,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     rating: 4.2,
-    maxRating: 5,
     size: "md",
   },
 };
 
-export const WithScore: Story = {
+export const WithRating: Story = {
   args: {
     rating: 4.5,
-    maxRating: 5,
     size: "md",
-    score: true,
+    showRating: true,
   },
   parameters: {
     docs: {
@@ -67,12 +65,11 @@ export const WithScore: Story = {
   },
 };
 
-export const WithTotalScore: Story = {
+export const WithRatingRatio: Story = {
   args: {
     rating: 3.8,
-    maxRating: 5,
     size: "lg",
-    totalScore: true,
+    showRatingRatio: true,
   },
   parameters: {
     docs: {
@@ -90,33 +87,33 @@ export const Sizes: Story = {
         <h3 className="text-sm font-semibold text-gray-700">
           Extra Small (xs)
         </h3>
-        <StarRating rating={4.0} size="xs" score />
+        <StarRating rating={4.0} size="xs" showRating />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-semibold text-gray-700">Small (sm)</h3>
-        <StarRating rating={4.2} size="sm" score />
+        <StarRating rating={4.2} size="sm" showRating />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-semibold text-gray-700">Medium (md)</h3>
-        <StarRating rating={4.5} size="md" score />
+        <StarRating rating={4.5} size="md" showRating />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-semibold text-gray-700">Medium 2 (md2)</h3>
-        <StarRating rating={3.8} size="md2" score />
+        <StarRating rating={3.8} size="md2" showRating />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-semibold text-gray-700">Large (lg)</h3>
-        <StarRating rating={4.7} size="lg" score />
+        <StarRating rating={4.7} size="lg" showRating />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-semibold text-gray-700">
           Extra Large (xl)
         </h3>
-        <StarRating rating={5.0} size="xl" score />
+        <StarRating rating={5.0} size="xl" showRating />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-semibold text-gray-700">2XL (2xl)</h3>
-        <StarRating rating={4.3} size="2xl" score />
+        <StarRating rating={4.3} size="2xl" showRating />
       </div>
     </div>
   ),
@@ -133,16 +130,18 @@ export const MaxRatingVariations: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-semibold text-gray-700">5점 만점</h3>
-        <StarRating rating={4.2} maxRating={5} score />
+        <h3 className="text-sm font-semibold text-gray-700">
+          5점 만점(기본값)
+        </h3>
+        <StarRating rating={4.2} showRating />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-semibold text-gray-700">10점 만점</h3>
-        <StarRating rating={8.5} maxRating={10} score />
+        <StarRating rating={8.5} maxRating={10} showRating />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-semibold text-gray-700">3점 만점</h3>
-        <StarRating rating={2.1} maxRating={3} score />
+        <StarRating rating={2.1} maxRating={3} showRating />
       </div>
     </div>
   ),

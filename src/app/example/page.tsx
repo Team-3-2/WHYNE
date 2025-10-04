@@ -9,6 +9,8 @@ import {
   SelectType,
   TextInput,
   Card,
+  StarRating,
+  RatingBreakdown,
 } from "@/components";
 import LikeButton from "@/components/button/like-button";
 import ConfirmModal from "@/components/modal/confirm-modal";
@@ -295,6 +297,34 @@ const Page = () => {
       <section>
         <LikeButton count={642304} />
         <LikeButton count={5024} isLike={true} />
+      </section>
+
+      <section className="mt-10 flex flex-col gap-4">
+        <div>
+          <h3>기본 별점</h3>
+          <StarRating rating={4.0} />
+        </div>
+        <div>
+          <h3>기본 별점 + 점수 표시</h3>
+          <StarRating rating={4.3} showRating />
+        </div>
+        <div>
+          <h3>기본 별점 + 평균 점수 표시</h3>
+          <StarRating rating={2.3} showRatingRatio />
+        </div>
+        <div>
+          <h3>평점 분포</h3>
+          <RatingBreakdown
+            average={4.2}
+            distribution={{
+              5: 150,
+              4: 80,
+              3: 30,
+              2: 10,
+              1: 5,
+            }}
+          />
+        </div>
       </section>
 
       <br />
