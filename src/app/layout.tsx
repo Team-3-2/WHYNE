@@ -11,8 +11,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="ko" className={sfPro.variable}>
@@ -20,6 +22,7 @@ export default function RootLayout({
         <QueryProvider>
           <Gnb />
           {children}
+          {modal}
         </QueryProvider>
       </body>
     </html>

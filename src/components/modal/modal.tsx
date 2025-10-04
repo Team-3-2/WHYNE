@@ -23,7 +23,7 @@ const Modal = ({ ref, className, onCancel, children }: ModalProps) => {
   return createPortal(
     <dialog
       className={cn(
-        "flex-col-center gap-6 bg-white",
+        "flex flex-col gap-6 bg-white",
         "rounded-2xl border border-gray-200",
         "shadow-[0_16px_32px_-4px_rgba(12,12,13,0.1)]",
         className

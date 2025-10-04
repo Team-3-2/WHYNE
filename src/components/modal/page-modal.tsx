@@ -1,0 +1,67 @@
+"use client";
+
+import { ReactNode, useEffect, useRef } from "react";
+import Modal from "./modal";
+import { useRouter } from "next/navigation";
+import { allowScroll, cn, lockingScroll } from "@/lib/utils";
+import IconButton from "../button/icon-button";
+
+interface PageModalProps {
+  title: string;
+  children: ReactNode;
+}
+
+const PageModal = ({ title = "등록 하기", children }: PageModalProps) => {
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!modalRef.current?.open) modalRef.current?.showModal();
+    lockingScroll();
+
+    return () => {
+      allowScroll();
+    };
+  });
+
+  return (
+    // TODO: 모바일 반응형 스타일 작성
+    <Modal
+      ref={modalRef}
+      className={cn(
+        "border-none px-6 mobile:mt-[94px] tablet:relative pc:relative",
+        "mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:mb-0 mobile:w-full mobile:max-w-full",
+        "mobile:rounded-none mobile:rounded-t-2xl",
+        "tablet:h-[1010px]",
+        "pc:h-[1010px]"
+      )}
+      onCancel={() => router.back()}
+    >
+      {/* 모달 상단 영역 */}
+      <div className="sticky top-0 z-10 flex w-full items-center justify-between bg-white pt-8">
+        <p
+          className={cn(
+            "text-default mobile:text-heading-md",
+            "tablet:text-heading-lg",
+            "pc:text-heading-lg"
+          )}
+        >
+          {title}
+        </p>
+        <IconButton
+          icon="XIcon"
+          iconSize={"lg"}
+          iconColor="gray300"
+          aria-label="모달 닫기"
+          className="h-6 w-6 border-none"
+          onClick={() => router.back()}
+        />
+      </div>
+      <div className="mobile:h-[526px] tablet:h-[764px] pc:h-[764px]">
+        {children}
+      </div>
+    </Modal>
+  );
+};
+
+export default PageModal;
