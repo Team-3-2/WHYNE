@@ -2,15 +2,17 @@
 
 import { cn } from "@/lib/utils";
 
-export default function Loader() {
-  const bgColor = "bg-black/60";
-  const innerColor = "rgb(139, 0, 0)";
+const style = {
+  bgColor: "bg-black/60",
+  innerColor: "rgb(139, 0, 0)",
+};
 
+export default function Loader() {
   return (
     <div
       className={cn(
         "flex h-screen w-screen items-center justify-center",
-        bgColor
+        style.bgColor
       )}
     >
       <div className="relative">
@@ -19,7 +21,7 @@ export default function Loader() {
           style={{
             transform: "translate(-50%, -50%)",
             color: "transparent",
-            WebkitTextStroke: `0.3px ${innerColor}`,
+            WebkitTextStroke: `0.3px ${style.innerColor}`,
           }}
         >
           whyne
@@ -28,8 +30,8 @@ export default function Loader() {
           className="absolute left-1/2 top-1/2 text-[38px] tracking-[5px]"
           style={{
             transform: "translate(-50%, -50%)",
-            color: innerColor,
-            WebkitTextStroke: `1px ${innerColor}`,
+            color: style.innerColor,
+            WebkitTextStroke: `1px ${style.innerColor}`,
             animation: "whyne723 2s ease-in-out infinite",
           }}
         >
