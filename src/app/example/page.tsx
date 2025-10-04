@@ -134,8 +134,8 @@ const Page = () => {
         <WineTasteTest />
       </div>
 
-      <Button onClick={() => router.push("/wines/1680")}>
-        페이지 모달 테스트 링크
+      <Button variant="outline" onClick={() => router.push("/wines/1680")}>
+        페이지 모달 테스트
       </Button>
 
       {/* 기존 컴포넌트 영역 */}
