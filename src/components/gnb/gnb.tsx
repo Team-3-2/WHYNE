@@ -9,17 +9,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 import { User } from "@/types/user-type";
-
-const dropDownMenuItems = [
-  {
-    label: "마이프로필",
-    href: "/myprofile",
-  },
-  {
-    label: "로그아웃",
-    href: "/logout",
-  },
-];
+import { useLogout } from "@/hooks/use-logout";
 
 const Gnb = () => {
   const pathname = usePathname();
@@ -28,6 +18,19 @@ const Gnb = () => {
 
   const isHidden = pathname === "/login" || pathname === "/signup";
 
+  const logout = useLogout();
+  const dropDownMenuItems = [
+    { label: "마이프로필", href: "/myprofile" },
+    {
+      label: "로그아웃",
+      onClick: () => {
+        setIsOpen(false);
+        logout();
+      },
+    },
+  ];
+
+  // TODO(지권): 로그인 상태 확인 리팩토링 필요
   const getMe = async () => {
     try {
       const response = await instance.get("/users/me");
@@ -60,12 +63,11 @@ const Gnb = () => {
         <Logo className="w-[100px]" />
       </Link>
 
-      {/* 드롭다운 기준 컨테이너 */}
       <div className="relative">
         {user ? (
           <button
             type="button"
-            aria-label="프로필 메뉴 열기"
+            aria-label="메뉴 열기"
             onClick={() => setIsOpen((prev) => !prev)}
             className="flex items-center"
           >
@@ -87,7 +89,7 @@ const Gnb = () => {
         )}
 
         {isOpen && (
-          <div className="absolute right-0 top-full z-[60] mt-2">
+          <div className="absolute right-0 z-[60] mt-2">
             <DropdownMenu
               items={dropDownMenuItems}
               itemClassName="hover:text-black"
