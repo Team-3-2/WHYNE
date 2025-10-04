@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import useToggle from "@/hooks/use-toggle";
 import useClickOutside from "@/hooks/use-click-outside";
-import StarRating from "../star-rating/star-rating";
+import Rating from "../rating/rating";
 import IconButton from "../button/icon-button";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 
@@ -62,7 +62,7 @@ const Card = ({
         <div className="pb-[24px] pr-[26px]">
           {typeof avgRating === "number" && (
             <div className="mb-[12px] flex items-center gap-[14px]">
-              <StarRating rating={avgRating} />
+              <Rating rating={avgRating} />
               <span className="relative top-[1px] text-body-sm font-normal text-gray-500">
                 {reviewCount}개의 후기
               </span>
