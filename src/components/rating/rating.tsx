@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
-import Star from "./star";
-
-const RATING_RATIO_STYLES = "mobile:grid tablet:grid pc:flex";
+import FillShape from "./fill-shape";
+import { RATING_RATIO_STYLES } from "./style";
 
 /**
  * 별점 컴포넌트
@@ -12,7 +11,7 @@ const RATING_RATIO_STYLES = "mobile:grid tablet:grid pc:flex";
  * @param size 별 크기 (기본값: sm)
  */
 
-interface StarRatingProps {
+interface RatingProps {
   rating: number; //받은 별점
   maxRating?: number; //최대 별점 (기본값: 5)
   showRating?: boolean; //기본 점수 표시 여부 (점수)
@@ -21,14 +20,14 @@ interface StarRatingProps {
   size?: "xs" | "sm" | "md" | "md2" | "lg" | "xl" | "2xl";
 }
 
-const StarRating = ({
+const Rating = ({
   rating,
   maxRating = 5,
   showRating = false,
   showRatingRatio = false,
   size = "sm",
-}: StarRatingProps) => {
-  const starFills = Array.from({ length: maxRating }, (_, i) => {
+}: RatingProps) => {
+  const RaitingFills = Array.from({ length: maxRating }, (_, i) => {
     const fillPercent = rating - i;
     if (fillPercent >= 1) return 100;
     if (fillPercent > 0) return fillPercent * 100;
@@ -46,8 +45,8 @@ const StarRating = ({
       )}
     >
       <div className="flex">
-        {starFills.map((fill, i) => (
-          <Star key={i} fill={fill} size={size} />
+        {RaitingFills.map((fill, i) => (
+          <FillShape key={i} fill={fill} size={size} />
         ))}
       </div>
       {/* showRating */}
@@ -67,4 +66,4 @@ const StarRating = ({
   );
 };
 
-export default StarRating;
+export default Rating;

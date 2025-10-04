@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import StarRating from "./star-rating";
-import RatingBar from "./rating-bar";
+import Rating from "./rating";
+import RatingBar from "./rating-bar-item";
 import Button from "@/components/button/basic-button";
 
 /**
@@ -12,17 +12,17 @@ import Button from "@/components/button/basic-button";
  * @param totalReviews 총 리뷰 수
  */
 
-interface RatingBreakdownProps {
+interface RatingDistributionProps {
   average: number; //평균 별점
   maxRating?: number; //최대 별점 (기본값: 5)
   distribution: Record<number, number>; // 별점 : 해당 별점을 받은 리뷰 수
 }
 
-const RatingBreakdown = ({
+const RatingDistribution = ({
   average,
   maxRating = 5,
   distribution,
-}: RatingBreakdownProps) => {
+}: RatingDistributionProps) => {
   const reviewCounts = Object.values(distribution);
   const totalReviews = reviewCounts.reduce((total, count) => total + count, 0);
 
@@ -36,7 +36,7 @@ const RatingBreakdown = ({
         )}
       >
         <div>
-          <StarRating rating={average} size="md2" showRatingRatio />
+          <Rating rating={average} size="md2" showRatingRatio />
         </div>
         <div
           className={cn(
@@ -71,4 +71,4 @@ const RatingBreakdown = ({
   );
 };
 
-export default RatingBreakdown;
+export default RatingDistribution;
