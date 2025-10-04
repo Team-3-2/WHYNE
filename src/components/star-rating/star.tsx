@@ -17,10 +17,7 @@ const Star = ({ fill, size = "sm" }: RatingStarProps) => {
         className="mobile:ic-sm"
       />
       <div
-        className="absolute left-0 top-0 h-full overflow-hidden"
-        style={{
-          width: `${widthPercent}%`,
-        }}
+        className={`absolute left-0 top-0 h-full overflow-hidden w-[${widthPercent}%]`}
       >
         <Icon
           icon="StarIcon"
