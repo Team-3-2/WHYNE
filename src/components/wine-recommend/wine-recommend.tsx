@@ -8,7 +8,6 @@ import usePages from "./hooks/usePages";
 import CarouselNavButton from "../button/carousel-nav-button";
 const data = recommendwinemock;
 
-const data = recommendwinemock;
 const ArrowStyle =
   "relative h-12 w-12 mobile:hidden pc:block tablet:block pc:top-[136px] tablet:top-[114px]";
 const WineRecommend = () => {

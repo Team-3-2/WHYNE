@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type RecommendWineProps = {
   id: number;
@@ -16,7 +17,7 @@ const RecommendWineCard = ({ id, name, region, image }: RecommendWineProps) => {
         "pc:h-[320px] pc:w-[201px]"
       )}
     >
-      <img
+      <Image
         className={cn(
           "mx-auto h-[165px] w-auto object-contain",
           "tablet:h-[228px]",
@@ -24,6 +25,8 @@ const RecommendWineCard = ({ id, name, region, image }: RecommendWineProps) => {
         )}
         src={image}
         alt={name}
+        width={150}
+        height={243}
       />
       <h2
         className={cn(
