@@ -1,9 +1,5 @@
-// app/wines/[id]/_components/review-section.tsx
-"use client";
-
-import { cn } from "@/lib/utils";
 import RatingBreakdown from "@/components/star-rating/rating-breakdown";
-import ReviewItem from "@/app/myprofile/_components/review-item/review-item";
+import WineReviewItem from "./wine-review-item";
 import type { Review } from "@/types/wine";
 
 interface ReviewSectionProps {
@@ -57,15 +53,11 @@ export default function ReviewSection({
         ) : (
           <div className="space-y-4">
             {reviews.map((review, index) => (
-              <div
+              <WineReviewItem
                 key={review.id}
-                className={cn(
-                  "rounded-lg bg-white",
-                  index === 0 && "[&>div]:border-t-0" // 첫 번째만 구분선 제거
-                )}
-              >
-                <ReviewItem />
-              </div>
+                review={review}
+                isFirst={index === 0}
+              />
             ))}
           </div>
         )}

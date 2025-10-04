@@ -33,6 +33,7 @@ export interface Review {
     image: string | null;
   };
   isLiked: boolean;
+  wineId: number;
 }
 
 export interface WineDetail extends Wine {
