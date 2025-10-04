@@ -108,7 +108,7 @@ const Page = () => {
         <div className="flex-col-center w-full gap-4">
           <Button
             icon="KakaoIcon"
-            appearance="outline"
+            variant="outline"
             type="button"
             label="kakao로 시작하기"
           />

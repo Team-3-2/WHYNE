@@ -66,7 +66,7 @@ const ConfirmModal = ({
       </p>
       <div className={cn("flex gap-2")}>
         <Button
-          appearance="outline"
+          variant="outline"
           className={cn(
             "h-[42px] w-[136px]",
             "tablet:h-[50px] tablet:w-[156px]",

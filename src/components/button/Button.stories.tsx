@@ -67,14 +67,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    appearance: "default",
+    variant: "default",
     label: "버튼 이름을 입력해보세요",
   },
 };
 
 export const Outline: Story = {
   args: {
-    appearance: "outline",
+    variant: "outline",
     label: "버튼 이름을 입력해보세요",
   },
 };
@@ -100,7 +100,7 @@ export const CarouselNav: Story = {
 
 export const Disabled: Story = {
   args: {
-    appearance: "default",
+    variant: "default",
     label: "비활성 버튼",
     disabled: true,
   },
@@ -113,13 +113,13 @@ export const Variations: Story = {
 
       <div className="grid gap-4">
         <Button label="기본" />
-        <Button appearance="outline" label="아웃라인" />
+        <Button variant="outline" label="아웃라인" />
       </div>
 
       <h3 className="text-lg font-bold">아이콘이 들어간 버튼</h3>
       <div className="grid gap-4">
-        <Button appearance="outline" label="카카오 로그인" icon="KakaoIcon" />
-        <Button appearance="outline" label="구글 로그인" icon="GoogleIcon" />
+        <Button variant="outline" label="카카오 로그인" icon="KakaoIcon" />
+        <Button variant="outline" label="구글 로그인" icon="GoogleIcon" />
         <div className="flex flex-wrap gap-4">
           <IconButton icon="FilterIcon" aria-label="필터 버튼" />
           <IconButton icon="HamburgerIcon" aria-label="햄버거 버튼" />
