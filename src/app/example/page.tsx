@@ -9,6 +9,7 @@ import {
   SelectType,
   TextInput,
   Card,
+  Button,
 } from "@/components";
 import LikeButton from "@/components/button/like-button";
 import ConfirmModal from "@/components/modal/confirm-modal";
@@ -22,6 +23,8 @@ import WineTaste, {
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import React, { ChangeEvent, useState } from "react";
 import { recommendwinemock } from "@/mock";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const DATA = recommendwinemock;
 
@@ -123,12 +126,17 @@ const Page = () => {
     console.log(e.target.value);
   };
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   return (
     <>
       {/* 스타일 격리를 위해 완전히 별도의 영역에 WineTasteTest 컴포넌트 배치 */}
       <div className="w-full border-b border-gray-200 bg-gray-50">
         <WineTasteTest />
       </div>
+
+      <Button onClick={() => router.push("/wines/1680")}>
+        페이지 모달 테스트 링크
+      </Button>
 
       {/* 기존 컴포넌트 영역 */}
       <div className="flex-col-center gap-4">

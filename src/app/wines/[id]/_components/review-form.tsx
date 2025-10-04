@@ -12,7 +12,7 @@ import { getTasteDescription } from "@/components/wine-taste/_utils/tasteUtils";
 import WineInfo from "./wine-info";
 import type { ReviewFormData } from "../_types";
 
-interface ReviewFormProps {
+export interface ReviewFormProps {
   wineId: number;
   wineName: string;
   wineRegion: string;
