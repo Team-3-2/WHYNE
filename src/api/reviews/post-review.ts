@@ -1,19 +1,10 @@
-import axios from "axios";
+import instance from "@/lib/axios";
 import { ReviewFormData } from "@/app/wines/[id]/_types";
 
 export default async function postReview(data: ReviewFormData) {
-  const token = process.env.NEXT_PUBLIC_TEST_TOKEN;
-
-  const response = await axios.post(
+  const response = await instance.post(
     `${process.env.NEXT_PUBLIC_API_URL}/reviews`,
-    data,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
+    data
   );
-
   return response.data;
 }
