@@ -78,7 +78,6 @@ export const IconChart: Story = {
               <Icon
                 icon={iconName as keyof typeof unifiedIconMap}
                 size="lg"
-                color="gray800"
                 className="mb-2"
               />
               <span className="break-words text-center text-xs text-gray-600">

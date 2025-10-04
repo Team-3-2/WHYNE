@@ -4,20 +4,6 @@
  */
 
 const ICON_MAP = {
-  AlertIcon: () => import("/public/icons/ic-alert.svg"),
-  ArrowLeftIcon: () => import("/public/icons/ic-arrow-left.svg"),
-  ArrowRightIcon: () => import("/public/icons/ic-arrow-right.svg"),
-  CameraIcon: () => import("/public/icons/ic-camera.svg"),
-  FilterIcon: () => import("/public/icons/ic-filter.svg"),
-  HamburgerIcon: () => import("/public/icons/ic-hamburger.svg"),
-  ProfileIcon: () => import("/public/icons/ic-profile.svg"),
-  SearchIcon: () => import("/public/icons/ic-search.svg"),
-  GoogleIcon: () => import("/public/icons/ic-sns-google.svg"),
-  KakaoIcon: () => import("/public/icons/ic-sns-kakao.svg"),
-  StarIcon: () => import("/public/icons/ic-star.svg"),
-  WineIcon: () => import("/public/icons/ic-wine.svg"),
-  XIcon: () => import("/public/icons/ic-x.svg"),
-
   // flavor
   AppleIcon: () => import("/public/icons/flavor/ic-apple.svg"),
   BakingIcon: () => import("/public/icons/flavor/ic-baking.svg"),
