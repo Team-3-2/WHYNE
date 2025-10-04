@@ -14,7 +14,7 @@ import type { VariantProps } from "class-variance-authority";
 
 /**
  * 기본 버튼 컴포넌트
- * @param appearance : 버튼 스타일 (default | outline)
+ * @param variant : 버튼 스타일 (default | outline)
  * @param icon : 버튼에 노출할 아이콘 이름
  * @param iconColor : 아이콘 색상 (default | primary | danger | gray | black | white)
  * @param iconSize : 아이콘 크기 (xs | sm | md | md2 | lg | xl | 2xl)
@@ -29,7 +29,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconClassName?: string;
   iconColor?: VariantProps<typeof iconVariants>["color"];
   iconSize?: VariantProps<typeof iconVariants>["size"];
-  appearance?: ButtonState;
+  variant?: ButtonState;
   label?: string;
   shape?: ButtonShape;
   className?: string;
@@ -37,7 +37,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = ({
-  appearance = "default",
+  variant = "default",
   icon,
   iconColor,
   iconSize,
@@ -52,7 +52,7 @@ const Button = ({
       className={cn(
         COMMON_BUTTON_STYLES,
         BUTTON_SHAPE_VARIANTS.default,
-        BUTTON_STATE_VARIANTS[appearance],
+        BUTTON_STATE_VARIANTS[variant],
         className
       )}
       {...props}
@@ -65,7 +65,7 @@ const Button = ({
           size={iconSize ?? "md"}
         />
       )}
-      <span className={BUTTON_TEXT_COLOR_VARIANTS[appearance]}>{label}</span>
+      <span className={BUTTON_TEXT_COLOR_VARIANTS[variant]}>{label}</span>
       {children}
     </button>
   );
