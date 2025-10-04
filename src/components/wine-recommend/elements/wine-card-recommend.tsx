@@ -1,16 +1,6 @@
-type WineType = "white" | "sparkling" | "red";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
-type Wine = {
-  id: number;
-  name: string;
-  region: string;
-  image: string;
-  price: number;
-  type: WineType;
-  avgRating: number;
-  reviewCount: number;
-  recentReview: any[];
-};
 type RecommendWineProps = {
   id: number;
   name: string;
@@ -20,10 +10,42 @@ type RecommendWineProps = {
 
 const RecommendWineCard = ({ id, name, region, image }: RecommendWineProps) => {
   return (
-    <div>
-      <img src={image} alt={name} />
-      <h2>{name}</h2>
-      <p>{region}</p>
+    <div
+      className={cn(
+        "relative flex h-[243px] w-[150px] shrink-0 select-none flex-col items-center",
+        "tablet:h-[320px] tablet:w-[201px]",
+        "pc:h-[320px] pc:w-[201px]"
+      )}
+    >
+      <Image
+        className={cn(
+          "mx-auto h-[165px] w-auto object-contain",
+          "tablet:h-[228px]",
+          "pc:h-[228px]"
+        )}
+        src={image}
+        alt={name}
+        width={150}
+        height={243}
+      />
+      <h2
+        className={cn(
+          "line-clamp-2 pt-[12px] text-center text-sm tracking-[-0.02em] text-gray-900",
+          "tablet:h-16 tablet:pt-4 tablet:text-body-md",
+          "pc:h-16 pc:pt-4 pc:text-body-md"
+        )}
+      >
+        {name}
+      </h2>
+      <p
+        className={cn(
+          "bottom-0 line-clamp-1 pt-[6px] text-center text-[12px] leading-5 tracking-[-0.02em] text-gray-500",
+          "tablet:pt-2 tablet:text-sm",
+          "pc:pt-2 pc:text-sm"
+        )}
+      >
+        {region}
+      </p>
     </div>
   );
 };

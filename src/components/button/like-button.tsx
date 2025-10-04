@@ -18,7 +18,7 @@ const LikeButton = ({ isLike, count = 0, ...props }: LikeButtonProps) => {
   return (
     <Button
       icon={isLike ? "LikeOnIcon" : "LikeOffIcon"}
-      appearance="outline"
+      variant="outline"
       aria-label={isLike ? "좋아요" : "좋아요 취소"}
       aria-pressed={isLike}
       className={cn(
@@ -28,7 +28,7 @@ const LikeButton = ({ isLike, count = 0, ...props }: LikeButtonProps) => {
         isLike && "border border-red-200"
       )}
       iconClassName={cn("mobile:ic-sm", "tablet:ic-sm", "pc:ic-md")}
-      iconColor={isLike ? "danger200" : "default"}
+      iconColor={isLike ? "red200" : "default"}
       {...props}
     >
       <span
