@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import Button from "./basic-button";
-import IconButton from "./icon-button";
-import ArrowButton from "./arrow-button";
+import {
+  Button,
+  IconButton,
+  CarouselNavButton,
+  LikeButton,
+} from "@/components";
 import ICON_MAP from "../icon/icon-map";
 
 const meta: Meta<typeof Button> = {
@@ -43,12 +46,6 @@ const meta: Meta<typeof Button> = {
       control: "text",
       description: "버튼에 들어가는 텍스트",
     },
-    textColor: {
-      description: "-",
-      table: {
-        category: "X",
-      },
-    },
     disabled: {
       control: "boolean",
       description: "비활성화 여부",
@@ -86,11 +83,11 @@ export const Icon: Story = {
   ),
 };
 
-export const Arrow: Story = {
+export const CarouselNav: Story = {
   render: () => (
     <div className="flex flex-col gap-4 p-4">
-      <ArrowButton direction="prev" />
-      <ArrowButton direction="next" />
+      <CarouselNavButton slide="prev" />
+      <CarouselNavButton slide="next" />
     </div>
   ),
 };
@@ -121,13 +118,25 @@ export const Variations: Story = {
           <IconButton icon="FilterIcon" aria-label="필터 버튼" />
           <IconButton icon="HamburgerIcon" aria-label="햄버거 버튼" />
           <IconButton icon="LikeOnIcon" aria-label="찜 버튼" />
-          <ArrowButton direction="prev" />
-          <ArrowButton direction="next" />
+          <CarouselNavButton slide="prev" />
+          <CarouselNavButton slide="next" />
         </div>
       </div>
     </div>
   ),
   parameters: {
     layout: "fullscreen",
+  },
+};
+
+export const DefaultLike: Story = {
+  render: () => {
+    return <LikeButton count={24} />;
+  },
+};
+
+export const Liked: Story = {
+  render: () => {
+    return <LikeButton count={24} isLike={true} />;
   },
 };
