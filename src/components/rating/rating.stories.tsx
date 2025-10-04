@@ -127,31 +127,27 @@ export const Sizes: Story = {
   },
 };
 
-export const PartialRatings: Story = {
+export const CustomRatings: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-semibold text-gray-700">정수 별점</h3>
-        <Rating rating={4} size="md" showRating />
+        <h3 className="text-sm font-semibold text-gray-700">하트 별점</h3>
+        <Rating icon="LikeOnIcon" rating={3.5} size="md" showRating />
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-semibold text-gray-700">0.5점 별점</h3>
-        <Rating rating={3.5} size="md" showRating />
+        <h3 className="text-sm font-semibold text-gray-700">애플 별점</h3>
+        <Rating icon="AppleIcon" rating={2.3} size="2xl" showRatingRatio />
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-semibold text-gray-700">0.3점 별점</h3>
-        <Rating rating={2.3} size="md" showRating />
-      </div>
-      <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-semibold text-gray-700">0.7점 별점</h3>
-        <Rating rating={4.7} size="md" showRating />
+        <h3 className="text-sm font-semibold text-gray-700">베리 별점</h3>
+        <Rating icon="BerryIcon" rating={2.7} size="2xl" showRatingRatio />
       </div>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: "부분 채움 별점을 보여줍니다.",
+        story: "별점 모양을 커스텀할 수 있습니다.",
       },
     },
   },
@@ -208,7 +204,7 @@ export const RatingInputTest: Story = {
     layout: "centered",
     docs: {
       description: {
-        story: "실제 사용 시나리오를 보여주는 인터랙티브한 RatingInput입니다.",
+        story: "폼에서 사용되는 별점 입력 RatingInput입니다.",
       },
     },
   },

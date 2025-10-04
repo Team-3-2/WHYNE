@@ -1,9 +1,11 @@
 import { cn } from "@/lib/utils";
 import FillShape from "./fill-shape";
 import { RATING_RATIO_STYLES } from "./style";
+import type { UnifiedIconName } from "@/components/icon/icon";
 
 /**
  * 별점 컴포넌트
+ * @param icon 별점 아이콘 (기본값: StarIcon)
  * @param rating 받은 별점
  * @param maxRating 최대 별점 (기본값: 5)
  * @param showRating 기본 점수 표시 여부 (점수)
@@ -12,6 +14,7 @@ import { RATING_RATIO_STYLES } from "./style";
  */
 
 interface RatingProps {
+  icon?: UnifiedIconName;
   rating: number; //받은 별점
   maxRating?: number; //최대 별점 (기본값: 5)
   showRating?: boolean; //기본 점수 표시 여부 (점수)
@@ -21,6 +24,7 @@ interface RatingProps {
 }
 
 const Rating = ({
+  icon = "StarIcon",
   rating,
   maxRating = 5,
   showRating = false,
@@ -46,7 +50,7 @@ const Rating = ({
     >
       <div className="flex">
         {RaitingFills.map((fill, i) => (
-          <FillShape key={i} fill={fill} size={size} />
+          <FillShape icon={icon} key={i} fill={fill} size={size} />
         ))}
       </div>
       {/* showRating */}

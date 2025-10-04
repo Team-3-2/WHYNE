@@ -1,18 +1,20 @@
 import Icon from "@/components/icon/icon";
 import { COLOR_STYLES } from "./style";
+import type { UnifiedIconName } from "@/components/icon/icon";
 
 interface FillShapeProps {
+  icon: UnifiedIconName;
   fill: number;
   size?: "xs" | "sm" | "md" | "md2" | "lg" | "xl" | "2xl";
 }
 
-const FillShape = ({ fill, size = "sm" }: FillShapeProps) => {
+const FillShape = ({ icon, fill, size = "sm" }: FillShapeProps) => {
   const widthPercent = Math.min(Math.max(fill, 0), 100).toFixed(1);
 
   return (
     <div className="flex-center relative">
       <Icon
-        icon="StarIcon"
+        icon={icon}
         size={size}
         className={`mobile:ic-sm ${COLOR_STYLES.inactive}`}
       />
@@ -21,7 +23,7 @@ const FillShape = ({ fill, size = "sm" }: FillShapeProps) => {
         style={{ width: `${widthPercent}%` }}
       >
         <Icon
-          icon="StarIcon"
+          icon={icon}
           size={size}
           className={`align-top mobile:ic-sm ${COLOR_STYLES.active}`}
         />

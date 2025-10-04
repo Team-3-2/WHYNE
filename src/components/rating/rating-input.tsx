@@ -4,9 +4,11 @@ import { useState } from "react";
 import Icon from "@/components/icon/icon";
 import { cn } from "@/lib/utils";
 import { COLOR_STYLES, ERROR_MESSAGE_STYLES } from "./style";
+import type { UnifiedIconName } from "@/components/icon/icon";
 
 /**
  * 별점 입력 컴포넌트
+ * @param icon 별점 아이콘 (기본값: StarIcon)
  * @param label 별점 라벨
  * @param value 선택된 별점 값
  * @param onChange 별점 변경 핸들러
@@ -17,6 +19,7 @@ import { COLOR_STYLES, ERROR_MESSAGE_STYLES } from "./style";
  */
 
 interface RatingInputProps {
+  icon?: UnifiedIconName;
   label?: string;
   value: number;
   onChange: (value: number) => void;
@@ -27,6 +30,7 @@ interface RatingInputProps {
 }
 
 const RatingInput = ({
+  icon = "StarIcon",
   label,
   value,
   onChange,
@@ -77,7 +81,7 @@ const RatingInput = ({
                 aria-label={`${i + 1}점${i + 1 === value ? " 선택됨" : ""}`}
               >
                 <Icon
-                  icon="StarIcon"
+                  icon={icon}
                   size={size}
                   className={`block tablet:ic-md2 pc:ic-md2 ${isFilled ? COLOR_STYLES.active : COLOR_STYLES.inactive}`}
                 />

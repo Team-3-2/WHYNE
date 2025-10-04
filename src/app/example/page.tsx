@@ -320,8 +320,8 @@ const Page = () => {
 
       <section className="mt-10 flex flex-col gap-10 pb-[100px]">
         <div>
-          <h3>기본 별점</h3>
-          <Rating rating={4.0} />
+          <h3>하트 아이콘으로 바꿔봄</h3>
+          <Rating icon="LikeOnIcon" rating={3.5} />
         </div>
         <div>
           <h3>기본 별점 + 점수 표시</h3>
