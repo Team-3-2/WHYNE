@@ -41,7 +41,7 @@ const PageModal = ({ title = "등록 하기", children }: PageModalProps) => {
       <div className="sticky top-0 z-10 flex w-full items-center justify-between bg-white pt-8">
         <p
           className={cn(
-            "text-heading-md text-default",
+            "text-default mobile:text-heading-md",
             "tablet:text-heading-lg",
             "pc:text-heading-lg"
           )}
