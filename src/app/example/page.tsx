@@ -265,6 +265,7 @@ const Page = () => {
               name={item.name}
               region={item.region}
               price={item.price}
+              actionMenu
             />
           ))}
         </div>
@@ -279,6 +280,7 @@ const Page = () => {
               name={item.name}
               region={item.region}
               recentReview={item.recentReview}
+              href={`/detail/${item.id}`}
             />
           ))}
         </div>
