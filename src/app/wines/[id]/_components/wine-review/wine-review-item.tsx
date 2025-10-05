@@ -148,26 +148,17 @@ export default function WineReviewItem({
         )}
       >
         {/* 1. 모바일/태블릿: 별점 + 옵션 메뉴 (상단) */}
-        <div className={cn("flex items-center justify-between", "pc:hidden")}>
+        <div className="flex items-center justify-between">
           <Rating rating={review.rating} size="sm" />
           <OptionMenu />
         </div>
 
         {/* 2. 모바일/태블릿: 프로필 + 시간 */}
-        <div className={cn("block", "pc:hidden")}>
+        <div className="block">
           <WineReviewRating createdAt={review.createdAt} user={review.user} />
         </div>
 
-        {/* 3. PC: 프로필 + 별점 + 옵션 메뉴 (한 줄) */}
-        <div className={cn("hidden items-center justify-between", "pc:flex")}>
-          <div className="flex items-center gap-4">
-            <WineReviewRating createdAt={review.createdAt} user={review.user} />
-            <Rating rating={review.rating} size="sm" />
-          </div>
-          <OptionMenu />
-        </div>
-
-        {/* 4. 향 정보 */}
+        {/* 3. 향 정보 */}
         {review.aroma && review.aroma.length > 0 && (
           <div className="flex flex-wrap items-center gap-1">
             {review.aroma.map((aroma, index) => {
@@ -195,12 +186,12 @@ export default function WineReviewItem({
           </div>
         )}
 
-        {/* 5. 리뷰 내용 */}
+        {/* 4. 리뷰 내용 */}
         <p className="text-body-md leading-relaxed tracking-[-0.02em] text-gray-900">
           {review.content}
         </p>
 
-        {/* 6. 맛 평가 토글 버튼 + 내용 */}
+        {/* 5. 맛 평가 토글 버튼 + 내용 */}
         <div className="flex flex-col gap-4">
           {/* 맛 평가 내용 (토글) - 부드러운 슬라이드 애니메이션 */}
           <div
@@ -238,7 +229,7 @@ export default function WineReviewItem({
           </div>
         </div>
 
-        {/* 7. 좋아요 버튼 */}
+        {/* 6. 좋아요 버튼 */}
         <LikeButton
           count={likeCount}
           isLike={isLike}
