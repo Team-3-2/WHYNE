@@ -1,3 +1,4 @@
+// app/wines/[id]/_components/wine-flavor/wine-flavor-section.tsx
 import Flavor from "@/components/flavor/flavor";
 import type { AromaKey } from "@/types/AromaType";
 import type { Review } from "@/types/wine";
@@ -37,28 +38,32 @@ export default function FlavorSection({
   }
 
   return (
-    <div className="w-full tablet:grid tablet:max-w-[680px] tablet:grid-cols-2">
+    <div
+      className={cn(
+        "w-full",
+        "tablet:grid tablet:max-w-[680px] tablet:grid-cols-2 tablet:gap-6",
+        "pc:flex pc:max-w-none pc:flex-col pc:gap-6"
+      )}
+    >
+      {/* 제목 + 참여 인원 */}
       <div
         className={cn(
-          "mb-4 ml-4 mr-4",
-          "pc:ml-0 pc:mr-0 pc:flex pc:items-center pc:gap-52",
-          "tablet:mb-6 tablet:flex-col tablet:gap-3"
+          "mb-4 ml-4 mr-4 flex flex-col items-start gap-1",
+          "tablet:mb-0 tablet:ml-0 tablet:flex-col tablet:gap-3",
+          "pc:flex-row pc:items-center pc:gap-48"
         )}
       >
-        <h2 className="text-heading-lg text-gray-900 tablet:text-heading-lg pc:text-heading-lg">
-          어떤 향이 있나요?
-        </h2>
-        <span className="text-body-sm text-gray-400 tablet:text-body-sm">
+        <h2 className="text-heading-lg text-gray-900">어떤 향이 있나요?</h2>
+        <span className="text-body-sm text-gray-400">
           ({reviewCount}명 참여)
         </span>
       </div>
 
-      <div
-        className={cn(
-          "mobile:flex mobile:flex-col mobile:items-center mobile:justify-center [&>div>div:first-child]:hidden"
-        )}
-      >
-        <Flavor count={reviewCount} items={displayAromas} />
+      {/* Flavor 컴포넌트 래퍼 */}
+      <div className="flex w-full justify-center tablet:justify-start pc:justify-start">
+        <div className="[&>div>div:first-child]:hidden">
+          <Flavor count={reviewCount} items={displayAromas} />
+        </div>
       </div>
     </div>
   );

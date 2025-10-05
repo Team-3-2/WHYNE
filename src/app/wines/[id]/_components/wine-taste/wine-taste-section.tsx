@@ -1,3 +1,4 @@
+// app/wines/[id]/_components/wine-taste/wine-taste-section.tsx
 import WineTaste from "@/components/wine-taste/wine-taste";
 import { getTasteDescription } from "@/components/wine-taste";
 import type { TasteData } from "@/components/wine-taste";
@@ -71,23 +72,32 @@ export default function WineTasteSection({
   ];
 
   return (
-    <div className="w-full tablet:grid tablet:max-w-[680px] tablet:grid-cols-2">
+    <div
+      className={cn(
+        "w-full",
+        "tablet:grid tablet:max-w-[680px] tablet:grid-cols-2 tablet:gap-6",
+        "pc:flex pc:max-w-none pc:flex-col pc:gap-6"
+      )}
+    >
+      {/* 제목 + 참여 인원 */}
       <div
         className={cn(
-          "mb-4 ml-4 mr-4",
-          "pc:ml-0 pc:mr-0 pc:flex pc:items-center pc:gap-56",
-          "tablet:mb-6 tablet:flex-col tablet:gap-3"
+          "mb-4 ml-4 mr-4 flex flex-col items-start gap-1",
+          "tablet:mb-0 tablet:ml-0 tablet:flex-col tablet:gap-3",
+          "pc:flex-row pc:items-center pc:gap-56"
         )}
       >
-        <h2 className="text-heading-lg text-gray-900 tablet:text-heading-lg pc:text-heading-lg">
-          어떤 맛이 나나요?
-        </h2>
-        <span className="text-body-sm text-gray-400 tablet:text-body-sm">
+        <h2 className="text-heading-lg text-gray-900">어떤 맛이 나나요?</h2>
+        <span className="text-body-sm text-gray-400">
           ({reviewCount}명 참여)
         </span>
       </div>
-      <div className="mobile:flex mobile:flex-col mobile:items-center mobile:justify-center">
-        <WineTaste type="detail" tastes={tastes} />
+
+      {/* WineTaste 컴포넌트 래퍼 */}
+      <div className="flex w-full justify-center tablet:justify-start pc:justify-start">
+        <div>
+          <WineTaste type="detail" tastes={tastes} />
+        </div>
       </div>
     </div>
   );

@@ -24,6 +24,7 @@ export default function WineInfo({ name, region, image }: WineInfoProps) {
             width={62}
             height={96}
             className="h-full w-auto object-contain"
+            unoptimized={true}
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}

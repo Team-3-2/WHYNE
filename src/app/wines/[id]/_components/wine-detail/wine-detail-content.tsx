@@ -54,7 +54,7 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
       </section>
 
       {/* 맛/향 섹션 */}
-      <section className="bg-white px-4 pb-6 pt-8 tablet:px-8 tablet:pt-12 pc:px-16 pc:pt-12">
+      <section className="bg-white px-4 pt-4 tablet:px-8 tablet:pb-4 tablet:pt-12 pc:px-16 pc:pb-6 pc:pt-12">
         <div className="mx-auto flex flex-col gap-8 tablet:gap-12 pc:max-w-7xl pc:flex-row pc:gap-44">
           <div className="pc:flex-1">
             <WineTasteSection
@@ -73,7 +73,7 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
       </section>
 
       {/* 리뷰 섹션 */}
-      <section className="bg-white px-4 pb-12 pt-6 tablet:px-8 pc:px-16">
+      <section className="bg-white px-4 pb-12 pt-6 tablet:px-8 tablet:pt-12 pc:px-16 pc:pt-12">
         <div className="mx-auto pc:max-w-7xl">
           <div className="mb-6 w-full border-t border-gray-300" />
           <ReviewSection
