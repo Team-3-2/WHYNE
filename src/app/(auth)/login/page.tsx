@@ -9,16 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
-
-interface User {
-  id: number;
-  nickname: string;
-  teamId: string;
-  createdAt: string;
-  updatedAt: string;
-  image: string;
-  email: string;
-}
+import { User } from "@/types/user-type";
 
 interface LoginData {
   user: User;
@@ -81,6 +72,7 @@ const Page = () => {
 
   return (
     <FormWrapper>
+      {/* // TODO: 로고 링크 추가 */}
       <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100" />
       <form action={onSubmit} className="flex-col-center mb-4 gap-[60px]">
         <div className="flex flex-col gap-8">
@@ -108,7 +100,7 @@ const Page = () => {
         <div className="flex-col-center w-full gap-4">
           <Button
             icon="KakaoIcon"
-            appearance="outline"
+            variant="outline"
             type="button"
             label="kakao로 시작하기"
           />
