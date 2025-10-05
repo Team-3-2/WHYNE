@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
-import Icon, { iconVariants } from "../icon/icon";
-import type { IconName } from "../icon/icon-map";
+import Icon, { iconVariants } from "@/components/icon/icon";
+import type { UnifiedIconName } from "@/components/icon/icon";
 import type { VariantProps } from "class-variance-authority";
 import {
   COMMON_BUTTON_STYLES,
@@ -24,7 +24,7 @@ interface CarouselNavButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   slide: "prev" | "next";
   className?: string;
-  customIcon?: IconName;
+  customIcon?: UnifiedIconName;
   iconClassName?: string;
   iconColor?: VariantProps<typeof iconVariants>["color"];
   iconSize?: VariantProps<typeof iconVariants>["size"];

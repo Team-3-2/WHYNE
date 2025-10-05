@@ -6,6 +6,7 @@ export { default as Flavor } from "./flavor/flavor";
 export { default as TextInput } from "./text-input/text-input";
 export { default as SelectType } from "./select-type/select-type";
 export { default as Icon } from "./icon/icon";
+export type { UnifiedIconName } from "./icon/icon";
 export { default as BlockGauge } from "./gauge/block-gauge";
 export { default as Profile } from "./profile/profile";
 export { default as Button } from "./button/basic-button";

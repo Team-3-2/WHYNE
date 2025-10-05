@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
           loader: "@svgr/webpack",
           options: {
             configFile: "./svgr.config.js",
+            replaceAttrValues: {
+              "#101318": "currentColor",
+            },
           },
         },
       ],
