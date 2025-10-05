@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import WineTaste from "@/components/wine-taste/wine-taste";
-import StarRating from "@/components/star-rating/star-rating";
+import Rating from "@/components/rating/rating";
 import Button from "@/components/button/basic-button";
 import Chip from "@/components/chip/chip";
 import { aromaMap } from "@/components/flavor/aroma-map";
@@ -95,7 +95,7 @@ export default function ReviewForm({
         {/* 별점 선택 */}
         <div className="flex items-center gap-4">
           <label className="text-body-sm text-gray-500">별점 선택</label>
-          <StarRating rating={rating} size="lg" />
+          <Rating rating={rating} size="lg" />
         </div>
 
         {/* 후기 입력 */}
