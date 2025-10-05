@@ -3,8 +3,10 @@
 import { cn } from "@/lib/utils";
 
 const style = {
-  bgColor: "bg-black/60",
-  innerColor: "rgb(139, 0, 0)",
+  bgColor: "bg-black/5",
+  innerColor: "rgb(22,26,33)",
+  text: "WHYNE",
+  fontSize: "text-[50px]",
 };
 
 export default function Loader() {
@@ -17,17 +19,23 @@ export default function Loader() {
     >
       <div className="relative">
         <span
-          className="absolute left-1/2 top-1/2 text-[38px] tracking-[5px] text-white"
+          className={cn(
+            "absolute left-1/2 top-1/2 tracking-[5px] text-white",
+            style.fontSize
+          )}
           style={{
             transform: "translate(-50%, -50%)",
             color: "transparent",
             WebkitTextStroke: `0.3px ${style.innerColor}`,
           }}
         >
-          whyne
+          {style.text}
         </span>
         <span
-          className="absolute left-1/2 top-1/2 text-[38px] tracking-[5px]"
+          className={cn(
+            "absolute left-1/2 top-1/2 tracking-[5px]",
+            style.fontSize
+          )}
           style={{
             transform: "translate(-50%, -50%)",
             color: style.innerColor,
@@ -35,7 +43,7 @@ export default function Loader() {
             animation: "whyne723 2s ease-in-out infinite",
           }}
         >
-          whyne
+          {style.text}
         </span>
       </div>
 
