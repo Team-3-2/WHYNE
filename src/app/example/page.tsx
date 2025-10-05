@@ -26,6 +26,8 @@ import WineTaste, {
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import React, { ChangeEvent, useState } from "react";
 import { recommendwinemock } from "@/mock";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const DATA = recommendwinemock;
 
@@ -127,6 +129,7 @@ const Page = () => {
     console.log(e.target.value);
   };
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   //별점 에러메시지 테스트
   const [rating, setRating] = useState<number>(0);
@@ -150,6 +153,10 @@ const Page = () => {
       <div className="w-full border-b border-gray-200 bg-gray-50">
         <WineTasteTest />
       </div>
+
+      <Button variant="outline" onClick={() => router.push("/wines/1680")}>
+        페이지 모달 테스트
+      </Button>
 
       {/* 기존 컴포넌트 영역 */}
       <div className="flex-col-center gap-4">
