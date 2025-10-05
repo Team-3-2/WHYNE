@@ -1,4 +1,4 @@
-import RatingBreakdown from "@/components/star-rating/rating-breakdown";
+import RatingDistribution from "@/components/rating/rating-distribution";
 import WineReviewItem from "./wine-review-item";
 import type { Review } from "@/types/wine";
 
@@ -65,7 +65,7 @@ export default function ReviewSection({
 
       {/* 오른쪽: 평점 분포 */}
       <div className="pc:sticky pc:top-24 pc:h-fit">
-        <RatingBreakdown average={avgRating} distribution={avgRatings} />
+        <RatingDistribution average={avgRating} distribution={avgRatings} />
       </div>
     </div>
   );

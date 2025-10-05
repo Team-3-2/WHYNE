@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import StarRating from "@/components/star-rating/star-rating";
+import Rating from "@/components/rating/rating";
 import type { WineDetail } from "@/types/wine";
 
 interface WineHeaderProps {
@@ -50,7 +50,7 @@ export default function WineHeader({ wine }: WineHeaderProps) {
       <div className="flex flex-1 flex-col gap-4">
         {/* 평점 + 후기 개수 */}
         <div className="flex items-center gap-3">
-          <StarRating rating={wine.avgRating} maxRating={5} size="sm" />
+          <Rating rating={wine.avgRating} maxRating={5} size="sm" />
           <span className="text-body-sm text-gray-500">
             {wine.reviewCount}개의 후기
           </span>

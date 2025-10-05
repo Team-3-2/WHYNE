@@ -13,7 +13,7 @@ import type { GaugeLevel } from "@/components/gauge/block-gauge";
 import type { Review } from "@/types/wine";
 import type { AromaKey } from "@/types/AromaType";
 import WineReviewRating from "./wine-review-rating";
-import StarRating from "@/components/star-rating/star-rating";
+import Rating from "@/components/rating/rating";
 
 interface WineReviewItemProps {
   review: Review;
@@ -91,7 +91,7 @@ export default function WineReviewItem({
     >
       {/* 1. 별점 (최상단) */}
       <div className="flex items-center">
-        <StarRating rating={review.rating} size="sm" />
+        <Rating rating={review.rating} size="sm" />
       </div>
 
       {/* 2. 프로필 + 닉네임 + 시간 */}
