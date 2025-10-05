@@ -72,6 +72,7 @@ const Page = () => {
 
   return (
     <FormWrapper>
+      {/* // TODO: 로고 링크 추가 */}
       <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100" />
       <form action={onSubmit} className="flex-col-center mb-4 gap-[60px]">
         <div className="flex flex-col gap-8">
