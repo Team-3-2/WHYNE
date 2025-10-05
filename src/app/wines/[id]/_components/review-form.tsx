@@ -11,6 +11,7 @@ import { GaugeLevel } from "@/components/gauge/block-gauge";
 import { getTasteDescription } from "@/components/wine-taste/_utils/tasteUtils";
 import WineInfo from "./wine-info";
 import type { ReviewFormData } from "../_types";
+import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 
 interface ReviewFormProps {
   wineId: number;
@@ -138,15 +139,14 @@ export default function ReviewForm({
           disabled={isSubmitting || rating === 0 || !content.trim()}
           className="w-full"
         /> */}
-
-        <div className="pointer-events-none bottom-0 left-0 flex h-[185px] w-full flex-col justify-end bg-gradient-to-t from-white from-80% px-5 pb-8 mobile:fixed tablet:sticky tablet:from-70% pc:sticky pc:from-70%">
+        <PageModalBtnWrapper>
           <Button
             onClick={handleSubmit}
             label={isSubmitting ? "리뷰 남기는 중" : "리뷰 남기기"}
             disabled={isSubmitting || rating === 0 || !content.trim()}
             className="h-[50px] w-full"
           />
-        </div>
+        </PageModalBtnWrapper>
       </div>
     </div>
   );
