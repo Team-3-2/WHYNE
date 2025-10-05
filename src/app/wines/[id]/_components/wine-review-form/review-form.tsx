@@ -109,13 +109,18 @@ export default function ReviewForm({
         </div>
 
         {/* 후기 입력 */}
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="후기를 작성해주세요."
-          className="h-32 w-full resize-none rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-primary"
-          maxLength={500}
-        />
+        <div>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="후기를 작성해주세요."
+            className="h-32 w-full resize-none rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-primary"
+            maxLength={500}
+          />
+          <p className="mr-2 flex justify-end text-body-sm text-gray-500">
+            {content.length}/500
+          </p>
+        </div>
 
         {/* 와인의 맛 */}
         <div>
@@ -129,7 +134,7 @@ export default function ReviewForm({
           />
         </div>
 
-        {/* ✅ 향 선택 - 클릭 가능하도록 수정 */}
+        {/* 향 선택 */}
         <div>
           <label className="mb-4 block text-heading-md">
             기억에 남는 향이 있나요?

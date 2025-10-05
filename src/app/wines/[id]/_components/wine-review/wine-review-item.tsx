@@ -2,25 +2,24 @@
 
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
+import { getTasteDescription, TasteData } from "@/components/wine-taste";
+import { aromaMap } from "@/components/flavor/aroma-map";
 import LikeButton from "@/components/button/like-button";
 import WineTaste from "@/components/wine-taste/wine-taste";
 import Icon from "@/components/icon/icon";
 import DropdownMenu from "@/components/dropdown-menu/dropdown-menu";
-import { getTasteDescription } from "@/components/wine-taste";
-import { aromaMap } from "@/components/flavor/aroma-map";
 import useToggle from "@/hooks/use-toggle";
 import useClickOutside from "@/hooks/use-click-outside";
-import type { TasteData } from "@/components/wine-taste";
+import WineReviewRating from "./wine-review-rating";
+import Rating from "@/components/rating/rating";
 import type { GaugeLevel } from "@/components/gauge/block-gauge";
 import type { Review } from "@/types/wine";
 import type { AromaKey } from "@/types/AromaType";
-import WineReviewRating from "./wine-review-rating";
-import Rating from "@/components/rating/rating";
 
 interface WineReviewItemProps {
   review: Review;
   isFirst?: boolean;
-  currentUserId?: number; // ✅ 추가
+  currentUserId?: number;
 }
 
 function getAromaIconName(aroma: AromaKey): string {
@@ -52,7 +51,7 @@ function getAromaIconName(aroma: AromaKey): string {
 export default function WineReviewItem({
   review,
   isFirst = false,
-  currentUserId, // ✅ 받기
+  currentUserId,
 }: WineReviewItemProps) {
   const initialIsLiked =
     typeof review.isLiked === "boolean" ? review.isLiked : false;
@@ -66,7 +65,7 @@ export default function WineReviewItem({
 
   useClickOutside(menuRef, closeMenu);
 
-  // ✅ 내가 쓴 리뷰인지 확인
+  // 내가 쓴 리뷰인지 확인
   const isMyReview = currentUserId && currentUserId === review.user.id;
 
   const tastes: TasteData[] = [
@@ -94,7 +93,6 @@ export default function WineReviewItem({
 
   const likeCount = 24;
 
-  // ✅ 수정 핸들러
   const handleEdit = () => {
     closeMenu();
     console.log("리뷰 수정:", review.id);
@@ -102,7 +100,6 @@ export default function WineReviewItem({
     alert("리뷰 수정 기능은 준비 중입니다.");
   };
 
-  // ✅ 삭제 핸들러
   const handleDelete = () => {
     closeMenu();
     if (confirm("정말 삭제하시겠습니까?")) {
@@ -127,7 +124,7 @@ export default function WineReviewItem({
           <Rating rating={review.rating} size="sm" />
         </div>
 
-        {/* ✅ 내가 쓴 리뷰일 때만 햄버거 버튼 표시 */}
+        {/* 내가 쓴 리뷰일 때만 햄버거 버튼 표시 */}
         {isMyReview && (
           <div className="relative" ref={menuRef}>
             <button aria-label="옵션 메뉴" onClick={toggleMenu} className="p-1">

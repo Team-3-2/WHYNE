@@ -1,21 +1,15 @@
-// app/wines/[id]/_components/wine-taste-section.tsx
-import { cn } from "@/lib/utils";
 import WineTaste from "@/components/wine-taste/wine-taste";
 import { getTasteDescription } from "@/components/wine-taste";
 import type { TasteData } from "@/components/wine-taste";
 import type { GaugeLevel } from "@/components/gauge/block-gauge";
 import type { Review } from "@/types/wine";
+import { cn } from "@/lib/utils";
 
 interface WineTasteSectionProps {
   reviews: Review[];
-  reviewCount: number; // 🆕 추가
+  reviewCount: number;
 }
 
-/**
- * 리뷰 데이터에서 평균 맛 점수 계산
- * @param reviews 리뷰 배열
- * @returns 각 맛 특성의 평균값 (0-6 사이로 반올림)
- */
 function calculateAverageTastes(reviews: Review[]) {
   if (reviews.length === 0) {
     return {
@@ -77,23 +71,24 @@ export default function WineTasteSection({
   ];
 
   return (
-    <div>
-      {/* 제목 - WineTaste와 동일한 너비 */}
+    <div className="w-full tablet:grid tablet:max-w-[680px] tablet:grid-cols-2">
       <div
         className={cn(
-          "mb-6 flex items-center justify-between",
-          "w-[343px] tablet:w-[480px] pc:w-[480px]"
+          "mb-4 ml-4 mr-4",
+          "pc:ml-0 pc:mr-0 pc:flex pc:items-center pc:gap-56",
+          "tablet:mb-6 tablet:flex-col tablet:gap-3"
         )}
       >
-        <h2 className="text-heading-md font-bold text-gray-900">
-          어떤 맛인가요?
+        <h2 className="text-heading-lg text-gray-900 tablet:text-heading-lg pc:text-heading-lg">
+          어떤 맛이 나나요?
         </h2>
-        <span className="text-body-sm text-gray-400">
+        <span className="text-body-sm text-gray-400 tablet:text-body-sm">
           ({reviewCount}명 참여)
         </span>
       </div>
-
-      <WineTaste type="detail" tastes={tastes} />
+      <div className="mobile:flex mobile:flex-col mobile:items-center mobile:justify-center">
+        <WineTaste type="detail" tastes={tastes} />
+      </div>
     </div>
   );
 }

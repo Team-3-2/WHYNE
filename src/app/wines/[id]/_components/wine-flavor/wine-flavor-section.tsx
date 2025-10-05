@@ -1,17 +1,13 @@
-// app/wines/[id]/_components/taste-flavor/flavor-section.tsx
 import Flavor from "@/components/flavor/flavor";
-import { cn } from "@/lib/utils";
 import type { AromaKey } from "@/types/AromaType";
 import type { Review } from "@/types/wine";
+import { cn } from "@/lib/utils";
 
 interface FlavorSectionProps {
   reviews: Review[];
   reviewCount: number;
 }
 
-/**
- * 리뷰에서 가장 많이 선택된 향 TOP 4 추출
- */
 function getTopAromas(reviews: Review[]): AromaKey[] {
   const aromaCount = new Map<AromaKey, number>();
 
@@ -35,27 +31,34 @@ export default function FlavorSection({
 }: FlavorSectionProps) {
   const topAromas = getTopAromas(reviews);
 
-  // 향이 없으면 렌더링하지 않음
-  if (topAromas.length === 0) return null;
+  const displayAromas: AromaKey[] = [...topAromas];
+  while (displayAromas.length < 4) {
+    displayAromas.push("EMPTY");
+  }
 
   return (
-    <div>
+    <div className="w-full tablet:grid tablet:max-w-[680px] tablet:grid-cols-2">
       <div
         className={cn(
-          "mb-6 flex items-center justify-between",
-          "w-[343px] tablet:w-[480px] pc:w-[480px]"
+          "mb-4 ml-4 mr-4",
+          "pc:ml-0 pc:mr-0 pc:flex pc:items-center pc:gap-52",
+          "tablet:mb-6 tablet:flex-col tablet:gap-3"
         )}
       >
-        <h2 className="text-heading-md font-bold text-gray-900">
+        <h2 className="text-heading-lg text-gray-900 tablet:text-heading-lg pc:text-heading-lg">
           어떤 향이 있나요?
         </h2>
-        <span className="text-body-sm text-gray-400">
+        <span className="text-body-sm text-gray-400 tablet:text-body-sm">
           ({reviewCount}명 참여)
         </span>
       </div>
 
-      <div className="[&>div>div:first-child]:hidden">
-        <Flavor count={reviewCount} items={topAromas} />
+      <div
+        className={cn(
+          "mobile:flex mobile:flex-col mobile:items-center mobile:justify-center [&>div>div:first-child]:hidden"
+        )}
+      >
+        <Flavor count={reviewCount} items={displayAromas} />
       </div>
     </div>
   );

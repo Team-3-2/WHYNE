@@ -2,7 +2,6 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getWine } from "@/api/wines/get-wine";
-import { cn } from "@/lib/utils";
 import WineHeader from "../wine-header/wine-header";
 import WineTasteSection from "../wine-taste/wine-taste-section";
 import FlavorSection from "../wine-flavor/wine-flavor-section";
@@ -23,7 +22,6 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
     queryFn: () => getWine(wineId),
   });
 
-  // 현재 로그인한 사용자 정보 가져오기
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
@@ -31,7 +29,6 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
         setCurrentUserId(response.data.id);
       } catch (error) {
         console.error("사용자 정보 가져오기 실패:", error);
-        // 로그인 안 된 상태면 undefined
         setCurrentUserId(undefined);
       }
     };
@@ -51,48 +48,33 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* 1. 와인 헤더 */}
-      <section
-        className={cn(
-          "rounded-b-[88px] bg-[rgba(217,217,217,0.2)]",
-          "pt-[60px] tablet:pt-[70px] pc:pt-[70px]"
-        )}
-      >
+      {/* 헤더 */}
+      <section className="rounded-b-[88px] bg-[rgba(217,217,217,0.2)] pt-[60px] tablet:pt-[70px] pc:pt-[70px]">
         <WineHeader wine={wine} />
       </section>
 
-      {/* 2. 맛/향 섹션 */}
-      {wine.reviews.length > 0 && (
-        <section className="bg-white pb-6 pt-12">
-          <div
-            className={cn(
-              "mx-auto flex px-4",
-              "tablet:px-8",
-              "pc:max-w-7xl pc:px-16",
-              "flex-col gap-12 tablet:gap-16",
-              "pc:flex-row pc:items-start pc:justify-start pc:gap-44"
-            )}
-          >
-            <div className="pc:flex-1">
-              <WineTasteSection
-                reviews={wine.reviews}
-                reviewCount={wine.reviewCount}
-              />
-            </div>
-
-            <div className="pc:flex-1">
-              <FlavorSection
-                reviews={wine.reviews}
-                reviewCount={wine.reviewCount}
-              />
-            </div>
+      {/* 맛/향 섹션 */}
+      <section className="bg-white px-4 pb-6 pt-8 tablet:px-8 tablet:pt-12 pc:px-16 pc:pt-12">
+        <div className="mx-auto flex flex-col gap-8 tablet:gap-12 pc:max-w-7xl pc:flex-row pc:gap-44">
+          <div className="pc:flex-1">
+            <WineTasteSection
+              reviews={wine.reviews}
+              reviewCount={wine.reviewCount}
+            />
           </div>
-        </section>
-      )}
 
-      {/* 3. 리뷰 섹션 */}
-      <section className="bg-white pb-12 pt-6">
-        <div className={cn("mx-auto px-4 tablet:px-8 pc:max-w-7xl pc:px-16")}>
+          <div className="pc:flex-1">
+            <FlavorSection
+              reviews={wine.reviews}
+              reviewCount={wine.reviewCount}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 리뷰 섹션 */}
+      <section className="bg-white px-4 pb-12 pt-6 tablet:px-8 pc:px-16">
+        <div className="mx-auto pc:max-w-7xl">
           <div className="mb-6 w-full border-t border-gray-300" />
           <ReviewSection
             reviews={wine.reviews}
