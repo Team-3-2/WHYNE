@@ -9,6 +9,9 @@ import {
   SelectType,
   TextInput,
   Card,
+  Rating,
+  RatingInput,
+  RatingDistribution,
   Button,
 } from "@/components";
 import LikeButton from "@/components/button/like-button";
@@ -127,6 +130,23 @@ const Page = () => {
   };
   const [open, setOpen] = useState(false);
   const router = useRouter();
+
+  //별점 에러메시지 테스트
+  const [rating, setRating] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleRatingChange = (newRating: number) => {
+    setRating(newRating);
+  };
+
+  const handleSubmit = () => {
+    if (rating === 0) {
+      setError("별점은 필수 선택이에요");
+      return;
+    }
+    alert(`${rating}점 나와`);
+  };
+
   return (
     <>
       {/* 스타일 격리를 위해 완전히 별도의 영역에 WineTasteTest 컴포넌트 배치 */}
@@ -307,6 +327,48 @@ const Page = () => {
         <LikeButton count={5024} isLike={true} />
       </section>
 
+      <section className="mt-10 flex flex-col gap-10 pb-[100px]">
+        <div>
+          <h3>하트 아이콘으로 바꿔봄</h3>
+          <Rating icon="LikeOnIcon" rating={3.5} />
+        </div>
+        <div>
+          <h3>기본 별점 + 점수 표시</h3>
+          <Rating rating={4.3} showRating />
+        </div>
+        <div>
+          <h3>기본 별점 + 평균 점수 표시</h3>
+          <Rating rating={2.3} showRatingRatio />
+        </div>
+        <div>
+          <h3>평점 분포</h3>
+          <RatingDistribution
+            average={4.2}
+            distribution={{
+              5: 150,
+              4: 80,
+              3: 30,
+              2: 10,
+              1: 5,
+            }}
+          />
+        </div>
+        <div>
+          <h3>리뷰 등록 페이지 - 별점 입력</h3>
+          <RatingInput
+            label="별점 선택"
+            value={rating}
+            onChange={handleRatingChange}
+            errorMsg={error}
+          />
+          <Button
+            type="submit"
+            label="폼제출 테스트"
+            onClick={handleSubmit}
+            className="mt-5 w-auto"
+          />
+        </div>
+      </section>
       <br />
     </>
   );
