@@ -11,6 +11,7 @@ import { GaugeLevel } from "@/components/gauge/block-gauge";
 import { getTasteDescription } from "@/components/wine-taste/_utils/tasteUtils";
 import WineInfo from "./wine-info";
 import type { ReviewFormData } from "../_types";
+import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 
 interface ReviewFormProps {
   wineId: number;
@@ -72,7 +73,7 @@ export default function ReviewForm({
   return (
     <div className="flex w-full max-w-[480px] flex-col">
       {/* 헤더 */}
-      <div className="flex items-center justify-between pb-8">
+      {/* <div className="flex items-center justify-between pb-8">
         <h2 className="text-heading-lg">리뷰 등록</h2>
         <button
           onClick={onCancel}
@@ -82,7 +83,7 @@ export default function ReviewForm({
         >
           ✕
         </button>
-      </div>
+      </div> */}
 
       {/* 모든 컨텐츠 */}
       <div className="flex flex-col gap-8">
@@ -132,12 +133,20 @@ export default function ReviewForm({
         </div>
 
         {/* 버튼 */}
-        <Button
+        {/* <Button
           onClick={handleSubmit}
           label={isSubmitting ? "리뷰 남기는 중" : "리뷰 남기기"}
           disabled={isSubmitting || rating === 0 || !content.trim()}
           className="w-full"
-        />
+        /> */}
+        <PageModalBtnWrapper>
+          <Button
+            onClick={handleSubmit}
+            label={isSubmitting ? "리뷰 남기는 중" : "리뷰 남기기"}
+            disabled={isSubmitting || rating === 0 || !content.trim()}
+            className="h-[50px] w-full"
+          />
+        </PageModalBtnWrapper>
       </div>
     </div>
   );
