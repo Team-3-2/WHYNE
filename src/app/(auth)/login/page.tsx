@@ -9,16 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
-
-interface User {
-  id: number;
-  nickname: string;
-  teamId: string;
-  createdAt: string;
-  updatedAt: string;
-  image: string;
-  email: string;
-}
+import { User } from "@/types/user-type";
 
 interface LoginData {
   user: User;
