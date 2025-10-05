@@ -26,22 +26,13 @@ export default function WineHeader({ wine }: WineHeaderProps) {
     "pc:flex-col pc:items-start pc:justify-start pc:gap-6 pc:px-12 pc:pb-4 pc:pt-6"
   );
 
-  const titleClass = cn(
-    "!text-title-page-sm !leading-tight text-gray-900",
-    "tablet:text-title-page-md",
-    "pc:text-title-page-md"
-  );
+  const titleClass = cn("!text-title-page-sm !leading-tight text-gray-900");
 
-  const regionClass = cn(
-    "!text-body-lg text-gray-600",
-    "tablet:text-body-md",
-    "pc:text-body-md"
-  );
+  const regionClass = cn("!text-body-lg text-gray-600");
 
   const priceClass = cn(
-    "ml-auto mt-auto !text-heading-md text-gray-900",
-    "tablet:text-heading-lg",
-    "pc:self-start pc:text-heading-lg pc:mt-6"
+    "ml-auto mt-auto !text-heading-lg text-gray-900",
+    "pc:self-start pc:mt-6"
   );
 
   return (
