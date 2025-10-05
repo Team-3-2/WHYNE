@@ -37,7 +37,7 @@ export default function ReviewSection({
       <div>
         {/* 리뷰 목록 타이틀 */}
         <div className="mb-6 mt-12 flex items-center gap-4">
-          <h2 className="text-heading-lg font-bold text-gray-900">리뷰 목록</h2>
+          <h2 className="text-heading-lg text-gray-900">리뷰 목록</h2>
           <span className="text-body-md text-gray-500">
             {reviews.length.toLocaleString()}개
           </span>
@@ -65,9 +65,7 @@ export default function ReviewSection({
 
       {/* 오른쪽: 평점 분포 */}
       <div className="pc:sticky pc:top-24 pc:h-fit">
-        <div className="rounded-lg bg-white p-6">
-          <RatingBreakdown average={avgRating} distribution={avgRatings} />
-        </div>
+        <RatingBreakdown average={avgRating} distribution={avgRatings} />
       </div>
     </div>
   );

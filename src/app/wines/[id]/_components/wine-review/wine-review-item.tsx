@@ -78,7 +78,7 @@ export default function WineReviewItem({
     },
   ];
 
-  const likeCount = 0;
+  const likeCount = 24;
 
   return (
     <div
