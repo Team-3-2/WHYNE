@@ -7,16 +7,26 @@ interface WineInfoProps {
 }
 
 export default function WineInfo({ name, region, image }: WineInfoProps) {
+  // ✅ 유효한 이미지 URL인지 검사
+  const isValidImage =
+    image &&
+    (image.startsWith("http://") ||
+      image.startsWith("https://") ||
+      image.startsWith("/"));
+
   return (
     <div className="flex items-center gap-4">
       <div className="flex-center h-[96px] w-[62px] flex-shrink-0 rounded bg-gray-200">
-        {image ? (
+        {isValidImage ? (
           <Image
             src={image}
             alt={name}
             width={62}
             height={96}
             className="h-full w-auto object-contain"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
           />
         ) : (
           <span className="text-xs text-gray-400">No Image</span>

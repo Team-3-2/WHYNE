@@ -3,28 +3,32 @@ import { cn } from "@/lib/utils";
 import Rating from "./rating";
 import RatingBar from "./rating-bar-item";
 import Button from "@/components/button/basic-button";
+import { useRouter } from "next/navigation";
 
 /**
  * 평점 분포 컴포넌트
  * @param average 평균 별점
  * @param maxRating 최대 별점 (기본값: 5)
  * @param distribution 별점 : 해당 별점을 받은 리뷰 수
- * @param totalReviews 총 리뷰 수
+ * @param wineId 와인 ID (리뷰 작성 페이지 이동용)
  */
 
 interface RatingDistributionProps {
   average: number; //평균 별점
   maxRating?: number; //최대 별점 (기본값: 5)
   distribution: Record<number, number>; // 별점 : 해당 별점을 받은 리뷰 수
+  wineId: number; // 와인 ID (리뷰 작성 페이지 이동용)
 }
 
 const RatingDistribution = ({
   average,
   maxRating = 5,
   distribution,
+  wineId,
 }: RatingDistributionProps) => {
   const reviewCounts = Object.values(distribution);
   const totalReviews = reviewCounts.reduce((total, count) => total + count, 0);
+  const router = useRouter();
 
   return (
     <div className="relative grid gap-y-[24px] pc:gap-y-[40px]">
@@ -61,7 +65,7 @@ const RatingDistribution = ({
       </div>
       <Button
         label="리뷰 남기기"
-        onClick={() => alert("리뷰 작성 모달창!!")}
+        onClick={() => router.push(`/wines/${wineId}/write`)}
         className={cn(
           "w-full",
           "tablet:absolute tablet:bottom-[-10px] tablet:mt-0 tablet:w-[280px]"

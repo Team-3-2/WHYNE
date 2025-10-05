@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import WineTaste from "@/components/wine-taste/wine-taste";
-import Rating from "@/components/rating/rating";
+import RatingInput from "@/components/rating/rating-input";
 import Button from "@/components/button/basic-button";
-import Chip from "@/components/chip/chip";
 import { aromaMap } from "@/components/flavor/aroma-map";
 import { AromaKey } from "@/types/AromaType";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import { getTasteDescription } from "@/components/wine-taste/_utils/tasteUtils";
-import WineInfo from "./wine-info";
-import type { ReviewFormData } from "../_types";
+import WineInfo from "../wine-info";
+import type { ReviewFormData } from "../../_types";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 
 interface ReviewFormProps {
@@ -32,8 +31,12 @@ export default function ReviewForm({
   onCancel,
   isSubmitting = false,
 }: ReviewFormProps) {
+  // 상태 관리
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState("");
+  const [selectedAromas, setSelectedAromas] = useState<AromaKey[]>([]);
+
+  // ✅ 한글 인코딩 수정
   const [tastes, setTastes] = useState([
     { type: "바디감", data: 0 as GaugeLevel, taste: "없음" },
     { type: "탄닌", data: 0 as GaugeLevel, taste: "없음" },
@@ -41,6 +44,7 @@ export default function ReviewForm({
     { type: "산미", data: 0 as GaugeLevel, taste: "없음" },
   ]);
 
+  // 맛 변경 핸들러
   const handleTasteChange = (index: number, newLevel: GaugeLevel) => {
     const newTastes = [...tastes];
     newTastes[index].data = newLevel;
@@ -51,15 +55,33 @@ export default function ReviewForm({
     setTastes(newTastes);
   };
 
+  const toggleAroma = (aroma: AromaKey) => {
+    setSelectedAromas((prev) =>
+      prev.includes(aroma) ? prev.filter((a) => a !== aroma) : [...prev, aroma]
+    );
+  };
+
   const handleSubmit = () => {
+    if (rating === 0) {
+      alert("별점을 선택해주세요");
+      return;
+    }
+
+    // 리뷰 내용 검증
+    if (!content.trim()) {
+      alert("리뷰 내용을 입력해주세요");
+      return;
+    }
+
+    // 데이터 생성
     const reviewData: ReviewFormData = {
       rating,
       lightBold: tastes[0].data,
       smoothTannic: tastes[1].data,
       drySweet: tastes[2].data,
       softAcidic: tastes[3].data,
-      aroma: [],
-      content,
+      aroma: selectedAromas,
+      content: content.trim(),
       wineId,
     };
 
@@ -72,19 +94,6 @@ export default function ReviewForm({
 
   return (
     <div className="flex w-full max-w-[480px] flex-col">
-      {/* 헤더 */}
-      {/* <div className="flex items-center justify-between pb-8">
-        <h2 className="text-heading-lg">리뷰 등록</h2>
-        <button
-          onClick={onCancel}
-          className="text-2xl leading-none text-gray-400 hover:text-gray-600"
-          aria-label="닫기"
-          type="button"
-        >
-          ✕
-        </button>
-      </div> */}
-
       {/* 모든 컨텐츠 */}
       <div className="flex flex-col gap-8">
         {/* 와인 정보 */}
@@ -96,7 +105,7 @@ export default function ReviewForm({
         {/* 별점 선택 */}
         <div className="flex items-center gap-4">
           <label className="text-body-sm text-gray-500">별점 선택</label>
-          <Rating rating={rating} size="lg" />
+          <RatingInput onChange={setRating} value={rating} />
         </div>
 
         {/* 후기 입력 */}
@@ -111,7 +120,7 @@ export default function ReviewForm({
         {/* 와인의 맛 */}
         <div>
           <label className="mb-4 block text-heading-md">
-            와인의 맛은 어땠나요?
+            와인의 맛은 어떤가요?
           </label>
           <WineTaste
             type="detail"
@@ -120,29 +129,34 @@ export default function ReviewForm({
           />
         </div>
 
-        {/* 향 선택 */}
+        {/* ✅ 향 선택 - 클릭 가능하도록 수정 */}
         <div>
           <label className="mb-4 block text-heading-md">
             기억에 남는 향이 있나요?
           </label>
           <div className="flex flex-wrap gap-2">
             {aromaKeys.map((aroma) => (
-              <Chip key={aroma} label={aromaMap[aroma].label} />
+              <button
+                key={aroma}
+                type="button"
+                onClick={() => toggleAroma(aroma)}
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 transition-colors duration-200 ${
+                  selectedAromas.includes(aroma)
+                    ? "border-primary bg-primary text-white"
+                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
+                } `}
+              >
+                <span className="text-body-sm">{aromaMap[aroma].label}</span>
+              </button>
             ))}
           </div>
         </div>
 
         {/* 버튼 */}
-        {/* <Button
-          onClick={handleSubmit}
-          label={isSubmitting ? "리뷰 남기는 중" : "리뷰 남기기"}
-          disabled={isSubmitting || rating === 0 || !content.trim()}
-          className="w-full"
-        /> */}
         <PageModalBtnWrapper>
           <Button
             onClick={handleSubmit}
-            label={isSubmitting ? "리뷰 남기는 중" : "리뷰 남기기"}
+            label={isSubmitting ? "리뷰 남기는 중..." : "리뷰 남기기"}
             disabled={isSubmitting || rating === 0 || !content.trim()}
             className="h-[50px] w-full"
           />

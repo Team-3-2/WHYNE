@@ -351,6 +351,7 @@ const Page = () => {
               2: 10,
               1: 5,
             }}
+            wineId={1}
           />
         </div>
         <div>

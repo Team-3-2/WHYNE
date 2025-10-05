@@ -1,4 +1,3 @@
-// app/wines/[id]/_components/wine-detail-content.tsx
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
@@ -9,16 +8,36 @@ import WineTasteSection from "../wine-taste/wine-taste-section";
 import FlavorSection from "../wine-flavor/wine-flavor-section";
 import ReviewSection from "../wine-review/wine-review-section";
 import WineDetailSkeleton from "./wine-detail-skeleton";
+import instance from "@/lib/axios";
+import { useEffect, useState } from "react";
 
 interface WineDetailContentProps {
   wineId: number;
 }
 
 export default function WineDetailContent({ wineId }: WineDetailContentProps) {
+  const [currentUserId, setCurrentUserId] = useState<number | undefined>();
+
   const { data: wine, isLoading } = useQuery({
     queryKey: ["wine", wineId],
     queryFn: () => getWine(wineId),
   });
+
+  // 현재 로그인한 사용자 정보 가져오기
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await instance.get("/users/me");
+        setCurrentUserId(response.data.id);
+      } catch (error) {
+        console.error("사용자 정보 가져오기 실패:", error);
+        // 로그인 안 된 상태면 undefined
+        setCurrentUserId(undefined);
+      }
+    };
+
+    fetchCurrentUser();
+  }, []);
 
   if (isLoading) return <WineDetailSkeleton />;
 
@@ -29,8 +48,6 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
       </div>
     );
   }
-
-  // app/wines/[id]/_components/wine-detail-content.tsx
 
   return (
     <main className="min-h-screen bg-white">
@@ -47,8 +64,6 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
       {/* 2. 맛/향 섹션 */}
       {wine.reviews.length > 0 && (
         <section className="bg-white pb-6 pt-12">
-          {" "}
-          {/* py-12 → pt-12 pb-6 */}
           <div
             className={cn(
               "mx-auto flex px-4",
@@ -84,6 +99,8 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
             avgRating={wine.avgRating}
             avgRatings={wine.avgRatings}
             isLoading={isLoading}
+            wineId={wineId}
+            currentUserId={currentUserId}
           />
         </div>
       </section>

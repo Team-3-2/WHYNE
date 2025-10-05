@@ -13,6 +13,8 @@ interface ReviewSectionProps {
     "5": number;
   };
   isLoading: boolean;
+  wineId: number;
+  currentUserId?: number;
 }
 
 export default function ReviewSection({
@@ -20,6 +22,8 @@ export default function ReviewSection({
   avgRating,
   avgRatings,
   isLoading,
+  wineId,
+  currentUserId, // ✅ 받기
 }: ReviewSectionProps) {
   if (isLoading) {
     return (
@@ -29,13 +33,9 @@ export default function ReviewSection({
     );
   }
 
-  // app/wines/[id]/_components/review-section.tsx
-
   return (
     <div className="grid gap-8 pc:grid-cols-[1fr_280px]">
-      {/* 왼쪽: 리뷰 목록 */}
       <div>
-        {/* 리뷰 목록 타이틀 */}
         <div className="mb-6 mt-12 flex items-center gap-4">
           <h2 className="text-heading-lg text-gray-900">리뷰 목록</h2>
           <span className="text-body-md text-gray-500">
@@ -43,7 +43,6 @@ export default function ReviewSection({
           </span>
         </div>
 
-        {/* 리뷰 목록 */}
         {reviews.length === 0 ? (
           <div className="flex-center rounded-lg bg-white p-12">
             <p className="text-body-lg text-gray-500">
@@ -57,15 +56,19 @@ export default function ReviewSection({
                 key={review.id}
                 review={review}
                 isFirst={index === 0}
+                currentUserId={currentUserId}
               />
             ))}
           </div>
         )}
       </div>
 
-      {/* 오른쪽: 평점 분포 */}
       <div className="pc:sticky pc:top-24 pc:h-fit">
-        <RatingDistribution average={avgRating} distribution={avgRatings} />
+        <RatingDistribution
+          average={avgRating}
+          distribution={avgRatings}
+          wineId={wineId}
+        />
       </div>
     </div>
   );
