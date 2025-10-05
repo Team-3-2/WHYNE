@@ -1,4 +1,4 @@
-import StarRating from "@/components/star-rating/star-rating";
+import Rating from "@/components/rating/rating";
 
 /**
  * 카드 정보 컴포넌트
@@ -28,7 +28,7 @@ const CardInfo = ({
     <div className="pb-[24px] pr-[26px]">
       {typeof avgRating === "number" && (
         <div className="mb-[12px] flex items-center gap-[14px]">
-          <StarRating rating={avgRating} />
+          <Rating rating={avgRating} />
           <span className="relative text-body-sm font-normal text-gray-500">
             {reviewCount}개의 후기
           </span>
