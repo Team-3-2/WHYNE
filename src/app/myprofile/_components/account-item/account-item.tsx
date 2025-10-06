@@ -1,8 +1,35 @@
-import React from "react";
-import Image from "next/image";
+import React, { ChangeEvent, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Profile } from "@/components";
+import { User } from "@/types/user-type";
+import usePostProfileImage from "@/hooks/api/use-post-profile-image";
 
-const AccountItem = () => {
+interface AccountItemProps {
+  user: User | undefined;
+}
+
+const AccountItem = ({ user }: AccountItemProps) => {
+  console.log("$ user", user);
+  const [image, setImage] = useState<string | undefined>(user?.image);
+  console.log("$ image", image);
+
+  const { mutate: postProfileImage } = usePostProfileImage();
+
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const tempUrl = URL.createObjectURL(file);
+      setImage(tempUrl);
+
+      await postProfileImage({ image: tempUrl });
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
+      setImage(user?.image);
+    }
+  };
+
   return (
     <section
       className={cn(
@@ -12,17 +39,9 @@ const AccountItem = () => {
       )}
     >
       <div className="flex-col-center gap-3 tablet:gap-4 pc:gap-5">
-        {/* TODO(지권): 프로필 이미지 변경 기능 추가 */}
-        <Image
-          src="/images/aroma/aroma-no-image.jpg"
-          alt="profile"
-          width={164}
-          height={164}
-          priority={true}
-          className="h-[80px] w-[80px] cursor-pointer rounded-full tablet:h-[100px] tablet:w-[100px] pc:h-[164px] pc:w-[164px]"
-        />
+        <Profile url={user?.image} handleChange={handleChange} />
         <h1 className="font-bold tracking-[-0.02em] pc:text-heading-lg">
-          주말에 와인
+          {user?.nickname}
         </h1>
       </div>
       <div
@@ -45,14 +64,20 @@ const AccountItem = () => {
         >
           <input
             type="text"
-            placeholder="주말에 와인"
+            placeholder="닉네임을 입력해 주세요."
             id="nickname"
+            onChange={(e) => {
+              postProfileImage({ nickname: e.target.value });
+            }}
             className={cn(
-              "rounded-1 w-2/3 flex-1 border border-gray-300 px-4 py-3",
+              "w-2/3 flex-1 rounded-[4px] border border-gray-300 px-4 py-3",
               "tablet:flex-1 pc:w-full"
             )}
           />
           <button
+            onClick={() => {
+              postProfileImage({ nickname: user?.nickname });
+            }}
             className={cn(
               "h-[42px] w-1/3 rounded-[4px] bg-black text-body-sm tracking-[-0.03em] text-white",
               "tablet:w-1/4 pc:mx-auto pc:w-[98px]"
