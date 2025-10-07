@@ -1,3 +1,4 @@
+import React, { forwardRef } from "react";
 import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import Icon, { iconVariants } from "@/components/icon/icon";
@@ -22,6 +23,7 @@ import {
 
 interface CarouselNavButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
+  id?: string;
   slide: "prev" | "next";
   className?: string;
   customIcon?: UnifiedIconName;
@@ -31,40 +33,51 @@ interface CarouselNavButtonProps
   ariaLabel?: string;
 }
 
-const CarouselNavButton = ({
-  customIcon,
-  iconColor = "default",
-  iconSize = "md",
-  iconClassName,
-  slide,
-  className,
-  ariaLabel,
-  type = "button",
-  ...props
-}: CarouselNavButtonProps) => {
-  const defaultIcon = slide === "prev" ? "ArrowLeftIcon" : "ArrowRightIcon";
-  const defaultLabel = slide === "prev" ? "이전으로 이동" : "다음으로 이동";
+const CarouselNavButton = forwardRef<HTMLButtonElement, CarouselNavButtonProps>(
+  (
+    {
+      id,
+      customIcon,
+      iconColor = "default",
+      iconSize = "md",
+      iconClassName,
+      slide,
+      className,
+      ariaLabel,
+      type = "button",
+      ...props
+    },
+    ref
+  ) => {
+    const defaultIcon = slide === "prev" ? "ArrowLeftIcon" : "ArrowRightIcon";
+    const defaultLabel = slide === "prev" ? "이전으로 이동" : "다음으로 이동";
 
-  return (
-    <button
-      type={type}
-      aria-label={ariaLabel ?? defaultLabel}
-      className={cn(
-        COMMON_BUTTON_STYLES,
-        BUTTON_SHAPE_VARIANTS.round,
-        BUTTON_STATE_VARIANTS.secondary,
-        className
-      )}
-      {...props}
-    >
-      <Icon
-        icon={customIcon ?? defaultIcon}
-        className={iconClassName}
-        color={iconColor ?? "default"}
-        size={iconSize ?? "md"}
-      />
-    </button>
-  );
-};
+    return (
+      <button
+        ref={ref}
+        id={id}
+        type={type}
+        aria-label={ariaLabel ?? defaultLabel}
+        className={cn(
+          COMMON_BUTTON_STYLES,
+          BUTTON_SHAPE_VARIANTS.round,
+          BUTTON_STATE_VARIANTS.secondary,
+          slide === "prev" ? "swiper-button-prev" : "swiper-button-next",
+          className
+        )}
+        {...props}
+      >
+        <Icon
+          icon={customIcon ?? defaultIcon}
+          className={iconClassName}
+          color={iconColor ?? "default"}
+          size={iconSize ?? "md"}
+        />
+      </button>
+    );
+  }
+);
+
+CarouselNavButton.displayName = "CarouselNavButton";
 
 export default CarouselNavButton;
