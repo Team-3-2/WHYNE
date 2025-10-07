@@ -1,5 +1,4 @@
 "use client";
-
 import { ReactNode, useId, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar } from "swiper/modules";
@@ -28,6 +27,11 @@ const Carousel = ({
   navigationEnabled = true,
   draggableScrollbar = true,
 }: CarouselProps) => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 0);
+  }, []);
+
   const id = useId();
   const prevId = `carousel-prev-${id}`;
   const nextId = `carousel-next-${id}`;
@@ -38,7 +42,9 @@ const Carousel = ({
   const showScrollbar = draggableScrollbar && currentBreakpoint === "mobile";
 
   return (
-    <div className="relative w-full">
+    <div
+      className={`relative w-full overflow-hidden ${loading ? "opacity-0" : ""}`}
+    >
       <Swiper
         modules={[Navigation, Scrollbar]}
         autoHeight={true}
@@ -59,9 +65,10 @@ const Carousel = ({
               }
             : false
         }
-        observer
-        observeParents
-        className={`tablet:max-w-[calc(100%_-_57px_*_2)] pc:max-w-[calc(100%_-_57px_*_2)] ${className}`}
+        observer={true}
+        observeParents={true}
+        resizeObserver={true}
+        className={`w-full overflow-hidden tablet:max-w-[calc(100%_-_57px_*_2)] pc:max-w-[calc(100%_-_57px_*_2)] ${className}`}
       >
         {children.map((child, idx) => (
           <SwiperSlide key={idx}>{child}</SwiperSlide>

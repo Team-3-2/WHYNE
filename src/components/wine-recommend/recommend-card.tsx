@@ -15,7 +15,7 @@ const RecommendCard = ({ wine }: RecommendCardProps) => {
       <CardImg
         src={wine.image}
         alt={wine.name}
-        className="aspect-[62px/228px] bg-[transparent] p-[0px]"
+        className="!aspect-[62px/228px] !bg-[transparent] !p-[0px]"
       />
       <CardInfo name={wine.name} region={wine.region} />
     </div>

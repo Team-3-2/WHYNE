@@ -150,6 +150,16 @@ const Page = () => {
 
   return (
     <>
+      <section className="flex w-full flex-wrap gap-y-[50px] px-[16px] pc:px-[32px]">
+        <div className="m-auto w-full max-w-[1140px]">
+          <h3 className="mb-[10px] text-body-lg">이번 달 추천 와인</h3>
+          <RecommendWineSlider wines={DATA} />
+        </div>
+        <div className="m-auto w-full max-w-[1140px]">
+          <h3 className="mb-[10px] text-body-lg">슬라이드 개별 동작 테스트</h3>
+          <RecommendWineSlider wines={DATA} />
+        </div>
+      </section>
       {/* 스타일 격리를 위해 완전히 별도의 영역에 WineTasteTest 컴포넌트 배치 */}
       <div className="w-full border-b border-gray-200 bg-gray-50">
         <WineTasteTest />
@@ -370,14 +380,7 @@ const Page = () => {
           />
         </div>
       </section>
-      <section>
-        <div className="m-auto">
-          <h3>이번 달 추천 와인</h3>
-          <RecommendWineSlider wines={DATA} />
-          <h3>이번 달 추천 와인2</h3>
-          <RecommendWineSlider wines={DATA} />
-        </div>
-      </section>
+
       <br />
     </>
   );
