@@ -1,10 +1,8 @@
 "use client";
 
 import { Button, TextInput } from "@/components";
-import instance from "@/lib/axios";
 import { ChangeEvent, useState } from "react";
 import Logo from "@/../public/logo.svg";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import FormWrapper from "../_components/form-wrapper";
@@ -23,7 +21,7 @@ const Page = () => {
     password: "",
   });
   const router = useRouter();
-  const { user, setUser, clearUser } = useUserStore((state) => state);
+  const { user, setUser } = useUserStore((state) => state);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => ({ ...prevData, [e.target.id]: e.target.value }));
@@ -35,31 +33,18 @@ const Page = () => {
     if (!response) throw new Error("로그인에 실패했습니다.");
 
     setUser(response.user);
-    console.log(user);
 
-    // sessionStorage.setItem("accessToken", response?.accessToken);
-    // localStorage.setItem("refreshToken", response?.refreshToken);
     document.cookie = `accessToken=${response?.accessToken}`;
     document.cookie = `refreshToken=${response?.refreshToken}`;
 
-    // router.push("/");
-  };
-
-  // /users/me API 테스트를 위한 함수
-  const getMe = async () => {
-    try {
-      const response = await instance.get("/users/me");
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+    router.push("/");
   };
 
   return (
     <FormWrapper>
-      {/* // TODO: 로고 링크 추가 */}
-
-      <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100" />
+      <Link href={"/"}>
+        <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100" />
+      </Link>
       <form action={onSubmit} className="flex-col-center mb-4 gap-[60px]">
         <div className="flex flex-col gap-8">
           <TextInput
@@ -97,16 +82,6 @@ const Page = () => {
           url="/signup"
         />
       </div>
-
-      {user && (
-        <div>
-          <p>{user?.id}</p>
-          <p>{user?.email}</p>
-          <p>{user?.nickname}</p>
-          <p>{user?.createdAt}</p>
-          <p>{user?.updatedAt}</p>
-        </div>
-      )}
     </FormWrapper>
   );
 };
