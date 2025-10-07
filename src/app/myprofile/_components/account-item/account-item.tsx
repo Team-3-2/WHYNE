@@ -11,6 +11,7 @@ interface AccountItemProps {
 
 const AccountItem = ({ user }: AccountItemProps) => {
   const [image, setImage] = useState<string | undefined>(user?.image);
+  const [nickname, setNickname] = useState<string | undefined>(user?.nickname);
 
   const { mutateAsync: uploadImage } = usePostImage();
   const { mutateAsync: updateProfile } = usePatchProfile();
@@ -19,6 +20,7 @@ const AccountItem = ({ user }: AccountItemProps) => {
     if (!image) return;
   }, [image]);
 
+  // 이미지 변경
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -37,8 +39,21 @@ const AccountItem = ({ user }: AccountItemProps) => {
       await updateProfile({ imageUrl: url });
       setImage(`${url}?v=${Date.now()}`);
     } catch (err) {
-      console.error("이미지 업로드/프로필 갱신 실패:", err);
+      console.error("프로필 갱신 실패:", err);
       setImage(user?.image);
+    }
+  };
+
+  // 닉네임 변경
+  const handleNicknameUpdate = async () => {
+    const trimmed = nickname?.trim();
+    if (!trimmed) return;
+
+    try {
+      await updateProfile({ nickname: trimmed });
+      setNickname("");
+    } catch (err) {
+      console.error("닉네임 변경 실패:", err);
     }
   };
 
@@ -53,7 +68,7 @@ const AccountItem = ({ user }: AccountItemProps) => {
       <div className="flex-col-center gap-3 tablet:gap-4 pc:gap-5">
         <Profile url={user?.image || image} handleChange={handleChange} />
         <h1 className="font-bold tracking-[-0.02em] pc:text-heading-lg">
-          {user?.nickname}
+          {user?.nickname || "닉네임 로딩중..."}
         </h1>
       </div>
       <div
@@ -78,18 +93,19 @@ const AccountItem = ({ user }: AccountItemProps) => {
             type="text"
             placeholder="닉네임을 입력해 주세요."
             id="nickname"
+            value={nickname || ""}
             onChange={(e) => {
-              updateProfile({ nickname: e.target.value });
+              setNickname(e.target.value);
             }}
+            autoFocus
+            maxLength={10}
             className={cn(
-              "w-2/3 flex-1 rounded-[4px] border border-gray-300 px-4 py-3",
+              "w-2/3 flex-1 rounded-[4px] border border-gray-300 px-4 py-3 focus:outline-none",
               "tablet:flex-1 pc:w-full"
             )}
           />
           <button
-            onClick={() => {
-              updateProfile({ nickname: user?.nickname });
-            }}
+            onClick={handleNicknameUpdate}
             className={cn(
               "h-[42px] w-1/3 rounded-[4px] bg-black text-body-sm tracking-[-0.03em] text-white",
               "tablet:w-1/4 pc:mx-auto pc:w-[98px]"
