@@ -43,7 +43,7 @@ const Carousel = ({
 
   return (
     <div
-      className={`relative w-full overflow-hidden ${loading ? "opacity-0" : ""}`}
+      className={`relative w-full overflow-hidden mobile:pb-[34px] ${loading ? "opacity-100" : ""}`}
     >
       <Swiper
         modules={[Navigation, Scrollbar]}
@@ -92,9 +92,7 @@ const Carousel = ({
         </>
       )}
 
-      {showScrollbar && (
-        <div id={scrollbarId} className="swiper-scrollbar mt-2" />
-      )}
+      {showScrollbar && <div id={scrollbarId} className="swiper-scrollbar" />}
     </div>
   );
 };

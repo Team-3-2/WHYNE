@@ -15,9 +15,15 @@ const RecommendCard = ({ wine }: RecommendCardProps) => {
       <CardImg
         src={wine.image}
         alt={wine.name}
-        className="!aspect-[62px/228px] !bg-[transparent] !p-[0px]"
+        className="!aspect-[1/1.13] !bg-[transparent] !p-[0px]"
       />
-      <CardInfo name={wine.name} region={wine.region} />
+      <CardInfo
+        name={wine.name}
+        region={wine.region}
+        className="mt-[12px] !p-0 text-center tablet:mt-[16px] pc:mt-[16px]"
+        nameClassName="mobile:text-body-sm tablet:text-body-md pc:text-body-md text-default"
+        regionClassName="text-caption tablet:text-body-sm pc:text-body-sm text-secondary tablet:mt-[8px] pc:mt-[8px]"
+      />
     </div>
   );
 };
