@@ -1,4 +1,3 @@
-// app/wines/[id]/_components/wine-review/wine-review-section.tsx
 import RatingDistribution from "@/components/rating/rating-distribution";
 import WineReviewItem from "./wine-review-item";
 import Button from "@/components/button/basic-button";
@@ -21,14 +20,14 @@ interface ReviewSectionProps {
   currentUserId?: number;
 }
 
-export default function ReviewSection({
+const ReviewSection = ({
   reviews,
   avgRating,
   avgRatings,
   isLoading,
   wineId,
   currentUserId,
-}: ReviewSectionProps) {
+}: ReviewSectionProps) => {
   const router = useRouter();
 
   if (isLoading) {
@@ -39,90 +38,81 @@ export default function ReviewSection({
     );
   }
 
+  // 리뷰가 없을 때
+  if (reviews.length === 0) {
+    return (
+      <div className="flex-col-center py-16 tablet:py-20">
+        <div className="flex-center mb-4 h-20 w-20 rounded-full bg-gray-200 tablet:mb-6 tablet:h-24 tablet:w-24">
+          <span className="text-title-page-sm text-gray-500 tablet:text-title-page-md">
+            !
+          </span>
+        </div>
+        <p className="mb-4 text-body-lg text-gray-500 tablet:mb-6">
+          작성된 리뷰가 없어요
+        </p>
+        <Button
+          label="리뷰 남기기"
+          onClick={() => router.push(`/wines/${wineId}/write`)}
+          className="h-[42px] w-[240px] tablet:h-[50px] tablet:w-[283px]"
+        />
+      </div>
+    );
+  }
+
+  // 리뷰가 있을 때
   return (
-    <div className="flex flex-col gap-8">
-      {/* 리뷰가 없을 때 */}
-      {reviews.length === 0 ? (
-        <div className="flex-col-center py-16 tablet:py-20">
-          <div className="flex-center mb-4 h-20 w-20 rounded-full bg-gray-200 tablet:mb-6 tablet:h-24 tablet:w-24">
-            <span className="text-4xl font-bold text-gray-500 tablet:text-5xl">
-              !
+    <div>
+      {/* 모바일/태블릿: 평점 분포 */}
+      <div
+        className={cn(
+          "mb-12",
+          "tablet:sticky tablet:top-[70px] tablet:z-10 tablet:mb-8 tablet:bg-white tablet:pb-4 tablet:pt-4",
+          "pc:hidden"
+        )}
+      >
+        <RatingDistribution
+          average={avgRating}
+          distribution={avgRatings}
+          wineId={wineId}
+        />
+      </div>
+
+      {/* PC: 그리드 레이아웃 (타이틀부터 시작) */}
+      <div className="flex flex-col pc:grid pc:grid-cols-[1fr_280px] pc:gap-x-8">
+        {/* 왼쪽 영역: 리뷰 목록 타이틀 + 리뷰들 */}
+        <div>
+          {/* 리뷰 목록 타이틀 */}
+          <div className="mb-4 flex items-center gap-3 tablet:mb-6 pc:mb-6">
+            <h2 className="text-heading-lg text-gray-900">리뷰 목록</h2>
+            <span className="text-body-md text-gray-500">
+              {reviews.length.toLocaleString()}개
             </span>
           </div>
-          <p className="mb-4 text-body-sm text-gray-500 tablet:mb-6 tablet:text-body-lg">
-            작성된 리뷰가 없어요
-          </p>
-          <Button
-            label="리뷰 남기기"
-            onClick={() => router.push(`/wines/${wineId}/write`)}
-            className="h-[42px] w-[240px] tablet:h-[50px] tablet:w-[283px]"
+
+          {/* 리뷰 목록 */}
+          <div className="space-y-3 tablet:space-y-4">
+            {reviews.map((review, index) => (
+              <WineReviewItem
+                key={review.id}
+                review={review}
+                isFirst={index === 0}
+                currentUserId={currentUserId}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* 오른쪽 영역: PC 평점 분포 (sticky) */}
+        <div className="hidden pc:sticky pc:top-[70px] pc:block pc:h-fit">
+          <RatingDistribution
+            average={avgRating}
+            distribution={avgRatings}
+            wineId={wineId}
           />
         </div>
-      ) : (
-        <>
-          {/* 모바일/태블릿: 평점 분포 (상단) */}
-          <div
-            className={cn(
-              "z-10 block bg-white pt-8",
-              "tablet:sticky tablet:top-[70px] tablet:block tablet:h-fit",
-              "pc:hidden"
-            )}
-          >
-            <RatingDistribution
-              average={avgRating}
-              distribution={avgRatings}
-              wineId={wineId}
-            />
-          </div>
-
-          {/* PC: 그리드 레이아웃 (리뷰 목록 + 평점 분포) */}
-          <div
-            className={cn(
-              "flex flex-col gap-8",
-              "pc:grid pc:grid-cols-[1fr_280px]"
-            )}
-          >
-            {/* 리뷰 목록 */}
-            <div className="w-full">
-              {/* 리뷰 목록 타이틀 */}
-              <div className="mb-4 mt-8 flex items-center gap-3 tablet:mb-6 tablet:mt-12 pc:mt-12">
-                <h2 className="text-heading-lg text-gray-900 tablet:text-heading-lg pc:text-heading-lg">
-                  리뷰 목록
-                </h2>
-                <span className="text-body-md text-gray-500 tablet:text-body-md pc:text-body-md">
-                  {reviews.length.toLocaleString()}개
-                </span>
-              </div>
-
-              {/* 리뷰 아이템들 */}
-              <div className="space-y-3 tablet:space-y-4">
-                {reviews.map((review, index) => (
-                  <WineReviewItem
-                    key={review.id}
-                    review={review}
-                    isFirst={index === 0}
-                    currentUserId={currentUserId}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* PC: 평점 분포 (오른쪽 사이드) */}
-            <div
-              className={cn(
-                "hidden",
-                "pc:sticky pc:top-[70px] pc:block pc:h-fit pc:pt-8"
-              )}
-            >
-              <RatingDistribution
-                average={avgRating}
-                distribution={avgRatings}
-                wineId={wineId}
-              />
-            </div>
-          </div>
-        </>
-      )}
+      </div>
     </div>
   );
-}
+};
+
+export default ReviewSection;

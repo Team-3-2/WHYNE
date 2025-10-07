@@ -6,7 +6,7 @@ import WineHeader from "../wine-header/wine-header";
 import WineTasteSection from "../wine-taste/wine-taste-section";
 import FlavorSection from "../wine-flavor/wine-flavor-section";
 import ReviewSection from "../wine-review/wine-review-section";
-import WineDetailSkeleton from "./wine-detail-skeleton";
+import Loader from "@/components/loader/loader";
 import instance from "@/lib/axios";
 import { useEffect, useState } from "react";
 
@@ -14,7 +14,7 @@ interface WineDetailContentProps {
   wineId: number;
 }
 
-export default function WineDetailContent({ wineId }: WineDetailContentProps) {
+const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   const [currentUserId, setCurrentUserId] = useState<number | undefined>();
 
   const { data: wine, isLoading } = useQuery({
@@ -27,8 +27,7 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
       try {
         const response = await instance.get("/users/me");
         setCurrentUserId(response.data.id);
-      } catch (error) {
-        console.error("사용자 정보 가져오기 실패:", error);
+      } catch {
         setCurrentUserId(undefined);
       }
     };
@@ -36,7 +35,7 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
     fetchCurrentUser();
   }, []);
 
-  if (isLoading) return <WineDetailSkeleton />;
+  if (isLoading) return <Loader />;
 
   if (!wine) {
     return (
@@ -49,33 +48,41 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
   return (
     <main className="min-h-screen bg-white">
       {/* 헤더 */}
-      <section className="rounded-b-[88px] bg-[rgba(217,217,217,0.2)] pt-[60px] tablet:pt-[70px] pc:pt-[70px]">
+      <section className="rounded-b-none bg-[rgba(217,217,217,0.2)] pt-[60px] tablet:rounded-b-none tablet:pt-[70px] pc:rounded-b-[88px] pc:pt-[70px]">
         <WineHeader wine={wine} />
       </section>
 
       {/* 맛/향 섹션 */}
-      <section className="bg-white px-4 pt-4 tablet:px-8 tablet:pb-4 tablet:pt-12 pc:px-16 pc:pb-6 pc:pt-12">
-        <div className="mx-auto flex flex-col gap-8 tablet:gap-12 pc:max-w-7xl pc:flex-row pc:gap-44">
-          <div className="pc:flex-1">
-            <WineTasteSection
-              reviews={wine.reviews}
-              reviewCount={wine.reviewCount}
-            />
-          </div>
+      <section className="bg-white pb-0 pt-6 tablet:pb-0 tablet:pt-16 pc:pb-12 pc:pt-16">
+        <div className="container">
+          <div className="flex flex-col gap-8 tablet:gap-20 pc:flex-row pc:gap-32">
+            <div className="pc:flex-1">
+              <WineTasteSection
+                reviews={wine.reviews}
+                reviewCount={wine.reviewCount}
+              />
+            </div>
 
-          <div className="pc:flex-1">
-            <FlavorSection
-              reviews={wine.reviews}
-              reviewCount={wine.reviewCount}
-            />
+            <div className="pc:flex-1">
+              <FlavorSection
+                reviews={wine.reviews}
+                reviewCount={wine.reviewCount}
+              />
+            </div>
           </div>
         </div>
       </section>
 
+      {/* 구분선 */}
+      <div className="bg-white">
+        <div className="container">
+          <div className="w-full border-t border-gray-300" />
+        </div>
+      </div>
+
       {/* 리뷰 섹션 */}
-      <section className="bg-white px-4 pb-12 pt-6 tablet:px-8 tablet:pt-12 pc:px-16 pc:pt-12">
-        <div className="mx-auto pc:max-w-7xl">
-          <div className="mb-6 w-full border-t border-gray-300" />
+      <section className="bg-white pb-12 pt-14 tablet:pt-14 pc:pt-14">
+        <div className="container">
           <ReviewSection
             reviews={wine.reviews}
             avgRating={wine.avgRating}
@@ -88,4 +95,6 @@ export default function WineDetailContent({ wineId }: WineDetailContentProps) {
       </section>
     </main>
   );
-}
+};
+
+export default WineDetailContent;

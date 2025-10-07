@@ -11,7 +11,7 @@ import { TasteItemProps } from "../_types";
  */
 const ReviewTasteItem = ({ type, data, taste, onChange }: TasteItemProps) => {
   return (
-    <div className="flex w-[343px] flex-col items-start gap-3">
+    <div className="flex w-full flex-col items-start gap-3">
       <div className="flex w-full items-center gap-3">
         {/* 왼쪽: 맛 유형 라벨 (모바일 스타일 고정) */}
         <div

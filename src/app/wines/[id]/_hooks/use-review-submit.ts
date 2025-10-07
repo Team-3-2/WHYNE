@@ -24,7 +24,7 @@ import type { ReviewFormData } from "../_types";
  * });
  */
 
-export function useReviewSubmit() {
+export const useReviewSubmit = () => {
   const queryClient = useQueryClient();
 
   const { mutate, mutateAsync, isPending, isSuccess, isError, error } =
@@ -54,4 +54,4 @@ export function useReviewSubmit() {
     isError,
     error,
   };
-}
+};

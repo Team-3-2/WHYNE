@@ -1,4 +1,3 @@
-// app/wines/[id]/_components/wine-flavor/wine-flavor-section.tsx
 import Flavor from "@/components/flavor/flavor";
 import type { AromaKey } from "@/types/AromaType";
 import type { Review } from "@/types/wine";
@@ -9,7 +8,7 @@ interface FlavorSectionProps {
   reviewCount: number;
 }
 
-function getTopAromas(reviews: Review[]): AromaKey[] {
+const getTopAromas = (reviews: Review[]): AromaKey[] => {
   const aromaCount = new Map<AromaKey, number>();
 
   reviews.forEach((review) => {
@@ -24,12 +23,9 @@ function getTopAromas(reviews: Review[]): AromaKey[] {
     .map(([aroma]) => aroma);
 
   return sortedAromas;
-}
+};
 
-export default function FlavorSection({
-  reviews,
-  reviewCount,
-}: FlavorSectionProps) {
+const FlavorSection = ({ reviews, reviewCount }: FlavorSectionProps) => {
   const topAromas = getTopAromas(reviews);
 
   const displayAromas: AromaKey[] = [...topAromas];
@@ -41,16 +37,16 @@ export default function FlavorSection({
     <div
       className={cn(
         "w-full",
-        "tablet:grid tablet:max-w-[680px] tablet:grid-cols-2 tablet:gap-6",
-        "pc:flex pc:max-w-none pc:flex-col pc:gap-6"
+        "tablet:grid tablet:grid-cols-2",
+        "pc:flex pc:flex-col pc:gap-6"
       )}
     >
       {/* 제목 + 참여 인원 */}
       <div
         className={cn(
-          "mb-4 ml-4 mr-4 flex flex-col items-start gap-1",
-          "tablet:mb-0 tablet:ml-0 tablet:flex-col tablet:gap-3",
-          "pc:flex-row pc:items-center pc:gap-48"
+          "mb-4 flex flex-col items-start gap-1",
+          "tablet:mb-0 tablet:flex-col tablet:gap-3",
+          "pc:flex-row pc:items-center pc:justify-between pc:pr-8"
         )}
       >
         <h2 className="text-heading-lg text-gray-900">어떤 향이 있나요?</h2>
@@ -59,12 +55,14 @@ export default function FlavorSection({
         </span>
       </div>
 
-      {/* Flavor 컴포넌트 래퍼 */}
-      <div className="flex w-full justify-center tablet:justify-start pc:justify-start">
+      {/* Flavor 컴포넌트 */}
+      <div className="flex w-full justify-center tablet:justify-start">
         <div className="[&>div>div:first-child]:hidden">
           <Flavor count={reviewCount} items={displayAromas} />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default FlavorSection;

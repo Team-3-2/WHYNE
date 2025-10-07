@@ -21,7 +21,7 @@ interface ReviewFormClientProps {
  * - 리뷰 제출 처리
  * - 로딩/에러 상태 관리
  */
-export default function ReviewFormClient({ wineId }: ReviewFormClientProps) {
+const ReviewFormClient = ({ wineId }: ReviewFormClientProps) => {
   const router = useRouter();
   const { mutate, isPending } = useReviewSubmit();
 
@@ -42,7 +42,7 @@ export default function ReviewFormClient({ wineId }: ReviewFormClientProps) {
         alert("리뷰가 등록되었습니다!");
         router.back(); // 모달 닫기
       },
-      onError: (error) => {
+      onError: () => {
         alert("리뷰 등록에 실패했습니다. 다시 시도해주세요.");
       },
     });
@@ -87,4 +87,6 @@ export default function ReviewFormClient({ wineId }: ReviewFormClientProps) {
       isSubmitting={isPending}
     />
   );
-}
+};
+
+export default ReviewFormClient;

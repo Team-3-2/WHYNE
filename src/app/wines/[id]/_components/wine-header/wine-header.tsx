@@ -7,70 +7,74 @@ interface WineHeaderProps {
   wine: WineDetail;
 }
 
-export default function WineHeader({ wine }: WineHeaderProps) {
-  const containerClass = cn(
-    "flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm",
-    "tablet:flex-row tablet:items-center tablet:gap-8 tablet:p-8",
-    "pc:flex-row pc:items-start pc:gap-14 pc:p-12"
-  );
+const reviewLabel = (count: number) =>
+  count > 0 ? `${count.toLocaleString()}개의 후기` : "아직 후기가 없어요";
 
-  const imageWrapperClass = cn(
-    "flex-center h-[260px] w-full rounded-2xl bg-white",
-    "tablet:h-[280px] tablet:w-[320px] tablet:flex-shrink-0",
-    "pc:h-[360px] pc:w-[300px] pc:rounded-lg"
-  );
-
-  const infoWrapperClass = cn(
-    "flex flex-1 flex-col gap-6 px-6 pb-6 pt-6",
-    "tablet:h-full tablet:justify-between tablet:gap-8 tablet:px-0 tablet:pt-0",
-    "pc:flex-col pc:items-start pc:justify-start pc:gap-6 pc:px-12 pc:pb-4 pc:pt-6"
-  );
-
-  const titleClass = cn("!text-title-page-sm !leading-tight text-gray-900");
-
-  const regionClass = cn("!text-body-lg text-gray-600");
-
-  const priceClass = cn(
-    "ml-auto mt-auto !text-heading-lg text-gray-900",
-    "pc:self-start pc:mt-6"
-  );
-
+const WineHeader = ({ wine }: WineHeaderProps) => {
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-8 tablet:px-8 pc:px-16">
-      <div className={containerClass}>
-        <div className={imageWrapperClass}>
-          {wine.image ? (
-            <Image
-              src={wine.image}
-              alt={wine.name}
-              width={220}
-              height={320}
-              unoptimized
-              className="h-full w-auto object-contain"
-            />
-          ) : (
-            <div className="flex-col-center gap-2 text-gray-400">
-              <span className="text-xs">이미지 없음</span>
-            </div>
+    <div className="container py-8 tablet:py-10 pc:py-12">
+      <div
+        className={cn(
+          "flex w-full flex-col gap-8 overflow-hidden rounded-2xl bg-white px-6 py-8 shadow-sm",
+          "tablet:flex-row tablet:items-center tablet:gap-10 tablet:px-8 tablet:py-10",
+          "pc:flex-row pc:items-center pc:gap-16 pc:px-12 pc:py-12"
+        )}
+      >
+        <div
+          className={cn(
+            "relative flex w-full justify-center",
+            "tablet:w-[280px] tablet:flex-shrink-0",
+            "pc:w-[320px]"
           )}
+        >
+          <div
+            className={cn(
+              "flex-center h-[260px] w-full max-w-[220px] rounded-2xl bg-gray-100",
+              "tablet:h-[300px] tablet:max-w-none tablet:rounded-3xl",
+              "pc:h-[320px] pc:w-[320px] pc:max-w-none"
+            )}
+          >
+            {wine.image ? (
+              <Image
+                src={wine.image}
+                alt={wine.name}
+                width={240}
+                height={320}
+                unoptimized
+                className="h-full w-auto object-contain"
+              />
+            ) : (
+              <div className="flex-col-center gap-2 text-gray-400">
+                <span className="text-xs">이미지 없음</span>
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className={infoWrapperClass}>
-          <div className="flex flex-col gap-3 pc:w-full pc:flex-1 pc:gap-4">
-            <div className="flex flex-wrap items-center gap-2 text-gray-500">
+        <div className="flex flex-1 flex-col gap-6">
+          <div className="flex flex-col gap-3 pc:max-w-[520px]">
+            <div className="flex items-center gap-2 text-gray-500">
               <Rating rating={wine.avgRating} maxRating={5} size="sm" />
-              <span className="text-body-sm text-gray-500">
-                {wine.reviewCount}개의 후기
+              <span className="text-body-sm tablet:text-body-md">
+                {reviewLabel(wine.reviewCount)}
               </span>
             </div>
 
-            <h1 className={titleClass}>{wine.name}</h1>
-            <p className={regionClass}>{wine.region}</p>
+            <h1 className="text-title-page-md text-gray-900 tablet:text-title-page-md pc:text-title-page-md">
+              {wine.name}
+            </h1>
+            <p className="text-body-sm text-gray-600 tablet:text-body-md">
+              {wine.region}
+            </p>
           </div>
 
-          <div className={priceClass}>{wine.price.toLocaleString()}원</div>
+          <div className="text-right text-heading-lg text-gray-900">
+            {wine.price.toLocaleString()}원
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default WineHeader;

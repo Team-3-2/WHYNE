@@ -1,4 +1,3 @@
-// app/wines/[id]/_components/reviews/wine-review-rating.tsx
 import Image from "next/image";
 
 interface WineReviewRatingProps {
@@ -9,10 +8,7 @@ interface WineReviewRatingProps {
   };
 }
 
-export default function WineReviewRating({
-  createdAt,
-  user,
-}: WineReviewRatingProps) {
+const WineReviewRating = ({ createdAt, user }: WineReviewRatingProps) => {
   const getTimeAgo = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -55,4 +51,6 @@ export default function WineReviewRating({
       </div>
     </div>
   );
-}
+};
+
+export default WineReviewRating;

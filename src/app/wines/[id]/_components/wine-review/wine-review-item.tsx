@@ -23,7 +23,7 @@ interface WineReviewItemProps {
   currentUserId?: number;
 }
 
-function getAromaIconName(aroma: AromaKey): string {
+const getAromaIconName = (aroma: AromaKey): string => {
   const iconMap: Record<AromaKey, string> = {
     CHERRY: "CherryIcon",
     BERRY: "BerryIcon",
@@ -47,17 +47,17 @@ function getAromaIconName(aroma: AromaKey): string {
     EMPTY: "WineIcon",
   };
   return iconMap[aroma] || "WineIcon";
-}
+};
 
-export default function WineReviewItem({
+const WineReviewItem = ({
   review,
   isFirst = false,
   currentUserId,
-}: WineReviewItemProps) {
+}: WineReviewItemProps) => {
   const initialIsLiked =
     typeof review.isLiked === "boolean" ? review.isLiked : false;
   const [isLike, setIsLike] = useState(initialIsLiked);
-  const [isTasteOpen, setIsTasteOpen] = useState(false); // 맛 평가 토글 상태
+  const [isTasteOpen, setIsTasteOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const {
     isOn: isMenuOpen,
@@ -106,7 +106,6 @@ export default function WineReviewItem({
     }
   };
 
-  // 옵션 메뉴 컴포넌트
   const OptionMenu = () => {
     if (!isMyReview) return null;
 
@@ -133,29 +132,28 @@ export default function WineReviewItem({
   return (
     <div
       className={cn(
-        "flex w-full flex-col items-center gap-6 py-8",
-        "tablet:items-start tablet:gap-8 tablet:px-4 tablet:py-10",
+        "flex w-full flex-col items-center gap-6 px-4 py-8",
+        "tablet:items-start tablet:gap-8 tablet:px-6 tablet:py-10",
         "pc:items-start pc:gap-6 pc:px-4 pc:py-8",
         !isFirst && "border-t border-gray-300"
       )}
     >
-      {/* 모든 요소를 감싸는 컨테이너 */}
       <div
         className={cn(
-          "flex w-[343px] flex-col gap-6",
-          "tablet:w-full tablet:gap-8",
-          "pc:w-full pc:gap-6"
+          "flex w-full max-w-[420px] flex-col gap-6",
+          "tablet:max-w-none tablet:gap-8",
+          "pc:max-w-[720px] pc:gap-6"
         )}
       >
-        {/* 1. 모바일/태블릿: 별점 + 옵션 메뉴 (상단) */}
+        {/* 1. 별점 */}
         <div className="flex items-center justify-between">
           <Rating rating={review.rating} size="sm" />
-          <OptionMenu />
         </div>
 
-        {/* 2. 모바일/태블릿: 프로필 + 시간 */}
-        <div className="block">
+        {/* 2. 프로필 + 시간 */}
+        <div className="flex items-center justify-between">
           <WineReviewRating createdAt={review.createdAt} user={review.user} />
+          <OptionMenu />
         </div>
 
         {/* 3. 향 정보 */}
@@ -191,9 +189,8 @@ export default function WineReviewItem({
           {review.content}
         </p>
 
-        {/* 5. 맛 평가 토글 버튼 + 내용 */}
+        {/* 5. 맛 평가 토글 */}
         <div className="flex flex-col gap-4">
-          {/* 맛 평가 내용 (토글) - 부드러운 슬라이드 애니메이션 */}
           <div
             className={cn(
               "grid transition-all duration-300 ease-in-out",
@@ -204,13 +201,23 @@ export default function WineReviewItem({
           >
             <div className="overflow-hidden">
               <div className="pb-2">
-                <WineTaste type="review" tastes={tastes} />
+                <div className="mx-auto w-full max-w-none">
+                  <WineTaste type="review" tastes={tastes} />
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* 토글 버튼 - 중앙 배치 */}
-          <div className="flex w-full justify-center">
+        {/* 6. 토글 & 좋아요 */}
+        <div className="flex w-full items-center gap-4">
+          <LikeButton
+            count={likeCount}
+            isLike={isLike}
+            onClick={() => setIsLike(!isLike)}
+          />
+
+          <div className="flex flex-1 justify-center">
             <button
               onClick={() => setIsTasteOpen(!isTasteOpen)}
               className="rounded-full p-2 transition-colors hover:bg-gray-100 active:bg-gray-200"
@@ -218,7 +225,7 @@ export default function WineReviewItem({
               aria-label={isTasteOpen ? "맛 평가 숨기기" : "맛 평가 보기"}
             >
               <Icon
-                icon="ArrowDownIcon"
+                icon="ArrowUpIcon"
                 size="md"
                 className={cn(
                   "text-gray-600 transition-transform duration-300 ease-in-out",
@@ -228,14 +235,9 @@ export default function WineReviewItem({
             </button>
           </div>
         </div>
-
-        {/* 6. 좋아요 버튼 */}
-        <LikeButton
-          count={likeCount}
-          isLike={isLike}
-          onClick={() => setIsLike(!isLike)}
-        />
       </div>
     </div>
   );
-}
+};
+
+export default WineReviewItem;

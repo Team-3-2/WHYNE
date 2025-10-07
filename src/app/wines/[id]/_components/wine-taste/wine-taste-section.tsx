@@ -1,4 +1,3 @@
-// app/wines/[id]/_components/wine-taste/wine-taste-section.tsx
 import WineTaste from "@/components/wine-taste/wine-taste";
 import { getTasteDescription } from "@/components/wine-taste";
 import type { TasteData } from "@/components/wine-taste";
@@ -11,7 +10,7 @@ interface WineTasteSectionProps {
   reviewCount: number;
 }
 
-function calculateAverageTastes(reviews: Review[]) {
+const calculateAverageTastes = (reviews: Review[]) => {
   if (reviews.length === 0) {
     return {
       avgLightBold: 0,
@@ -39,12 +38,9 @@ function calculateAverageTastes(reviews: Review[]) {
     avgDrySweet: Math.round(sum.drySweet / count),
     avgSoftAcidic: Math.round(sum.softAcidic / count),
   };
-}
+};
 
-export default function WineTasteSection({
-  reviews,
-  reviewCount,
-}: WineTasteSectionProps) {
+const WineTasteSection = ({ reviews, reviewCount }: WineTasteSectionProps) => {
   const { avgLightBold, avgSmoothTannic, avgDrySweet, avgSoftAcidic } =
     calculateAverageTastes(reviews);
 
@@ -75,16 +71,16 @@ export default function WineTasteSection({
     <div
       className={cn(
         "w-full",
-        "tablet:grid tablet:max-w-[680px] tablet:grid-cols-2 tablet:gap-6",
-        "pc:flex pc:max-w-none pc:flex-col pc:gap-6"
+        "tablet:grid tablet:grid-cols-2",
+        "pc:flex pc:flex-col pc:gap-6"
       )}
     >
       {/* 제목 + 참여 인원 */}
       <div
         className={cn(
-          "mb-4 ml-4 mr-4 flex flex-col items-start gap-1",
-          "tablet:mb-0 tablet:ml-0 tablet:flex-col tablet:gap-3",
-          "pc:flex-row pc:items-center pc:gap-56"
+          "mb-4 flex flex-col items-start gap-1",
+          "tablet:mb-0 tablet:flex-col tablet:gap-3",
+          "pc:flex-row pc:items-center pc:justify-between pc:pr-3"
         )}
       >
         <h2 className="text-heading-lg text-gray-900">어떤 맛이 나나요?</h2>
@@ -93,12 +89,14 @@ export default function WineTasteSection({
         </span>
       </div>
 
-      {/* WineTaste 컴포넌트 래퍼 */}
-      <div className="flex w-full justify-center tablet:justify-start pc:justify-start">
-        <div>
+      {/* WineTaste 컴포넌트 */}
+      <div className="flex w-full justify-center tablet:justify-start">
+        <div className="w-full max-w-[360px] tablet:max-w-[480px] pc:max-w-[560px]">
           <WineTaste type="detail" tastes={tastes} />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default WineTasteSection;
