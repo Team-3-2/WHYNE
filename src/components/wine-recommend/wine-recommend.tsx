@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import Link from "next/link";
 import { CAROUSEL_BREAKPOINTS } from "@/constants/responsive";
 import Carousel from "@/components/carousel/carousel";
@@ -16,9 +17,12 @@ interface RecommendWineSliderProps {
 }
 
 const RecommendWineSlider = ({ wines }: RecommendWineSliderProps) => {
+  const randomItems = useMemo(() => {
+    return [...wines].sort(() => Math.random() - 0.5);
+  }, [wines]);
   return (
     <Carousel breakpoints={CAROUSEL_BREAKPOINTS.recommendWine}>
-      {wines.map((wine) => (
+      {randomItems.map((wine) => (
         <Link key={wine.id} href={`/wines/${wine.id}`}>
           <RecommendCard wine={wine} />
         </Link>
