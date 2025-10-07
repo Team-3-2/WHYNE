@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useId } from "react";
+import { ReactNode, useId, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar } from "swiper/modules";
 import "swiper/css";
@@ -10,6 +10,7 @@ import {
   CAROUSEL_BREAKPOINTS,
   BreakpointSettings,
 } from "@/constants/responsive";
+import { useBreakpoint } from "@/hooks/use-breakpoint";
 import CarouselNavButton from "@/components/button/carousel-nav-button";
 
 interface CarouselProps {
@@ -32,6 +33,10 @@ const Carousel = ({
   const nextId = `carousel-next-${id}`;
   const scrollbarId = `carousel-scrollbar-${id}`;
 
+  const currentBreakpoint = useBreakpoint();
+  const showNavigation = navigationEnabled && currentBreakpoint !== "mobile";
+  const showScrollbar = draggableScrollbar && currentBreakpoint === "mobile";
+
   return (
     <div className="relative w-full">
       <Swiper
@@ -39,7 +44,7 @@ const Carousel = ({
         autoHeight={true}
         breakpoints={breakpoints}
         navigation={
-          navigationEnabled
+          showNavigation
             ? {
                 prevEl: `#${prevId}`,
                 nextEl: `#${nextId}`,
@@ -47,7 +52,7 @@ const Carousel = ({
             : false
         }
         scrollbar={
-          draggableScrollbar
+          showScrollbar
             ? {
                 el: `#${scrollbarId}`,
                 draggable: true,
@@ -63,7 +68,7 @@ const Carousel = ({
         ))}
       </Swiper>
 
-      {navigationEnabled && (
+      {showNavigation && (
         <>
           <CarouselNavButton
             id={prevId}
@@ -80,7 +85,7 @@ const Carousel = ({
         </>
       )}
 
-      {draggableScrollbar !== false && (
+      {showScrollbar && (
         <div id={scrollbarId} className="swiper-scrollbar mt-2" />
       )}
     </div>

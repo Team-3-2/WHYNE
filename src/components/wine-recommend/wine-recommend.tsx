@@ -19,7 +19,7 @@ const RecommendWineSlider = ({ wines }: RecommendWineSliderProps) => {
   return (
     <Carousel breakpoints={CAROUSEL_BREAKPOINTS.recommendWine}>
       {wines.map((wine) => (
-        <Link key={wine.id} href={`/wines/${wine.id}`} className="">
+        <Link key={wine.id} href={`/wines/${wine.id}`}>
           <RecommendCard wine={wine} />
         </Link>
       ))}
