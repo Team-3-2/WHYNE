@@ -7,7 +7,7 @@ import { useReviewSubmit } from "../../_hooks/use-review-submit";
 import ReviewForm from "./review-form";
 import Loader from "@/components/loader/loader";
 import type { ReviewFormData } from "../../_types";
-import ReviewFormErrorState from "./review-form-error-state";
+import ReviewFormErrorState from "../wine-state/review-error-state";
 
 interface ReviewFormClientProps {
   wineId: number;

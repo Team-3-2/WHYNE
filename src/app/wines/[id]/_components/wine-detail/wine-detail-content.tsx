@@ -6,7 +6,7 @@ import WineHeader from "../wine-header/wine-header";
 import WineTasteSection from "../wine-taste/wine-taste-section";
 import FlavorSection from "../wine-flavor/wine-flavor-section";
 import ReviewSection from "../wine-review/wine-review-section";
-import ReviewFormErrorState from "../wine-review-form/review-form-error-state";
+import ReviewFormErrorState from "../wine-state/review-error-state";
 import Loader from "@/components/loader/loader";
 import instance from "@/lib/axios";
 import { useEffect, useState } from "react";

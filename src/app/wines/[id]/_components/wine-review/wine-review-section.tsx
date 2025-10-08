@@ -1,6 +1,6 @@
 import RatingDistribution from "@/components/rating/rating-distribution";
 import WineReviewItem from "./wine-review-item";
-import ReviewEmptyState from "./review-empty-state";
+import ReviewEmptyState from "../wine-state/review-empty-state";
 import ReviewListHeader from "./wine-review-list-header";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
