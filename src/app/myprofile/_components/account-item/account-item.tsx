@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Profile } from "@/components";
+import { Button, Profile } from "@/components";
 import { User } from "@/types/user-type";
 import usePostImage from "@/hooks/api/use-post-image";
 import usePatchProfile from "@/hooks/api/use-patch-profile";
@@ -78,7 +78,6 @@ const AccountItem = ({ user }: AccountItemProps) => {
           "pc:flex-col-center pc:gap-2"
         )}
       >
-        {/* TODO(지권): 공용 컴포넌트 변경 */}
         <label className="w-full text-left text-body-sm" htmlFor="nickname">
           닉네임
         </label>
@@ -104,15 +103,14 @@ const AccountItem = ({ user }: AccountItemProps) => {
               "tablet:flex-1 pc:w-full"
             )}
           />
-          <button
+          <Button
             onClick={handleNicknameUpdate}
             className={cn(
               "h-[42px] w-1/3 rounded-[4px] bg-black text-body-sm tracking-[-0.03em] text-white",
               "tablet:w-1/4 pc:mx-auto pc:w-[98px]"
             )}
-          >
-            변경하기
-          </button>
+            label="변경하기"
+          />
         </div>
       </div>
     </section>
