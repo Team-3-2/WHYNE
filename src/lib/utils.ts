@@ -56,3 +56,19 @@ export const formatCount = (count: number): string => {
     return count.toString();
   }
 };
+
+/**
+ * 이미지 경로가 next/image에서 허용하는 형태인지 검사
+ * @author junyeol
+ * @param src : 검사할 이미지 경로 (null / undefined 허용)
+ * @returns : 허용된 프로토콜(http/https) 또는 루트 경로(/)라면 true
+ */
+export const isValidImageSrc = (src?: string | null): src is string => {
+  if (typeof src !== "string") return false;
+  if (!src.trim()) return false; // 빈 문자열 방지
+  return (
+    src.startsWith("http://") ||
+    src.startsWith("https://") ||
+    src.startsWith("/")
+  );
+};

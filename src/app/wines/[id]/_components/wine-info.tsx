@@ -1,35 +1,31 @@
 import Image from "next/image";
+import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
+import { isValidImageSrc } from "@/lib/utils";
 
 interface WineInfoProps {
   name: string;
   region: string;
-  image?: string;
+  image?: string | null;
 }
 
 const WineInfo = ({ name, region, image }: WineInfoProps) => {
-  const isValidImage =
-    image &&
-    (image.startsWith("http://") ||
-      image.startsWith("https://") ||
-      image.startsWith("/"));
-
   return (
     <div className="flex items-center gap-4">
       <div className="flex-center h-[96px] w-[62px] flex-shrink-0 bg-gray-200">
-        {isValidImage ? (
+        {isValidImageSrc(image) ? (
           <Image
             src={image}
             alt={name}
             width={62}
             height={96}
             className="h-full w-auto object-contain"
-            unoptimized={true}
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-            }}
           />
         ) : (
-          <span className="text-xs text-gray-400">No Image</span>
+          <PlaceholderImgWine
+            className="h-full w-auto object-contain"
+            role="img"
+            aria-label={`${name} 이미지 불러오기 실패`}
+          />
         )}
       </div>
       <div className="flex flex-col gap-1">
