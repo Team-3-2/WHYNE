@@ -1,10 +1,26 @@
+"use client";
+
 import Link from "next/link";
 import FormWrapper from "../_components/form-wrapper";
 import Logo from "@/../public/logo.svg";
 import { Button, TextInput } from "@/components";
 import AuthRedirect from "../_components/auth-redirect";
+import { useForm } from "react-hook-form";
+import REGEX from "@/constants/regex";
+
+interface SignupFormData {
+  email: string;
+  pw: string;
+  nickname: string;
+  pwCheck: string;
+}
 
 const Page = () => {
+  const {
+    register,
+    getValues,
+    formState: { errors, isValid },
+  } = useForm<SignupFormData>();
   return (
     <FormWrapper>
       <Link href={"/"}>
@@ -15,43 +31,74 @@ const Page = () => {
           <TextInput
             id="email"
             type="text"
-            name="email"
             title="이메일"
             placeholder="whyne@gmail.com"
             className="h-[100px]"
+            isError={errors.email ? true : false}
+            errorMsg={errors.email && errors.email.message}
+            {...register("email", {
+              required: "이메일을 입력해주세요",
+              pattern: {
+                value: REGEX.email,
+                message: "이메일 형식으로 작성해주세요",
+              },
+            })}
           />
           <TextInput
             id="nickname"
             type="text"
-            name="nickname"
             title="닉네임"
             placeholder="닉네임을 입력해주세요"
-            isError={true}
-            errorMsg="닉네임은 최대 20자까지 가능합니다"
             className="h-[100px]"
+            isError={errors.nickname ? true : false}
+            errorMsg={errors.nickname && errors.nickname.message}
+            {...register("nickname", {
+              required: true,
+              minLength: {
+                value: 2,
+                message: "닉네임은 최소 2자 이상 입력해야 합니다",
+              },
+              maxLength: {
+                value: 20,
+                message: "닉네임은 최대 20자까지 가능합니다.",
+              },
+            })}
           />
           <TextInput
             id="pw"
             type="password"
-            name="pw"
             title="비밀번호"
             placeholder="영문, 숫자, 특수문자(!@#$%^&*) 제한"
-            isError={true}
-            errorMsg="닉네임은 최대 20자까지 가능합니다"
             className="h-[100px]"
+            isError={errors.pw ? true : false}
+            errorMsg={errors.pw && errors.pw.message}
+            {...register("pw", {
+              required: "비밀번호는 필수 입력입니다.",
+              minLength: {
+                value: 8,
+                message: "비밀번호는 최소 8자 이상입니다.",
+              },
+              pattern: {
+                value: REGEX.pw,
+                message: "비밀번호는 숫자, 영문, 특수문자로만 가능합니다.",
+              },
+            })}
           />
           <TextInput
             id="pwCheck"
             type="password"
-            name="pwCheck"
             title="비밀번호 확인"
             placeholder="비밀번호 확인"
-            isError={true}
-            errorMsg="닉네임은 최대 20자까지 가능합니다"
             className="h-[100px]"
+            isError={errors.pwCheck ? true : false}
+            errorMsg={errors.pwCheck && "비밀번호가 일치하지 않습니다."}
+            {...register("pwCheck", {
+              required: true,
+              validate: () => getValues("pw") === getValues("pwCheck"),
+            })}
           />
         </div>
-        <Button label="가입하기" />
+        <Button label="가입하기" disabled={isValid ? false : true} />
       </form>
       <AuthRedirect
         text="계정이 이미 있으신가요?"
