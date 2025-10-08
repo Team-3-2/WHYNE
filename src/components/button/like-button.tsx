@@ -1,5 +1,4 @@
-import { cn, formatCount } from "@/lib/utils";
-import Button from "./basic-button";
+import { cn } from "@/lib/utils";
 import { ComponentProps } from "react";
 import IconButton from "./icon-button";
 
