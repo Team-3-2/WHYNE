@@ -2,8 +2,7 @@
 import { cn } from "@/lib/utils";
 import Rating from "./rating";
 import RatingBar from "./rating-bar-item";
-import Button from "@/components/button/basic-button";
-import { useRouter } from "next/navigation";
+import LinkButton from "@/components/button/link-button";
 
 /**
  * 평점 분포 컴포넌트
@@ -28,7 +27,6 @@ const RatingDistribution = ({
 }: RatingDistributionProps) => {
   const reviewCounts = Object.values(distribution);
   const totalReviews = reviewCounts.reduce((total, count) => total + count, 0);
-  const router = useRouter();
 
   return (
     <div className="relative grid gap-y-[24px] pc:gap-y-[40px]">
@@ -63,9 +61,10 @@ const RatingDistribution = ({
           })}
         </div>
       </div>
-      <Button
+      <LinkButton
+        href={`/wines/${wineId}/write`}
+        scroll={false}
         label="리뷰 남기기"
-        onClick={() => router.push(`/wines/${wineId}/write`)}
         className={cn(
           "w-full",
           "tablet:absolute tablet:bottom-[-10px] tablet:mt-0 tablet:w-[280px]"
