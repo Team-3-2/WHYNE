@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import WineTaste from "@/components/wine-taste/wine-taste";
+import WineTaste, { getTasteDescription } from "@/components/wine-taste";
 import RatingInput from "@/components/rating/rating-input";
 import Button from "@/components/button/basic-button";
 import { aromaMap } from "@/components/flavor/aroma-map";
 import { AromaKey } from "@/types/AromaType";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
-import { getTasteDescription } from "@/components/wine-taste/_utils/tasteUtils";
 import WineInfo from "../wine-info";
 import type { ReviewFormData } from "../../_types";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";

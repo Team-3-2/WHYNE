@@ -2,9 +2,10 @@
 
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
-import WineTaste from "@/components/wine-taste";
-import { getTasteDescription } from "@/components/wine-taste";
-import { TasteData } from "@/components/wine-taste/_types";
+import WineTaste, {
+  getTasteDescription,
+  type TasteData,
+} from "@/components/wine-taste";
 import { aromaMap } from "@/components/flavor/aroma-map";
 import LikeButton from "@/components/button/like-button";
 import Icon from "@/components/icon/icon";
