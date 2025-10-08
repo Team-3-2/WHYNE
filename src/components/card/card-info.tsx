@@ -55,7 +55,7 @@ const CardInfo = ({
           </span>
         </div>
       )}
-      <div className="max-w-[280px]">
+      <div>
         <div className={`line-clamp-2 text-heading-lg ${nameClassName}`}>
           {name}
         </div>

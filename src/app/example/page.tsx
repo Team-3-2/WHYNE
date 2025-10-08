@@ -151,11 +151,11 @@ const Page = () => {
   return (
     <>
       <section className="flex w-full flex-wrap gap-y-[50px] px-[16px] pc:px-[32px]">
-        <div className="m-auto w-full max-w-[1140px]">
+        <div className="m-auto w-full">
           <h3 className="mb-[10px] text-body-lg">이번 달 추천 와인</h3>
           <RecommendWineSlider wines={DATA} />
         </div>
-        <div className="m-auto w-full max-w-[1140px]">
+        <div className="m-auto w-full">
           <h3 className="mb-[10px] text-body-lg">슬라이드 개별 동작 테스트</h3>
           <RecommendWineSlider wines={DATA} />
         </div>

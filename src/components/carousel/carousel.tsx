@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useId, useState, useEffect } from "react";
+import { ReactNode, useId } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar } from "swiper/modules";
 import "swiper/css";
@@ -27,11 +27,6 @@ const Carousel = ({
   navigationEnabled = true,
   draggableScrollbar = true,
 }: CarouselProps) => {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 0);
-  }, []);
-
   const id = useId();
   const prevId = `carousel-prev-${id}`;
   const nextId = `carousel-next-${id}`;
@@ -42,9 +37,7 @@ const Carousel = ({
   const showScrollbar = draggableScrollbar && currentBreakpoint === "mobile";
 
   return (
-    <div
-      className={`relative w-full overflow-hidden mobile:pb-[34px] ${loading ? "opacity-100" : ""}`}
-    >
+    <div className={`relative w-full overflow-hidden mobile:pb-[34px]`}>
       <Swiper
         modules={[Navigation, Scrollbar]}
         autoHeight={true}
