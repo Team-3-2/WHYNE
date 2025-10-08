@@ -1,31 +1,21 @@
 import Image from "next/image";
+import DefaultImage from "@/../public/images/profile/default-profile.svg";
+import { isValidImageSrc, getTimeAgo } from "@/lib/utils";
 
 interface WineReviewRatingProps {
   createdAt: string;
   user: {
     nickname: string;
-    image: string | null;
+    image?: string | null;
   };
 }
 
 const WineReviewRating = ({ createdAt, user }: WineReviewRatingProps) => {
-  const getTimeAgo = (dateString: string) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInMs = now.getTime() - date.getTime();
-    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
-    const diffInDays = Math.floor(diffInHours / 24);
-
-    if (diffInDays > 0) return `${diffInDays}일 전`;
-    if (diffInHours > 0) return `${diffInHours}시간 전`;
-    return "방금 전";
-  };
-
   return (
     <div className="flex items-center gap-3">
       {/* 프로필 이미지 */}
-      <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-200">
-        {user.image ? (
+      <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full">
+        {isValidImageSrc(user.image) ? (
           <Image
             src={user.image}
             alt={user.nickname}
@@ -34,9 +24,11 @@ const WineReviewRating = ({ createdAt, user }: WineReviewRatingProps) => {
             className="h-full w-full object-cover"
           />
         ) : (
-          <div className="flex-center h-full w-full text-2xl text-gray-400">
-            👤
-          </div>
+          <DefaultImage
+            className="h-full w-full object-cover"
+            role="img"
+            aria-label={`${user.nickname} 이미지 불러오기 실패`}
+          />
         )}
       </div>
 

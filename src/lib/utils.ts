@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import type { Review } from "@/types/wine";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -71,4 +72,59 @@ export const isValidImageSrc = (src?: string | null): src is string => {
     src.startsWith("https://") ||
     src.startsWith("/")
   );
+};
+
+/**
+ * 리뷰 배열을 받아 맛 지표별 평균(0~6)을 0.5 반올림으로 계산해 돌려준다.
+ * 리뷰가 없으면 전부 0으로 초기화된 평균을 반환한다.
+ * @author junyeol
+ * @param reviews 평균을 계산할 리뷰 목록
+ * @returns 각 맛 지표의 평균 값
+ */
+export const calculateAverageTastes = (reviews: Review[]) => {
+  if (reviews.length === 0) {
+    return {
+      avgLightBold: 0,
+      avgSmoothTannic: 0,
+      avgDrySweet: 0,
+      avgSoftAcidic: 0,
+    };
+  }
+
+  const sum = reviews.reduce(
+    (acc, review) => ({
+      lightBold: acc.lightBold + review.lightBold,
+      smoothTannic: acc.smoothTannic + review.smoothTannic,
+      drySweet: acc.drySweet + review.drySweet,
+      softAcidic: acc.softAcidic + review.softAcidic,
+    }),
+    { lightBold: 0, smoothTannic: 0, drySweet: 0, softAcidic: 0 }
+  );
+
+  const count = reviews.length;
+
+  return {
+    avgLightBold: Math.round(sum.lightBold / count),
+    avgSmoothTannic: Math.round(sum.smoothTannic / count),
+    avgDrySweet: Math.round(sum.drySweet / count),
+    avgSoftAcidic: Math.round(sum.softAcidic / count),
+  };
+};
+
+/**
+ * 현재 시간을 기준으로 글이 작성 시간 계산 로직
+ * @autor junyeol
+ * @param dateString : 리뷰 작성 시간
+ * @returns : 작성 시간 텍스트
+ */
+export const getTimeAgo = (dateString: string) => {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+  const diffInDays = Math.floor(diffInHours / 24);
+
+  if (diffInDays > 0) return `${diffInDays}일 전`;
+  if (diffInHours > 0) return `${diffInHours}시간 전`;
+  return "방금 전";
 };

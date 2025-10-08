@@ -4,8 +4,7 @@ import WineTaste, {
 } from "@/components/wine-taste";
 import type { GaugeLevel } from "@/components/gauge/block-gauge";
 import type { Review } from "@/types/wine";
-import calculateAverageTastes from "@/app/wines/[id]/_utils/utils";
-import { cn } from "@/lib/utils";
+import { cn, calculateAverageTastes } from "@/lib/utils";
 
 /**
  * 와인 맛 섹션이 소비하는 리뷰 데이터 형태
