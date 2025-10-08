@@ -1,6 +1,7 @@
-import WineTaste from "@/components/wine-taste/wine-taste";
-import { getTasteDescription } from "@/components/wine-taste";
-import type { TasteData } from "@/components/wine-taste";
+import WineTaste, {
+  getTasteDescription,
+  type TasteData,
+} from "@/components/wine-taste";
 import type { GaugeLevel } from "@/components/gauge/block-gauge";
 import type { Review } from "@/types/wine";
 import { cn } from "@/lib/utils";
