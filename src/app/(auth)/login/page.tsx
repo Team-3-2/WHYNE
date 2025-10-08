@@ -43,7 +43,7 @@ const Page = () => {
   return (
     <FormWrapper>
       <Link href={"/"}>
-        <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100" />
+        <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100 tablet:mb-[64px] pc:mb-[64px]" />
       </Link>
       <form action={onSubmit} className="flex-col-center mb-4 gap-[60px]">
         <div className="flex flex-col gap-8">
