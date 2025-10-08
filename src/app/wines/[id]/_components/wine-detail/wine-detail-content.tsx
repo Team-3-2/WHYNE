@@ -2,14 +2,14 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getWine } from "@/api/wines/get-wine";
+import { getCurrentUser } from "@/api/user/get-current-user";
 import WineHeader from "../wine-header/wine-header";
 import WineTasteSection from "../wine-taste/wine-taste-section";
 import FlavorSection from "../wine-flavor/wine-flavor-section";
 import ReviewSection from "../wine-review/wine-review-section";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 import Loader from "@/components/loader/loader";
-import instance from "@/lib/axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface WineDetailContentProps {
@@ -19,28 +19,22 @@ interface WineDetailContentProps {
 const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   const router = useRouter();
 
-  const [currentUserId, setCurrentUserId] = useState<number | undefined>();
-
   const { data: wine, isLoading } = useQuery({
     queryKey: ["wine", wineId],
     queryFn: () => getWine(wineId),
   });
 
+  const { data: currentUser } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: getCurrentUser,
+    retry: false,
+  });
+
+  const currentUserId = currentUser?.id;
+
   const handleCancel = () => {
     router.replace(`/`);
   };
-  useEffect(() => {
-    const fetchCurrentUser = async () => {
-      try {
-        const response = await instance.get("/users/me");
-        setCurrentUserId(response.data.id);
-      } catch {
-        setCurrentUserId(undefined);
-      }
-    };
-
-    fetchCurrentUser();
-  }, []);
 
   if (isLoading) return <Loader />;
 
@@ -77,10 +71,8 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
       </section>
 
       {/* 구분선 */}
-      <div className="bg-white">
-        <div className="container">
-          <div className="w-full border-t border-gray-300" />
-        </div>
+      <div className="container">
+        <hr className="border-t border-gray-300" />
       </div>
 
       {/* 리뷰 섹션 */}
