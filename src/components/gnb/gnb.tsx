@@ -10,10 +10,12 @@ import { useEffect, useState } from "react";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 import { User } from "@/types/user-type";
 import { useLogout } from "@/hooks/use-logout";
+import useUserStore from "@/store/user-store";
 
 const Gnb = () => {
   const pathname = usePathname();
-  const [user, setUser] = useState<User>();
+  // const [user, setUser] = useState<User>();
+  const { user, setUser, clearUser } = useUserStore((state) => state);
   const [isOpen, setIsOpen] = useState(false);
 
   const isHidden = pathname === "/login" || pathname === "/signup";
@@ -26,6 +28,7 @@ const Gnb = () => {
       onClick: () => {
         setIsOpen(false);
         logout();
+        clearUser();
       },
     },
   ];
@@ -41,7 +44,7 @@ const Gnb = () => {
   };
 
   useEffect(() => {
-    getMe();
+    // getMe();
   }, []);
 
   if (isHidden) return null;
