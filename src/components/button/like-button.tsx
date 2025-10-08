@@ -11,14 +11,9 @@ interface LikeButtonProps extends ComponentProps<"button"> {
  * 좋아요 버튼 컴포넌트
  * @author hwitae
  * @param isLike 좋아요 상태 true/false
- * @param count 좋아요 개수
  * @returns button
  */
-const LikeButton = ({
-  isLike = false,
-  count = 0,
-  ...props
-}: LikeButtonProps) => {
+const LikeButton = ({ isLike = false, ...props }: LikeButtonProps) => {
   return (
     <IconButton
       icon={isLike ? "LikeOnIcon" : "LikeOffIcon"}
