@@ -7,6 +7,7 @@ import WineTaste, {
   type TasteData,
 } from "@/components/wine-taste";
 import { aromaMap } from "@/components/flavor/aroma-map";
+import IconButton from "@/components/button/icon-button";
 import LikeButton from "@/components/button/like-button";
 import Icon from "@/components/icon/icon";
 import DropdownMenu from "@/components/dropdown-menu/dropdown-menu";
@@ -112,10 +113,12 @@ const WineReviewItem = ({
 
     return (
       <div className="relative" ref={menuRef}>
-        <button aria-label="옵션 메뉴" onClick={toggleMenu} className="p-1">
-          <Icon icon="HamburgerIcon" size="md" />
-        </button>
-
+        <IconButton
+          icon="HamburgerIcon"
+          aria-label="옵션 메뉴"
+          className="p-1"
+          onClick={toggleMenu}
+        />
         {isMenuOpen && (
           <div className="absolute right-0 top-full z-50 mt-2">
             <DropdownMenu
@@ -219,21 +222,18 @@ const WineReviewItem = ({
           />
 
           <div className="flex flex-1 justify-center">
-            <button
-              onClick={() => setIsTasteOpen(!isTasteOpen)}
-              className="rounded-full p-2 transition-colors hover:bg-gray-100 active:bg-gray-200"
-              aria-expanded={isTasteOpen}
+            <IconButton
+              icon="ArrowUpIcon"
               aria-label={isTasteOpen ? "맛 평가 숨기기" : "맛 평가 보기"}
-            >
-              <Icon
-                icon="ArrowUpIcon"
-                size="md"
-                className={cn(
-                  "text-gray-600 transition-transform duration-300 ease-in-out",
-                  isTasteOpen && "rotate-180"
-                )}
-              />
-            </button>
+              aria-expanded={isTasteOpen}
+              onClick={() => setIsTasteOpen(!isTasteOpen)}
+              className={cn(
+                "h-auto w-auto p-2",
+                "!border-none !bg-transparent hover:!bg-transparent active:!bg-transparent",
+                "text-gray-600 transition-transform duration-300 ease-in-out",
+                isTasteOpen && "rotate-180"
+              )}
+            />
           </div>
         </div>
       </div>
