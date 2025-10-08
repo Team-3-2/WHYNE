@@ -14,7 +14,7 @@ interface ReviewFormProps {
   wineId: number;
   wineName: string;
   wineRegion: string;
-  wineImage: string;
+  wineImage: string | null;
   onSubmit: (data: ReviewFormData) => void;
   onCancel: () => void;
   isSubmitting?: boolean;

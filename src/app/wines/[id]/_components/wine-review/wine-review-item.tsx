@@ -240,7 +240,7 @@ const WineReviewItem = ({
       <ConfirmModal
         isOpen={isDeleteModalOpen}
         msg={{
-          text: "이 리뷰를 삭제하시겠어요?",
+          text: "정말 삭제하시겠습니까?",
           cancelMsg: "취소",
           confirmMsg: "삭제하기",
         }}

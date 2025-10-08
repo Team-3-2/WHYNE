@@ -7,6 +7,7 @@ import { useReviewSubmit } from "../../_hooks/use-review-submit";
 import ReviewForm from "./review-form";
 import Loader from "@/components/loader/loader";
 import type { ReviewFormData } from "../../_types";
+import ReviewFormErrorState from "./review-form-error-state";
 
 interface ReviewFormClientProps {
   wineId: number;
@@ -15,8 +16,6 @@ interface ReviewFormClientProps {
 /**
  * 리뷰 작성 폼 클라이언트 래퍼
  * @author junyrol
- * @param wineId
- * @returns
  * - 와인 정보 페칭
  * - 리뷰 제출 처리
  * - 로딩/에러 상태 관리
@@ -49,7 +48,7 @@ const ReviewFormClient = ({ wineId }: ReviewFormClientProps) => {
   };
 
   const handleCancel = () => {
-    router.back();
+    router.replace(`/wines/${wineId}`);
   };
 
   if (isLoading) {
@@ -61,19 +60,7 @@ const ReviewFormClient = ({ wineId }: ReviewFormClientProps) => {
   }
 
   if (isError || !wine) {
-    return (
-      <div className="flex-center min-h-[400px] flex-col gap-4">
-        <p className="text-body-lg text-gray-500">
-          와인 정보를 불러올 수 없습니다.
-        </p>
-        <button
-          onClick={handleCancel}
-          className="text-body-md text-primary underline"
-        >
-          돌아가기
-        </button>
-      </div>
-    );
+    return <ReviewFormErrorState onRetry={handleCancel} />;
   }
 
   return (

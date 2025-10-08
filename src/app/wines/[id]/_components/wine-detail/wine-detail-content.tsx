@@ -6,15 +6,19 @@ import WineHeader from "../wine-header/wine-header";
 import WineTasteSection from "../wine-taste/wine-taste-section";
 import FlavorSection from "../wine-flavor/wine-flavor-section";
 import ReviewSection from "../wine-review/wine-review-section";
+import ReviewFormErrorState from "../wine-review-form/review-form-error-state";
 import Loader from "@/components/loader/loader";
 import instance from "@/lib/axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface WineDetailContentProps {
   wineId: number;
 }
 
 const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
+  const router = useRouter();
+
   const [currentUserId, setCurrentUserId] = useState<number | undefined>();
 
   const { data: wine, isLoading } = useQuery({
@@ -22,6 +26,9 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
     queryFn: () => getWine(wineId),
   });
 
+  const handleCancel = () => {
+    router.replace(`/`);
+  };
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
@@ -38,11 +45,7 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   if (isLoading) return <Loader />;
 
   if (!wine) {
-    return (
-      <div className="flex-center min-h-screen">
-        <p className="text-body-lg text-gray-500">와인을 찾을 수 없습니다.</p>
-      </div>
-    );
+    return <ReviewFormErrorState onRetry={handleCancel} />;
   }
 
   return (
