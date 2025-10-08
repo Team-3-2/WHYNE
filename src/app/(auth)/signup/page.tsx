@@ -53,7 +53,7 @@ const Page = () => {
             isError={errors.nickname ? true : false}
             errorMsg={errors.nickname && errors.nickname.message}
             {...register("nickname", {
-              required: true,
+              required: "닉네임은 필수 입력입니다.",
               minLength: {
                 value: 2,
                 message: "닉네임은 최소 2자 이상 입력해야 합니다",
