@@ -1,9 +1,12 @@
 import RatingDistribution from "@/components/rating/rating-distribution";
 import WineReviewItem from "./wine-review-item";
+import ReviewEmptyState from "./review-empty-state";
+import ReviewListHeader from "./wine-review-list-header";
 import Button from "@/components/button/basic-button";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import type { Review } from "@/types/wine";
+import Loader from "@/components/loader/loader";
 
 interface ReviewSectionProps {
   reviews: Review[];
@@ -33,31 +36,13 @@ const ReviewSection = ({
   if (isLoading) {
     return (
       <div className="flex-center rounded-lg bg-white p-12">
-        <p className="text-body-md text-gray-500">리뷰를 불러오는 중...</p>
+        <Loader />
       </div>
     );
   }
 
   // 리뷰가 없을 때
-  if (reviews.length === 0) {
-    return (
-      <div className="flex-col-center py-16 tablet:py-20">
-        <div className="flex-center mb-4 h-20 w-20 rounded-full bg-gray-200 tablet:mb-6 tablet:h-24 tablet:w-24">
-          <span className="text-title-page-sm text-gray-500 tablet:text-title-page-md">
-            !
-          </span>
-        </div>
-        <p className="mb-4 text-body-lg text-gray-500 tablet:mb-6">
-          작성된 리뷰가 없어요
-        </p>
-        <Button
-          label="리뷰 남기기"
-          onClick={() => router.push(`/wines/${wineId}/write`)}
-          className="h-[42px] w-[240px] tablet:h-[50px] tablet:w-[283px]"
-        />
-      </div>
-    );
-  }
+  if (reviews.length === 0) return <ReviewEmptyState wineId={wineId} />;
 
   // 리뷰가 있을 때
   return (
@@ -82,12 +67,7 @@ const ReviewSection = ({
         {/* 왼쪽 영역: 리뷰 목록 타이틀 + 리뷰들 */}
         <div>
           {/* 리뷰 목록 타이틀 */}
-          <div className="mb-4 flex items-center gap-3 tablet:mb-6 pc:mb-6">
-            <h2 className="text-heading-lg text-gray-900">리뷰 목록</h2>
-            <span className="text-body-md text-gray-500">
-              {reviews.length.toLocaleString()}개
-            </span>
-          </div>
+          <ReviewListHeader totalCount={reviews.length} />
 
           {/* 리뷰 목록 */}
           <div className="space-y-3 tablet:space-y-4">
