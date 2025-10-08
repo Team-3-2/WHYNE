@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { WineType } from "../../_types/review-type";
 
-const ReviewInfo = () => {
+const ReviewInfo = ({ info }: { info: WineType }) => {
   return (
     <div
       className={cn(
@@ -11,7 +12,7 @@ const ReviewInfo = () => {
       )}
     >
       <Image
-        src="/images/test/test_wine.png"
+        src={info?.image || "/images/placeholder/img-wine.svg"}
         alt="와인 이미지"
         width={60}
         height={60}
@@ -31,10 +32,10 @@ const ReviewInfo = () => {
             "pc:text-body-lg"
           )}
         >
-          Sentinel Carbernet Sauvignon 2016
+          {info?.name || "와인 이름을 찾을 수 없습니다."}
         </h2>
         <p className="text-body-sm tracking-[-0.02em] text-gray-500">
-          Western Cape, South Africa
+          {info?.region || "지역을 찾을 수 없습니다."}
         </p>
       </div>
     </div>

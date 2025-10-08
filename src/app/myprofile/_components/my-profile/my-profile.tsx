@@ -1,11 +1,13 @@
 "use client";
 
 import { redirect, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AccountItem from "../account-item/account-item";
 import ReviewItem from "../review-item/review-item";
 import ProfileTabs from "../profile-tabs/profile-tabs";
 import useUserStore from "@/store/user-store";
+import useGetUserReview from "@/hooks/api/myprofile/use-get-user-review";
+import { ReviewItemType } from "../../_types/review-type";
 
 // TODO(지권): 이슈 발생...
 
@@ -14,6 +16,9 @@ const MyProfile = () => {
   const [tab, setTab] = useState(searchParams.get("tab") || "review");
   const { user } = useUserStore((state) => state);
 
+  const { data: userReview } = useGetUserReview();
+  console.log(userReview);
+
   if (!user) return redirect("/login");
 
   return (
@@ -21,12 +26,19 @@ const MyProfile = () => {
       <article className="w-full px-4 tablet:px-8 pc:mx-[300px]">
         <ProfileTabs tab={tab} setTab={setTab} />
 
-        {tab === "review" &&
-          Array.from({ length: 8 }).map((_, index) => (
-            <ReviewItem key={index} />
-          ))}
+        {tab === "review" && (
+          <section className="mt-20">
+            {userReview?.list?.map((review: ReviewItemType) => (
+              <ReviewItem key={review.id} review={review} />
+            ))}
+          </section>
+        )}
 
-        {tab === "account" && <AccountItem user={user} />}
+        {tab === "account" && (
+          <section>
+            <AccountItem user={user} />
+          </section>
+        )}
       </article>
     </main>
   );
