@@ -1,8 +1,7 @@
 import WineTaste, {
-  getTasteDescription,
+  buildTasteData,
   type TasteData,
 } from "@/components/wine-taste";
-import type { GaugeLevel } from "@/components/gauge/block-gauge";
 import type { Review } from "@/types/wine";
 import { cn, calculateAverageTastes } from "@/lib/utils";
 
@@ -29,28 +28,12 @@ const WineTasteSection = ({ reviews, reviewCount }: WineTasteSectionProps) => {
   const { avgLightBold, avgSmoothTannic, avgDrySweet, avgSoftAcidic } =
     calculateAverageTastes(reviews);
 
-  const tastes: TasteData[] = [
-    {
-      type: "바디감",
-      data: avgLightBold as GaugeLevel,
-      taste: getTasteDescription("바디감", avgLightBold as GaugeLevel),
-    },
-    {
-      type: "탄닌",
-      data: avgSmoothTannic as GaugeLevel,
-      taste: getTasteDescription("탄닌", avgSmoothTannic as GaugeLevel),
-    },
-    {
-      type: "당도",
-      data: avgDrySweet as GaugeLevel,
-      taste: getTasteDescription("당도", avgDrySweet as GaugeLevel),
-    },
-    {
-      type: "산미",
-      data: avgSoftAcidic as GaugeLevel,
-      taste: getTasteDescription("산미", avgSoftAcidic as GaugeLevel),
-    },
-  ];
+  const tastes: TasteData[] = buildTasteData({
+    lightBold: avgLightBold,
+    smoothTannic: avgSmoothTannic,
+    drySweet: avgDrySweet,
+    softAcidic: avgSoftAcidic,
+  });
 
   return (
     <section

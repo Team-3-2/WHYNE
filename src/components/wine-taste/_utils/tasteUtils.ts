@@ -1,3 +1,4 @@
+import type { TasteData } from "../_types";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 
 const tasteDescriptionMap: Record<string, readonly string[]> = {
@@ -14,10 +15,30 @@ const mapLevelToIndex = (level: GaugeLevel): number => {
   return 3;
 };
 
-const getTasteDescription = (type: string, level: GaugeLevel): string => {
+export const getTasteDescription = (
+  type: string,
+  level: GaugeLevel
+): string => {
   const descriptions = tasteDescriptionMap[type];
   if (!descriptions) return "";
   return descriptions[mapLevelToIndex(level)] ?? "";
 };
 
-export default getTasteDescription;
+const TASTE_KEYS = [
+  { type: "바디감", key: "lightBold" },
+  { type: "탄닌", key: "smoothTannic" },
+  { type: "당도", key: "drySweet" },
+  { type: "산미", key: "softAcidic" },
+] as const;
+
+type TasteSource = Record<(typeof TASTE_KEYS)[number]["key"], number>;
+
+export const buildTasteData = (source: TasteSource): TasteData[] =>
+  TASTE_KEYS.map(({ type, key }) => {
+    const level = source[key] as GaugeLevel;
+    return {
+      type,
+      data: level,
+      taste: getTasteDescription(type, level),
+    };
+  });

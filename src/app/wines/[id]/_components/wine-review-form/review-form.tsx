@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import WineTaste, { getTasteDescription } from "@/components/wine-taste";
-import RatingInput from "@/components/rating/rating-input";
-import Button from "@/components/button/basic-button";
+import { Button, RatingInput } from "@/components";
 import { aromaMap } from "@/components/flavor/aroma-map";
 import { AromaKey } from "@/types/AromaType";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
@@ -35,7 +34,6 @@ export default function ReviewForm({
   const [content, setContent] = useState("");
   const [selectedAromas, setSelectedAromas] = useState<AromaKey[]>([]);
 
-  // ✅ 한글 인코딩 수정
   const [tastes, setTastes] = useState([
     { type: "바디감", data: 0 as GaugeLevel, taste: "없음" },
     { type: "탄닌", data: 0 as GaugeLevel, taste: "없음" },

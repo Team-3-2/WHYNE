@@ -41,7 +41,6 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                 alt={wine.name}
                 width={240}
                 height={320}
-                unoptimized
                 className="h-full w-auto object-contain"
               />
             ) : (

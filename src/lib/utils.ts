@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { Review } from "@/types/wine";
+import type { AromaKey } from "@/types/AromaType";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -127,4 +128,51 @@ export const getTimeAgo = (dateString: string) => {
   if (diffInDays > 0) return `${diffInDays}일 전`;
   if (diffInHours > 0) return `${diffInHours}시간 전`;
   return "방금 전";
+};
+
+/**
+ * 와인 향(Aroma) 타입에 해당하는 아이콘 이름을 반환합니다.
+ *
+ * @author junyeol
+ * @param {AromaKey} aroma - 와인 향 타입 (예: "CHERRY", "BERRY", "OAK" 등)
+ * @returns {string} 해당하는 아이콘 컴포넌트 이름 (예: "CherryIcon", "BerryIcon")
+ *
+ * @example
+ * ```typescript
+ * const iconName = getAromaIconName("CHERRY");
+ * // "CherryIcon" 반환
+ *
+ * const icon = getAromaIconName("EMPTY");
+ * // "WineIcon" 반환 (기본값)
+ * ```
+ *
+ * @remarks
+ * - 매핑되지 않은 향 타입은 기본값 "WineIcon"을 반환합니다.
+ *
+ * @see {@link AromaKey} - 사용 가능한 향 타입 목록
+ */
+export const getAromaIconName = (aroma: AromaKey): string => {
+  const iconMap: Record<AromaKey, string> = {
+    CHERRY: "CherryIcon",
+    BERRY: "BerryIcon",
+    OAK: "OakIcon",
+    VANILLA: "VanillaIcon",
+    PEPPER: "PepperIcon",
+    BAKING: "BakingIcon",
+    GRASS: "GrassIcon",
+    APPLE: "AppleIcon",
+    PEACH: "PeachIcon",
+    CITRUS: "CitrusIcon",
+    TROPICAL: "TropicalIcon",
+    MINERAL: "MineralIcon",
+    FLOWER: "FlowerIcon",
+    TOBACCO: "TobaccoIcon",
+    EARTH: "EarthIcon",
+    CHOCOLATE: "ChocolateIcon",
+    SPICE: "SpiceIcon",
+    CARAMEL: "CaramelIcon",
+    LEATHER: "LeatherIcon",
+    EMPTY: "WineIcon",
+  };
+  return iconMap[aroma] || "WineIcon";
 };
