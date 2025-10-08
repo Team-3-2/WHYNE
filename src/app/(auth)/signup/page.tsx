@@ -20,13 +20,13 @@ const Page = () => {
     register,
     getValues,
     formState: { errors, isValid },
-  } = useForm<SignupFormData>();
+  } = useForm<SignupFormData>({ mode: "onBlur" });
   return (
     <FormWrapper>
       <Link href={"/"}>
         <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100 tablet:mb-[64px] pc:mb-[64px]" />
       </Link>
-      <form className="flex-col-center mb-10 gap-4 tablet:gap-8">
+      <form className="flex-col-center mb-10 gap-4 tablet:gap-8 pc:gap-8">
         <div className="flex flex-col gap-3">
           <TextInput
             id="email"

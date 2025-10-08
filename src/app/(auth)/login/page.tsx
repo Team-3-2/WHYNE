@@ -51,13 +51,17 @@ const Page = () => {
       <Link href={"/"}>
         <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100 tablet:mb-[64px] pc:mb-[64px]" />
       </Link>
-      <form action={onSubmit} className="flex-col-center mb-4 gap-[60px]">
-        <div className="flex flex-col gap-8">
+      <form
+        action={onSubmit}
+        className="flex-col-center mb-4 gap-10 tablet:gap-8 pc:gap-8"
+      >
+        <div className="flex flex-col gap-3 tablet:gap-[14px] pc:gap-[14px]">
           <TextInput
             id="email"
             type="text"
             title="이메일"
             placeholder="이메일을 입력해주세요"
+            className="h-[100px]"
             isError={errors.email ? true : false}
             errorMsg={errors.email && errors.email.message}
             {...register("email", {
@@ -73,6 +77,7 @@ const Page = () => {
             id="password"
             title="비밀번호"
             placeholder="비밀번호를 입력해주세요"
+            className="h-[100px]"
             isError={errors.password ? true : false}
             errorMsg={errors.password && errors.password.message}
             {...register("password", {
