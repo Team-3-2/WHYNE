@@ -1,33 +1,48 @@
 export const recommendwinemock = [
   {
-    id: 1107,
-    name: "이미지 경로 잘못되었을 경우",
-    region: "Sauternes, France",
+    id: 1,
+    name: "Test Wine 4",
+    region: "France",
     image:
-      "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/1435/1750149018549/test.png",
-    price: 100000,
-    type: "WHITE",
-    avgRating: 5,
-    reviewCount: 1,
+      "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/1558/1750568547760/image-wine4.png",
+    price: 60000,
+    type: "RED",
+    avgRating: 4.5,
+    reviewCount: 10,
     recentReview: {
-      id: 2598,
+      id: 3033,
       rating: 5,
-      lightBold: 2,
+      lightBold: 9,
       smoothTannic: 1,
-      drySweet: 5,
+      drySweet: 9,
       softAcidic: 2,
-      aroma: ["TROPICAL", "CARAMEL"],
-      content:
-        "샤토 디켐, 진짜 달콤함의 끝판왕이네요! 열대과일이랑 카라멜 향이 진하게 올라오는데, 한 모금 마시면 하루 피로가 싹 가시는 느낌이에요. 디저트랑 같이 먹으니 최고!",
-      createdAt: "2025-06-18T07:43:49.505Z",
-      updatedAt: "2025-06-18T07:43:49.505Z",
+      aroma: ["VANILLA", "OAK", "BERRY", "PEPPER", "BAKING"],
+      content: "This Wine is very good.",
+      createdAt: "2025-06-23T04:57:26.940Z",
+      updatedAt: "2025-06-23T04:58:40.264Z",
       user: {
-        id: 1452,
-        nickname: "단게좋아",
+        id: 1611,
+        nickname: "tester4001",
         image:
-          "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/1452/1750645777655/icon_link.png",
+          "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/Wine/user/1611/1750654695906/profile.webp",
       },
-      likes: [],
+      likes: [
+        {
+          user: {
+            id: 1623,
+          },
+        },
+        {
+          user: {
+            id: 1624,
+          },
+        },
+        {
+          user: {
+            id: 1613,
+          },
+        },
+      ],
     },
   },
   {

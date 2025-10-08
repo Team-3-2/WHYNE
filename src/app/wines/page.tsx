@@ -1,17 +1,16 @@
-import getRecommendedWines from "@/api/wines/get-recommended";
-import RecommendWineSlider from "@/components/wine-recommend/wine-recommend";
+import { Suspense } from "react";
+import WineRecommended from "@/app/wines/_components/wine-recommended/wine-recommended";
+import Loader from "@/components/loader/loader";
 
-const WineListPage = async () => {
-  const wines = await getRecommendedWines(10);
+/**
+ * 와인 목록 페이지
+ */
 
+const WineListPage = () => {
   return (
-    <>
-      <div className="bg-gray-200">
-        <h2>와인 목록</h2>
-        <RecommendWineSlider wines={wines} />
-      </div>
-      <div className="h-[400px] bg-gray-300">ㅇㅇㅇ</div>
-    </>
+    <Suspense fallback={<Loader />}>
+      <WineRecommended />
+    </Suspense>
   );
 };
 

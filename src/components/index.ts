@@ -19,7 +19,5 @@ export { default as Searchbar } from "./searchbar/searchbar";
 export { default as ConfirmModal } from "./modal/confirm-modal";
 export { default as WineTaste } from "./wine-taste/wine-taste";
 export { default as Card } from "./card/card";
-export { default as RecommendCard } from "./wine-recommend/recommend-card";
 export { default as LikeButton } from "./button/like-button";
 export { default as Carousel } from "./carousel/carousel";
-export { default as RecommendWineSlider } from "./wine-recommend/wine-recommend";

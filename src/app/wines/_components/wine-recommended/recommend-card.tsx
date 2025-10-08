@@ -1,12 +1,15 @@
 import CardImg from "@/components/card/card-img";
 import CardInfo from "@/components/card/card-info";
+import { CardItem } from "@/types/card-item-type";
+
+/**
+ * [이번 달 추천 와인] 카드 컴포넌트
+ * @author yeonsu
+ * @param wine : 카드에 표시할 와인 정보(CardItem 타입)
+ */
 
 interface RecommendCardProps {
-  wine: {
-    image: string;
-    name: string;
-    region: string;
-  };
+  wine: CardItem;
 }
 
 const RecommendCard = ({ wine }: RecommendCardProps) => {

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { BREAKPOINTS } from "@/constants/responsive";
 
+/**
+ * 현재 뷰포트의 브레이크포인트를 반환하는 커스텀 훅
+ */
+
 type Breakpoint = "mobile" | "tablet" | "pc";
 
 export const useBreakpoint = (): Breakpoint => {
@@ -14,7 +18,7 @@ export const useBreakpoint = (): Breakpoint => {
       else setBreakpoint("pc");
     };
 
-    handleResize(); // 초기 세팅
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
