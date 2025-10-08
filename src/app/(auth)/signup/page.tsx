@@ -10,7 +10,7 @@ import REGEX from "@/constants/regex";
 
 interface SignupFormData {
   email: string;
-  pw: string;
+  password: string;
   nickname: string;
   pwCheck: string;
 }
@@ -70,9 +70,9 @@ const Page = () => {
             title="비밀번호"
             placeholder="영문, 숫자, 특수문자(!@#$%^&*) 제한"
             className="h-[100px]"
-            isError={errors.pw ? true : false}
-            errorMsg={errors.pw && errors.pw.message}
-            {...register("pw", {
+            isError={errors.password ? true : false}
+            errorMsg={errors.password && errors.password.message}
+            {...register("password", {
               required: "비밀번호는 필수 입력입니다.",
               minLength: {
                 value: 8,
@@ -94,7 +94,7 @@ const Page = () => {
             errorMsg={errors.pwCheck && "비밀번호가 일치하지 않습니다."}
             {...register("pwCheck", {
               required: true,
-              validate: () => getValues("pw") === getValues("pwCheck"),
+              validate: () => getValues("password") === getValues("pwCheck"),
             })}
           />
         </div>
