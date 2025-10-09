@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, TextInput } from "@/components";
-import { ChangeEvent, useState } from "react";
+import { useActionState, useEffect } from "react";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,10 +18,6 @@ interface LoginFormData {
 }
 
 const Page = () => {
-  const [formData, setFormData] = useState<LoginFormData>({
-    email: "",
-    password: "",
-  });
   const router = useRouter();
   const { user, setUser } = useUserStore((state) => state);
   const {
@@ -29,22 +25,17 @@ const Page = () => {
     formState: { errors, isValid },
   } = useForm<LoginFormData>();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevData) => ({ ...prevData, [e.target.id]: e.target.value }));
-  };
+  const [state, formAction, isPending] = useActionState(login, null);
 
-  const onSubmit = async () => {
-    const response = await login(formData);
+  useEffect(() => {
+    if (state && !state.isError) {
+      setUser(state.data);
 
-    if (!response) throw new Error("로그인에 실패했습니다.");
-
-    setUser(response.user);
-
-    sessionStorage.setItem("accessToken", response?.accessToken);
-    localStorage.setItem("refreshToken", response?.refreshToken);
-
-    router.push("/");
-  };
+      sessionStorage.setItem("accessToken", state.data?.accessToken);
+      localStorage.setItem("refreshToken", state.data?.refreshToken);
+      router.push("/");
+    }
+  }, [state]);
 
   return (
     <FormWrapper>
@@ -52,7 +43,7 @@ const Page = () => {
         <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100 tablet:mb-[64px] pc:mb-[64px]" />
       </Link>
       <form
-        action={onSubmit}
+        action={formAction}
         className="flex-col-center mb-4 gap-10 tablet:gap-8 pc:gap-8"
       >
         <div className="flex flex-col gap-3 tablet:gap-[14px] pc:gap-[14px]">
@@ -62,8 +53,8 @@ const Page = () => {
             title="이메일"
             placeholder="이메일을 입력해주세요"
             className="h-[100px]"
-            isError={errors.email ? true : false}
-            errorMsg={errors.email && errors.email.message}
+            isError={state?.isError}
+            errorMsg={state?.message}
             {...register("email", {
               required: "이메일은 필수 입력입니다.",
               pattern: {
