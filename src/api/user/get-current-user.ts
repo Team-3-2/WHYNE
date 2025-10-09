@@ -4,16 +4,20 @@ export interface CurrentUserResponse {
   image: string | null;
   updatedAt: string;
   createdAt: string;
-  teamId: string | null;
+  teamId: string;
   nickname: string;
   id: number;
 }
 
-export const getCurrentUser = async (): Promise<CurrentUserResponse | null> => {
+const getCurrentUser = async (): Promise<CurrentUserResponse | undefined> => {
   try {
-    const { data } = await instance.get<CurrentUserResponse>("/users/me");
+    const { data } = await instance.get("/users/me");
+    if (!data) throw new Error("사용자 정보를 불러오는데 실패했습니다.");
     return data;
   } catch (error) {
-    return null;
+    console.log(error);
+    return undefined;
   }
 };
+
+export default getCurrentUser;

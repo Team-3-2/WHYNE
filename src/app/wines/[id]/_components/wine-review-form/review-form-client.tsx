@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { getWine } from "@/api/wines/get-wine";
+import getWine from "@/api/wines/get-wine";
 import { useReviewSubmit } from "../../_hooks/use-review-submit";
 import ReviewForm from "./review-form";
 import Loader from "@/components/loader/loader";
@@ -39,7 +39,7 @@ const ReviewFormClient = ({ wineId }: ReviewFormClientProps) => {
     mutate(data, {
       onSuccess: () => {
         alert("리뷰가 등록되었습니다!");
-        router.back(); // 모달 닫기
+        router.back();
       },
       onError: () => {
         alert("리뷰 등록에 실패했습니다. 다시 시도해주세요.");

@@ -7,7 +7,9 @@ import type { WineDetail } from "@/types/wine";
  * @param id 와인 ID
  * @returns 와인 상세 정보 + 전체 리뷰 목록
  */
-export async function getWine(id: number): Promise<WineDetail> {
-  const response = await instance.get(`/wines/${id}`);
-  return response.data;
+async function getWine(id: number): Promise<WineDetail> {
+  const { data } = await instance.get(`/wines/${id}`);
+  return data;
 }
+
+export default getWine;

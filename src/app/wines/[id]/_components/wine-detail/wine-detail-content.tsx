@@ -1,15 +1,14 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getWine } from "@/api/wines/get-wine";
-import { getCurrentUser } from "@/api/user/get-current-user";
+import getWine from "@/api/wines/get-wine";
+import getCurrentUser from "@/api/user/get-current-user";
 import WineHeader from "../wine-header/wine-header";
 import WineTasteSection from "../wine-taste/wine-taste-section";
 import FlavorSection from "../wine-flavor/wine-flavor-section";
 import ReviewSection from "../wine-review/wine-review-section";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 import Loader from "@/components/loader/loader";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface WineDetailContentProps {
@@ -19,7 +18,11 @@ interface WineDetailContentProps {
 const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   const router = useRouter();
 
-  const { data: wine, isLoading } = useQuery({
+  const {
+    data: wine,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["wine", wineId],
     queryFn: () => getWine(wineId),
   });
@@ -27,19 +30,19 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   const { data: currentUser } = useQuery({
     queryKey: ["currentUser"],
     queryFn: getCurrentUser,
-    retry: false,
+    retry: 1,
   });
 
   const currentUserId = currentUser?.id;
 
-  const handleCancel = () => {
+  const handleGoHome = () => {
     router.replace(`/`);
   };
 
   if (isLoading) return <Loader />;
 
-  if (!wine) {
-    return <ReviewFormErrorState onRetry={handleCancel} />;
+  if (isError || !wine) {
+    return <ReviewFormErrorState onRetry={handleGoHome} />;
   }
 
   return (
