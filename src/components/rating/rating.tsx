@@ -61,7 +61,7 @@ const Rating = ({
       )}
       {/* showRatingRatio */}
       {showRatingRatio && (
-        <div className="text-[28px] font-bold leading-[32px] tracking-[-0.3px] pc:relative pc:top-[2px]">
+        <div className="text-[28px] font-bold leading-[32px] tracking-[-0.3px] pc:relative">
           {ratingValue}
           <span className="text-gray-400"> / {maxRatingValue}</span>
         </div>

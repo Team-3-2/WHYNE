@@ -262,9 +262,9 @@ const Page = () => {
         <Searchbar onChange={handleChange} />
       </section>
 
-      <section>
+      <section className="m-auto max-w-[1140px]">
         <h3 className="mb-[10px] text-body-lg">내가 등록한 와인</h3>
-        <div className="grid max-w-[800px] grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
           {DATA.map((item) => (
             <Card
               key={item.id}
@@ -277,7 +277,7 @@ const Page = () => {
           ))}
         </div>
         <h3 className="mb-[10px] text-body-lg">와인 목록 페이지</h3>
-        <div className="grid max-w-[800px] grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
           {DATA.map((item) => (
             <Card
               key={item.id}
@@ -287,7 +287,7 @@ const Page = () => {
               name={item.name}
               region={item.region}
               recentReview={item.recentReview}
-              href={`/detail/${item.id}`}
+              href={`/wines/${item.id}`}
             />
           ))}
         </div>
@@ -327,7 +327,7 @@ const Page = () => {
         <LikeButton count={5024} isLike={true} />
       </section>
 
-      <section className="mt-10 flex flex-col gap-10 pb-[100px]">
+      <section className="m-auto mt-10 flex max-w-[1140px] flex-col gap-10 pb-[100px]">
         <div>
           <h3>하트 아이콘으로 바꿔봄</h3>
           <Rating icon="LikeOnIcon" rating={3.5} />
@@ -351,6 +351,7 @@ const Page = () => {
               2: 10,
               1: 5,
             }}
+            wineId={1}
           />
         </div>
         <div>
@@ -369,6 +370,7 @@ const Page = () => {
           />
         </div>
       </section>
+
       <br />
     </>
   );

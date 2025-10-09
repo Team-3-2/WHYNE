@@ -13,8 +13,7 @@ const DetailTasteItem = ({ type, data, taste, onChange }: TasteItemProps) => {
   return (
     <div
       className={cn(
-        "flex flex-col items-start",
-        "w-[343px] tablet:w-[480px] pc:w-[480px]",
+        "flex w-full flex-col items-start",
         "gap-3 tablet:gap-4 pc:gap-4"
       )}
     >
