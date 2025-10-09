@@ -76,6 +76,7 @@ const ReviewSection = ({
                 review={review}
                 isFirst={index === 0}
                 currentUserId={currentUserId}
+                wineId={wineId}
               />
             ))}
           </div>

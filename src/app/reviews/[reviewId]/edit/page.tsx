@@ -1,22 +1,26 @@
-// app/reviews/[reviewId]/edit/page.tsx
+"use client";
+
+import { useRouter, useParams } from "next/navigation";
+import { useEffect } from "react";
+import PageModal from "@/components/modal/page-modal";
 import ReviewFormClient from "@/app/wines/[id]/_components/wine-review-form/review-form-client";
 
-interface EditPageProps {
-  params: Promise<{ reviewId: string }>;
-}
+export default function EditPage() {
+  const router = useRouter();
+  const params = useParams();
+  const reviewId = Number(params?.reviewId);
 
-/**
- * 리뷰 수정 페이지 (직접 접근용)
- */
-async function EditPage({ params }: EditPageProps) {
-  const { reviewId } = await params;
+  useEffect(() => {
+    if (!reviewId) {
+      router.replace("/wines");
+    }
+  }, [reviewId, router]);
+
+  if (!reviewId) return null;
 
   return (
-    <div className="container py-10">
-      <h1 className="mb-6 text-2xl font-bold">리뷰 수정</h1>
-      <ReviewFormClient reviewId={Number(reviewId)} mode="edit" />
-    </div>
+    <PageModal title="리뷰 수정하기">
+      <ReviewFormClient reviewId={reviewId} mode="edit" />
+    </PageModal>
   );
 }
-
-export default EditPage;

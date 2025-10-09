@@ -1,5 +1,5 @@
 import instance from "@/lib/axios";
-import { ReviewFormData, Review } from "@/types/wine";
+import type { ReviewBase, Review } from "@/types/wine";
 
 /**
  * 리뷰 등록
@@ -7,7 +7,7 @@ import { ReviewFormData, Review } from "@/types/wine";
  * @param data 리뷰 폼 데이터
  * @returns 등록된 리뷰 정보
  */
-async function postReview(data: ReviewFormData): Promise<Review> {
+async function postReview(data: ReviewBase): Promise<Review> {
   const response = await instance.post<Review>("/reviews", data);
   return response.data;
 }

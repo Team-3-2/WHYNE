@@ -1,0 +1,19 @@
+// app/wines/[id]/_hooks/use-review-like.ts
+"use client";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import postLike from "@/api/reviews/post-like";
+import deleteLike from "@/api/reviews/delete-like";
+
+const useReviewLike = (reviewId: number, wineId: number, isLiked: boolean) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => (isLiked ? deleteLike(reviewId) : postLike(reviewId)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["wine", wineId] }); // 리뷰 다
+    },
+  });
+};
+
+export default useReviewLike;

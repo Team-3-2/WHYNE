@@ -40,14 +40,8 @@ export interface Review extends ReviewBase {
     nickname: string;
     image: string | null;
   };
-  isLiked: boolean;
+  isLiked: object;
 }
-
-/**
- * 리뷰 폼 제출 데이터 (ReviewBase와 동일)
- * @author junyeol
- */
-export type ReviewFormData = ReviewBase;
 
 export interface WineDetail extends Wine {
   description?: string;

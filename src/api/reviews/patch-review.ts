@@ -1,5 +1,5 @@
 import instance from "@/lib/axios";
-import type { ReviewFormData, Review } from "@/types/wine";
+import type { ReviewBase, Review } from "@/types/wine";
 
 /**
  * 리뷰 수정
@@ -10,7 +10,7 @@ import type { ReviewFormData, Review } from "@/types/wine";
  */
 const patchReview = async (
   reviewId: number,
-  data: ReviewFormData
+  data: Omit<ReviewBase, "wineId">
 ): Promise<Review> => {
   const response = await instance.patch<Review>(`/reviews/${reviewId}`, data);
   return response.data;
