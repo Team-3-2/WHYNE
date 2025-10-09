@@ -304,6 +304,7 @@ const Page = () => {
                 변경하시겠습니까?
               </>
             ),
+
             confirmMsg: "확인",
           }}
           onClose={() => setOpen(false)}

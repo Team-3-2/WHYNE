@@ -27,7 +27,7 @@ interface ModalProps {
  */
 const ConfirmModal = ({
   isOpen = false,
-  msg = { text: <>수정하시겠습니까?</>, cancelMsg: "취소", confirmMsg: "확인" },
+  msg,
   onClose = () => {},
   onConfirm = () => {},
 }: ModalProps) => {
@@ -73,7 +73,7 @@ const ConfirmModal = ({
             "pc:h-[50px] pc:w-[156px]"
           )}
           onClick={onClose}
-          label={msg.cancelMsg}
+          label={msg.cancelMsg || "취소"}
         />
         <Button
           className={cn(
