@@ -39,6 +39,7 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
               optionMenu={optionMenu}
               createdAt={review.createdAt}
               rating={review.rating}
+              id={review.id}
             />
             <ReviewInfo info={review.wine} />
           </div>
@@ -46,7 +47,7 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
             {review.content}
           </p>
         </div>
-        {/* TODO(지권): 타입 정의 수정필요 */}
+
         <WineTaste type="review" tastes={initialTastes} />
       </div>
     </div>

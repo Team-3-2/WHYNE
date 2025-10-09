@@ -1,4 +1,5 @@
 import { DropdownMenu, Icon, Rating } from "@/components";
+import useDeleteUserReview from "@/hooks/api/reviews/use-delete-user-review";
 import { getTimeAgo } from "@/lib/utils";
 import { Dispatch, SetStateAction } from "react";
 
@@ -7,6 +8,7 @@ interface ReviewRatingProps {
   optionMenu: boolean;
   createdAt: string;
   rating: number;
+  id: number;
 }
 
 const ReviewRating = ({
@@ -14,7 +16,14 @@ const ReviewRating = ({
   optionMenu,
   createdAt,
   rating,
+  id,
 }: ReviewRatingProps) => {
+  const { mutate } = useDeleteUserReview();
+
+  const handleReviewDelete = () => {
+    mutate({ id });
+  };
+
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-4">
@@ -43,7 +52,7 @@ const ReviewRating = ({
             <DropdownMenu
               items={[
                 { label: "수정하기", onClick: () => {} },
-                { label: "삭제하기", onClick: () => {} },
+                { label: "삭제하기", onClick: handleReviewDelete },
               ]}
             />
           </div>
