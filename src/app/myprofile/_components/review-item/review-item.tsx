@@ -1,23 +1,25 @@
 "use client";
 
-import { LikeButton, WineTaste } from "@/components";
+import { WineTaste } from "@/components";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import ReviewRating from "./review-rating";
-import ReviewInfo from "./review-info";
 import { TasteData } from "@/components/wine-taste";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import { ReviewItemType } from "../../_types/review-type";
+import { ReviewInfo, ReviewRating } from ".";
 
 const ReviewItem = ({ review }: { review: ReviewItemType }) => {
   const [optionMenu, setOptionMenu] = useState(false);
-  const [isLike, setIsLike] = useState(false);
 
   const initialTastes: TasteData[] = [
-    { type: "바디감", data: 4 as GaugeLevel, taste: "진해요" },
-    { type: "탄닌", data: 3 as GaugeLevel, taste: "부드러워요" },
-    { type: "당도", data: 2 as GaugeLevel, taste: "달아요" },
-    { type: "산미", data: 1 as GaugeLevel, taste: "많이셔요" },
+    { type: "바디감", data: review?.lightBold as GaugeLevel, taste: "진해요" },
+    {
+      type: "탄닌",
+      data: review?.smoothTannic as GaugeLevel,
+      taste: "부드러워요",
+    },
+    { type: "당도", data: review?.drySweet as GaugeLevel, taste: "달아요" },
+    { type: "산미", data: review?.softAcidic as GaugeLevel, taste: "많이셔요" },
   ];
 
   return (
