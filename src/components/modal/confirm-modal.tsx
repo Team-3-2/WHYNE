@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import Button from "../button/basic-button";
 import Modal from "./modal";
 import { allowScroll, cn, lockingScroll } from "@/lib/utils";
@@ -8,9 +8,9 @@ import { allowScroll, cn, lockingScroll } from "@/lib/utils";
 interface ModalProps {
   isOpen: boolean;
   msg: {
-    text?: string;
+    text: ReactNode;
     cancelMsg?: string;
-    confirmMsg?: string;
+    confirmMsg: string;
   };
   onClose?: () => void;
   onConfirm?: () => void;
@@ -27,9 +27,9 @@ interface ModalProps {
  */
 const ConfirmModal = ({
   isOpen = false,
-  msg,
-  onClose,
-  onConfirm,
+  msg = { text: <>수정하시겠습니까?</>, cancelMsg: "취소", confirmMsg: "확인" },
+  onClose = () => {},
+  onConfirm = () => {},
 }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -62,7 +62,7 @@ const ConfirmModal = ({
           "pc:text-heading-md"
         )}
       >
-        {msg.text || "모달 텍스트를 입력해주세요"}
+        {msg.text}
       </p>
       <div className={cn("flex gap-2")}>
         <Button
@@ -73,7 +73,7 @@ const ConfirmModal = ({
             "pc:h-[50px] pc:w-[156px]"
           )}
           onClick={onClose}
-          label={msg.cancelMsg || "취소"}
+          label={msg.cancelMsg}
         />
         <Button
           className={cn(
@@ -83,7 +83,7 @@ const ConfirmModal = ({
             "pc:h-[50px] pc:w-[156px]"
           )}
           onClick={onConfirm}
-          label={msg.confirmMsg || "삭제하기"}
+          label={msg.confirmMsg}
         />
       </div>
     </Modal>
