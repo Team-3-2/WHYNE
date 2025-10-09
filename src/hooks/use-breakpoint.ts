@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import debounce from "lodash/debounce";
 import { BREAKPOINTS } from "@/constants/responsive";
 
 /**
@@ -18,9 +19,15 @@ export const useBreakpoint = (): Breakpoint => {
       else setBreakpoint("pc");
     };
 
+    const debouncedResize = debounce(handleResize, 100);
+
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("resize", debouncedResize);
+
+    return () => {
+      window.removeEventListener("resize", debouncedResize);
+      debouncedResize.cancel();
+    };
   }, []);
 
   return breakpoint;
