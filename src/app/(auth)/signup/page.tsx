@@ -125,7 +125,7 @@ const Page = () => {
       <ConfirmModal
         isOpen={state !== null && !state?.isError}
         msg={{ text: <>{state?.message}</>, confirmMsg: "확인" }}
-        onConfirm={() => router.replace("/login")}
+        onConfirm={() => router.replace("/")}
         onClose={() => router.back()}
       />
     </>
