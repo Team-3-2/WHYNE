@@ -8,11 +8,11 @@ interface ProfileTabsProps {
 
 const tabs = [
   {
-    label: "내가 쓴 후기 8",
+    label: "내가 쓴 후기",
     href: "review",
   },
   {
-    label: "내가 등록한 와인 4",
+    label: "내가 등록한 와인",
     href: "registered",
   },
   {

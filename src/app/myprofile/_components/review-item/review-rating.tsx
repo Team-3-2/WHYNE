@@ -4,20 +4,26 @@ import { Dispatch, SetStateAction } from "react";
 interface ReviewRatingProps {
   setOptionMenu: Dispatch<SetStateAction<boolean>>;
   optionMenu: boolean;
+  createdAt: string;
+  rating: number;
 }
 
-const ReviewRating = ({ setOptionMenu, optionMenu }: ReviewRatingProps) => {
+const ReviewRating = ({
+  setOptionMenu,
+  optionMenu,
+  createdAt,
+  rating,
+}: ReviewRatingProps) => {
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-2">
-          <Rating rating={5} size="sm" maxRating={5} />
-          <span className="text-body-lg font-bold tracking-[-0.02em] text-gray-900">
-            5
-          </span>
+          <Rating rating={rating} size="sm" showRating />
         </span>
         <span className="text-body-md tracking-[-0.02em] text-gray-500">
-          10시간 전
+          {createdAt}
+          {/* TODO(지권): 시간 계산 로직 변경 */}
+          {/* {getTimeAgo(createdAt)} */}
         </span>
       </div>
       <div className="relative inline-flex">

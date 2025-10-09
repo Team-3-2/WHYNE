@@ -34,6 +34,8 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
             <ReviewRating
               setOptionMenu={setOptionMenu}
               optionMenu={optionMenu}
+              createdAt={review.createdAt}
+              rating={review.rating}
             />
             <ReviewInfo info={review.wine} />
           </div>
