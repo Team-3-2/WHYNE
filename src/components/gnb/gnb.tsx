@@ -28,7 +28,7 @@ const Gnb = () => {
       onClick: () => {
         setIsOpen(false);
         logout();
-        clearUser();
+        // clearUser();
       },
     },
   ];

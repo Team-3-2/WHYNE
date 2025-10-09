@@ -29,7 +29,7 @@ type Story = StoryObj<typeof ConfirmModal>;
 export const Alert: Story = {
   args: {
     isOpen: false,
-    msg: { text: "정말 삭제하시겠습니까?" },
+    msg: { text: <>정말 삭제하시겠습니까?</>, confirmMsg: "확인" },
     onClose: () => {},
     onConfirm: () => {},
   },
@@ -43,7 +43,7 @@ export const Alert: Story = {
           alert("삭제되었습니다.");
           setOpen(false);
         }}
-        msg={{ text: "정말 삭제하시겠습니까?" }}
+        msg={{ text: <>정말 삭제하시겠습니까?</>, confirmMsg: "확인" }}
       />
     );
   },
