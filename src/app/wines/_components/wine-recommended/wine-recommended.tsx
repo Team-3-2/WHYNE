@@ -1,6 +1,5 @@
 import getRecommendedWines from "@/api/wines/get-recommended";
 import RecommendWineSlider from "@/app/wines/_components/wine-recommended/recommend-slider";
-import { recommendwinemock } from "@/mock";
 
 /**
  * [이번 달 추천 와인] 영역
@@ -18,7 +17,7 @@ const WineRecommended = async () => {
             이번 달 추천 와인
           </h2>
           <div className="flex-center mobile:min-h-[284px] tablet:min-h-[303px] pc:min-h-[319px]">
-            <RecommendWineSlider wines={recommendwinemock} />
+            <RecommendWineSlider wines={wines} />
           </div>
         </div>
       </section>
