@@ -7,7 +7,7 @@ import { Button, ConfirmModal, TextInput } from "@/components";
 import AuthRedirect from "../_components/auth-redirect";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import signup from "@/api/auth/signup.action";
 import { useRouter } from "next/navigation";
 
@@ -26,11 +26,6 @@ const Page = () => {
   } = useForm<SignupFormData>({ mode: "onBlur" });
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(signup, null);
-
-  useEffect(() => {
-    // if (state && !state.isError) {
-    // }
-  }, [state]);
 
   return (
     <>
