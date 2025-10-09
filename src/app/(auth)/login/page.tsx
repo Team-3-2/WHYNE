@@ -30,6 +30,9 @@ const Page = () => {
   useEffect(() => {
     if (state && !state.isError) {
       setUser(state.data);
+
+      sessionStorage.setItem("accessToken", state.data?.accessToken);
+      localStorage.setItem("refreshToken", state.data?.refreshToken);
       router.push("/");
     }
   }, [state]);

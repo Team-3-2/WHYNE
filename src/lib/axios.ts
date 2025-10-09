@@ -30,6 +30,11 @@ const authRefreshToken = async () => {
   } catch (error) {
     sessionStorage.setItem("accessToken", "");
     localStorage.removeItem("refreshToken");
+
+    if (window.location.pathname !== "/login") {
+      window.location.href = "/login";
+    }
+
     throw new Error(`다시 로그인 해주세요 ${error}`);
   }
 };
