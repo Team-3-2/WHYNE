@@ -1,9 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, isValidImageSrc } from "@/lib/utils";
 import Image from "next/image";
 import { WineType } from "../../_types/review-type";
 import { useState } from "react";
+import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
 
 const PLACEHOLDER = "/images/placeholder/img-wine.svg";
 
@@ -18,14 +19,22 @@ const ReviewInfo = ({ info }: { info: WineType }) => {
         "pc:gap-[17px]"
       )}
     >
-      <Image
-        src={imgSrc}
-        alt="와인 이미지"
-        width={60}
-        height={60}
-        className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
-        onError={() => setImgSrc(PLACEHOLDER)}
-      />
+      {isValidImageSrc(imgSrc) ? (
+        <Image
+          src={imgSrc}
+          alt="와인 이미지"
+          width={60}
+          height={60}
+          className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
+          onError={() => setImgSrc(PLACEHOLDER)}
+        />
+      ) : (
+        <PlaceholderImgWine
+          className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
+          role="img"
+          aria-label={`${info.name} 이미지 불러오기 실패`}
+        />
+      )}
       <div
         className={cn(
           "flex flex-col items-start gap-[2px]",
