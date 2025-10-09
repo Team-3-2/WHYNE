@@ -1,4 +1,3 @@
-// app/wines/[id]/_components/wine-review/wine-review-item.tsx
 "use client";
 
 import { useState, useRef } from "react";

@@ -1,4 +1,3 @@
-// src/api/reviews/post-like.ts
 import instance from "@/lib/axios";
 
 const postLike = async (reviewId: number) => {

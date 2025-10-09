@@ -11,7 +11,7 @@ import type { ReviewBase } from "@/types/wine";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 
 interface ReviewFormClientProps {
-  wineId?: number; // optional
+  wineId?: number;
   reviewId?: number;
   mode?: "create" | "edit";
 }
