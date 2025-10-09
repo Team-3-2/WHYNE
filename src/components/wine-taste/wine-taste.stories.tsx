@@ -1,10 +1,11 @@
 // src/components/WineTaste/WineTaste.stories.tsx
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import { useState, useEffect } from "react";
-import WineTaste from "./wine-taste"; // 파일명 일치 확인
-import { TasteData } from "./_types";
-import { GaugeLevel } from "../gauge/block-gauge"; // 파일명 일치 확인
-import { getTasteDescription } from "./_utils/tasteUtils";
+import { useState } from "react";
+import WineTaste, {
+  getTasteDescription,
+  type TasteData,
+} from "@/components/wine-taste";
+import { GaugeLevel } from "@/components/gauge/block-gauge";
 
 const meta: Meta<typeof WineTaste> = {
   title: "Components/WineTaste",
