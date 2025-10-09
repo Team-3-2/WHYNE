@@ -1,6 +1,6 @@
-import { cn, formatCount } from "@/lib/utils";
-import Button from "./basic-button";
+import { cn } from "@/lib/utils";
 import { ComponentProps } from "react";
+import IconButton from "./icon-button";
 
 interface LikeButtonProps extends ComponentProps<"button"> {
   isLike?: boolean;
@@ -11,35 +11,25 @@ interface LikeButtonProps extends ComponentProps<"button"> {
  * 좋아요 버튼 컴포넌트
  * @author hwitae
  * @param isLike 좋아요 상태 true/false
- * @param count 좋아요 개수
  * @returns button
  */
-const LikeButton = ({ isLike, count = 0, ...props }: LikeButtonProps) => {
+const LikeButton = ({ isLike = false, ...props }: LikeButtonProps) => {
   return (
-    <Button
+    <IconButton
       icon={isLike ? "LikeOnIcon" : "LikeOffIcon"}
-      variant="outline"
       aria-label={isLike ? "좋아요" : "좋아요 취소"}
       aria-pressed={isLike}
       className={cn(
-        "h-8 w-fit cursor-pointer gap-[2px] rounded-lg py-1 pl-2 pr-3",
-        "tablet:h-9 tablet:w-fit tablet:gap-[4px] tablet:py-[6px] tablet:pl-3 tablet:pr-[14px]",
-        "pc:h-9 pc:w-fit pc:gap-[4px] pc:py-[6px] pc:pl-3 pc:pr-[14px]",
+        "h-6 w-6 cursor-pointer",
+        "border-none hover:bg-inherit active:bg-inherit active:text-inherit",
+        "tablet:h-6 tablet:w-6",
+        "pc:h-6 pc:w-6",
         isLike && "border border-red-200"
       )}
       iconClassName={cn("mobile:ic-sm", "tablet:ic-sm", "pc:ic-md")}
       iconColor={isLike ? "red200" : "default"}
       {...props}
-    >
-      <span
-        className={cn(
-          "text-lg font-normal tracking-[-0.02em]",
-          isLike ? "text-red-200" : "text-primary"
-        )}
-      >
-        {formatCount(count)}
-      </span>
-    </Button>
+    />
   );
 };
 
