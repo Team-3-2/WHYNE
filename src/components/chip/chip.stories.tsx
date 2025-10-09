@@ -25,17 +25,3 @@ export const Default: Story = {
     label: "후추",
   },
 };
-
-export const WithImage: Story = {
-  args: {
-    label: "후추",
-    img: "/images/test/test_chip.jpg",
-  },
-  decorators: [
-    (Story) => (
-      <div className="w-[100px]">
-        <Story />
-      </div>
-    ),
-  ],
-};

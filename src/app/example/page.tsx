@@ -195,7 +195,7 @@ const Page = () => {
         </div>
         <div className="flex-center gap-4">
           <Chip label="후추" />
-          <Chip label="후추" img="/images/test/test_chip.jpg" />
+          <Chip label="바닐라" />
         </div>
         <div>
           <Flavor
