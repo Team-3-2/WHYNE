@@ -13,6 +13,11 @@
   }
 }
 
+@layer components {
+  .container {
+    @apply mx-auto max-w-[1140px] px-4 tablet:px-8;
+  }
+}
 :root {
   --color-black: #1a1918;
   --color-white: #ffffff;
