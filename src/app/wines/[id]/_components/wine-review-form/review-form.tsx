@@ -143,7 +143,7 @@ export default function ReviewForm({
                 label={aromaMap[aroma].label}
                 selected={selectedAromas.includes(aroma)}
                 onToggle={() => toggleAroma(aroma)}
-                size="md"
+                aria-label={`${aromaMap[aroma].label} 선택`}
               />
             ))}
           </div>

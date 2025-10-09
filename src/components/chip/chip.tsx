@@ -3,30 +3,19 @@
 import { cn } from "@/lib/utils";
 import { memo } from "react";
 
-type ChipSize = "sm" | "md";
-
 interface ChipProps {
   label: string;
   selected?: boolean;
   onToggle?: () => void;
   disabled?: boolean;
-  size?: ChipSize;
-  className?: string;
   "aria-label"?: string;
 }
-
-const sizeClasses: Record<ChipSize, string> = {
-  sm: "h-[38px] text-body-sm pc:h-[48px] pc:text-body-md",
-  md: "h-[44px] text-body-md pc:h-[52px] pc:text-body-lg",
-};
 
 function ChipBase({
   label,
   selected = false,
   onToggle,
   disabled,
-  size = "sm",
-  className,
   "aria-label": ariaLabel,
 }: ChipProps) {
   return (
