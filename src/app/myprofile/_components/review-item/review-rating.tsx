@@ -1,4 +1,5 @@
 import { DropdownMenu, Icon, Rating } from "@/components";
+import { getTimeAgo } from "@/lib/utils";
 import { Dispatch, SetStateAction } from "react";
 
 interface ReviewRatingProps {
@@ -21,9 +22,7 @@ const ReviewRating = ({
           <Rating rating={rating} size="sm" showRating />
         </span>
         <span className="text-body-md tracking-[-0.02em] text-gray-500">
-          {createdAt}
-          {/* TODO(지권): 시간 계산 로직 변경 */}
-          {/* {getTimeAgo(createdAt)} */}
+          {getTimeAgo(createdAt)}
         </span>
       </div>
       <div className="relative inline-flex">

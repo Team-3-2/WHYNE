@@ -8,6 +8,8 @@ const useGetUserReview = () => {
     queryKey: ["user-review"],
     queryFn: () => getUserReview({ limit: 5 }),
     refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 30,
   });
 };
 

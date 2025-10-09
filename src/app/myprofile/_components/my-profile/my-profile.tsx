@@ -24,21 +24,21 @@ const MyProfile = () => {
   return (
     <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
       <article className="w-full px-4 tablet:px-8 pc:mx-[300px]">
-        <ProfileTabs tab={tab} setTab={setTab} />
+        <ProfileTabs
+          tab={tab}
+          setTab={setTab}
+          reviewTotal={userReview.totalCount}
+          // registeredTotal={}
+        />
 
-        {tab === "review" && (
-          <section className="mt-20">
-            {userReview?.list?.map((review: ReviewItemType) => (
+        <section className="mt-20">
+          {tab === "review" &&
+            userReview?.list?.map((review: ReviewItemType) => (
               <ReviewItem key={review.id} review={review} />
             ))}
-          </section>
-        )}
 
-        {tab === "account" && (
-          <section>
-            <AccountItem user={user} />
-          </section>
-        )}
+          {tab === "account" && <AccountItem user={user} />}
+        </section>
       </article>
     </main>
   );

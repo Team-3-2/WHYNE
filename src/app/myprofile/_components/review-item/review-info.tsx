@@ -1,8 +1,15 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { WineType } from "../../_types/review-type";
+import { useState } from "react";
+
+const PLACEHOLDER = "/images/placeholder/img-wine.svg";
 
 const ReviewInfo = ({ info }: { info: WineType }) => {
+  const [imgSrc, setImgSrc] = useState(info?.image || PLACEHOLDER);
+
   return (
     <div
       className={cn(
@@ -12,11 +19,12 @@ const ReviewInfo = ({ info }: { info: WineType }) => {
       )}
     >
       <Image
-        src={info?.image || "/images/placeholder/img-wine.svg"}
+        src={imgSrc}
         alt="와인 이미지"
         width={60}
         height={60}
         className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
+        onError={() => setImgSrc(PLACEHOLDER)}
       />
       <div
         className={cn(
