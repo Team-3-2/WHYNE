@@ -17,7 +17,9 @@ const WineRecommended = async () => {
           <h2 className="mb-[19px] mb-[38px] px-[20px] text-heading-sm text-gray-800 tablet:mb-[33px] tablet:px-[50px] tablet:text-heading-md pc:px-[60px]">
             이번 달 추천 와인
           </h2>
-          <RecommendWineSlider wines={wines} />
+          <div className="flex-center mobile:min-h-[284px] tablet:min-h-[303px] pc:min-h-[319px]">
+            <RecommendWineSlider wines={recommendwinemock} />
+          </div>
         </div>
       </section>
     </>

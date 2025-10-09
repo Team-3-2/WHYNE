@@ -13,11 +13,18 @@ import { CardItem } from "@/types/card-item-type";
 
 interface RecommendWineSliderProps {
   wines: CardItem[];
+  className?: string;
 }
 
-const RecommendWineSlider = ({ wines }: RecommendWineSliderProps) => {
+const RecommendWineSlider = ({
+  wines,
+  className,
+}: RecommendWineSliderProps) => {
   return (
-    <Carousel breakpoints={CAROUSEL_BREAKPOINTS.recommendWine}>
+    <Carousel
+      breakpoints={CAROUSEL_BREAKPOINTS.recommendWine}
+      className={className}
+    >
       {wines.map((wine) => (
         <Link key={wine.id} href={`/wines/${wine.id}`}>
           <RecommendCard wine={wine} />
