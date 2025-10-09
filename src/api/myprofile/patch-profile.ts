@@ -11,12 +11,7 @@ export default async function patchProfile(body: ProfileData) {
     return;
   }
 
-  const res = await instance.patch(
-    `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
-    body,
-    {
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+  const res = await instance.patch("/users/me", body);
+
   return res.data;
 }
