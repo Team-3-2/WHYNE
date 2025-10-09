@@ -43,15 +43,9 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
             {review.content}
           </p>
         </div>
-        <div className="w-full">
-          <WineTaste type="review" tastes={initialTastes} />
-        </div>
+        {/* TODO(지권): 타입 정의 수정필요 */}
+        <WineTaste type="review" tastes={initialTastes} />
       </div>
-      {/* <LikeButton
-        count={24}
-        isLike={isLike}
-        onClick={() => setIsLike(!isLike)}
-      /> */}
     </div>
   );
 };
