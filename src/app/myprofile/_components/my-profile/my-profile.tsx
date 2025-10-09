@@ -10,7 +10,6 @@ import useGetUserReview from "@/hooks/api/myprofile/use-get-user-review";
 import { ReviewItemType } from "../../_types/review-type";
 
 // TODO(지권): 이슈 발생...
-// TODO(지권): 스토리북 수정 필요
 
 const MyProfile = () => {
   const searchParams = useSearchParams();

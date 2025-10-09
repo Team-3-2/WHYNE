@@ -9,7 +9,6 @@ import { ReviewItemType } from "../../_types/review-type";
 import { ReviewInfo, ReviewRating } from ".";
 
 const ReviewItem = ({ review }: { review: ReviewItemType }) => {
-  console.log(review);
   const [optionMenu, setOptionMenu] = useState(false);
 
   const initialTastes: TasteData[] = [
