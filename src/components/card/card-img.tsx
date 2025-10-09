@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { SVGProps } from "react";
 import Image from "next/image";
@@ -58,7 +60,7 @@ const CardImage = ({
           />
         ) : (
           <FallbackImage
-            className="h-full w-auto object-contain"
+            className="relative left-[50%] h-full w-auto translate-x-[-50%] object-contain"
             role="img"
             aria-label={`${alt} 이미지 불러오기 실패`}
           />
