@@ -46,11 +46,11 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
         {/* TODO(지권): 타입 정의 수정필요 */}
         <WineTaste type="review" tastes={initialTastes} />
       </div>
-      <LikeButton
+      {/* <LikeButton
         count={24}
         isLike={isLike}
         onClick={() => setIsLike(!isLike)}
-      />
+      /> */}
     </div>
   );
 };
