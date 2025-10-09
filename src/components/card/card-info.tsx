@@ -7,6 +7,11 @@ import Rating from "@/components/rating/rating";
  * @param price : 가격
  * @param avgRating : 평균 별점
  * @param reviewCount : 후기 개수
+ * @param ratingWrapperClassName : 별점 래퍼 클래스명
+ * @param reviewCountClassName : 후기 개수 클래스명
+ * @param nameClassName : 이름 클래스명
+ * @param regionClassName : 지역 클래스명
+ * @param priceClassName : 가격 클래스명
  */
 
 interface CardInfoProps {
@@ -15,6 +20,12 @@ interface CardInfoProps {
   price?: number;
   avgRating?: number;
   reviewCount?: number;
+  className?: string;
+  ratingWrapperClassName?: string;
+  reviewCountClassName?: string;
+  nameClassName?: string;
+  regionClassName?: string;
+  priceClassName?: string;
 }
 
 const CardInfo = ({
@@ -23,25 +34,41 @@ const CardInfo = ({
   price,
   avgRating,
   reviewCount,
+  className,
+  ratingWrapperClassName,
+  reviewCountClassName,
+  nameClassName,
+  regionClassName,
+  priceClassName,
 }: CardInfoProps) => {
   return (
-    <div className="pb-[24px] pr-[26px]">
+    <div className={`pb-[24px] pr-[26px] ${className}`}>
       {typeof avgRating === "number" && (
-        <div className="mb-[12px] flex items-center gap-[14px]">
+        <div
+          className={`mb-[12px] flex items-center gap-[14px] ${ratingWrapperClassName}`}
+        >
           <Rating rating={avgRating} />
-          <span className="relative text-body-sm font-normal text-gray-500">
+          <span
+            className={`relative text-body-sm font-normal text-gray-500 ${reviewCountClassName}`}
+          >
             {reviewCount}개의 후기
           </span>
         </div>
       )}
-      <div className="max-w-[280px]">
-        <div className="line-clamp-2 text-heading-lg">{name}</div>
-        <div className="mt-[6px] text-body-sm font-normal text-gray-500">
+      <div>
+        <div className={`line-clamp-2 text-heading-lg ${nameClassName}`}>
+          {name}
+        </div>
+        <div
+          className={`mt-[6px] line-clamp-2 text-body-sm font-normal text-gray-500 ${regionClassName}`}
+        >
           {region}
         </div>
       </div>
       {typeof price === "number" && (
-        <div className="mt-[20px] text-heading-lg font-bold pc:mt-[24px]">
+        <div
+          className={`mt-[20px] text-heading-lg font-bold pc:mt-[24px] ${priceClassName}`}
+        >
           {price.toLocaleString()}원
         </div>
       )}
