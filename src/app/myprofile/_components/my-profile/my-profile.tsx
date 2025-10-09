@@ -20,6 +20,14 @@ const MyProfile = () => {
 
   if (!user) return redirect("/login");
 
+  // 무한 스크롤 훅
+  // useInfiniteScroll({
+  //   observerTarget,
+  //   hasNextPage,
+  //   fetchNextPage,
+  //   isFetchingNextPage,
+  // });
+
   return (
     <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
       <article className="w-full px-4 tablet:px-8 pc:mx-[300px]">
