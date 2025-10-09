@@ -1,50 +1,44 @@
+import type { TasteData } from "../_types";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 
-/**
- * 와인 맛 유형과 강도 레벨에 따른 설명을 반환하는 함수
- * @author junyeol
- * @param type 맛 타입 ( 바디감, 탄닌, 당도, 산미 )
- * @param level 맛 레벨 ( 0 ~ 6 )
- * @returns 맛 설명 텍스트
- */
+const tasteDescriptionMap: Record<string, readonly string[]> = {
+  바디감: ["없음", "가벼움", "적당해요", "진해요"],
+  탄닌: ["없음", "부드러움", "적당해요", "떫어요"],
+  당도: ["없음", "약간단맛", "중간단맛", "달아요"],
+  산미: ["없음", "순해요", "새콤해요", "상큼해요"],
+};
+
+const mapLevelToIndex = (level: GaugeLevel): number => {
+  if (level === 0) return 0;
+  if (level <= 2) return 1;
+  if (level <= 4) return 2;
+  return 3;
+};
+
 export const getTasteDescription = (
   type: string,
   level: GaugeLevel
 ): string => {
-  switch (type) {
-    case "바디감":
-      return level === 0
-        ? "없음"
-        : level <= 2
-          ? "가벼워요"
-          : level <= 4
-            ? "중간"
-            : "진해요";
-    case "탄닌":
-      return level === 0
-        ? "없음"
-        : level <= 2
-          ? "부드러워요"
-          : level <= 4
-            ? "적당함"
-            : "떫어요";
-    case "당도":
-      return level === 0
-        ? "없음"
-        : level <= 2
-          ? "약간 단맛"
-          : level <= 4
-            ? "중간 단맛"
-            : "달아요";
-    case "산미":
-      return level === 0
-        ? "없음"
-        : level <= 2
-          ? "부족함"
-          : level <= 4
-            ? "적당함"
-            : "많이셔요";
-    default:
-      return "";
-  }
+  const descriptions = tasteDescriptionMap[type];
+  if (!descriptions) return "";
+  return descriptions[mapLevelToIndex(level)] ?? "";
 };
+
+const TASTE_KEYS = [
+  { type: "바디감", key: "lightBold" },
+  { type: "탄닌", key: "smoothTannic" },
+  { type: "당도", key: "drySweet" },
+  { type: "산미", key: "softAcidic" },
+] as const;
+
+type TasteSource = Record<(typeof TASTE_KEYS)[number]["key"], number>;
+
+export const buildTasteData = (source: TasteSource): TasteData[] =>
+  TASTE_KEYS.map(({ type, key }) => {
+    const level = source[key] as GaugeLevel;
+    return {
+      type,
+      data: level,
+      taste: getTasteDescription(type, level),
+    };
+  });
