@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import WineTaste, { getTasteDescription } from "@/components/wine-taste";
-import { Button, RatingInput } from "@/components";
+import { Button, Chip, RatingInput } from "@/components";
 import { aromaMap } from "@/components/flavor/aroma-map";
 import { AromaKey } from "@/types/AromaType";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
@@ -140,18 +140,13 @@ export default function ReviewForm({
           </label>
           <div className="flex flex-wrap gap-2">
             {aromaKeys.map((aroma) => (
-              <button
+              <Chip
                 key={aroma}
-                type="button"
-                onClick={() => toggleAroma(aroma)}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 transition-colors duration-200 ${
-                  selectedAromas.includes(aroma)
-                    ? "border-primary bg-primary text-white"
-                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
-                } `}
-              >
-                <span className="text-body-sm">{aromaMap[aroma].label}</span>
-              </button>
+                label={aromaMap[aroma].label}
+                selected={selectedAromas.includes(aroma)}
+                onToggle={() => toggleAroma(aroma)}
+                aria-label={`${aromaMap[aroma].label} 선택`}
+              />
             ))}
           </div>
         </div>

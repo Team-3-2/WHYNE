@@ -29,7 +29,7 @@ const Page = () => {
 
   useEffect(() => {
     if (state && !state.isError) {
-      setUser(state.data);
+      setUser(state.data.user);
 
       sessionStorage.setItem("accessToken", state.data?.accessToken);
       localStorage.setItem("refreshToken", state.data?.refreshToken);

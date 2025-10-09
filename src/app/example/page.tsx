@@ -195,7 +195,7 @@ const Page = () => {
         </div>
         <div className="flex-center gap-4">
           <Chip label="후추" />
-          <Chip label="후추" img="/images/test/test_chip.jpg" />
+          <Chip label="바닐라" />
         </div>
         <div>
           <Flavor
@@ -296,7 +296,16 @@ const Page = () => {
       <section>
         <ConfirmModal
           isOpen={open}
-          msg={{ text: "정말 삭제하시겠습니까?" }}
+          msg={{
+            text: (
+              <>
+                닉네임을
+                <br />
+                변경하시겠습니까?
+              </>
+            ),
+            confirmMsg: "확인",
+          }}
           onClose={() => setOpen(false)}
           onConfirm={() => {
             alert("삭제되었습니다.");
