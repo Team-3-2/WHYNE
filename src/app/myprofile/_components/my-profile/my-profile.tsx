@@ -18,7 +18,6 @@ const MyProfile = () => {
   const { user } = useUserStore((state) => state);
 
   const { data: userReview } = useGetUserReview();
-  console.log(userReview);
 
   if (!user) return redirect("/login");
 
