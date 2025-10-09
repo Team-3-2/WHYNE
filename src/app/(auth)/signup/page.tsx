@@ -126,6 +126,7 @@ const Page = () => {
         isOpen={state !== null && !state?.isError}
         msg={{ text: <>{state?.message}</>, confirmMsg: "확인" }}
         onConfirm={() => router.replace("/login")}
+        onClose={() => router.back()}
       />
     </>
   );
