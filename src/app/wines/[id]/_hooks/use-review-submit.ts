@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import postReview from "@/api/reviews/post-review";
-import type { ReviewFormData } from "../_types";
+import type { ReviewFormData } from "@/types/wine";
 
 /**
  * 리뷰 제출을 처리하는 TanStack Query Mutation 훅

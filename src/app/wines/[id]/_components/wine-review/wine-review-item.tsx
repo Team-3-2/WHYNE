@@ -16,6 +16,7 @@ import useToggle from "@/hooks/use-toggle";
 import useClickOutside from "@/hooks/use-click-outside";
 import WineReviewRating from "./wine-review-rating";
 import type { Review } from "@/types/wine";
+import { useRouter } from "next/navigation";
 
 interface WineReviewItemProps {
   review: Review;
@@ -69,6 +70,8 @@ const WineReviewItem = ({
   isFirst = false,
   currentUserId,
 }: WineReviewItemProps) => {
+  const router = useRouter();
+
   const initialIsLiked =
     typeof review.isLiked === "boolean" ? review.isLiked : false;
   const [isLike, setIsLike] = useState(initialIsLiked);
@@ -94,7 +97,7 @@ const WineReviewItem = ({
 
   const handleEdit = () => {
     closeMenu();
-    alert("리뷰 수정 기능은 준비 중입니다.");
+    router.push(`/reviews/${review.id}/edit?wineId=${review.wineId}`);
   };
 
   const openDeleteModal = () => {

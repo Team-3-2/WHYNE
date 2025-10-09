@@ -1,8 +1,4 @@
-/**
- * 와인 타입 정의
- * @author junyeol
- */
-
+// types/wine.ts
 import type { AromaKey } from "./AromaType";
 
 export interface Wine {
@@ -16,8 +12,11 @@ export interface Wine {
   reviewCount: number;
 }
 
-export interface Review {
-  id: number;
+/**
+ * 리뷰 핵심 데이터 (작성/수정/제출용)
+ * @author junyeol
+ */
+export interface ReviewBase {
   rating: number;
   lightBold: number;
   smoothTannic: number;
@@ -25,6 +24,15 @@ export interface Review {
   softAcidic: number;
   aroma: AromaKey[];
   content: string;
+  wineId: number;
+}
+
+/**
+ * API 응답 리뷰 타입
+ * @author junyeol
+ */
+export interface Review extends ReviewBase {
+  id: number;
   createdAt: string;
   updatedAt: string;
   user: {
@@ -33,15 +41,18 @@ export interface Review {
     image: string | null;
   };
   isLiked: boolean;
-  wineId: number;
 }
+
+/**
+ * 리뷰 폼 제출 데이터 (ReviewBase와 동일)
+ * @author junyeol
+ */
+export type ReviewFormData = ReviewBase;
 
 export interface WineDetail extends Wine {
   description?: string;
   year?: number;
   alcohol?: number;
-
-  // API 응답에 포함된 필드
   userId: number;
   recentReview: Review | null;
   reviews: Review[];

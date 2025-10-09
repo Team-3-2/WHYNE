@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WineTaste, { getTasteDescription } from "@/components/wine-taste";
 import { Button, RatingInput } from "@/components";
 import { aromaMap } from "@/components/flavor/aroma-map";
 import { AromaKey } from "@/types/AromaType";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import WineInfo from "../wine-info";
-import type { ReviewFormData } from "../../_types";
+import type { ReviewFormData } from "@/types/wine";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 
 interface ReviewFormProps {
@@ -18,6 +18,7 @@ interface ReviewFormProps {
   onSubmit: (data: ReviewFormData) => void;
   onCancel: () => void;
   isSubmitting?: boolean;
+  initialData?: ReviewFormData;
 }
 
 export default function ReviewForm({
@@ -28,6 +29,7 @@ export default function ReviewForm({
   onSubmit,
   onCancel,
   isSubmitting = false,
+  initialData,
 }: ReviewFormProps) {
   // 상태 관리
   const [rating, setRating] = useState(0);

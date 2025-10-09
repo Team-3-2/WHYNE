@@ -1,6 +1,5 @@
 import instance from "@/lib/axios";
-import { ReviewFormData } from "@/app/wines/[id]/_types";
-import { Review } from "@/types/wine";
+import { ReviewFormData, Review } from "@/types/wine";
 
 /**
  * 리뷰 등록
