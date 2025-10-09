@@ -3,24 +3,19 @@
 import { WineTaste } from "@/components";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { TasteData } from "@/components/wine-taste";
-import { GaugeLevel } from "@/components/gauge/block-gauge";
+import { buildTasteData } from "@/components/wine-taste";
 import { ReviewItemType } from "../../_types/review-type";
 import { ReviewInfo, ReviewRating } from ".";
 
 const ReviewItem = ({ review }: { review: ReviewItemType }) => {
   const [optionMenu, setOptionMenu] = useState(false);
 
-  const initialTastes: TasteData[] = [
-    { type: "바디감", data: review?.lightBold as GaugeLevel, taste: "진해요" },
-    {
-      type: "탄닌",
-      data: review?.smoothTannic as GaugeLevel,
-      taste: "부드러워요",
-    },
-    { type: "당도", data: review?.drySweet as GaugeLevel, taste: "달아요" },
-    { type: "산미", data: review?.softAcidic as GaugeLevel, taste: "많이셔요" },
-  ];
+  const tastes = buildTasteData({
+    lightBold: review.lightBold,
+    smoothTannic: review.smoothTannic,
+    drySweet: review.drySweet,
+    softAcidic: review.softAcidic,
+  });
 
   return (
     <div
@@ -47,7 +42,7 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
           </p>
         </div>
 
-        <WineTaste type="review" tastes={initialTastes} />
+        <WineTaste type="review" tastes={tastes} />
       </div>
     </div>
   );
