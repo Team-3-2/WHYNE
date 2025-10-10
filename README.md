@@ -85,5 +85,5 @@ src
 
 ## 바로가기
 - [배포 바로가기](https://google.com/)
-- [스토리북 바로가기](https://68d3998e0b054d1207706cbb-rwcjoqmeoa.chromatic.com/)
+- [스토리북 바로가기](https://68d3998e0b054d1207706cbb-tzevsxkvcq.chromatic.com/?path=/docs/my-profile-accountitem--docs)
 - [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
