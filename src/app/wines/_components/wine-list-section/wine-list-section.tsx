@@ -6,25 +6,41 @@ import WineList from "../wine-list/wine-list";
 import useGetWineList from "@/hooks/api/wines/use-get-wine-list";
 import { useSearchParams } from "next/navigation";
 import WineSearchOption from "../wine-search-option/wine-search-option";
+import { useState, useCallback } from "react";
+import debounce from "lodash/debounce";
+import { parseQueryParams } from "../../_utils/parse-query-params";
+
+const limit = 10;
 
 const WineListSection = () => {
   const params = useSearchParams();
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  const typeParam = params.get("type");
-  const type = typeParam ? typeParam.toUpperCase() : undefined;
+  const { type, rating, maxPrice, minPrice } = parseQueryParams(params);
 
-  const ratingParam = params.get("rating");
-  const rating = ratingParam ? parseFloat(ratingParam) : undefined;
+  const debouncedSetSearch = debounce((value: string) => {
+    setDebouncedSearch(value);
+  }, 400);
 
-  const maxPriceParam = params.get("maxPrice");
-  const maxPrice = maxPriceParam ? parseFloat(maxPriceParam) : undefined;
+  const handleSearchChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setSearch(value);
+      debouncedSetSearch(value);
+    },
+    [debouncedSetSearch]
+  );
 
-  const minPriceParam = params.get("minPrice");
-  const minPrice = minPriceParam ? parseFloat(minPriceParam) : undefined;
+  const { data } = useGetWineList({
+    limit,
+    type,
+    rating,
+    maxPrice,
+    minPrice,
+    name: debouncedSearch,
+  });
 
-  const limit = 10;
-
-  const { data } = useGetWineList({ limit, type, rating, maxPrice, minPrice });
   console.log(data);
 
   return (
@@ -40,7 +56,11 @@ const WineListSection = () => {
       <WineSearchOption />
 
       {/* 검색바 */}
-      <Searchbar className="order-1 flex-1 pc:order-2" />
+      <Searchbar
+        className="order-1 flex-1 pc:order-2"
+        value={search}
+        onChange={handleSearchChange}
+      />
 
       {/* 와인 목록 */}
       <WineList />

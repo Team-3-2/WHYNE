@@ -73,9 +73,7 @@ const PriceOption = () => {
           </span>
         </div>
 
-        {/* 겹치는 이중 range 슬라이더 */}
         <div className="relative h-5 w-full">
-          {/* 최소 */}
           <input
             type="range"
             min={MIN_PRICE}
@@ -90,7 +88,6 @@ const PriceOption = () => {
             )}
           />
 
-          {/* 최대 */}
           <input
             type="range"
             min={MIN_PRICE}
