@@ -84,6 +84,6 @@ src
 > [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%ED%8F%B4%EB%8D%94-%EA%B5%AC%EC%A1%B0)
 
 ## 바로가기
-- [배포 바로가기](https://wine-phi-olive.vercel.app/)
+- [배포 바로가기](https://google.com/)
 - [스토리북 바로가기](https://68d3998e0b054d1207706cbb-rwcjoqmeoa.chromatic.com/)
 - [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
