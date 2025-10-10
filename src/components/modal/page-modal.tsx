@@ -25,7 +25,6 @@ const PageModal = ({ title = "등록 하기", children }: PageModalProps) => {
   });
 
   return (
-    // TODO: 모바일 반응형 스타일 작성
     <Modal
       ref={modalRef}
       className={cn(
