@@ -3,10 +3,12 @@
 import { TypeInput } from "@/components/select-type/select-type";
 import { WINE_TYPE } from "../../_constants/wine-type";
 import { useUpdateQuery } from "../../_utils/use-update-query";
+import { cn } from "@/lib/utils";
 
 const TypeOption = () => {
   const { setQuery, searchParams } = useUpdateQuery();
   const selectedType = searchParams.get("type") ?? "";
+  console.log(selectedType);
 
   // 타입 선택 핸들러
   const handleTypeClick = (type: string) => {
@@ -26,6 +28,8 @@ const TypeOption = () => {
             key={item}
             name={item as "SPARKLING" | "WHITE" | "RED"}
             onClick={() => handleTypeClick(item)}
+            className={cn(selectedType === item && "bg-gray-800")}
+            labelClassName={cn(selectedType === item && "text-white")}
           />
         ))}
       </div>
