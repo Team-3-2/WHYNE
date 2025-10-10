@@ -1,23 +1,37 @@
-import { DropdownMenu, Icon, StarRating } from "@/components";
+import { DropdownMenu, Icon, Rating } from "@/components";
+import useDeleteUserReview from "@/hooks/api/reviews/use-delete-user-review";
+import { getTimeAgo } from "@/lib/utils";
 import { Dispatch, SetStateAction } from "react";
 
 interface ReviewRatingProps {
   setOptionMenu: Dispatch<SetStateAction<boolean>>;
   optionMenu: boolean;
+  createdAt: string;
+  rating: number;
+  id: number;
 }
 
-const ReviewRating = ({ setOptionMenu, optionMenu }: ReviewRatingProps) => {
+const ReviewRating = ({
+  setOptionMenu,
+  optionMenu,
+  createdAt,
+  rating,
+  id,
+}: ReviewRatingProps) => {
+  const { mutate } = useDeleteUserReview();
+
+  const handleReviewDelete = () => {
+    mutate({ id });
+  };
+
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-2">
-          <StarRating rating={5} size="sm" maxRating={5} />
-          <span className="text-body-lg font-bold tracking-[-0.02em] text-gray-900">
-            5
-          </span>
+          <Rating rating={rating} size="sm" showRating />
         </span>
         <span className="text-body-md tracking-[-0.02em] text-gray-500">
-          10시간 전
+          {getTimeAgo(createdAt)}
         </span>
       </div>
       <div className="relative inline-flex">
@@ -38,7 +52,7 @@ const ReviewRating = ({ setOptionMenu, optionMenu }: ReviewRatingProps) => {
             <DropdownMenu
               items={[
                 { label: "수정하기", onClick: () => {} },
-                { label: "삭제하기", onClick: () => {} },
+                { label: "삭제하기", onClick: handleReviewDelete },
               ]}
             />
           </div>

@@ -17,9 +17,9 @@ interface InputValue extends ComponentProps<"input"> {
  * @returns
  */
 const Input = ({
-  placeholder,
-  isError,
-  errorMsg,
+  placeholder = "내용을 입력해주세요",
+  isError = false,
+  // errorMsg = "형식에 맞지 않습니다.",
   className,
   ...props
 }: InputValue) => {
@@ -38,7 +38,7 @@ const Input = ({
         isError && "border-2 border-red-400"
       )}
       type="text"
-      placeholder={placeholder || "내용을 입력해주세요"}
+      placeholder={placeholder}
       {...props}
     />
   );
@@ -53,42 +53,36 @@ const Input = ({
  * @returns input
  */
 const TextInput = ({
-  title,
+  title = "제목",
   placeholder,
-  isError,
+  isError = false,
   errorMsg,
   variant = "default",
+  className,
   ...props
 }: InputValue) => {
   return (
     <>
-      <div className={cn("flex flex-col gap-2")}>
+      <div className={cn("flex flex-col gap-2", className)}>
         {/* 타입이 모달일 때 */}
         {variant === "modal" && (
           <>
             <div className="flex gap-2">
-              <label
-                className={
-                  "text-body-sm font-bold tracking-[0.02em] text-gray-950"
-                }
-              >
-                {title || "제목"}
+              <label className={"text-body-sm tracking-[0.02em] text-gray-950"}>
+                {title}
               </label>
               {isError && (
-                <p className="text-body-sm text-red-400">{errorMsg}</p>
+                <p className="mt-[2px] text-component-notes-md text-red-400">
+                  {errorMsg}
+                </p>
               )}
             </div>
             <div className="relative flex w-[303px] items-center tablet:w-[400px] pc:w-[400px]">
-              <Input
-                placeholder={placeholder}
-                errorMsg={errorMsg}
-                isError={isError}
-                {...props}
-              />
+              <Input placeholder={placeholder} isError={isError} {...props} />
               <Icon
                 className="absolute right-0 mr-[14px]"
                 icon="AlertIcon"
-                color="danger400"
+                color="red400"
                 size={"sm"}
               />
             </div>
@@ -100,41 +94,29 @@ const TextInput = ({
           <>
             <label
               htmlFor="text-input"
-              className={
-                "text-body-sm font-bold tracking-[0.02em] text-gray-950"
-              }
+              className={"text-body-sm tracking-[0.02em] text-gray-950"}
             >
-              {title || "제목"}
+              {title}
             </label>
             {isError ? (
               <div className="relative flex w-[303px] items-center tablet:w-[400px] pc:w-[400px]">
-                <Input
-                  placeholder={placeholder}
-                  errorMsg={errorMsg}
-                  isError={isError}
-                  {...props}
-                />
+                <Input placeholder={placeholder} isError={isError} {...props} />
                 <Icon
                   className="absolute right-0 mr-[14px]"
                   icon="AlertIcon"
-                  color="danger400"
+                  color="red400"
                   size={"sm"}
                 />
               </div>
             ) : (
-              <Input
-                placeholder={placeholder}
-                errorMsg={errorMsg}
-                isError={isError}
-                {...props}
-              />
+              <Input placeholder={placeholder} isError={isError} {...props} />
             )}
           </>
         )}
+        {variant === "default" && isError && (
+          <p className="text-component-notes-md text-red-400">{errorMsg}</p>
+        )}
       </div>
-      {variant === "default" && isError && (
-        <p className="mt-1 text-body-sm text-red-400">{errorMsg}</p>
-      )}
     </>
   );
 };

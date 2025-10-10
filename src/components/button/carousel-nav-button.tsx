@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
-import Icon, { iconVariants } from "../icon/icon";
-import type { IconName } from "../icon/icon-map";
+import Icon, { iconVariants } from "@/components/icon/icon";
+import type { UnifiedIconName } from "@/components/icon/icon";
 import type { VariantProps } from "class-variance-authority";
 import {
   COMMON_BUTTON_STYLES,
@@ -11,6 +11,7 @@ import {
 
 /**
  * 캐러셀 내비게이션 버튼 컴포넌트
+ * @param id : 버튼 id
  * @param slide : 슬라이드 방향 (prev | next)
  * @param className : 버튼 커스텀 클래스
  * @param customIcon : 커스텀 아이콘
@@ -22,9 +23,10 @@ import {
 
 interface CarouselNavButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
+  id?: string;
   slide: "prev" | "next";
   className?: string;
-  customIcon?: IconName;
+  customIcon?: UnifiedIconName;
   iconClassName?: string;
   iconColor?: VariantProps<typeof iconVariants>["color"];
   iconSize?: VariantProps<typeof iconVariants>["size"];
@@ -32,6 +34,7 @@ interface CarouselNavButtonProps
 }
 
 const CarouselNavButton = ({
+  id,
   customIcon,
   iconColor = "default",
   iconSize = "md",
@@ -47,12 +50,14 @@ const CarouselNavButton = ({
 
   return (
     <button
+      id={id}
       type={type}
       aria-label={ariaLabel ?? defaultLabel}
       className={cn(
         COMMON_BUTTON_STYLES,
         BUTTON_SHAPE_VARIANTS.round,
         BUTTON_STATE_VARIANTS.secondary,
+        slide === "prev" ? "swiper-button-prev" : "swiper-button-next",
         className
       )}
       {...props}
@@ -66,5 +71,7 @@ const CarouselNavButton = ({
     </button>
   );
 };
+
+CarouselNavButton.displayName = "CarouselNavButton";
 
 export default CarouselNavButton;

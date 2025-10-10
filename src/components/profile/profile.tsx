@@ -2,12 +2,13 @@ import Image from "next/image";
 import DefaultProfile from "../../../public/images/profile/default-profile.svg";
 import { cn } from "@/lib/utils";
 import Icon from "../icon/icon";
-import { ComponentProps } from "react";
+import { ChangeEvent, ComponentProps } from "react";
 
 interface ProfileProps extends ComponentProps<"input"> {
   url?: string;
   isEditing?: boolean;
   className?: string;
+  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -16,12 +17,14 @@ interface ProfileProps extends ComponentProps<"input"> {
  * @param url 이미지 경로
  * @param isEditing 이미지 업로드 기능 활성화 여부
  * @param className 스타일
+ * @param handleChange 이미지 업로드 시 호출되는 함수
  * @returns input
  */
 const Profile = ({
   url,
   isEditing = true,
   className,
+  handleChange,
   ...props
 }: ProfileProps) => {
   return (
@@ -53,6 +56,9 @@ const Profile = ({
             accept="image/*"
             className="hidden"
             disabled={!isEditing}
+            onChange={(e) => {
+              handleChange?.(e);
+            }}
             {...props}
           />
           {isEditing && (

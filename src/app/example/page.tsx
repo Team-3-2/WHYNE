@@ -9,6 +9,10 @@ import {
   SelectType,
   TextInput,
   Card,
+  Rating,
+  RatingInput,
+  RatingDistribution,
+  Button,
 } from "@/components";
 import LikeButton from "@/components/button/like-button";
 import ConfirmModal from "@/components/modal/confirm-modal";
@@ -22,6 +26,8 @@ import WineTaste, {
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import React, { ChangeEvent, useState } from "react";
 import { recommendwinemock } from "@/mock";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const DATA = recommendwinemock;
 
@@ -123,12 +129,34 @@ const Page = () => {
     console.log(e.target.value);
   };
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  //별점 에러메시지 테스트
+  const [rating, setRating] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleRatingChange = (newRating: number) => {
+    setRating(newRating);
+  };
+
+  const handleSubmit = () => {
+    if (rating === 0) {
+      setError("별점은 필수 선택이에요");
+      return;
+    }
+    alert(`${rating}점 나와`);
+  };
+
   return (
     <>
       {/* 스타일 격리를 위해 완전히 별도의 영역에 WineTasteTest 컴포넌트 배치 */}
       <div className="w-full border-b border-gray-200 bg-gray-50">
         <WineTasteTest />
       </div>
+
+      <Button variant="outline" onClick={() => router.push("/wines/1680")}>
+        페이지 모달 테스트
+      </Button>
 
       {/* 기존 컴포넌트 영역 */}
       <div className="flex-col-center gap-4">
@@ -167,7 +195,7 @@ const Page = () => {
         </div>
         <div className="flex-center gap-4">
           <Chip label="후추" />
-          <Chip label="후추" img="/images/test/test_chip.jpg" />
+          <Chip label="바닐라" />
         </div>
         <div>
           <Flavor
@@ -234,9 +262,9 @@ const Page = () => {
         <Searchbar onChange={handleChange} />
       </section>
 
-      <section>
+      <section className="m-auto max-w-[1140px]">
         <h3 className="mb-[10px] text-body-lg">내가 등록한 와인</h3>
-        <div className="grid max-w-[800px] grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
           {DATA.map((item) => (
             <Card
               key={item.id}
@@ -244,11 +272,12 @@ const Page = () => {
               name={item.name}
               region={item.region}
               price={item.price}
+              actionMenu
             />
           ))}
         </div>
         <h3 className="mb-[10px] text-body-lg">와인 목록 페이지</h3>
-        <div className="grid max-w-[800px] grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-[64px] gap-y-[60px] tablet:grid-cols-2 pc:grid-cols-2">
           {DATA.map((item) => (
             <Card
               key={item.id}
@@ -258,6 +287,7 @@ const Page = () => {
               name={item.name}
               region={item.region}
               recentReview={item.recentReview}
+              href={`/wines/${item.id}`}
             />
           ))}
         </div>
@@ -266,7 +296,16 @@ const Page = () => {
       <section>
         <ConfirmModal
           isOpen={open}
-          msg={{ text: "정말 삭제하시겠습니까?" }}
+          msg={{
+            text: (
+              <>
+                닉네임을
+                <br />
+                변경하시겠습니까?
+              </>
+            ),
+            confirmMsg: "확인",
+          }}
           onClose={() => setOpen(false)}
           onConfirm={() => {
             alert("삭제되었습니다.");
@@ -295,6 +334,50 @@ const Page = () => {
       <section>
         <LikeButton count={642304} />
         <LikeButton count={5024} isLike={true} />
+      </section>
+
+      <section className="m-auto mt-10 flex max-w-[1140px] flex-col gap-10 pb-[100px]">
+        <div>
+          <h3>하트 아이콘으로 바꿔봄</h3>
+          <Rating icon="LikeOnIcon" rating={3.5} />
+        </div>
+        <div>
+          <h3>기본 별점 + 점수 표시</h3>
+          <Rating rating={4.3} showRating />
+        </div>
+        <div>
+          <h3>기본 별점 + 평균 점수 표시</h3>
+          <Rating rating={2.3} showRatingRatio />
+        </div>
+        <div>
+          <h3>평점 분포</h3>
+          <RatingDistribution
+            average={4.2}
+            distribution={{
+              5: 150,
+              4: 80,
+              3: 30,
+              2: 10,
+              1: 5,
+            }}
+            wineId={1}
+          />
+        </div>
+        <div>
+          <h3>리뷰 등록 페이지 - 별점 입력</h3>
+          <RatingInput
+            label="별점 선택"
+            value={rating}
+            onChange={handleRatingChange}
+            errorMsg={error}
+          />
+          <Button
+            type="submit"
+            label="폼제출 테스트"
+            onClick={handleSubmit}
+            className="mt-5 w-auto"
+          />
+        </div>
       </section>
 
       <br />

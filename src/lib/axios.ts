@@ -19,8 +19,6 @@ const instance = axios.create({
 const authRefreshToken = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
 
-  if (!refreshToken) throw new Error("다시 로그인 해주세요");
-
   try {
     const response = await instance.post("/auth/refresh-token", {
       refreshToken,
@@ -32,12 +30,23 @@ const authRefreshToken = async () => {
   } catch (error) {
     sessionStorage.setItem("accessToken", "");
     localStorage.removeItem("refreshToken");
+
+    if (window.location.pathname !== "/login") {
+      window.location.href = "/login";
+    }
+
     throw new Error(`다시 로그인 해주세요 ${error}`);
   }
 };
 
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    const noTokenUrls = ["/", "/login", "/wines", "/wines/recommended"];
+
+    if (noTokenUrls.includes(config.url ?? "")) {
+      return config;
+    }
+
     const accessToken = sessionStorage.getItem("accessToken");
 
     if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;

@@ -21,7 +21,23 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
-    remotePatterns: [new URL("https://upload.wikimedia.org/**")],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "sprint-fe-project.s3.ap-northeast-2.amazonaws.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "gangnam.wine",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

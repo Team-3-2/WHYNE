@@ -1,0 +1,254 @@
+"use client";
+
+import { cn, getAromaIconName } from "@/lib/utils";
+import { useState, useRef } from "react";
+import WineTaste, { buildTasteData } from "@/components/wine-taste";
+import { aromaMap } from "@/components/flavor/aroma-map";
+import {
+  Rating,
+  Icon,
+  DropdownMenu,
+  IconButton,
+  LikeButton,
+  ConfirmModal,
+} from "@/components";
+import useToggle from "@/hooks/use-toggle";
+import useClickOutside from "@/hooks/use-click-outside";
+import WineReviewRating from "./wine-review-rating";
+import type { Review } from "@/types/wine";
+
+interface WineReviewItemProps {
+  review: Review;
+  isFirst?: boolean;
+  currentUserId?: number;
+}
+
+interface OptionMenuProps {
+  isOpen: boolean;
+  onToggle: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+  onClose: () => void;
+}
+
+const OptionMenu = ({
+  isOpen,
+  onToggle,
+  onEdit,
+  onDelete,
+  onClose,
+}: OptionMenuProps) => {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(menuRef, onClose);
+
+  return (
+    <div className="relative" ref={menuRef}>
+      <IconButton
+        icon="HamburgerIcon"
+        aria-label="옵션 메뉴"
+        className="border-none p-1"
+        onClick={onToggle}
+      />
+      {isOpen && (
+        <div className="absolute right-0 top-full z-50 mt-2">
+          <DropdownMenu
+            items={[
+              { label: "수정하기", onClick: onEdit },
+              { label: "삭제하기", onClick: onDelete },
+            ]}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+const WineReviewItem = ({
+  review,
+  isFirst = false,
+  currentUserId,
+}: WineReviewItemProps) => {
+  const initialIsLiked =
+    typeof review.isLiked === "boolean" ? review.isLiked : false;
+  const [isLike, setIsLike] = useState(initialIsLiked);
+  const [isTasteOpen, setIsTasteOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const {
+    isOn: isMenuOpen,
+    toggle: toggleMenu,
+    setOff: closeMenu,
+  } = useToggle(false);
+
+  const isMyReview = currentUserId && currentUserId === review.user.id;
+
+  const tastes = buildTasteData({
+    lightBold: review.lightBold,
+    smoothTannic: review.smoothTannic,
+    drySweet: review.drySweet,
+    softAcidic: review.softAcidic,
+  });
+
+  const likeCount = 24;
+
+  const handleEdit = () => {
+    closeMenu();
+    alert("리뷰 수정 기능은 준비 중입니다.");
+  };
+
+  const openDeleteModal = () => {
+    closeMenu();
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteCancel = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleDeleteConfirm = () => {
+    setIsDeleteModalOpen(false);
+    alert("리뷰 삭제 기능은 준비 중입니다.");
+  };
+
+  return (
+    <>
+      <article
+        className={cn(
+          "flex w-full flex-col items-center gap-6 px-4 py-8",
+          "tablet:items-start tablet:gap-8 tablet:px-6 tablet:py-10",
+          "pc:gap-6 pc:px-4 pc:py-8",
+          !isFirst && "border-t border-gray-300"
+        )}
+        aria-label={`${review.user.nickname}님의 리뷰`}
+      >
+        <div
+          className={cn(
+            "flex w-full max-w-[420px] flex-col gap-6",
+            "tablet:max-w-none tablet:gap-8",
+            "pc:max-w-[720px] pc:gap-6"
+          )}
+        >
+          {/* 1. 별점 */}
+          <div className="flex items-center justify-between">
+            <div role="group" aria-label={`별점 ${review.rating}점`}>
+              <Rating rating={review.rating} size="sm" />
+            </div>
+          </div>
+
+          {/* 2. 프로필 + 시간 */}
+          <header className="flex items-center justify-between">
+            <WineReviewRating createdAt={review.createdAt} user={review.user} />
+            {isMyReview && (
+              <OptionMenu
+                isOpen={isMenuOpen}
+                onToggle={toggleMenu}
+                onEdit={handleEdit}
+                onDelete={openDeleteModal}
+                onClose={closeMenu}
+              />
+            )}
+          </header>
+
+          {/* 3. 향 정보 */}
+          {review.aroma && review.aroma.length > 0 && (
+            <nav aria-label="와인 향">
+              <ul className="flex flex-wrap items-center gap-1">
+                {review.aroma.map((aroma, index) => {
+                  const aromaInfo = aromaMap[aroma];
+                  if (!aromaInfo) return null;
+
+                  return (
+                    <li key={aroma} className="flex items-center">
+                      <div className="flex items-center gap-3 px-1">
+                        <Icon
+                          icon={getAromaIconName(aroma) as any}
+                          size="sm"
+                          className="text-gray-700"
+                          aria-hidden="true"
+                        />
+                        <span className="text-body-sm text-gray-500">
+                          {aromaInfo.label}
+                        </span>
+                      </div>
+                      {index < review.aroma.length - 1 && (
+                        <span className="text-gray-300" aria-hidden="true">
+                          •
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          )}
+
+          {/* 4. 리뷰 내용 */}
+          <p className="text-body-md leading-relaxed tracking-[-0.02em] text-gray-900">
+            {review.content}
+          </p>
+
+          {/* 5. 맛 평가 토글 영역 */}
+          <div className="flex flex-col gap-4">
+            <div
+              id={`taste-${review.id}`}
+              className={cn(
+                "grid transition-all duration-300 ease-in-out",
+                isTasteOpen
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0"
+              )}
+              role="region"
+              aria-label="맛 평가"
+              aria-hidden={!isTasteOpen}
+            >
+              <div className="overflow-hidden">
+                <div className="pb-2">
+                  <WineTaste type="review" tastes={tastes} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 6. 토글 & 좋아요 */}
+          <footer className="flex w-full items-center gap-4">
+            <LikeButton
+              count={likeCount}
+              isLike={isLike}
+              onClick={() => setIsLike(!isLike)}
+            />
+
+            <div className="flex flex-1 justify-center">
+              <IconButton
+                icon="ArrowUpIcon"
+                aria-label={isTasteOpen ? "맛 평가 숨기기" : "맛 평가 보기"}
+                aria-expanded={isTasteOpen}
+                aria-controls={`taste-${review.id}`}
+                onClick={() => setIsTasteOpen(!isTasteOpen)}
+                className={cn(
+                  "h-auto w-auto p-2",
+                  "!border-none !bg-transparent hover:!bg-transparent active:!bg-transparent",
+                  "text-gray-600 transition-transform duration-300 ease-in-out",
+                  isTasteOpen && "rotate-180"
+                )}
+              />
+            </div>
+          </footer>
+        </div>
+      </article>
+
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        msg={{
+          text: "정말 삭제하시겠습니까?",
+          cancelMsg: "취소",
+          confirmMsg: "삭제하기",
+        }}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+      />
+    </>
+  );
+};
+
+export default WineReviewItem;

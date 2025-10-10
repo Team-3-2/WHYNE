@@ -1,8 +1,65 @@
-import React from "react";
-import Image from "next/image";
+import { ChangeEvent, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { Button, ConfirmModal, Profile } from "@/components";
+import { User } from "@/types/user-type";
+import usePostImage from "@/hooks/api/use-post-image";
+import usePatchProfile from "@/hooks/api/myprofile/use-patch-profile";
 
-const AccountItem = () => {
+interface AccountItemProps {
+  user: User | undefined;
+}
+
+const AccountItem = ({ user }: AccountItemProps) => {
+  const [image, setImage] = useState<string | undefined>(user?.image);
+  const [nickname, setNickname] = useState<string | undefined>(user?.nickname);
+  const [confirmModal, setConfirmModal] = useState(false);
+
+  const { mutateAsync: uploadImage } = usePostImage();
+  const { mutateAsync: updateProfile } = usePatchProfile();
+
+  useEffect(() => {
+    if (!image) return;
+  }, [image]);
+
+  // 이미지 변경
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!/^image\//.test(file.type)) {
+      alert("이미지 파일만 업로드 가능합니다.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert("5MB 이하 이미지만 업로드 가능합니다.");
+      return;
+    }
+
+    try {
+      const { url } = await uploadImage({ url: file });
+      await updateProfile({ imageUrl: url });
+      setImage(`${url}?v=${Date.now()}`);
+    } catch (err) {
+      console.error("프로필 갱신 실패:", err);
+      setImage(user?.image);
+    }
+  };
+
+  // 닉네임 변경
+  const handleNicknameUpdate = async () => {
+    const trimmed = nickname?.trim();
+    if (!trimmed) return;
+
+    try {
+      await updateProfile({ nickname: trimmed });
+      setNickname("");
+    } catch (err) {
+      console.error("닉네임 변경 실패:", err);
+    } finally {
+      setConfirmModal(false);
+    }
+  };
+
   return (
     <section
       className={cn(
@@ -12,17 +69,9 @@ const AccountItem = () => {
       )}
     >
       <div className="flex-col-center gap-3 tablet:gap-4 pc:gap-5">
-        {/* TODO(지권): 프로필 이미지 변경 기능 추가 */}
-        <Image
-          src="/images/aroma/aroma-no-image.jpg"
-          alt="profile"
-          width={164}
-          height={164}
-          priority={true}
-          className="h-[80px] w-[80px] cursor-pointer rounded-full tablet:h-[100px] tablet:w-[100px] pc:h-[164px] pc:w-[164px]"
-        />
+        <Profile url={user?.image || image} handleChange={handleChange} />
         <h1 className="font-bold tracking-[-0.02em] pc:text-heading-lg">
-          주말에 와인
+          {user?.nickname || "닉네임 로딩중..."}
         </h1>
       </div>
       <div
@@ -32,7 +81,6 @@ const AccountItem = () => {
           "pc:flex-col-center pc:gap-2"
         )}
       >
-        {/* TODO(지권): 공용 컴포넌트 변경 */}
         <label className="w-full text-left text-body-sm" htmlFor="nickname">
           닉네임
         </label>
@@ -45,23 +93,43 @@ const AccountItem = () => {
         >
           <input
             type="text"
-            placeholder="주말에 와인"
+            placeholder="닉네임을 입력해 주세요."
             id="nickname"
+            value={nickname || ""}
+            onChange={(e) => {
+              setNickname(e.target.value);
+            }}
+            autoFocus
+            maxLength={10}
             className={cn(
-              "rounded-1 w-2/3 flex-1 border border-gray-300 px-4 py-3",
+              "w-2/3 flex-1 rounded-[4px] border border-gray-300 px-4 py-3 focus:outline-none",
               "tablet:flex-1 pc:w-full"
             )}
           />
-          <button
+          <Button
+            onClick={() => setConfirmModal(true)}
             className={cn(
               "h-[42px] w-1/3 rounded-[4px] bg-black text-body-sm tracking-[-0.03em] text-white",
               "tablet:w-1/4 pc:mx-auto pc:w-[98px]"
             )}
-          >
-            변경하기
-          </button>
+            label="변경하기"
+          />
         </div>
       </div>
+      <ConfirmModal
+        isOpen={confirmModal}
+        onClose={() => setConfirmModal(false)}
+        onConfirm={handleNicknameUpdate}
+        msg={{
+          text: (
+            <>
+              &apos;{nickname}&apos;으로 <br /> 닉네임을 변경할까요?
+            </>
+          ),
+          cancelMsg: "취소",
+          confirmMsg: "변경하기",
+        }}
+      />
     </section>
   );
 };
