@@ -1,9 +1,9 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Button, Profile } from "@/components";
+import { Button, ConfirmModal, Profile } from "@/components";
 import { User } from "@/types/user-type";
 import usePostImage from "@/hooks/api/use-post-image";
-import usePatchProfile from "@/hooks/api/use-patch-profile";
+import usePatchProfile from "@/hooks/api/myprofile/use-patch-profile";
 
 interface AccountItemProps {
   user: User | undefined;
@@ -12,6 +12,7 @@ interface AccountItemProps {
 const AccountItem = ({ user }: AccountItemProps) => {
   const [image, setImage] = useState<string | undefined>(user?.image);
   const [nickname, setNickname] = useState<string | undefined>(user?.nickname);
+  const [confirmModal, setConfirmModal] = useState(false);
 
   const { mutateAsync: uploadImage } = usePostImage();
   const { mutateAsync: updateProfile } = usePatchProfile();
@@ -54,6 +55,8 @@ const AccountItem = ({ user }: AccountItemProps) => {
       setNickname("");
     } catch (err) {
       console.error("닉네임 변경 실패:", err);
+    } finally {
+      setConfirmModal(false);
     }
   };
 
@@ -104,7 +107,7 @@ const AccountItem = ({ user }: AccountItemProps) => {
             )}
           />
           <Button
-            onClick={handleNicknameUpdate}
+            onClick={() => setConfirmModal(true)}
             className={cn(
               "h-[42px] w-1/3 rounded-[4px] bg-black text-body-sm tracking-[-0.03em] text-white",
               "tablet:w-1/4 pc:mx-auto pc:w-[98px]"
@@ -113,6 +116,20 @@ const AccountItem = ({ user }: AccountItemProps) => {
           />
         </div>
       </div>
+      <ConfirmModal
+        isOpen={confirmModal}
+        onClose={() => setConfirmModal(false)}
+        onConfirm={handleNicknameUpdate}
+        msg={{
+          text: (
+            <>
+              &apos;{nickname}&apos;으로 <br /> 닉네임을 변경할까요?
+            </>
+          ),
+          cancelMsg: "취소",
+          confirmMsg: "변경하기",
+        }}
+      />
     </section>
   );
 };
