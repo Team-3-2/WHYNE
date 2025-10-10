@@ -10,6 +10,22 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        pathname: "/",
+        query: {},
+        segments: [],
+        router: {
+          push: async () => {},
+          replace: async () => {},
+          back: () => {},
+          forward: () => {},
+          prefetch: async () => {},
+          refresh: () => {},
+        },
+      },
+    },
   },
 };
 
