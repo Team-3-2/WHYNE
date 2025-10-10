@@ -8,7 +8,7 @@ import AuthRedirect from "../_components/auth-redirect";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
 import { useActionState } from "react";
-import signup from "@/api/auth/signup.action";
+import signup from "@/api/auth/signup-action";
 import { useRouter } from "next/navigation";
 
 interface SignupFormData {
