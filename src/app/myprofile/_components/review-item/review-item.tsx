@@ -7,6 +7,7 @@ import { TasteData } from "@/components/wine-taste";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import { ReviewItemType } from "../../_types/review-type";
 import { ReviewInfo, ReviewRating } from ".";
+import FlavorIconList from "@/components/flavor-icon-list/flavor-icon-list";
 
 const ReviewItem = ({ review }: { review: ReviewItemType }) => {
   const [optionMenu, setOptionMenu] = useState(false);
@@ -31,7 +32,7 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
       )}
     >
       <div className="flex w-full flex-col items-start justify-center gap-8 px-[14px]">
-        <div className="flex w-full flex-col items-center justify-center gap-6">
+        <div className="flex w-full flex-col items-center justify-center gap-[26px]">
           <div className="flex w-full flex-col items-start gap-5">
             <ReviewRating
               setOptionMenu={setOptionMenu}
@@ -42,6 +43,11 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
             />
             <ReviewInfo info={review.wine} />
           </div>
+
+          <div className="h-auto w-full flex-shrink-0">
+            <FlavorIconList aroma={review.aroma} size="md" />
+          </div>
+
           <p className="w-full text-start text-body-md tracking-[-0.02em] text-gray-900">
             {review.content}
           </p>
