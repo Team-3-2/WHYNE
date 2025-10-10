@@ -22,15 +22,19 @@ import CardActionMenu from "./card-action-menu";
  * @param actionMenu : 액션 메뉴 표시 여부 (기본값: false)
  */
 
+interface RecentReview {
+  content: string;
+}
+
 interface CardProps {
-  image: string;
+  image: string | null;
   blurDataURL?: string;
   avgRating?: number;
   reviewCount?: number;
   name: string;
   region?: string;
   price?: number;
-  recentReview?: { content?: string } | null;
+  recentReview: RecentReview | null;
   href?: string;
   actionMenu?: boolean;
 }
