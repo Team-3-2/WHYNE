@@ -19,7 +19,7 @@ interface LoginFormData {
 
 const Page = () => {
   const router = useRouter();
-  const { user, setUser } = useUserStore((state) => state);
+  // const { user, setUser } = useUserStore((state) => state);
   const {
     register,
     formState: { errors, isValid },
@@ -29,10 +29,10 @@ const Page = () => {
 
   useEffect(() => {
     if (state && !state.isError) {
-      setUser(state.data.user);
+      // setUser(state.data.user);
 
-      sessionStorage.setItem("accessToken", state.data?.accessToken);
-      localStorage.setItem("refreshToken", state.data?.refreshToken);
+      // sessionStorage.setItem("accessToken", state.data?.accessToken);
+      // localStorage.setItem("refreshToken", state.data?.refreshToken);
       router.push("/");
     }
   }, [state]);

@@ -29,16 +29,11 @@ const authRefreshToken = async () => {
 
     const { accessToken: newAccessToken } = response.data;
 
-    // sessionStorage.setItem("accessToken", newAccessToken);
-
     deleteCookie("accessToken");
     document.cookie = `accessToken=${newAccessToken}`;
 
     return newAccessToken;
   } catch (error) {
-    // sessionStorage.setItem("accessToken", "");
-    // localStorage.removeItem("refreshToken");
-
     deleteCookie("accessToken");
     deleteCookie("refreshToken");
 
@@ -58,7 +53,6 @@ instance.interceptors.request.use(
       return config;
     }
 
-    // const accessToken = sessionStorage.getItem("accessToken");
     const accessToken = getCookie("accessToken");
 
     if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;

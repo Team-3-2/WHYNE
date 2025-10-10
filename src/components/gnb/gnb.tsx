@@ -1,22 +1,17 @@
 "use client";
 
-import { cn, deleteCookie, getCookie } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Logo from "@/../public/logo.svg";
 import { usePathname } from "next/navigation";
-import instance from "@/lib/axios";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 import { User } from "@/types/user-type";
 import { useLogout } from "@/hooks/use-logout";
-import useUserStore from "@/store/user-store";
-import getCurrentUser from "@/api/user/get-current-user";
 
 const Gnb = ({ user }: { user: User }) => {
   const pathname = usePathname();
-  // const [user, setUser] = useState<User>();
-  // const { user, setUser, clearUser } = useUserStore((state) => state);
   const [isOpen, setIsOpen] = useState(false);
 
   const isHidden = pathname === "/login" || pathname === "/signup";
@@ -29,19 +24,9 @@ const Gnb = ({ user }: { user: User }) => {
       onClick: () => {
         setIsOpen(false);
         logout();
-        // clearUser();
       },
     },
   ];
-
-  // const accessToken = sessionStorage.getItem("accessToken");
-
-  // const { data, error } = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: () => getCurrentUser(),
-  // });
-
-  useEffect(() => {}, []);
 
   if (isHidden) return null;
 

@@ -10,7 +10,7 @@ const authRefreshToken = async () => {
   const cookieStore = await cookies();
   const refreshToken = cookieStore.get("refreshToken")?.value;
 
-  if (!refreshToken) return undefined;
+  if (!refreshToken) return;
 
   try {
     const response = await fetch(
@@ -78,7 +78,9 @@ const getMe = async () => {
 
     return await response.json();
   } catch (error) {
-    console.error(error);
+    console.log(error);
+
+    return;
   }
 };
 
