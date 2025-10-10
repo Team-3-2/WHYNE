@@ -3,6 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+import { deleteCookie, getCookie } from "./utils";
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -23,13 +24,23 @@ const authRefreshToken = async () => {
     const response = await instance.post("/auth/refresh-token", {
       refreshToken,
     });
+
+    if (!response) throw new Error("재로그인 해주세요");
+
     const { accessToken: newAccessToken } = response.data;
 
-    sessionStorage.setItem("accessToken", newAccessToken);
+    // sessionStorage.setItem("accessToken", newAccessToken);
+
+    deleteCookie("accessToken");
+    document.cookie = `accessToken=${newAccessToken}`;
+
     return newAccessToken;
   } catch (error) {
-    sessionStorage.setItem("accessToken", "");
-    localStorage.removeItem("refreshToken");
+    // sessionStorage.setItem("accessToken", "");
+    // localStorage.removeItem("refreshToken");
+
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
 
     if (window.location.pathname !== "/login") {
       window.location.href = "/login";
@@ -47,7 +58,8 @@ instance.interceptors.request.use(
       return config;
     }
 
-    const accessToken = sessionStorage.getItem("accessToken");
+    // const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = getCookie("accessToken");
 
     if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
     return config;
