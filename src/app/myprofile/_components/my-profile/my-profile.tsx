@@ -41,9 +41,9 @@ const MyProfile = () => {
           {tab === "registered" && (
             <div
               className={cn(
-                `grid gap-y-[16px] pt-[24px]`,
-                `pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]`,
-                `tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]`
+                "grid gap-y-[16px] pt-[24px]",
+                "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+                "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
               )}
             >
               {userWines?.list?.map((wine: WineType) => (
