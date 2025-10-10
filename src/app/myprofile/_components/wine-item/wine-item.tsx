@@ -1,21 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import { cn } from "@/lib/utils";
 import { Card } from "@/components";
+import useDeleteWine from "@/hooks/api/wines/use-delete-wine";
+import { WineType } from "../../_types/review-type";
 
-interface WineItemProps {
-  id: number;
-  image: string;
-  name: string;
-  region: string;
-  price: number;
-}
+const WineItem = ({ wine }: { wine: WineType }) => {
+  const { mutate } = useDeleteWine();
+  const handleWineDelete = () => {
+    mutate({ id: wine.id });
+  };
 
-//무한 스크롤 -
-
-const WineItem = (props: WineItemProps) => {
-  return <div></div>;
+  return (
+    <Card
+      image={wine.image}
+      name={wine.name}
+      region={wine.region}
+      price={wine.price}
+      actionMenuItems={[
+        { label: "수정하기", onClick: () => {} },
+        { label: "삭제하기", onClick: handleWineDelete },
+      ]}
+    />
+  );
 };
 
 export default WineItem;

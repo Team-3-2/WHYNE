@@ -10,9 +10,9 @@ interface deleteWineData {
   id: number;
 }
 
-const useDeleteWine = async ({ id }: deleteWineData) => {
+const deleteWine = async ({ id }: deleteWineData) => {
   const res = await instance.delete(`/wines/${id}`);
   return res.data;
 };
 
-export default useDeleteWine;
+export default deleteWine;
