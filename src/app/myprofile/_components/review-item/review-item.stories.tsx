@@ -28,7 +28,7 @@ const mockReview: ReviewItemType = {
   smoothTannic: 3,
   drySweet: 2,
   softAcidic: 6,
-  aroma: "CHERRY",
+  aroma: ["CHERRY"],
   content: "안녕하세요",
   createdAt: "2025-10-09T06:24:12.278Z",
   updatedAt: "2025-10-09T06:24:12.278Z",
