@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import ReviewItem from "./review-item";
 import { ReviewItemType } from "../../_types/review-type";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const meta: Meta<typeof ReviewItem> = {
   title: "MY-PROFILE/ReviewItem",
@@ -10,11 +11,19 @@ const meta: Meta<typeof ReviewItem> = {
     layout: "centered",
   },
   decorators: [
-    (Story) => (
-      <div className="w-[550px]">
-        <Story />
-      </div>
-    ),
+    (Story) => {
+      const queryClient = new QueryClient({
+        defaultOptions: {
+          queries: { retry: false, refetchOnWindowFocus: false },
+          mutations: { retry: false },
+        },
+      });
+      return (
+        <QueryClientProvider client={queryClient}>
+          <Story />
+        </QueryClientProvider>
+      );
+    },
   ],
 };
 
