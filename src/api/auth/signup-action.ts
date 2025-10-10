@@ -1,6 +1,6 @@
 "use server";
 
-const Signup = async (prevState: any, formData: FormData) => {
+const signup = async (prevState: any, formData: FormData) => {
   const email = formData.get("email");
   const nickname = formData.get("nickname");
   const password = formData.get("password");
@@ -25,10 +25,12 @@ const Signup = async (prevState: any, formData: FormData) => {
       }
     );
 
-    if (!response.ok) throw new Error(response.statusText);
+    if (!response.ok) return { isError: true, message: "다시 시도해주세요." };
+
+    return { isError: false, message: "가입이 완료되었습니다." };
   } catch (error) {
     console.error(error);
   }
 };
 
-export default Signup;
+export default signup;
