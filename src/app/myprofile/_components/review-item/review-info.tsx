@@ -1,7 +1,16 @@
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+"use client";
 
-const ReviewInfo = () => {
+import { cn, isValidImageSrc } from "@/lib/utils";
+import Image from "next/image";
+import { WineType } from "../../_types/review-type";
+import { useState } from "react";
+import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
+
+const PLACEHOLDER = "/images/placeholder/img-wine.svg";
+
+const ReviewInfo = ({ info }: { info: WineType }) => {
+  const [imgSrc, setImgSrc] = useState(info?.image || PLACEHOLDER);
+
   return (
     <div
       className={cn(
@@ -10,13 +19,22 @@ const ReviewInfo = () => {
         "pc:gap-[17px]"
       )}
     >
-      <Image
-        src="/images/test/test_wine.png"
-        alt="와인 이미지"
-        width={60}
-        height={60}
-        className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
-      />
+      {isValidImageSrc(imgSrc) ? (
+        <Image
+          src={imgSrc}
+          alt="와인 이미지"
+          width={60}
+          height={60}
+          className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
+          onError={() => setImgSrc(PLACEHOLDER)}
+        />
+      ) : (
+        <PlaceholderImgWine
+          className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
+          role="img"
+          aria-label={`${info.name} 이미지 불러오기 실패`}
+        />
+      )}
       <div
         className={cn(
           "flex flex-col items-start gap-[2px]",
@@ -31,10 +49,10 @@ const ReviewInfo = () => {
             "pc:text-body-lg"
           )}
         >
-          Sentinel Carbernet Sauvignon 2016
+          {info?.name || "와인 이름을 찾을 수 없습니다."}
         </h2>
         <p className="text-body-sm tracking-[-0.02em] text-gray-500">
-          Western Cape, South Africa
+          {info?.region || "지역을 찾을 수 없습니다."}
         </p>
       </div>
     </div>
