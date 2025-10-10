@@ -19,7 +19,6 @@ interface InputValue extends ComponentProps<"input"> {
 const Input = ({
   placeholder = "내용을 입력해주세요",
   isError = false,
-  // errorMsg = "형식에 맞지 않습니다.",
   className,
   ...props
 }: InputValue) => {
@@ -59,6 +58,7 @@ const TextInput = ({
   errorMsg,
   variant = "default",
   className,
+  id = "",
   ...props
 }: InputValue) => {
   return (
@@ -68,7 +68,10 @@ const TextInput = ({
         {variant === "modal" && (
           <>
             <div className="flex gap-2">
-              <label className={"text-body-sm tracking-[0.02em] text-gray-950"}>
+              <label
+                htmlFor={id}
+                className={"text-body-sm tracking-[0.02em] text-gray-950"}
+              >
                 {title}
               </label>
               {isError && (
@@ -93,7 +96,7 @@ const TextInput = ({
         {variant === "default" && (
           <>
             <label
-              htmlFor="text-input"
+              htmlFor={id}
               className={"text-body-sm tracking-[0.02em] text-gray-950"}
             >
               {title}
@@ -109,7 +112,12 @@ const TextInput = ({
                 />
               </div>
             ) : (
-              <Input placeholder={placeholder} isError={isError} {...props} />
+              <Input
+                id={id}
+                placeholder={placeholder}
+                isError={isError}
+                {...props}
+              />
             )}
           </>
         )}
