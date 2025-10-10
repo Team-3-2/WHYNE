@@ -37,7 +37,7 @@ const Page = () => {
           action={formAction}
           className="flex-col-center mb-10 gap-4 tablet:gap-8 pc:gap-8"
         >
-          <div className="flex flex-col gap-3">
+          <div className="flex w-[303px] flex-col gap-3 tablet:w-[400px] pc:w-[400px]">
             <TextInput
               id="email"
               type="text"

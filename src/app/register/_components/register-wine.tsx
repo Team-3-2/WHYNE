@@ -3,6 +3,7 @@
 import { Button, SelectType, TextInput } from "@/components";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 import WineImg from "@/components/wine-img/wine-img";
+import { isValidImageSrc } from "@/lib/utils";
 import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -15,18 +16,35 @@ interface WineFormData {
   type: string;
 }
 
-const RegisterWine = () => {
+const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
+  console.log(wineData);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<WineFormData>();
-  const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(null);
+  } = useForm<WineFormData>({
+    defaultValues: {
+      name: wineData?.name,
+      region: wineData?.region,
+      image: wineData?.image,
+      price: wineData?.price,
+      type: wineData?.type,
+    },
+  });
+  const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(
+    wineData ? wineData.image : null
+  );
 
   const onSubmit: SubmitHandler<WineFormData> = (data) => {
     console.log(data);
   };
 
+  /**
+   * 이미지 미리보기
+   * @author hwitae
+   * @param e input 파일 선택 이벤트
+   */
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const imgFile = e.target.files?.[0];
 
@@ -38,19 +56,24 @@ const RegisterWine = () => {
     setPreviewImgUrl(newPreviewImgUrl);
   };
 
+  const handleImgError = () => {
+    setPreviewImgUrl(null);
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="overflow-auto pb-40 tablet:pb-0 pc:pb-0"
+      className="pb-40 tablet:pb-0 pc:pb-0"
     >
       <div className="flex flex-col gap-[18px] px-6">
-        {previewImgUrl ? (
+        {isValidImageSrc(previewImgUrl) ? (
           <label htmlFor="changeImg" className="w-fit cursor-pointer">
             <Image
               src={previewImgUrl}
               width={370}
               height={360}
               alt="미리보기 이미지"
+              onError={handleImgError}
             />
             <input
               type="file"

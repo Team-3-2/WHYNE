@@ -154,7 +154,7 @@ const Page = () => {
         <WineTasteTest />
       </div>
 
-      <Button variant="outline" onClick={() => router.push("/wines/1680")}>
+      <Button variant="outline" onClick={() => router.push("/register/new")}>
         페이지 모달 테스트
       </Button>
 
