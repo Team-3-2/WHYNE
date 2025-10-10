@@ -18,7 +18,7 @@ const instance = axios.create({
  * @author hwitae
  */
 const authRefreshToken = async () => {
-  const refreshToken = localStorage.getItem("refreshToken");
+  const refreshToken = getCookie("refreshToken");
 
   try {
     const response = await instance.post("/auth/refresh-token", {
