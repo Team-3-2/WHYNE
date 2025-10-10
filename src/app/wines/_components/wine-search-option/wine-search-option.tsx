@@ -12,10 +12,6 @@ const WineSearchOption = () => {
   const breakpoint = useBreakpoint();
   const isMobileOrTablet = breakpoint === "mobile" || breakpoint === "tablet";
 
-  const handleResetClick = () => {
-    router.replace("/wines", { scroll: false });
-  };
-
   return (
     <>
       {isMobileOrTablet ? (
@@ -59,7 +55,7 @@ const WineSearchOption = () => {
               <Button
                 label="초기화"
                 variant="outline"
-                onClick={handleResetClick}
+                onClick={() => router.replace("/wines", { scroll: false })}
               />
               <Button label="와인 등록하기" />
             </div>

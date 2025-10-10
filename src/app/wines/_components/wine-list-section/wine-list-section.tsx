@@ -16,9 +16,15 @@ const WineListSection = () => {
   const ratingParam = params.get("rating");
   const rating = ratingParam ? parseFloat(ratingParam) : undefined;
 
+  const maxPriceParam = params.get("maxPrice");
+  const maxPrice = maxPriceParam ? parseFloat(maxPriceParam) : undefined;
+
+  const minPriceParam = params.get("minPrice");
+  const minPrice = minPriceParam ? parseFloat(minPriceParam) : undefined;
+
   const limit = 10;
 
-  const { data } = useGetWineList({ limit, type, rating });
+  const { data } = useGetWineList({ limit, type, rating, maxPrice, minPrice });
   console.log(data);
 
   return (

@@ -3,23 +3,34 @@
 import { useEffect, useMemo, useState } from "react";
 import debounce from "lodash/debounce";
 import { useUpdateQuery } from "../../_utils/use-update-query";
+import { cn } from "@/lib/utils";
+import { RANGE_BASE_STYLE } from "../../_constants/range-base-style";
 
+const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
 
 const PriceOption = () => {
   const { setQuery, searchParams } = useUpdateQuery();
 
-  const initial = Number(searchParams.get("maxPrice") ?? MAX_PRICE);
-  const [price, setPrice] = useState(
-    Number.isNaN(initial) ? MAX_PRICE : initial
+  const initialMin = Number(searchParams.get("minPrice") ?? MIN_PRICE);
+  const initialMax = Number(searchParams.get("maxPrice") ?? MAX_PRICE);
+
+  const [minPrice, setMinPrice] = useState(
+    Number.isNaN(initialMin) ? MIN_PRICE : initialMin
+  );
+  const [maxPrice, setMaxPrice] = useState(
+    Number.isNaN(initialMax) ? MAX_PRICE : initialMax
   );
 
   const updateUrl = useMemo(
     () =>
-      debounce((value: number) => {
+      debounce((min: number, max: number) => {
         setQuery((params) => {
-          if (value === MAX_PRICE) params.delete("maxPrice");
-          else params.set("maxPrice", String(value));
+          if (min <= MIN_PRICE) params.delete("minPrice");
+          else params.set("minPrice", String(min));
+
+          if (max >= MAX_PRICE) params.delete("maxPrice");
+          else params.set("maxPrice", String(max));
         });
       }, 400),
     [setQuery]
@@ -29,11 +40,22 @@ const PriceOption = () => {
     return () => updateUrl.cancel();
   }, [updateUrl]);
 
-  // 가격 선택 핸들러
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // 최소 가격 핸들러
+  const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
-    setPrice(value);
-    updateUrl(value);
+    if (value <= maxPrice) {
+      setMinPrice(value);
+      updateUrl(value, maxPrice);
+    }
+  };
+
+  // 최대 가격 핸들러
+  const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    if (value >= minPrice) {
+      setMaxPrice(value);
+      updateUrl(minPrice, value);
+    }
   };
 
   return (
@@ -44,22 +66,57 @@ const PriceOption = () => {
       <div className="flex flex-col gap-2">
         <div className="flex w-full items-center justify-between text-sm">
           <span aria-live="polite" className="text-body-md">
-            ₩ 0
+            ₩ {minPrice.toLocaleString()}
           </span>
           <span aria-live="polite" className="text-body-md">
-            ₩ {price}
+            ₩ {maxPrice.toLocaleString()}
           </span>
         </div>
-        <input
-          type="range"
-          min={0}
-          max={MAX_PRICE}
-          step={1000}
-          aria-label="최대 가격"
-          className="w-full"
-          value={price}
-          onChange={handlePriceChange}
-        />
+
+        {/* 겹치는 이중 range 슬라이더 */}
+        <div className="relative h-5 w-full">
+          {/* 최소 */}
+          <input
+            type="range"
+            min={MIN_PRICE}
+            max={MAX_PRICE}
+            step={1000}
+            value={minPrice}
+            onChange={handleMinChange}
+            aria-label="최소 가격"
+            className={cn(
+              RANGE_BASE_STYLE,
+              "pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto"
+            )}
+          />
+
+          {/* 최대 */}
+          <input
+            type="range"
+            min={MIN_PRICE}
+            max={MAX_PRICE}
+            step={1000}
+            value={maxPrice}
+            onChange={handleMaxChange}
+            aria-label="최대 가격"
+            className={cn(
+              RANGE_BASE_STYLE,
+              "pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto"
+            )}
+          />
+
+          <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 rounded bg-gray-200" />
+
+          <div
+            className="absolute h-1 rounded bg-black"
+            style={{
+              left: `${(minPrice / MAX_PRICE) * 100}%`,
+              right: `${100 - (maxPrice / MAX_PRICE) * 100}%`,
+              top: "50%",
+              transform: "translateY(-50%)",
+            }}
+          />
+        </div>
       </div>
     </fieldset>
   );

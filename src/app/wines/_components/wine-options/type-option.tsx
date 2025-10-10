@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 const TypeOption = () => {
   const { setQuery, searchParams } = useUpdateQuery();
   const selectedType = searchParams.get("type") ?? "";
-  console.log(selectedType);
 
   // 타입 선택 핸들러
   const handleTypeClick = (type: string) => {
