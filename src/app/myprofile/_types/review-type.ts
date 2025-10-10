@@ -23,7 +23,7 @@ export type ReviewItemType = {
   smoothTannic: number;
   drySweet: number;
   softAcidic: number;
-  aroma: AromaKey;
+  aroma: AromaKey[];
   content: string;
   createdAt: string;
   updatedAt: string;
