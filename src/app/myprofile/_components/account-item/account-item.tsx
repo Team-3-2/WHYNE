@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button, Profile } from "@/components";
 import { User } from "@/types/user-type";
 import usePostImage from "@/hooks/api/use-post-image";
-import usePatchProfile from "@/hooks/api/use-patch-profile";
+import usePatchProfile from "@/hooks/api/myprofile/use-patch-profile";
 
 interface AccountItemProps {
   user: User | undefined;
