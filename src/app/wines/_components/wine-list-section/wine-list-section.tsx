@@ -3,9 +3,9 @@
 import { cn } from "@/lib/utils";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineList from "../wine-list/wine-list";
-import WineSearchOption from "../wine-search-option/wine-search-option";
 import useGetWineList from "@/hooks/api/wines/use-get-wine-list";
 import { useSearchParams } from "next/navigation";
+import WineSearchOption from "../wine-search-option/wine-search-option";
 
 const WineListSection = () => {
   const params = useSearchParams();
