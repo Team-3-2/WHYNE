@@ -8,7 +8,7 @@ import useGetWineList from "@/hooks/api/wines/use-get-wine-list";
 
 const WineListSection = () => {
   const limit = 10;
-  const { data } = useGetWineList({ limit });
+  const { data, isLoading } = useGetWineList({ limit });
   const wineList = data?.list ?? [];
   console.log(data);
 
@@ -26,7 +26,7 @@ const WineListSection = () => {
         className={cn(
           "order-1 mb-[24px]",
           "tablet:mb-[40px]",
-          "pc:order-2 pc:float-right pc:w-[calc(100%-284px-60px)]"
+          "pc:order-2 pc:float-right pc:mb-0 pc:w-[calc(100%-284px-60px)]"
         )}
       />
 
@@ -43,12 +43,13 @@ const WineListSection = () => {
       {/* 와인 목록 */}
       <div
         className={cn(
-          "relative order-3 grid gap-y-[48px]",
+          wineList.length === 0 ? "pc:float-right" : "grid pc:left-[60px]",
+          "relative order-3 gap-y-[48px]",
           "tablet:grid-cols-2 tablet:gap-x-[16px]",
-          "pc:left-[60px] pc:top-[64px] pc:order-3 pc:w-[calc(100%-284px-60px)] pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
+          "pc:top-[64px] pc:order-3 pc:w-[calc(100%-284px-60px)] pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
         )}
       >
-        <WineList wine={wineList} />
+        <WineList wine={wineList} isLoading={isLoading} />
       </div>
     </section>
   );

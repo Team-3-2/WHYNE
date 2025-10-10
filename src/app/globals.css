@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+@tailwind animations;
 @tailwind utilities;
 
 @layer base {
@@ -18,6 +19,7 @@
     @apply mx-auto max-w-[1140px] px-[16px] tablet:px-[32px] pc:px-0;
   }
 }
+
 :root {
   --color-black: #1a1918;
   --color-white: #ffffff;

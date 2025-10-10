@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { SVGProps } from "react";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import BASE64_IMAGES from "@/constants/base64-images";
 import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
@@ -53,9 +54,19 @@ const CardImage = ({
 
   return (
     <div
-      className={`flex-center relative aspect-[1/1] w-full overflow-hidden bg-gray-200 p-[12%] ${className}`}
+      className={cn(
+        "flex-center relative aspect-[1/1] w-full bg-gray-200 p-[12%]",
+        className
+      )}
     >
-      <span className="relative block h-full w-full">
+      <span
+        className={cn(
+          "relative block h-full w-full",
+          !hasError &&
+            safeSrc &&
+            "duration-300 group-hover:scale-[.95] group-hover:opacity-50"
+        )}
+      >
         {!hasError && safeSrc ? (
           <Image
             src={safeSrc}
