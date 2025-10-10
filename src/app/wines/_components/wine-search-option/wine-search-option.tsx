@@ -12,7 +12,6 @@ const WineSearchOption = () => {
   const breakpoint = useBreakpoint();
   const isMobileOrTablet = breakpoint === "mobile" || breakpoint === "tablet";
 
-  // 초기화 핸들러
   const handleResetClick = () => {
     router.replace("/wines", { scroll: false });
   };

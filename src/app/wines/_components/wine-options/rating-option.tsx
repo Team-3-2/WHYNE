@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { WINE_FIELDSET } from "../../_constants/wine-fieldset";
 import { useUpdateQuery } from "../../_utils/use-update-query";
 
@@ -28,12 +29,16 @@ const RatingOption = () => {
             type="radio"
             name="rating"
             id={fieldset.id}
-            className="h-5 w-5 border border-gray-300 bg-white"
+            className={cn(
+              "relative h-5 w-5 appearance-none rounded-[4px] border border-gray-300 bg-white transition-colors",
+              "checked:border-tertiary",
+              "after:absolute after:inset-[3px] after:scale-0 after:rounded-[2px] after:bg-black after:transition-transform checked:after:scale-100"
+            )}
             checked={selectedRating === fieldset.id}
             onChange={() => handleRatingClick(fieldset.id)}
           />
           <label
-            className="select-none text-body-md text-default"
+            className="cursor-pointer select-none text-body-md text-default"
             htmlFor={fieldset.id}
           >
             {fieldset.label}
