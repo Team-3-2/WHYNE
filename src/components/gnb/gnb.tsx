@@ -4,18 +4,14 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Logo from "@/../public/logo.svg";
 import { usePathname } from "next/navigation";
-import instance from "@/lib/axios";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 import { User } from "@/types/user-type";
 import { useLogout } from "@/hooks/use-logout";
-import useUserStore from "@/store/user-store";
 
-const Gnb = () => {
+const Gnb = ({ user }: { user: User }) => {
   const pathname = usePathname();
-  // const [user, setUser] = useState<User>();
-  const { user, setUser, clearUser } = useUserStore((state) => state);
   const [isOpen, setIsOpen] = useState(false);
 
   const isHidden = pathname === "/login" || pathname === "/signup";
@@ -28,24 +24,9 @@ const Gnb = () => {
       onClick: () => {
         setIsOpen(false);
         logout();
-        clearUser();
       },
     },
   ];
-
-  // TODO(지권): 로그인 상태 확인 리팩토링 필요
-  const getMe = async () => {
-    try {
-      const response = await instance.get("/users/me");
-      setUser(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    // getMe();
-  }, []);
 
   if (isHidden) return null;
 
