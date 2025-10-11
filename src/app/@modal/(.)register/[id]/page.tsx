@@ -1,4 +1,4 @@
-import getRegisterWine from "@/api/wines/get-register-wine";
+import getRegisterWine from "@/api/register/get-register-wine";
 import RegisterWine from "@/app/register/_components/register-wine";
 import PageModal from "@/components/modal/page-modal";
 

@@ -53,3 +53,11 @@ export interface WineDetail extends Wine {
     "5": number;
   };
 }
+
+export interface WineFormData {
+  name: string;
+  region: string;
+  image: string;
+  price: number;
+  type: "RED" | "WHITE" | "SPARKLING";
+}

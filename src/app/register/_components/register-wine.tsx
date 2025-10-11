@@ -4,17 +4,10 @@ import { Button, SelectType, TextInput } from "@/components";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 import WineImg from "@/components/wine-img/wine-img";
 import { isValidImageSrc } from "@/lib/utils";
+import { WineFormData } from "@/types/wine";
 import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
-interface WineFormData {
-  name: string;
-  region: string;
-  image: string;
-  price: number;
-  type: string;
-}
 
 const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
   const {
@@ -45,6 +38,7 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
    */
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const imgFile = e.target.files?.[0];
+    console.log(imgFile);
 
     if (!imgFile) return;
 

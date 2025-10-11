@@ -1,14 +1,7 @@
 import { cookies } from "next/headers";
 import authRefreshToken from "../auth/auth-refresh-token";
 import { redirect } from "next/navigation";
-
-interface WineFormData {
-  name: string;
-  region: string;
-  image: string;
-  price: number;
-  type: string;
-}
+import { WineFormData } from "@/types/wine";
 
 /**
  * 등록된 와인의 정보를 요청한다.

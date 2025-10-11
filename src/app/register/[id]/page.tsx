@@ -1,14 +1,6 @@
 import { cn } from "@/lib/utils";
 import RegisterWine from "../_components/register-wine";
-import getRegisterWine from "@/api/wines/get-register-wine";
-
-interface WineFormData {
-  name: string;
-  region: string;
-  image: string;
-  price: number;
-  type: string;
-}
+import getRegisterWine from "@/api/register/get-register-wine";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
