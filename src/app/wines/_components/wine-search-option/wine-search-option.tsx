@@ -15,11 +15,11 @@ const WineSearchOption = () => {
   return (
     <>
       {isMobileOrTablet ? (
-        <div className="order-2 mb-4 flex justify-between">
+        <div className="order-2 flex justify-between">
           <Link
             href="/"
             aria-label="옵션 열기"
-            className="flex-center h-12 w-12 rounded-[8px] border border-gray-300 bg-white"
+            className="flex-center h-[42px] w-[42px] rounded-[8px] border border-gray-300 bg-white tablet:h-12 tablet:w-12"
           >
             <Icon icon="FilterIcon" className="text-secondary" />
           </Link>

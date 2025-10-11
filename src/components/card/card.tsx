@@ -24,7 +24,7 @@ import type { DropdownItem } from "@/components/dropdown-menu/dropdown-menu";
  */
 
 interface CardProps {
-  image: string;
+  image: string | null;
   blurDataURL?: string;
   avgRating?: number;
   reviewCount?: number;
@@ -60,7 +60,7 @@ const Card = ({
   useClickOutside(menuRef, closeMenu);
 
   const content = (
-    <div className="relative w-full">
+    <div className="group relative w-full">
       <CardImage src={image} alt={`${name} 이미지`} blurDataURL={blurDataURL} />
       <div className="relative mt-[24px]">
         <CardInfo
