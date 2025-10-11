@@ -7,10 +7,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PriceOption, RatingOption, TypeOption } from "../wine-options";
 
-const WineSearchOption = () => {
+const WineSearchOption = ({
+  setSearch,
+}: {
+  setSearch: (search: string) => void;
+}) => {
   const router = useRouter();
   const breakpoint = useBreakpoint();
   const isMobileOrTablet = breakpoint === "mobile" || breakpoint === "tablet";
+
+  const handleResetClick = () => {
+    router.replace("/wines", { scroll: false });
+    setSearch("");
+  };
 
   return (
     <>
@@ -55,7 +64,7 @@ const WineSearchOption = () => {
               <Button
                 label="초기화"
                 variant="outline"
-                onClick={() => router.replace("/wines", { scroll: false })}
+                onClick={handleResetClick}
               />
               <Button label="와인 등록하기" />
             </div>
