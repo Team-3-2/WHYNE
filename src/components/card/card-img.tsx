@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { SVGProps } from "react";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import BASE64_IMAGES from "@/constants/base64-images";
 import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
@@ -18,7 +19,7 @@ const { WINE_BASE64 } = BASE64_IMAGES;
  */
 
 interface CardImageProps {
-  src: string;
+  src: string | null;
   alt: string;
   blurDataURL?: string;
   fallbackBlurDataURL?: string;
@@ -37,19 +38,38 @@ const CardImage = ({
   imageClassName,
 }: CardImageProps) => {
   const [hasError, setHasError] = useState(false);
+  const isValidSrc =
+    typeof src === "string" &&
+    (src.startsWith("/") ||
+      src.startsWith("http://") ||
+      src.startsWith("https://"));
+
+  const safeSrc = isValidSrc ? src : undefined;
 
   useEffect(() => {
-    if (!src) setHasError(true);
-  }, [src]);
+    if (!isValidSrc) {
+      setHasError(true);
+    }
+  }, [isValidSrc]);
 
   return (
     <div
-      className={`flex-center relative aspect-[1/1] w-full overflow-hidden bg-gray-200 p-[12%] ${className}`}
+      className={cn(
+        "flex-center relative aspect-[1/1] w-full bg-gray-200 p-[12%]",
+        className
+      )}
     >
-      <span className="relative block h-full w-full">
-        {!hasError && src ? (
+      <span
+        className={cn(
+          "relative block h-full w-full",
+          !hasError &&
+            safeSrc &&
+            "duration-300 group-hover:scale-[.95] group-hover:opacity-50"
+        )}
+      >
+        {!hasError && safeSrc ? (
           <Image
-            src={src}
+            src={safeSrc}
             fill
             alt={alt}
             className={`object-contain ${imageClassName}`}

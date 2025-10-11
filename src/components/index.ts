@@ -21,3 +21,4 @@ export { default as WineTaste } from "./wine-taste/wine-taste";
 export { default as Card } from "./card/card";
 export { default as LikeButton } from "./button/like-button";
 export { default as Carousel } from "./carousel/carousel";
+export { default as EmptyState } from "./empty-state/empty-state";

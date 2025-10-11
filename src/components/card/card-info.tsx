@@ -33,7 +33,7 @@ const CardInfo = ({
   region,
   price,
   avgRating,
-  reviewCount,
+  reviewCount = 0,
   className,
   ratingWrapperClassName,
   reviewCountClassName,
@@ -51,7 +51,9 @@ const CardInfo = ({
           <span
             className={`relative text-body-sm font-normal text-gray-500 ${reviewCountClassName}`}
           >
-            {reviewCount}개의 후기
+            {reviewCount > 0
+              ? `${reviewCount.toLocaleString()}개의 후기`
+              : "아직 후기가 없어요"}
           </span>
         </div>
       )}

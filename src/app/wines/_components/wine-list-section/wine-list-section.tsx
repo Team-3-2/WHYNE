@@ -32,7 +32,7 @@ const WineListSection = () => {
     [debouncedSetSearch]
   );
 
-  const { data } = useGetWineList({
+  const { data, isLoading } = useGetWineList({
     limit,
     type,
     rating,
@@ -41,17 +41,27 @@ const WineListSection = () => {
     name: debouncedSearch,
   });
 
+  const wineList = data?.list ?? [];
   console.log(data);
 
   return (
     <section
       aria-labelledby="browse-title"
       className={cn(
-        "container flex w-full flex-col gap-[24px]",
-        "tablet:gap-[40px]",
-        "pc:mt-[45px] pc:flex-row pc:items-start pc:gap-[60px]"
+        "container relative mt-[27px] w-full pb-[75px]",
+        "tablet:mt-[33px]",
+        "pc:flex-end pc:mt-[45px] pc:pb-[150px]"
       )}
     >
+      {/* 검색바 */}
+      <Searchbar
+        className={cn(
+          "order-1 mb-[24px]",
+          "tablet:mb-[40px]",
+          "pc:order-2 pc:float-right pc:mb-0 pc:w-[calc(100%-284px-60px)]"
+        )}
+      />
+
       {/* 검색 옵션 */}
       <WineSearchOption />
 
@@ -61,9 +71,26 @@ const WineListSection = () => {
         value={search}
         onChange={handleSearchChange}
       />
+      <div
+        className={cn(
+          "order-2 mb-[20px]",
+          "pc:z-5 pc:sticky pc:top-[100px] pc:order-1 pc:float-left pc:w-[284px]"
+        )}
+      >
+        <WineSearchOption />
+      </div>
 
       {/* 와인 목록 */}
-      <WineList />
+      <div
+        className={cn(
+          wineList.length === 0 ? "pc:float-right" : "grid pc:left-[60px]",
+          "relative order-3 gap-y-[48px]",
+          "tablet:grid-cols-2 tablet:gap-x-[16px]",
+          "pc:top-[64px] pc:order-3 pc:w-[calc(100%-284px-60px)] pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
+        )}
+      >
+        <WineList wine={wineList} isLoading={isLoading} />
+      </div>
     </section>
   );
 };
