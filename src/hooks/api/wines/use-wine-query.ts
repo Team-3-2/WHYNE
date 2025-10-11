@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import getWine from "@/api/wines/get-wine";
 
-const WINE_STALE_TIME = 1000 * 60 * 5; // 5분
+const WINE_STALE_TIME = 1000 * 60 * 5;
 
 const useWineQuery = (wineId?: number) => {
   return useQuery({
