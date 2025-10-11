@@ -1,7 +1,6 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import getWine from "@/api/wines/get-wine";
 import getCurrentUser from "@/api/user/get-current-user";
 import WineHeader from "../wine-header/wine-header";
 import WineTasteSection from "../wine-taste/wine-taste-section";
@@ -10,6 +9,7 @@ import ReviewSection from "../wine-review/wine-review-section";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 import Loader from "@/components/loader/loader";
 import { useRouter } from "next/navigation";
+import useWineQuery from "@/hooks/api/wines/use-wine-query";
 
 interface WineDetailContentProps {
   wineId: number;
@@ -18,14 +18,7 @@ interface WineDetailContentProps {
 const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   const router = useRouter();
 
-  const {
-    data: wine,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["wine", wineId],
-    queryFn: () => getWine(wineId),
-  });
+  const { data: wine, isLoading, isError } = useWineQuery(wineId);
 
   const { data: currentUser } = useQuery({
     queryKey: ["currentUser"],
