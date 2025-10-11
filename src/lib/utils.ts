@@ -176,3 +176,33 @@ export const getAromaIconName = (aroma: AromaKey): string => {
   };
   return iconMap[aroma] || "WineIcon";
 };
+
+/**
+ * 쿠키의 값을 가져옵니다.
+ *
+ * @author hwitae
+ * @param cookieName 쿠키 이름
+ * @returns 쿠키 문자열
+ */
+export const getCookie = (cookieName: string) => {
+  const cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+
+    if (cookie.startsWith(cookieName + "=")) {
+      return cookie.slice(cookieName.length + 1);
+    }
+  }
+  return undefined;
+};
+
+/**
+ * 해당하는 이름의 쿠키를 삭제합니다.
+ *
+ * @author hwitae
+ * @param cookieName 쿠키 이름
+ */
+export const deleteCookie = (cookieName: string) => {
+  document.cookie = `${cookieName}=""; max-age=0; path=/;`;
+};

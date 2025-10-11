@@ -1,6 +1,7 @@
 "use server";
 
 import { User } from "@/types/user-type";
+import { cookies } from "next/headers";
 
 interface LoginData {
   user: User;
@@ -9,7 +10,6 @@ interface LoginData {
 }
 
 const login = async (prevState: any, formData: FormData) => {
-  console.log(formData);
   const email = formData.get("email");
   const password = formData.get("password");
 
@@ -30,6 +30,10 @@ const login = async (prevState: any, formData: FormData) => {
       return { isError: true, message: "이메일 혹은 비밀번호를 확인해주세요." };
 
     const data = await response.json();
+
+    const cookieStore = await cookies();
+    cookieStore.set("accessToken", `${data.accessToken}`);
+    cookieStore.set("refreshToken", `${data.refreshToken}`);
 
     return { isError: false, data: data };
   } catch (error) {
