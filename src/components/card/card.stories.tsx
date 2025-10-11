@@ -27,7 +27,10 @@ export const CardActionMenu: Story = {
           name={DATA[3].name}
           region={DATA[3].region}
           price={DATA[3].price}
-          actionMenu
+          actionMenuItems={[
+            { label: "수정하기", onClick: () => console.log("edit") },
+            { label: "삭제하기", onClick: () => console.log("delete") },
+          ]}
         />
       </div>
     </div>

@@ -37,6 +37,11 @@ const nextConfig: NextConfig = {
         hostname: "gangnam.wine",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.gangnam.wine",
+        pathname: "/**",
+      },
     ],
   },
 };
