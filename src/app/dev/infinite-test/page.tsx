@@ -1,4 +1,3 @@
-// src/app/dev/infinite-test/page.tsx
 "use client";
 
 import { useMemo, useState } from "react";
