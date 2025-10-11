@@ -57,7 +57,10 @@ const WineSearchOption = () => {
                 variant="outline"
                 onClick={() => router.replace("/wines", { scroll: false })}
               />
-              <Button label="와인 등록하기" />
+              <Button
+                label="와인 등록하기"
+                onClick={() => router.push("/register/new")}
+              />
             </div>
           </aside>
         </>
