@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import getWine from "@/api/wines/get-wine";
 import getReview from "@/api/reviews/get-review";
 import useReviewMutation from "../../_hooks/use-review-mutation";
+import useWineQuery from "../../../../../hooks/api/wines/use-wine-query";
 import ReviewForm from "./review-form";
 import Loader from "@/components/loader/loader";
 import type { ReviewBase } from "@/types/wine";
@@ -44,12 +45,7 @@ const ReviewFormClient = ({
     data: wine,
     isLoading: wineLoading,
     isError: wineError,
-  } = useQuery({
-    queryKey: ["wine", actualWineId],
-    queryFn: () => getWine(actualWineId!),
-    retry: 1,
-    enabled: !!actualWineId,
-  });
+  } = useWineQuery(actualWineId);
 
   const handleSubmit = (data: ReviewBase) => {
     mutate(data, {

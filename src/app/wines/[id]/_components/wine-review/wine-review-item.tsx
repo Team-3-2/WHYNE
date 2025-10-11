@@ -16,8 +16,8 @@ import { aromaMap } from "@/components/flavor/aroma-map";
 import useToggle from "@/hooks/use-toggle";
 import useClickOutside from "@/hooks/use-click-outside";
 import WineReviewRating from "./wine-review-rating";
-import useReviewLike from "../../_hooks/use-review-like";
-import useReviewDelete from "../../_hooks/use-review-delete";
+import useReviewLike from "../../../../../hooks/api/reviews/use-review-like";
+import useReviewDelete from "../../../../../hooks/api/reviews/use-review-delete";
 import type { Review } from "@/types/wine";
 
 interface WineReviewItemProps {
