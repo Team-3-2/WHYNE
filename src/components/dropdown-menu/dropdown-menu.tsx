@@ -13,7 +13,7 @@ import { ComponentPropsWithoutRef } from "react";
  * @param className : 메뉴 커스텀 클래스
  */
 
-type DropdownItem = {
+export type DropdownItem = {
   label: string;
   href?: string;
   onClick?: () => void;
