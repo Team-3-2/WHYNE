@@ -32,7 +32,7 @@ const WineListSection = () => {
     [debouncedSetSearch]
   );
 
-  const { data } = useGetWineList({
+  const { data, isLoading } = useGetWineList({
     limit,
     type,
     rating,
@@ -41,8 +41,6 @@ const WineListSection = () => {
     name: debouncedSearch,
   });
 
-  const limit = 10;
-  const { data, isLoading } = useGetWineList({ limit });
   const wineList = data?.list ?? [];
   console.log(data);
 
