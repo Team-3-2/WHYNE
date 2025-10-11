@@ -1,6 +1,5 @@
 @tailwind base;
 @tailwind components;
-@tailwind animations;
 @tailwind utilities;
 
 @layer base {
