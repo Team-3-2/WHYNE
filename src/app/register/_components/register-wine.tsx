@@ -3,13 +3,20 @@
 import { Button, SelectType, TextInput } from "@/components";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 import WineImg from "@/components/wine-img/wine-img";
+import usePatchWine from "@/hooks/api/wines/use-patch-wine";
 import usePostWine from "@/hooks/api/wines/use-post-wine";
 import { WineFormData } from "@/types/wine";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
+const RegisterWine = ({
+  wineData,
+  id,
+}: {
+  wineData: WineFormData | null;
+  id: string | null;
+}) => {
   const {
     register,
     handleSubmit,
@@ -28,6 +35,7 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
   );
   const [imgFile, setImgFile] = useState<File | undefined>();
   const { mutate: postWine } = usePostWine();
+  const { mutate: patchWine } = usePatchWine();
 
   const onSubmit = async (data: WineFormData) => {
     const price = Number(data.price);
@@ -35,7 +43,16 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
 
     if (imgFile) {
       const imgUrl = { url: imgFile };
-      postWine({ registerData, imgUrl });
+
+      if (wineData) {
+        const avgRating = wineData.avgRating || 0;
+        const patchData = { ...data, price, avgRating };
+        const path = Number(id);
+
+        patchWine({ patchData, imgUrl, path });
+      } else {
+        postWine({ registerData, imgUrl });
+      }
     }
   };
 
@@ -46,6 +63,7 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
    */
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const uploadImg = e.target.files?.[0];
+    console.log(uploadImg);
 
     if (!uploadImg) return;
     setImgFile(uploadImg);

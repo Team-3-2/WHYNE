@@ -59,7 +59,7 @@ const WineSearchOption = () => {
               />
               <Button
                 label="와인 등록하기"
-                onClick={() => router.push("/register/1700")}
+                onClick={() => router.push("/register/1701")}
               />
             </div>
           </aside>

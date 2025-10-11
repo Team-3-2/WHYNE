@@ -69,4 +69,5 @@ export interface WineFormData {
   image: File | string;
   price: number;
   type: "RED" | "WHITE" | "SPARKLING";
+  avgRating?: number;
 }
