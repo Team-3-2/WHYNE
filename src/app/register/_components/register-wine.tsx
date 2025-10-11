@@ -3,7 +3,6 @@
 import { Button, SelectType, TextInput } from "@/components";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 import WineImg from "@/components/wine-img/wine-img";
-import { isValidImageSrc } from "@/lib/utils";
 import { WineFormData } from "@/types/wine";
 import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -26,6 +25,9 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
   const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(
     wineData ? wineData.image : null
   );
+  const imageRegister = register("image", {
+    required: "와인 사진은 필수입니다.",
+  });
 
   const onSubmit: SubmitHandler<WineFormData> = (data) => {
     console.log(data);
@@ -45,6 +47,8 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
     if (previewImgUrl) URL.revokeObjectURL(previewImgUrl);
 
     const newPreviewImgUrl = URL.createObjectURL(imgFile);
+    console.log(newPreviewImgUrl);
+
     setPreviewImgUrl(newPreviewImgUrl);
   };
 
@@ -54,12 +58,12 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
       className="pb-40 tablet:pb-0 pc:pb-0"
     >
       <div className="flex flex-col gap-[18px]">
-        {isValidImageSrc(previewImgUrl) ? (
+        {previewImgUrl ? (
           <label htmlFor="changeImg" className="w-fit cursor-pointer">
             <Image
               src={previewImgUrl}
-              width={370}
-              height={360}
+              width={360}
+              height={370}
               alt="미리보기 이미지"
             />
             <input

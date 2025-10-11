@@ -125,9 +125,9 @@ const WineTasteTest = () => {
 
 // 메인 페이지 컴포넌트
 const Page = () => {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  // console.log(e.target.value);
+  // };
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -225,20 +225,20 @@ const Page = () => {
         </div>
 
         <section>
-          <SelectType isError={false} onChange={handleChange} />
+          {/* <SelectType isError={false} onChange={handleChange} /> */}
           <br />
-          <SelectType isError={true} className="flex-col" />
+          {/* <SelectType isError={true} className="flex-col" /> */}
         </section>
 
         <br />
         <section>
-          <TextInput onChange={handleChange} />
+          {/* <TextInput onChange={handleChange} /> */}
           <br />
-          <TextInput
+          {/* <TextInput
             onChange={handleChange}
             isError={true}
             errorMsg="에러입니다"
-          />
+          /> */}
         </section>
 
         <br />
@@ -254,13 +254,11 @@ const Page = () => {
         </section>
 
         <section>
-          <Searchbar onChange={handleChange} className="pc:w-[500px]" />
+          {/* <Searchbar onChange={handleChange} className="pc:w-[500px]" /> */}
         </section>
         <br />
       </div>
-      <section>
-        <Searchbar onChange={handleChange} />
-      </section>
+      <section>{/* <Searchbar onChange={handleChange} /> */}</section>
 
       <section className="m-auto max-w-[1140px]">
         <h3 className="mb-[10px] text-body-lg">내가 등록한 와인</h3>
