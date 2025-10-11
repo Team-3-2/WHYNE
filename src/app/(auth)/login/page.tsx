@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
-import useUserStore from "@/store/user-store";
 import login from "@/api/auth/login";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
@@ -19,7 +18,6 @@ interface LoginFormData {
 
 const Page = () => {
   const router = useRouter();
-  const { user, setUser } = useUserStore((state) => state);
   const {
     register,
     formState: { errors, isValid },
@@ -29,10 +27,6 @@ const Page = () => {
 
   useEffect(() => {
     if (state && !state.isError) {
-      setUser(state.data.user);
-
-      sessionStorage.setItem("accessToken", state.data?.accessToken);
-      localStorage.setItem("refreshToken", state.data?.refreshToken);
       router.push("/");
     }
   }, [state]);
