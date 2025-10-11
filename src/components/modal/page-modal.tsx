@@ -9,9 +9,14 @@ import IconButton from "../button/icon-button";
 interface PageModalProps {
   title: string;
   children: ReactNode;
+  className?: string;
 }
 
-const PageModal = ({ title = "등록 하기", children }: PageModalProps) => {
+const PageModal = ({
+  title = "등록 하기",
+  children,
+  className,
+}: PageModalProps) => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const router = useRouter();
 
@@ -25,7 +30,6 @@ const PageModal = ({ title = "등록 하기", children }: PageModalProps) => {
   });
 
   return (
-    // TODO: 모바일 반응형 스타일 작성
     <Modal
       ref={modalRef}
       className={cn(
@@ -33,7 +37,8 @@ const PageModal = ({ title = "등록 하기", children }: PageModalProps) => {
         "mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:mb-0 mobile:w-full mobile:max-w-full",
         "mobile:rounded-none mobile:rounded-t-2xl",
         "tablet:h-[1010px]",
-        "pc:h-[1010px]"
+        "pc:h-[1010px]",
+        className
       )}
       onCancel={() => router.back()}
     >

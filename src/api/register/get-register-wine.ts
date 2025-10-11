@@ -1,25 +1,30 @@
 import { cookies } from "next/headers";
 import authRefreshToken from "../auth/auth-refresh-token";
+import { redirect } from "next/navigation";
+import { WineFormData } from "@/types/wine";
 
 /**
- * 유저 정보를 쿠키에 저장된 토큰을 사용하여 불러온다.
- *
+ * 등록된 와인의 정보를 요청한다.
  * @author hwitae
- * @returns User
+ * @param id 와인 상세 정보 ID
+ * @returns WineFormData
  */
-const getMe = async () => {
+const getRegisterWine = async (
+  id: string
+): Promise<WineFormData | undefined> => {
   const cookieStore = await cookies();
   let accessToken = cookieStore.get("accessToken")?.value;
+  let wineData = null;
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+      `${process.env.NEXT_PUBLIC_API_URL}/wines/${id}`,
       {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        method: "GET",
       }
     );
 
@@ -27,7 +32,7 @@ const getMe = async () => {
       const newAccessToken = await authRefreshToken();
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+        `${process.env.NEXT_PUBLIC_API_URL}/wines/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -38,19 +43,27 @@ const getMe = async () => {
         }
       );
 
-      if (!response.ok) throw new Error("재로그인이 필요합니다.");
+      if (!response.ok) redirect("/login");
 
       return await response.json();
     }
 
-    if (!response.ok) throw new Error("데이터 불러오기 실패");
+    if (!response.ok) redirect("/login");
 
-    return await response.json();
+    const wineDetailData = await response.json();
+
+    wineData = {
+      name: wineDetailData.name,
+      region: wineDetailData.region,
+      image: wineDetailData.image,
+      price: wineDetailData.price,
+      type: wineDetailData.type,
+    };
+
+    return wineData;
   } catch (error) {
     console.log(error);
-
-    return;
   }
 };
 
-export default getMe;
+export default getRegisterWine;

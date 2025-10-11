@@ -22,10 +22,12 @@ const TypeOption = () => {
     <div className="flex flex-col gap-5">
       <h2 className="text-body-lg">타입</h2>
       <div className="flex flex-col gap-2">
-        {WINE_TYPE.map((item: string) => (
+        {WINE_TYPE.map((item: string, idx) => (
           <TypeInput
+            id={idx.toString()}
             key={item}
-            name={item as "SPARKLING" | "WHITE" | "RED"}
+            name="filter"
+            value={item as "SPARKLING" | "WHITE" | "RED"}
             onClick={() => handleTypeClick(item)}
             className={cn(selectedType === item && "bg-gray-800")}
             labelClassName={cn(selectedType === item && "text-white")}

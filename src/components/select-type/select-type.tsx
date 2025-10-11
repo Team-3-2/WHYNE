@@ -16,21 +16,29 @@ type WineType = keyof typeof imgMap;
 interface SelectTypeValue extends ComponentProps<"input"> {
   isError: boolean;
   className?: string;
+  name: string;
+}
+
+interface TypeInputProps extends ComponentProps<"input"> {
+  id: string;
+  name: string;
+  onClick?: () => void;
+  className?: string;
+  labelClassName?: string;
+  value: WineType;
 }
 
 export const TypeInput = ({
+  id,
   name,
   onClick,
   className,
   labelClassName,
-}: {
-  name: WineType;
-  onClick?: () => void;
-  className?: string;
-  labelClassName?: string;
-}) => {
-  const imgSrc = imgMap[name] || "";
-  const typeName = name.slice(0, 1) + name.slice(1).toLowerCase();
+  value,
+  ...props
+}: TypeInputProps) => {
+  const imgSrc = imgMap[value] || "";
+  const typeName = value.slice(0, 1) + value.slice(1).toLowerCase();
 
   return (
     <div
@@ -47,13 +55,14 @@ export const TypeInput = ({
     >
       <input
         type="radio"
-        id={name}
-        value={name}
-        name="wine-type"
+        id={id}
+        value={value}
+        name={name}
         className="peer hidden"
+        {...props}
       />
       <label
-        htmlFor={name}
+        htmlFor={id}
         className={cn(
           "py-[7px] pl-2 pr-3",
           "flex-center gap-[6px]",
@@ -85,7 +94,12 @@ export const TypeInput = ({
   );
 };
 
-const SelectType = ({ isError, className, ...props }: SelectTypeValue) => {
+const SelectType = ({
+  isError,
+  className,
+  name,
+  ...props
+}: SelectTypeValue) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
@@ -97,9 +111,9 @@ const SelectType = ({ isError, className, ...props }: SelectTypeValue) => {
         )}
       </div>
       <div className={cn("flex gap-[10px]", className)} {...props}>
-        <TypeInput name="RED" />
-        <TypeInput name="WHITE" />
-        <TypeInput name="SPARKLING" />
+        <TypeInput id={"wine-red"} name={name} value="RED" />
+        <TypeInput id={"wine-white"} name={name} value="WHITE" />
+        <TypeInput id={"wine-spark"} name={name} value="SPARKLING" />
       </div>
     </div>
   );
