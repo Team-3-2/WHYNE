@@ -20,6 +20,7 @@ interface ReviewFormProps {
   onCancel: () => void;
   isSubmitting?: boolean;
   initialData?: ReviewBase;
+  className?: string;
 }
 
 export default function ReviewForm({
@@ -28,6 +29,7 @@ export default function ReviewForm({
   onCancel,
   isSubmitting = false,
   initialData,
+  className,
 }: ReviewFormProps) {
   const {
     id: wineId,
@@ -132,7 +134,7 @@ export default function ReviewForm({
   );
 
   return (
-    <div className="flex w-full max-w-[480px] flex-col">
+    <div className={cn("flex w-full max-w-[480px] flex-col", className)}>
       {/* 모든 컨텐츠 */}
       <div className="flex flex-col gap-8">
         {/* 와인 정보 */}

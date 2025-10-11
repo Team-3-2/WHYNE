@@ -14,12 +14,14 @@ interface ReviewFormClientProps {
   wineId?: number;
   reviewId?: number;
   mode?: "create" | "edit";
+  className?: string;
 }
 
 const ReviewFormClient = ({
   wineId,
   reviewId,
   mode = "create",
+  className,
 }: ReviewFormClientProps) => {
   const router = useRouter();
 
@@ -85,6 +87,7 @@ const ReviewFormClient = ({
 
   return (
     <ReviewForm
+      className={className}
       wine={wine}
       onSubmit={handleSubmit}
       onCancel={handleCancel}
