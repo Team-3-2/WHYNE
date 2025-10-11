@@ -18,6 +18,10 @@ const usePatchProfile = () => {
     mutationFn: ({ imageUrl, nickname }) =>
       patchProfile({ image: imageUrl, nickname }),
 
+    onSuccess: () => {
+      alert("프로필 갱신 성공");
+    },
+
     onError: (error) => {
       const message = error.response?.data?.message;
 
