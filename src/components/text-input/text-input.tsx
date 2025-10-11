@@ -26,15 +26,16 @@ const Input = ({
     <input
       id="text-input"
       className={cn(
-        "w-[303px]",
+        "w-full",
         "px-4 py-3",
         "rounded border border-gray-300",
         "text-[14px] leading-5 tracking-[0.02em] text-gray-900",
         "placeholder:text-tertiary placeholder:text-body-sm placeholder:font-normal",
         "focus:outline-none",
-        "tablet:w-[400px] tablet:text-body-md tablet:font-normal tablet:placeholder:text-body-md tablet:placeholder:font-normal",
-        "pc:w-[400px] pc:text-body-md pc:font-normal pc:placeholder:text-body-md pc:placeholder:font-normal",
-        isError && "border-2 border-red-400"
+        "tablet:text-body-md tablet:font-normal tablet:placeholder:text-body-md tablet:placeholder:font-normal",
+        "pc:text-body-md pc:font-normal pc:placeholder:text-body-md pc:placeholder:font-normal",
+        isError && "border-2 border-red-400",
+        className
       )}
       type="text"
       placeholder={placeholder}
@@ -80,14 +81,22 @@ const TextInput = ({
                 </p>
               )}
             </div>
-            <div className="relative flex w-[303px] items-center tablet:w-[400px] pc:w-[400px]">
-              <Input placeholder={placeholder} isError={isError} {...props} />
-              <Icon
-                className="absolute right-0 mr-[14px]"
-                icon="AlertIcon"
-                color="red400"
-                size={"sm"}
+            <div className="relative flex w-full items-center">
+              <Input
+                id={id}
+                placeholder={placeholder}
+                isError={isError}
+                className={className}
+                {...props}
               />
+              {isError && (
+                <Icon
+                  className="absolute right-0 mr-[14px]"
+                  icon="AlertIcon"
+                  color="red400"
+                  size={"sm"}
+                />
+              )}
             </div>
           </>
         )}
@@ -103,7 +112,12 @@ const TextInput = ({
             </label>
             {isError ? (
               <div className="relative flex w-[303px] items-center tablet:w-[400px] pc:w-[400px]">
-                <Input placeholder={placeholder} isError={isError} {...props} />
+                <Input
+                  id={id}
+                  placeholder={placeholder}
+                  isError={isError}
+                  {...props}
+                />
                 <Icon
                   className="absolute right-0 mr-[14px]"
                   icon="AlertIcon"
