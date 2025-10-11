@@ -6,6 +6,7 @@ export interface GetWineListParams {
   maxPrice?: number;
   rating?: number;
   name?: string;
+  type?: string;
 }
 
 async function getWineList(params: GetWineListParams) {
