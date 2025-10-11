@@ -60,17 +60,11 @@ const WineListSection = () => {
           "tablet:mb-[40px]",
           "pc:order-2 pc:float-right pc:mb-0 pc:w-[calc(100%-284px-60px)]"
         )}
-      />
-
-      {/* 검색 옵션 */}
-      <WineSearchOption />
-
-      {/* 검색바 */}
-      <Searchbar
-        className="order-1 flex-1 pc:order-2"
         value={search}
         onChange={handleSearchChange}
       />
+
+      {/* 검색 옵션 */}
       <div
         className={cn(
           "order-2 mb-[20px]",
