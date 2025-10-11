@@ -17,6 +17,7 @@ import useToggle from "@/hooks/use-toggle";
 import useClickOutside from "@/hooks/use-click-outside";
 import WineReviewRating from "./wine-review-rating";
 import useReviewLike from "../../_hooks/use-review-like";
+import useReviewDelete from "../../_hooks/use-review-delete";
 import type { Review } from "@/types/wine";
 
 interface WineReviewItemProps {
@@ -97,6 +98,11 @@ const WineReviewItem = ({
     isLiked
   );
 
+  const { mutate: deleteReview, isPending: deletePending } = useReviewDelete({
+    reviewId: review.id,
+    wineId,
+  });
+
   const tastes = buildTasteData({
     lightBold: review.lightBold,
     smoothTannic: review.smoothTannic,
@@ -119,8 +125,16 @@ const WineReviewItem = ({
   };
 
   const handleDeleteConfirm = () => {
-    setIsDeleteModalOpen(false);
-    alert("리뷰 삭제 기능은 준비 중입니다.");
+    deleteReview(undefined, {
+      onSuccess: () => {
+        setIsDeleteModalOpen(false);
+        alert("리뷰가 삭제되었습니다.");
+        router.refresh();
+      },
+      onError: () => {
+        alert("리뷰 삭제에 실패했습니다. 다시 시도해주세요.");
+      },
+    });
   };
 
   return (
