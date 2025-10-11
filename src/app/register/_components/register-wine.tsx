@@ -3,10 +3,11 @@
 import { Button, SelectType, TextInput } from "@/components";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 import WineImg from "@/components/wine-img/wine-img";
+import usePostWine from "@/hooks/api/wines/use-post-wine";
 import { WineFormData } from "@/types/wine";
 import Image from "next/image";
-import { ChangeEvent, useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { ChangeEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
   const {
@@ -23,14 +24,19 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
     },
   });
   const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(
-    wineData ? wineData.image : null
+    wineData && typeof wineData.image === "string" ? wineData.image : null
   );
-  const imageRegister = register("image", {
-    required: "와인 사진은 필수입니다.",
-  });
+  const [imgFile, setImgFile] = useState<File | undefined>();
+  const { mutate: postWine } = usePostWine();
 
-  const onSubmit: SubmitHandler<WineFormData> = (data) => {
-    console.log(data);
+  const onSubmit = async (data: WineFormData) => {
+    const price = Number(data.price);
+    const registerData = { ...data, price: price };
+
+    if (imgFile) {
+      const imgUrl = { url: imgFile };
+      postWine({ registerData, imgUrl });
+    }
   };
 
   /**
@@ -39,15 +45,14 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
    * @param e input 파일 선택 이벤트
    */
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const imgFile = e.target.files?.[0];
-    console.log(imgFile);
+    const uploadImg = e.target.files?.[0];
 
-    if (!imgFile) return;
+    if (!uploadImg) return;
+    setImgFile(uploadImg);
 
     if (previewImgUrl) URL.revokeObjectURL(previewImgUrl);
 
-    const newPreviewImgUrl = URL.createObjectURL(imgFile);
-    console.log(newPreviewImgUrl);
+    const newPreviewImgUrl = URL.createObjectURL(uploadImg);
 
     setPreviewImgUrl(newPreviewImgUrl);
   };
@@ -61,7 +66,7 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
         {previewImgUrl ? (
           <label htmlFor="changeImg" className="w-fit cursor-pointer">
             <Image
-              src={previewImgUrl}
+              src={previewImgUrl ? previewImgUrl : ""}
               width={360}
               height={370}
               alt="미리보기 이미지"
