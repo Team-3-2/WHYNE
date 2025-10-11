@@ -1,13 +1,6 @@
 import IconButton from "@/components/button/icon-button";
-import DropdownMenu from "@/components/dropdown-menu/dropdown-menu";
-
-type DropdownItem = {
-  label: string;
-  href?: string;
-  onClick?: () => void;
-  className?: string;
-};
-
+import { DropdownMenu } from "@/components";
+import type { DropdownItem } from "@/components/dropdown-menu/dropdown-menu";
 /**
  * 카드 정보 우측 상단 액션 메뉴 컴포넌트
  * @param isOpen : 메뉴 열림 상태

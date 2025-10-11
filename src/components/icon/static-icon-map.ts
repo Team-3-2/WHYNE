@@ -20,6 +20,7 @@ import GoogleIcon from "/public/icons/ic-sns-google.svg";
 import KakaoIcon from "/public/icons/ic-sns-kakao.svg";
 import WineIcon from "/public/icons/ic-wine.svg";
 import XIcon from "/public/icons/ic-x.svg";
+import EmptyStateIcon from "/public/icons/ic-empty-state.svg";
 
 const STATIC_ICON_MAP = {
   ArrowUpIcon,
@@ -39,6 +40,7 @@ const STATIC_ICON_MAP = {
   KakaoIcon,
   WineIcon,
   XIcon,
+  EmptyStateIcon,
 };
 
 export type StaticIconName = keyof typeof STATIC_ICON_MAP;
