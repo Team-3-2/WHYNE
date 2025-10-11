@@ -10,6 +10,12 @@ interface WineFormData {
   type: string;
 }
 
+/**
+ * 등록된 와인의 정보를 요청한다.
+ * @author hwitae
+ * @param id 와인 상세 정보 ID
+ * @returns WineFormData
+ */
 const getRegisterWine = async (
   id: string
 ): Promise<WineFormData | undefined> => {
@@ -60,7 +66,6 @@ const getRegisterWine = async (
       price: wineDetailData.price,
       type: wineDetailData.type,
     };
-    console.log(wineData);
 
     return wineData;
   } catch (error) {

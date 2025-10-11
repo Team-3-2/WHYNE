@@ -17,8 +17,6 @@ interface WineFormData {
 }
 
 const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
-  console.log(wineData);
-
   const {
     register,
     handleSubmit,
@@ -56,16 +54,12 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
     setPreviewImgUrl(newPreviewImgUrl);
   };
 
-  const handleImgError = () => {
-    setPreviewImgUrl(null);
-  };
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="pb-40 tablet:pb-0 pc:pb-0"
     >
-      <div className="flex flex-col gap-[18px] px-6">
+      <div className="flex flex-col gap-[18px]">
         {isValidImageSrc(previewImgUrl) ? (
           <label htmlFor="changeImg" className="w-fit cursor-pointer">
             <Image
@@ -73,7 +67,6 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
               width={370}
               height={360}
               alt="미리보기 이미지"
-              onError={handleImgError}
             />
             <input
               type="file"
@@ -127,7 +120,7 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
           {...register("region", { required: "원산지는 필수 입력입니다." })}
         />
       </div>
-      <PageModalBtnWrapper>
+      <PageModalBtnWrapper className="tablet:h-[130px] tablet:px-0 pc:h-[130px] pc:px-0">
         <Button label="와인 등록하기" />
       </PageModalBtnWrapper>
     </form>

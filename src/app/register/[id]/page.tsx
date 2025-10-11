@@ -33,7 +33,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       >
         와인 등록
       </p>
-      <RegisterWine wineData={wineData} />
+      <div className="px-6">
+        <RegisterWine wineData={wineData} />
+      </div>
     </div>
   );
 };
