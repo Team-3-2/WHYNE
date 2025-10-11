@@ -1,15 +1,19 @@
+"use client";
+
 import { ChangeEvent, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button, ConfirmModal, Profile } from "@/components";
 import { User } from "@/types/user-type";
 import usePostImage from "@/hooks/api/use-post-image";
-import usePatchProfile from "@/hooks/api/myprofile/use-patch-profile";
+import usePatchProfile from "@/hooks/api/my-profile/use-patch-profile";
+import { useRouter } from "next/navigation";
 
 interface AccountItemProps {
   user: User | undefined;
 }
 
 const AccountItem = ({ user }: AccountItemProps) => {
+  const router = useRouter();
   const [image, setImage] = useState<string | undefined>(user?.image);
   const [nickname, setNickname] = useState<string | undefined>(user?.nickname);
   const [confirmModal, setConfirmModal] = useState(false);
@@ -39,8 +43,9 @@ const AccountItem = ({ user }: AccountItemProps) => {
       const { url } = await uploadImage({ url: file });
       await updateProfile({ imageUrl: url });
       setImage(`${url}?v=${Date.now()}`);
+      router.refresh();
     } catch (err) {
-      console.error("프로필 갱신 실패:", err);
+      alert("프로필 갱신 실패");
       setImage(user?.image);
     }
   };
@@ -53,8 +58,9 @@ const AccountItem = ({ user }: AccountItemProps) => {
     try {
       await updateProfile({ nickname: trimmed });
       setNickname("");
+      router.refresh();
     } catch (err) {
-      console.error("닉네임 변경 실패:", err);
+      alert("닉네임 변경 실패");
     } finally {
       setConfirmModal(false);
     }
@@ -63,9 +69,9 @@ const AccountItem = ({ user }: AccountItemProps) => {
   return (
     <section
       className={cn(
-        "mx-auto mb-[60px] flex w-[300px] flex-col items-center justify-start gap-5",
+        "mx-auto mb-[60px] mt-[200px] flex w-[300px] flex-col items-center justify-start gap-5",
         "tablet:mb-[34px] tablet:w-[400px]",
-        "pc:sticky pc:top-32 pc:mb-0 pc:h-[calc(100vh-50px-128px)] pc:w-[291px] pc:justify-center pc:gap-6 pc:px-[25px] pc:pt-10"
+        "pc:sticky pc:top-32 pc:mb-0 pc:mt-0 pc:h-[calc(100vh-50px-128px)] pc:w-[291px] pc:justify-center pc:gap-6 pc:px-[25px] pc:pt-10"
       )}
     >
       <div className="flex-col-center gap-3 tablet:gap-4 pc:gap-5">

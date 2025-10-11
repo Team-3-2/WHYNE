@@ -9,7 +9,7 @@ import { RANGE_BASE_STYLE } from "../../_constants/range-base-style";
 const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
 
-const PriceOption = () => {
+const PriceOption = ({ resetSignal }: { resetSignal: number }) => {
   const { setQuery, searchParams } = useUpdateQuery();
 
   const initialMin = Number(searchParams.get("minPrice") ?? MIN_PRICE);
@@ -22,6 +22,13 @@ const PriceOption = () => {
     Number.isNaN(initialMax) ? MAX_PRICE : initialMax
   );
 
+  useEffect(() => {
+    if (resetSignal === undefined) return;
+
+    setMinPrice(MIN_PRICE);
+    setMaxPrice(MAX_PRICE);
+  }, [resetSignal]);
+
   const updateUrl = useMemo(
     () =>
       debounce((min: number, max: number) => {
@@ -32,13 +39,9 @@ const PriceOption = () => {
           if (max >= MAX_PRICE) params.delete("maxPrice");
           else params.set("maxPrice", String(max));
         });
-      }, 400),
+      }, 600),
     [setQuery]
   );
-
-  useEffect(() => {
-    return () => updateUrl.cancel();
-  }, [updateUrl]);
 
   // 최소 가격 핸들러
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
