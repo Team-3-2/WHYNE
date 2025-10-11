@@ -18,7 +18,17 @@ interface SelectTypeValue extends ComponentProps<"input"> {
   className?: string;
 }
 
-const TypeInput = ({ name }: { name: WineType }) => {
+export const TypeInput = ({
+  name,
+  onClick,
+  className,
+  labelClassName,
+}: {
+  name: WineType;
+  onClick?: () => void;
+  className?: string;
+  labelClassName?: string;
+}) => {
   const imgSrc = imgMap[name] || "";
   const typeName = name.slice(0, 1) + name.slice(1).toLowerCase();
 
@@ -30,8 +40,10 @@ const TypeInput = ({ name }: { name: WineType }) => {
         "flex items-center",
         "bg-white",
         "tablet:h-[48px]",
-        "pc:h-[48px]"
+        "pc:h-[48px]",
+        className
       )}
+      onClick={onClick}
     >
       <input
         type="radio"
@@ -49,7 +61,8 @@ const TypeInput = ({ name }: { name: WineType }) => {
           "text-default hover:bg-gray-200",
           "peer-checked:bg-gray-800 peer-checked:text-white",
           "tablet:gap-2 tablet:py-2 tablet:pl-2 tablet:pr-4",
-          "pc:gap-2 pc:py-2 pc:pl-2 pc:pr-4"
+          "pc:gap-2 pc:py-2 pc:pl-2 pc:pr-4",
+          labelClassName
         )}
       >
         <Image

@@ -272,7 +272,10 @@ const Page = () => {
               name={item.name}
               region={item.region}
               price={item.price}
-              actionMenu
+              actionMenuItems={[
+                { label: "수정하기", onClick: () => console.log("edit") },
+                { label: "삭제하기", onClick: () => console.log("delete") },
+              ]}
             />
           ))}
         </div>
