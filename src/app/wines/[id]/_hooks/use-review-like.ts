@@ -10,7 +10,9 @@ const useReviewLike = (reviewId: number, wineId: number, isLiked: boolean) => {
   return useMutation({
     mutationFn: () => (isLiked ? deleteLike(reviewId) : postLike(reviewId)),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["wine", wineId] }); // 리뷰 다
+      queryClient.invalidateQueries({ queryKey: ["reviews", wineId] });
+      queryClient.invalidateQueries({ queryKey: ["wine", wineId] });
+      queryClient.invalidateQueries({ queryKey: ["review", reviewId] });
     },
   });
 };
