@@ -1,4 +1,4 @@
-import Button from "@/components/button/basic-button";
+import LinkButton from "@/components/button/link-button";
 import LandingBanner from "./(landing)/_components/landing-banner";
 import LandingSection from "./(landing)/_components/landing-section";
 import {
@@ -27,9 +27,12 @@ const Home = () => {
         ))}
       </main>
 
-      {/* TODO(junyeol): /wines 라우트 연결 */}
       <footer className="flex-center w-full px-16 py-16">
-        <Button label="와인 보러가기" className="h-[50px] w-[283px]" />
+        <LinkButton
+          href="/wines"
+          label="와인 보러가기"
+          className="h-[50px] w-[283px]"
+        />
       </footer>
     </>
   );

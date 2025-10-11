@@ -3,55 +3,73 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import getWine from "@/api/wines/get-wine";
-import { useReviewSubmit } from "../../_hooks/use-review-submit";
+import getReview from "@/api/reviews/get-review";
+import useReviewMutation from "../../_hooks/use-review-mutation";
+import useWineQuery from "../../../../../hooks/api/wines/use-wine-query";
 import ReviewForm from "./review-form";
 import Loader from "@/components/loader/loader";
-import type { ReviewFormData } from "../../_types";
+import type { ReviewBase } from "@/types/wine";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 
 interface ReviewFormClientProps {
-  wineId: number;
+  wineId?: number;
+  reviewId?: number;
+  mode?: "create" | "edit";
+  className?: string;
 }
 
-/**
- * 리뷰 작성 폼 클라이언트 래퍼
- * @author junyrol
- * - 와인 정보 페칭
- * - 리뷰 제출 처리
- * - 로딩/에러 상태 관리
- */
-const ReviewFormClient = ({ wineId }: ReviewFormClientProps) => {
+const ReviewFormClient = ({
+  wineId,
+  reviewId,
+  mode = "create",
+  className,
+}: ReviewFormClientProps) => {
   const router = useRouter();
-  const { mutate, isPending } = useReviewSubmit();
 
-  // 와인 정보 페칭
+  const reviewMutation = useReviewMutation({ mode, reviewId });
+  const { mutate, isPending } = reviewMutation;
+
   const {
-    data: wine,
-    isLoading,
-    isError,
+    data: review,
+    isLoading: reviewLoading,
+    isError: reviewError,
   } = useQuery({
-    queryKey: ["wine", wineId],
-    queryFn: () => getWine(wineId),
-    retry: 1,
+    queryKey: ["review", reviewId],
+    queryFn: () => getReview(reviewId!),
+    enabled: mode === "edit" && !!reviewId,
   });
 
-  const handleSubmit = (data: ReviewFormData) => {
+  const actualWineId = wineId ?? review?.wineId;
+
+  const {
+    data: wine,
+    isLoading: wineLoading,
+    isError: wineError,
+  } = useWineQuery(actualWineId);
+
+  const handleSubmit = (data: ReviewBase) => {
     mutate(data, {
       onSuccess: () => {
-        alert("리뷰가 등록되었습니다!");
+        alert(
+          mode === "edit" ? "리뷰가 수정되었습니다!" : "리뷰가 등록되었습니다!"
+        );
         router.back();
       },
       onError: () => {
-        alert("리뷰 등록에 실패했습니다. 다시 시도해주세요.");
+        alert(
+          mode === "edit"
+            ? "리뷰 수정에 실패했습니다. 다시 시도해주세요."
+            : "리뷰 등록에 실패했습니다. 다시 시도해주세요."
+        );
       },
     });
   };
 
   const handleCancel = () => {
-    router.replace(`/wines/${wineId}`);
+    router.back();
   };
 
-  if (isLoading) {
+  if (wineLoading || reviewLoading) {
     return (
       <div className="flex-center min-h-[400px]">
         <Loader />
@@ -59,19 +77,18 @@ const ReviewFormClient = ({ wineId }: ReviewFormClientProps) => {
     );
   }
 
-  if (isError || !wine) {
+  if (wineError || !wine || (mode === "edit" && (reviewError || !review))) {
     return <ReviewFormErrorState onRetry={handleCancel} />;
   }
 
   return (
     <ReviewForm
-      wineId={wine.id}
-      wineName={wine.name}
-      wineRegion={wine.region}
-      wineImage={wine.image}
+      className={className}
+      wine={wine}
       onSubmit={handleSubmit}
       onCancel={handleCancel}
       isSubmitting={isPending}
+      initialData={review ?? undefined}
     />
   );
 };
