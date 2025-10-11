@@ -8,8 +8,8 @@ import ReviewItem from "../review-item/review-item";
 import WineItem from "../wine-item/wine-item";
 import ProfileTabs from "../profile-tabs/profile-tabs";
 import useUserStore from "@/store/user-store";
-import useGetUserReview from "@/hooks/api/myprofile/use-get-user-review";
-import useGetUserWine from "@/hooks/api/myprofile/use-get-user-wine";
+import useGetUserReview from "@/hooks/api/my-profile/use-get-user-review";
+import useGetUserWine from "@/hooks/api/my-profile/use-get-user-wine";
 import { ReviewItemType, WineType } from "../../_types/review-type";
 
 // TODO(지권): 이슈 발생...
