@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PriceOption, RatingOption, TypeOption } from "../wine-options";
+import { useState } from "react";
 
 const WineSearchOption = ({
   setSearch,
@@ -14,11 +15,13 @@ const WineSearchOption = ({
 }) => {
   const router = useRouter();
   const breakpoint = useBreakpoint();
+  const [resetSignal, setResetSignal] = useState(0);
   const isMobileOrTablet = breakpoint === "mobile" || breakpoint === "tablet";
 
   const handleResetClick = () => {
     router.replace("/wines", { scroll: false });
     setSearch("");
+    setResetSignal((prev) => prev + 1);
   };
 
   return (
@@ -55,7 +58,7 @@ const WineSearchOption = ({
               <TypeOption />
 
               {/* 가격 선택 필터 */}
-              <PriceOption />
+              <PriceOption resetSignal={resetSignal} />
 
               {/* 평점 선택 필터 */}
               <RatingOption />
