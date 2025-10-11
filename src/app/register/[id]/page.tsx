@@ -23,10 +23,10 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           "pc:text-heading-lg"
         )}
       >
-        와인 등록
+        {wineData ? "와인 수정" : "와인 등록"}
       </p>
       <div className="px-6">
-        <RegisterWine wineData={wineData} />
+        <RegisterWine wineData={wineData} id={id} />
       </div>
     </div>
   );
