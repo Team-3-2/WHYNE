@@ -1,5 +1,6 @@
 "use client";
 
+import postImage from "@/api/image/post-image";
 import { Button, SelectType, TextInput } from "@/components";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 import WineImg from "@/components/wine-img/wine-img";
@@ -33,46 +34,46 @@ const RegisterWine = ({
   const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(
     wineData && typeof wineData.image === "string" ? wineData.image : null
   );
-  const [imgFile, setImgFile] = useState<File | undefined>();
+  const [imgUrl, setImgUrl] = useState<string>(
+    wineData && typeof wineData.image === "string"
+      ? wineData.image
+      : "not_found_img"
+  );
   const { mutate: postWine } = usePostWine();
   const { mutate: patchWine } = usePatchWine();
 
   const onSubmit = async (data: WineFormData) => {
     const price = Number(data.price);
-    const registerData = { ...data, price: price };
 
-    if (imgFile) {
-      const imgUrl = { url: imgFile };
+    if (wineData) {
+      const avgRating = wineData.avgRating || 0;
+      const patchData = { ...data, price, avgRating };
+      const path = Number(id);
 
-      if (wineData) {
-        const avgRating = wineData.avgRating || 0;
-        const patchData = { ...data, price, avgRating };
-        const path = Number(id);
-
-        patchWine({ patchData, imgUrl, path });
-      } else {
-        postWine({ registerData, imgUrl });
-      }
+      patchWine({ patchData, path });
+    } else {
+      const registerData = { ...data, price: price, image: imgUrl };
+      postWine({ registerData });
     }
   };
 
   /**
-   * 이미지 미리보기
+   * 이미지 미리보기 url을 만들고, 실제 이미지 경로를 받아온다.
    * @author hwitae
    * @param e input 파일 선택 이벤트
    */
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const uploadImg = e.target.files?.[0];
-    console.log(uploadImg);
 
     if (!uploadImg) return;
-    setImgFile(uploadImg);
 
     if (previewImgUrl) URL.revokeObjectURL(previewImgUrl);
 
     const newPreviewImgUrl = URL.createObjectURL(uploadImg);
-
     setPreviewImgUrl(newPreviewImgUrl);
+
+    const { url } = await postImage({ url: uploadImg });
+    setImgUrl(url);
   };
 
   return (
@@ -127,9 +128,10 @@ const RegisterWine = ({
           {...register("price", { required: "가격은 필수 입력입니다." })}
         />
         <SelectType
-          id="type"
+          id="wine-type"
           isError={errors.type ? true : false}
-          {...register("type", { required: "와인 타입은 필수 입력입니다." })}
+          name="type"
+          register={register}
         />
         <TextInput
           id="region"

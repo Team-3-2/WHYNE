@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useRef } from "react";
 import Modal from "./modal";
 import { useRouter } from "next/navigation";
 import { allowScroll, cn, lockingScroll } from "@/lib/utils";
@@ -20,13 +20,17 @@ const PageModal = ({
   const modalRef = useRef<HTMLDialogElement>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!modalRef.current?.open) modalRef.current?.showModal();
-    lockingScroll();
+  useLayoutEffect(() => {
+    const currentScrollY = window.scrollY;
+    lockingScroll(currentScrollY);
 
     return () => {
-      allowScroll();
+      allowScroll(currentScrollY);
     };
+  }, []);
+
+  useEffect(() => {
+    if (!modalRef.current?.open) modalRef.current?.showModal();
   });
 
   return (

@@ -12,13 +12,8 @@ const usePostWine = () => {
   const router = useRouter();
 
   const { mutate, isSuccess } = useMutation({
-    mutationFn: ({
-      registerData,
-      imgUrl,
-    }: {
-      registerData: WineFormData;
-      imgUrl: ImageData;
-    }) => postRegisterWine(registerData, imgUrl),
+    mutationFn: ({ registerData }: { registerData: WineFormData }) =>
+      postRegisterWine(registerData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["wineList"] });
       router.back();

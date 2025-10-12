@@ -10,13 +10,11 @@ const usePatchWine = () => {
   const { mutate, isSuccess, isPending } = useMutation({
     mutationFn: ({
       patchData,
-      imgUrl,
       path,
     }: {
       patchData: WineFormData;
       path: number;
-      imgUrl: { url: File };
-    }) => patchRegisteredWine(patchData, imgUrl, path),
+    }) => patchRegisteredWine(patchData, path),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["wineList"] });
       router.back();
