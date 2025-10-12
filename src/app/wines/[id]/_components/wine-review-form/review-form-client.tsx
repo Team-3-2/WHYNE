@@ -1,11 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import getWine from "@/api/wines/get-wine";
-import getReview from "@/api/reviews/get-review";
 import useReviewMutation from "../../_hooks/use-review-mutation";
 import useWineQuery from "../../../../../hooks/api/wines/use-wine-query";
+import useReviewQuery from "../../../../../hooks/api/reviews/use-review-query";
 import ReviewForm from "./review-form";
 import Loader from "@/components/loader/loader";
 import type { ReviewBase } from "@/types/wine";
@@ -33,11 +31,7 @@ const ReviewFormClient = ({
     data: review,
     isLoading: reviewLoading,
     isError: reviewError,
-  } = useQuery({
-    queryKey: ["review", reviewId],
-    queryFn: () => getReview(reviewId!),
-    enabled: mode === "edit" && !!reviewId,
-  });
+  } = useReviewQuery(reviewId, mode === "edit");
 
   const actualWineId = wineId ?? review?.wineId;
 
