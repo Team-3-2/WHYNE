@@ -64,7 +64,7 @@ const LandingSection = ({
           width={725}
           height={470}
           priority
-          className="h-full w-full"
+          className="h-auto w-full"
         />
       </div>
     </section>
