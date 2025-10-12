@@ -1,16 +1,19 @@
 "use client";
 
+import { useMemo, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineList from "../wine-list/wine-list";
-import useGetWineList from "@/hooks/api/wines/use-get-wine-list";
+//import useGetWineList from "@/hooks/api/wines/use-get-wine-list";
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
+import getWineList from "@/api/wines/get-wine-list";
 import { useSearchParams } from "next/navigation";
 import WineSearchOption from "../wine-search-option/wine-search-option";
-import { useState, useCallback } from "react";
+
 import debounce from "lodash/debounce";
 import { parseQueryParams } from "../../_utils/parse-query-params";
 
-const limit = 10;
+const limit = 4;
 
 const WineListSection = () => {
   const params = useSearchParams();
@@ -32,17 +35,38 @@ const WineListSection = () => {
     [debouncedSetSearch]
   );
 
-  const { data, isLoading } = useGetWineList({
-    limit,
-    type,
-    rating,
-    maxPrice,
-    minPrice,
-    name: debouncedSearch,
+  const filters = useMemo(
+    () => ({
+      limit,
+      type,
+      rating,
+      maxPrice,
+      minPrice,
+      name: debouncedSearch,
+    }),
+    [type, rating, maxPrice, minPrice, debouncedSearch]
+  );
+
+  const queryKey = useMemo(() => ["wine-list", filters], [filters]);
+
+  const {
+    data,
+    allItems: wines,
+    observerRef,
+    isLoading,
+    isFetchingNextPage,
+  } = useInfiniteScroll({
+    queryKey,
+    fetchFn: (cursor) =>
+      getWineList({
+        cursor,
+        ...filters,
+      }),
   });
 
-  const wineList = data?.list ?? [];
-  console.log(data);
+  const wineList = wines;
+
+  const isInitialLoading = isLoading && wines.length === 0;
 
   return (
     <section
@@ -77,12 +101,18 @@ const WineListSection = () => {
       {/* 와인 목록 */}
       <div
         className={cn(
-          wineList.length === 0 ? "pc:float-right" : "flex pc:left-[60px]",
+          wineList.length === 0 ? "pc:float-right" : "grid pc:left-[60px]",
           "relative order-3",
-          "pc:top-[64px] pc:order-3 pc:w-[calc(100%-284px-60px)]"
+          "pc:top-[64px] pc:w-[calc(100%-284px-60px)]"
         )}
       >
-        <WineList wine={wineList} isLoading={isLoading} />
+        <WineList wine={wineList} isLoading={isInitialLoading} />
+        <div ref={observerRef} className="mt-40 h-1 w-full" />
+        {(isFetchingNextPage || (!isInitialLoading && wines.length === 0)) && (
+          <p className="col-span-2 text-center text-sm text-gray-500">
+            Loading…
+          </p>
+        )}
       </div>
     </section>
   );
