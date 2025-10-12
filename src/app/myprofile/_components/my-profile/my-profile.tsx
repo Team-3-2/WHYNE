@@ -7,22 +7,23 @@ import AccountItem from "../account-item/account-item";
 import ReviewItem from "../review-item/review-item";
 import WineItem from "../wine-item/wine-item";
 import ProfileTabs from "../profile-tabs/profile-tabs";
-import useUserStore from "@/store/user-store";
-import useGetUserReview from "@/hooks/api/myprofile/use-get-user-review";
-import useGetUserWine from "@/hooks/api/myprofile/use-get-user-wine";
+import useGetUserReview from "@/hooks/api/my-profile/use-get-user-review";
+import useGetUserWine from "@/hooks/api/my-profile/use-get-user-wine";
 import { ReviewItemType, WineType } from "../../_types/review-type";
+import { User } from "@/types/user-type";
 
-// TODO(지권): 이슈 발생...
+interface MyProfileProps {
+  userInfo: User;
+}
 
-const MyProfile = () => {
+const MyProfile = ({ userInfo }: MyProfileProps) => {
   const searchParams = useSearchParams();
   const [tab, setTab] = useState(searchParams.get("tab") || "review");
-  const { user } = useUserStore((state) => state);
 
   const { data: userReview } = useGetUserReview();
   const { data: userWines } = useGetUserWine();
 
-  if (!user) return redirect("/login");
+  if (!userInfo) return redirect("/login");
 
   return (
     <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
@@ -52,7 +53,7 @@ const MyProfile = () => {
             </div>
           )}
 
-          {tab === "account" && <AccountItem user={user} />}
+          {tab === "account" && <AccountItem user={userInfo} />}
         </section>
       </article>
     </main>

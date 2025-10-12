@@ -117,7 +117,7 @@ export const calculateAverageTastes = (reviews: Review[]) => {
 
 /**
  * 현재 시간을 기준으로 글이 작성 시간 계산 로직
- * @autor junyeol
+ * @author junyeol
  * @param dateString : 리뷰 작성 시간
  * @returns : 작성 시간 텍스트
  */
