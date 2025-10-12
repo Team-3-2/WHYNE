@@ -6,11 +6,23 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PriceOption, RatingOption, TypeOption } from "../wine-options";
+import { useState } from "react";
 
-const WineSearchOption = () => {
+const WineSearchOption = ({
+  setSearch,
+}: {
+  setSearch: (search: string) => void;
+}) => {
   const router = useRouter();
   const breakpoint = useBreakpoint();
+  const [resetSignal, setResetSignal] = useState(0);
   const isMobileOrTablet = breakpoint === "mobile" || breakpoint === "tablet";
+
+  const handleResetClick = () => {
+    router.replace("/wines", { scroll: false });
+    setSearch("");
+    setResetSignal((prev) => prev + 1);
+  };
 
   return (
     <>
@@ -46,7 +58,7 @@ const WineSearchOption = () => {
               <TypeOption />
 
               {/* 가격 선택 필터 */}
-              <PriceOption />
+              <PriceOption resetSignal={resetSignal} />
 
               {/* 평점 선택 필터 */}
               <RatingOption />
@@ -55,7 +67,7 @@ const WineSearchOption = () => {
               <Button
                 label="초기화"
                 variant="outline"
-                onClick={() => router.replace("/wines", { scroll: false })}
+                onClick={handleResetClick}
               />
               <Button
                 label="와인 등록하기"
