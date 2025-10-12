@@ -1,1 +1,1 @@
-export const WINE_TYPE = ["RED", "WHITE", "SPARKLING"];
+export const WINE_TYPE = ["Red", "White", "Sparkling"];
