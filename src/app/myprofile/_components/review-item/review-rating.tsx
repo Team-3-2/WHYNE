@@ -1,6 +1,6 @@
 import { DropdownMenu, Icon, Rating } from "@/components";
 import useDeleteUserReview from "@/hooks/api/reviews/use-delete-user-review";
-import { useOutsideClick } from "@/lib/use-outside-click";
+import { useOutsideClick } from "@/hooks/use-outside-click";
 import { getTimeAgo } from "@/lib/utils";
 import { Dispatch, SetStateAction, useRef } from "react";
 
