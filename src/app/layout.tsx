@@ -4,6 +4,7 @@ import "./globals.css";
 import { Gnb } from "@/components";
 import QueryProvider from "@/providers/query-provider";
 import getMe from "@/api/user/get-me";
+import KaKaoInitializer from "@/lib/kakao-initializer";
 
 export const metadata: Metadata = {
   title: "Wine App",
@@ -27,6 +28,7 @@ export default async function RootLayout({
           {children}
           {modal}
         </QueryProvider>
+        <KaKaoInitializer />
       </body>
     </html>
   );
