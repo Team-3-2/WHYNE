@@ -5,7 +5,7 @@ import Link from "next/link";
 import Logo from "@/../public/logo.svg";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 import { User } from "@/types/user-type";
 import { useLogout } from "@/hooks/use-logout";
@@ -13,6 +13,10 @@ import { useLogout } from "@/hooks/use-logout";
 const Gnb = ({ user }: { user: User }) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   const isHidden = pathname === "/login" || pathname === "/signup";
 
