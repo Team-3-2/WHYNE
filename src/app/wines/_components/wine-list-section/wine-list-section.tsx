@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useEffect, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineList from "../wine-list/wine-list";
@@ -21,9 +21,19 @@ const WineListSection = () => {
 
   const { type, rating, maxPrice, minPrice } = parseQueryParams(params);
 
-  const debouncedSetSearch = debounce((value: string) => {
-    setDebouncedSearch(value);
-  }, 400);
+  const debouncedSetSearch = useMemo(
+    () =>
+      debounce((value: string) => {
+        setDebouncedSearch(value);
+      }, 400),
+    []
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedSetSearch.cancel();
+    };
+  }, [debouncedSetSearch]);
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
