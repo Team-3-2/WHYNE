@@ -41,7 +41,7 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   return (
     <main className="min-h-screen bg-white">
       {/* 헤더 */}
-      <section className="rounded-b-none bg-[rgba(217,217,217,0.2)] pt-[60px] tablet:rounded-b-none tablet:pt-[70px] pc:rounded-b-[88px] pc:pt-[70px]">
+      <section className="rounded-b-none bg-[url('/images/wines/bg-recommended.png')] bg-cover bg-center pt-[60px] tablet:rounded-b-none tablet:pt-[70px] pc:rounded-b-[88px] pc:pt-[70px]">
         <WineHeader wine={wine} />
       </section>
 
