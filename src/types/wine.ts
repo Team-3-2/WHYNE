@@ -1,5 +1,5 @@
 // types/wine.ts
-import type { AromaKey } from "./AromaType";
+import type { AromaKey } from "./aroma-type";
 
 export interface Wine {
   id: number;

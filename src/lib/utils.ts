@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { Review } from "@/types/wine";
-import type { AromaKey } from "@/types/AromaType";
+import type { AromaKey } from "@/types/aroma-type";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

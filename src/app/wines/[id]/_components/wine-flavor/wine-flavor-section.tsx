@@ -1,5 +1,5 @@
 import Flavor from "@/components/flavor/flavor";
-import type { AromaKey } from "@/types/AromaType";
+import type { AromaKey } from "@/types/aroma-type";
 import type { Review } from "@/types/wine";
 import { cn } from "@/lib/utils";
 

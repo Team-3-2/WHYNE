@@ -8,7 +8,7 @@ import WineTaste, {
 } from "@/components/wine-taste";
 import { Button, Chip, RatingInput } from "@/components";
 import { aromaMap } from "@/components/flavor/aroma-map";
-import { AromaKey } from "@/types/AromaType";
+import { AromaKey } from "@/types/aroma-type";
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 import WineInfo from "../wine-info";
 import type { ReviewBase, Wine } from "@/types/wine";
