@@ -55,7 +55,7 @@ const HEADER_STYLE =
 const AsciiArt = () => {
   useEffect(() => {
     console.log(
-      "%cTeam 2 : suuuuya Imhwitar wlrnjs junye0l\n%c" + ASCII_ART,
+      "%cTeam 2 : suuuuya Imhwitae wlrnjs junye0l\n%c" + ASCII_ART,
       HEADER_STYLE,
       ...WINE_COLOR_STYLES
     );
