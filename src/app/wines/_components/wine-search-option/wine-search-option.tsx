@@ -45,7 +45,7 @@ const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
           <div className="flex w-full items-center justify-between">
             <h2 className="text-heading-md">필터</h2>
             <button onClick={() => setModalOpen(0)} aria-label="검색 필터 닫기">
-              <Icon icon="XIcon" size="lg" />
+              <Icon icon="XIcon" size="lg" className="select-none" />
             </button>
           </div>
           <div className="flex flex-col gap-[16px]">
@@ -100,7 +100,7 @@ const WineSearchOption = ({
             className="flex-center h-[42px] w-[42px] rounded-[8px] border border-gray-300 bg-white tablet:h-12 tablet:w-12"
             onClick={() => setModalOpen((prev) => prev + 1)}
           >
-            <Icon icon="FilterIcon" className="text-secondary" />
+            <Icon icon="FilterIcon" className="select-none text-secondary" />
           </button>
           <Button
             label="와인 등록하기"
