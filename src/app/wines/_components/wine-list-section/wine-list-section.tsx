@@ -77,10 +77,9 @@ const WineListSection = () => {
       {/* 와인 목록 */}
       <div
         className={cn(
-          wineList.length === 0 ? "pc:float-right" : "grid pc:left-[60px]",
-          "relative order-3 gap-y-[48px]",
-          "tablet:grid-cols-2 tablet:gap-x-[16px]",
-          "pc:top-[64px] pc:order-3 pc:w-[calc(100%-284px-60px)] pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
+          wineList.length === 0 ? "pc:float-right" : "flex pc:left-[60px]",
+          "relative order-3",
+          "pc:top-[64px] pc:order-3 pc:w-[calc(100%-284px-60px)]"
         )}
       >
         <WineList wine={wineList} isLoading={isLoading} />
