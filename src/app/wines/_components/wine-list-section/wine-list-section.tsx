@@ -71,7 +71,7 @@ const WineListSection = () => {
           "pc:z-5 pc:sticky pc:top-[100px] pc:order-1 pc:float-left pc:w-[284px]"
         )}
       >
-        <WineSearchOption />
+        <WineSearchOption setSearch={setSearch} />
       </div>
 
       {/* 와인 목록 */}

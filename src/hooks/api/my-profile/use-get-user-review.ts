@@ -1,6 +1,6 @@
 "use client";
 
-import getUserReview from "@/api/myprofile/get-user-review";
+import getUserReview from "@/api/my-profile/get-user-review";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetUserReview = () => {
