@@ -75,7 +75,7 @@ const TypeOption = () => {
   return (
     <div className="flex flex-col gap-5">
       <h2 className="text-body-lg">타입</h2>
-      <div className="flex flex-col gap-2">
+      <div className="flex gap-2 pc:flex-col">
         {(WINE_TYPE as WineType[]).map((item) => (
           <TypeItem
             key={item}
