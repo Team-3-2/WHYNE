@@ -12,22 +12,20 @@ import {
 const TITLE = "404";
 
 const TITLE_STYLES = {
-  fontSize: "pc:text-[140px] tablet:text-[130px] text-[90px]",
-  fontWeight: "font-medium",
-  baseColor: "text-gray-100",
+  fontStyle: "pc:text-[140px] tablet:text-[130px] text-[90px] font-medium",
+  baseStyle: "text-gray-100",
   stroke: "[-webkit-text-stroke-width:.6px] [-webkit-text-stroke-color:#aaa]",
 };
 
 const NotFound = () => {
   return (
-    <div className="flex-center cover h-screen w-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-no-repeat pt-[40px]">
+    <div className="flex-center h-screen w-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat pt-[40px]">
       <div className="container text-center">
         <h2 className="relative m-auto inline-block leading-none">
           <span
             className={cn(
-              TITLE_STYLES.fontSize,
-              TITLE_STYLES.fontWeight,
-              TITLE_STYLES.baseColor,
+              TITLE_STYLES.fontStyle,
+              TITLE_STYLES.baseStyle,
               TITLE_STYLES.stroke
             )}
           >
@@ -36,8 +34,7 @@ const NotFound = () => {
           <span
             className={cn(
               "absolute left-0 top-0 animate-wave-mask",
-              TITLE_STYLES.fontSize,
-              TITLE_STYLES.fontWeight
+              TITLE_STYLES.fontStyle
             )}
           >
             {TITLE}
