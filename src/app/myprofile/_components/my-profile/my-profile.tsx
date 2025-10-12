@@ -5,11 +5,11 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import AccountItem from "../account-item/account-item";
 import ReviewItem from "../review-item/review-item";
-import WineItem from "../wine-item/wine-item";
+import WineList from "../registered/wine-list/wine-list";
 import ProfileTabs from "../profile-tabs/profile-tabs";
 import useGetUserReview from "@/hooks/api/my-profile/use-get-user-review";
 import useGetUserWine from "@/hooks/api/my-profile/use-get-user-wine";
-import { ReviewItemType, WineType } from "../../_types/review-type";
+import { ReviewItemType } from "../../_types/review-type";
 import { User } from "@/types/user-type";
 
 interface MyProfileProps {
@@ -39,19 +39,7 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
             userReview?.list?.map((review: ReviewItemType) => (
               <ReviewItem key={review.id} review={review} />
             ))}
-          {tab === "registered" && (
-            <div
-              className={cn(
-                "grid gap-y-[16px] pt-[24px]",
-                "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
-                "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
-              )}
-            >
-              {userWines?.list?.map((wine: WineType) => (
-                <WineItem key={wine.id} wine={wine} />
-              ))}
-            </div>
-          )}
+          {tab === "registered" && <WineList />}
 
           {tab === "account" && <AccountItem user={userInfo} />}
         </section>

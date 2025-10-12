@@ -1,10 +1,7 @@
 "use client";
 
-import getUserWines from "@/api/user/get-user-wines";
 import { useQuery } from "@tanstack/react-query";
-//임시
-import { recommendwinemock } from "@/mock";
-import { WineType } from "@/app/myprofile/_types/review-type";
+import getUserWines from "@/api/user/get-user-wines";
 
 const useGetUserWine = () => {
   return useQuery({

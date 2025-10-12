@@ -2,7 +2,7 @@
 
 import { Card } from "@/components";
 import useDeleteWine from "@/hooks/api/wines/use-delete-wine";
-import { WineType } from "../../_types/review-type";
+import { WineType } from "../../../_types/review-type";
 
 const WineItem = ({ wine }: { wine: WineType }) => {
   const { mutate } = useDeleteWine();
