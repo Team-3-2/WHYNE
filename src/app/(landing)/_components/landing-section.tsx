@@ -63,7 +63,8 @@ const LandingSection = ({
           alt={imgAlt}
           width={725}
           height={470}
-          className="h-auto w-full"
+          priority
+          className="h-full w-full"
         />
       </div>
     </section>
