@@ -4,7 +4,6 @@ import { useMemo, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineList from "../wine-list/wine-list";
-//import useGetWineList from "@/hooks/api/wines/use-get-wine-list";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import getWineList from "@/api/wines/get-wine-list";
 import { useSearchParams } from "next/navigation";
@@ -62,6 +61,7 @@ const WineListSection = () => {
         cursor,
         ...filters,
       }),
+    staleTime: 1000 * 60 * 5,
   });
 
   const wineList = wines;
@@ -107,11 +107,9 @@ const WineListSection = () => {
         )}
       >
         <WineList wine={wineList} isLoading={isInitialLoading} />
-        <div ref={observerRef} className="mt-40 h-1 w-full" />
-        {(isFetchingNextPage || (!isInitialLoading && wines.length === 0)) && (
-          <p className="col-span-2 text-center text-sm text-gray-500">
-            Loading…
-          </p>
+        <div ref={observerRef} className="mt-[20px] h-1 w-full" />
+        {isFetchingNextPage && (
+          <p className="text-center text-sm text-gray-500">Loading…</p>
         )}
       </div>
     </section>
