@@ -42,7 +42,7 @@ const TypeItem = ({
         )}
       >
         <Image
-          className="h-8 w-8 rounded-full object-cover"
+          className="h-6 w-6 rounded-full object-cover pc:h-8 pc:w-8"
           src={imgMap[item]}
           width={24}
           height={24}
