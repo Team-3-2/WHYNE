@@ -35,6 +35,13 @@ const WineTasteSection = ({ reviews, reviewCount }: WineTasteSectionProps) => {
     softAcidic: avgSoftAcidic,
   });
 
+  const tasteA11yLabel =
+    tastes.length > 0
+      ? tastes
+          .map(({ type, taste, data }) => `${type}은 ${taste} (${data}단계)`)
+          .join(", ")
+      : "아직 맛 데이터가 없습니다.";
+
   return (
     <section
       aria-labelledby={tasteHeadingId}
@@ -60,7 +67,7 @@ const WineTasteSection = ({ reviews, reviewCount }: WineTasteSectionProps) => {
 
       {/* 와인 맛 분포 컴포넌트 */}
       <section
-        aria-label="와인 맛 분포"
+        aria-label={`와인 맛 분포: ${tasteA11yLabel}`}
         className="flex w-full justify-center tablet:justify-start"
       >
         <div className="w-full max-w-[470px] tablet:max-w-[480px] pc:max-w-[560px]">
