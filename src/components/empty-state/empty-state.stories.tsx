@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs";
 import { EmptyState } from "@/components";
 
 const meta: Meta<typeof EmptyState> = {
-  title: "Components/EmptyState",
+  title: "공통 컴포넌트/EmptyState",
   component: EmptyState,
   parameters: {
     docs: {

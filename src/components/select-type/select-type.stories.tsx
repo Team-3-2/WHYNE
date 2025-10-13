@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import SelectType from "./select-type";
 
 const meta: Meta<typeof SelectType> = {
-  title: "Components/type-select",
+  title: "공통 컴포넌트/SelectType",
   component: SelectType,
   parameters: {
     layout: "centered",

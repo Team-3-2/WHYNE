@@ -147,7 +147,7 @@ const ToastButtons = () => {
 };
 
 const meta: Meta<typeof ToastButtons> = {
-  title: "Toast/Toast",
+  title: "토스트/Toast",
   component: ToastButtons,
   tags: ["autodocs"],
   parameters: {
