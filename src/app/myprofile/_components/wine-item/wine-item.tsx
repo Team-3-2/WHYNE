@@ -23,12 +23,12 @@ const WineItem = ({ wine }: { wine: WineType }) => {
         region={wine.region}
         price={wine.price}
         actionMenuItems={[
-          { label: "수정하기", onClick: () => {} },
+          { label: "수정하기", href: `/register/${wine.id}` },
           { label: "삭제하기", onClick: () => setIsModalOpen(true) },
         ]}
       />
 
-      {/* <ConfirmModal
+      <ConfirmModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleWineDelete}
@@ -38,7 +38,7 @@ const WineItem = ({ wine }: { wine: WineType }) => {
           cancelMsg: "취소",
           confirmMsg: "삭제하기",
         }}
-      /> */}
+      />
     </>
   );
 };
