@@ -1,4 +1,5 @@
 import useScrollVisibility from "@/hooks/use-scroll-visibility";
+import { cn } from "@/lib/utils";
 import { IconButton } from "@/components";
 
 /**
@@ -24,7 +25,11 @@ const ScrollTopButton = ({}: ScrollTopButtonProps) => {
     <IconButton
       icon="ArrowTopIcon"
       iconSize="md"
-      className="h-[40px] w-[40px] rounded-full border-gray-300 tablet:h-[50px] tablet:w-[50px] pc:h-[50px] pc:w-[50px]"
+      className={cn(
+        "h-[40px] w-[40px] rounded-full border-gray-300",
+        "tablet:h-[50px] tablet:w-[50px]",
+        "pc:h-[50px] pc:w-[50px]"
+      )}
       onClick={scrollToTop}
       aria-label="최상단으로 이동"
     />

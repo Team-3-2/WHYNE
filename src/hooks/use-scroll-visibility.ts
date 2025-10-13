@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import debounce from "lodash/debounce";
+import throttle from "lodash/throttle";
 
 /**
  * 특정 스크롤 위치에 도달하면 true를 반환하는 훅
@@ -17,7 +17,7 @@ const useScrollVisibility = (options: UseScrollVisibilityOptions = {}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = debounce(() => {
+    const handleScroll = throttle(() => {
       const shouldBeVisible = window.scrollY > threshold;
       setIsVisible((prev) =>
         prev !== shouldBeVisible ? shouldBeVisible : prev
