@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useRef } from "react";
 import Button from "../button/basic-button";
 import Modal from "./modal";
 import { allowScroll, cn, lockingScroll } from "@/lib/utils";
@@ -35,17 +35,21 @@ const ConfirmModal = ({
 }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
+  useLayoutEffect(() => {
+    const currentScrollY = window.scrollY;
+    lockingScroll(currentScrollY);
+
+    return () => {
+      allowScroll(currentScrollY);
+    };
+  }, []);
+
   useEffect(() => {
     if (!dialogRef.current?.open && isOpen) {
       dialogRef.current?.showModal();
-      lockingScroll();
     } else {
       dialogRef.current?.close();
     }
-
-    return () => {
-      allowScroll();
-    };
   }, [isOpen]);
 
   if (!isOpen) return null;
