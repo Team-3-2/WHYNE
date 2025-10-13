@@ -10,7 +10,6 @@ export interface Wine {
   type: "RED" | "WHITE" | "SPARKLING";
   avgRating: number;
   reviewCount: number;
-  rating: number;
   recentReview: {
     content: string;
   } | null;
