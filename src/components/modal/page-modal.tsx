@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useRef } from "react";
 import Modal from "./modal";
 import { useRouter } from "next/navigation";
 import { allowScroll, cn, lockingScroll } from "@/lib/utils";
@@ -20,14 +20,30 @@ const PageModal = ({
   const modalRef = useRef<HTMLDialogElement>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!modalRef.current?.open) modalRef.current?.showModal();
-    lockingScroll();
+  const handleCancel = (e: Event) => {
+    e.preventDefault();
+  };
+
+  useLayoutEffect(() => {
+    const currentScrollY = window.scrollY;
+    lockingScroll(currentScrollY);
 
     return () => {
-      allowScroll();
+      allowScroll(currentScrollY);
     };
-  });
+  }, []);
+
+  useEffect(() => {
+    if (!modalRef.current?.open) modalRef.current?.showModal();
+
+    if (modalRef.current) {
+      modalRef.current.addEventListener("cancel", handleCancel);
+    }
+
+    return () => {
+      modalRef.current?.removeEventListener("cancel", handleCancel);
+    };
+  }, [modalRef]);
 
   return (
     <Modal
@@ -40,7 +56,6 @@ const PageModal = ({
         "pc:h-[1010px]",
         className
       )}
-      onCancel={() => router.back()}
     >
       {/* 모달 상단 영역 */}
       <div className="sticky top-0 z-10 flex w-full items-center justify-between bg-white pt-8">
