@@ -3,8 +3,8 @@ import { LoginData } from "@/types/user-type";
 
 const kakaoRedirect = async (code: string): Promise<LoginData | undefined> => {
   const body = {
-    state: "",
-    redirectUri: "http://localhost:3000/oauth/kakao",
+    state: "login",
+    redirectUri: "http://localhost:3000/redirect",
     token: code,
   };
 

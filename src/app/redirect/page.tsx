@@ -2,8 +2,10 @@
 
 import kakaoRedirect from "@/api/auth/kakao-redirect";
 import Loader from "@/components/loader/loader";
+import instance from "@/lib/axios";
 import { deleteCookie } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { headers } from "next/headers";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 const Page = () => {
@@ -22,7 +24,7 @@ const Page = () => {
     document.cookie = `accessToken=${response?.accessToken}`;
     document.cookie = `refreshToken=${response?.refreshToken}`;
 
-    router.push("/");
+    window.location.href = "/";
   };
 
   useEffect(() => {
