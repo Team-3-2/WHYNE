@@ -36,14 +36,16 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
             )}
           >
             {isValidImageSrc(wine.image) ? (
-              <Image
-                src={wine.image}
-                alt={wine.name}
-                width={240}
-                height={320}
-                priority
-                className="h-full w-auto object-contain"
-              />
+              <div className="relative h-full w-full">
+                <Image
+                  src={wine.image}
+                  alt={wine.name}
+                  fill
+                  priority
+                  className="object-contain"
+                  sizes="(min-width: 1200px) 320px, (min-width: 768px) 280px, 220px"
+                />
+              </div>
             ) : (
               <PlaceholderImgWine
                 className="h-full w-auto object-contain"

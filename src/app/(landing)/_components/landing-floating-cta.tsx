@@ -36,17 +36,13 @@ const LandingFloatingCTA = ({ footerId }: LandingFloatingCTAProps) => {
     if (!footerElement) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsFooterVisible(entry.isIntersecting);
-      },
+      ([entry]) => setIsFooterVisible(entry.isIntersecting),
       { threshold: 0.25 }
     );
 
     observer.observe(footerElement);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [footerId]);
 
   const isVisible = footerId
@@ -67,7 +63,11 @@ const LandingFloatingCTA = ({ footerId }: LandingFloatingCTAProps) => {
       <LinkButton
         href="/wines"
         label="와인 보러가기"
-        className="h-[50px] w-[283px]"
+        className={cn(
+          "h-[54px] w-[260px] select-none px-8",
+          "tablet:w-[320px]",
+          "pc:h-[60px] pc:w-[260px]"
+        )}
       />
     </div>
   );
