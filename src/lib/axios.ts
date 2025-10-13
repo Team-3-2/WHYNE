@@ -75,8 +75,6 @@ instance.interceptors.response.use(
   },
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
-      console.error("Unauthorized!");
-
       const prevRequest = error.config as InternalAxiosRequestConfig;
 
       try {
