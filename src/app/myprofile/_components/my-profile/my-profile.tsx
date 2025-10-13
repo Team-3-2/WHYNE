@@ -24,7 +24,11 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
   const queryKey = useMemo(() => ["user-review"], []);
   const wineQueryKey = useMemo(() => ["user-wine"], []);
 
-  const { allItems: userReview, observerRef } = useInfiniteScroll({
+  const {
+    allItems: userReview,
+    totalCount: totalReviews,
+    observerRef,
+  } = useInfiniteScroll({
     queryKey,
     fetchFn: (cursor) =>
       getUserReview({
@@ -33,15 +37,18 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
       }),
   });
 
-  const { allItems: userWines, observerRef: wineObserverRef } =
-    useInfiniteScroll<WineType>({
-      queryKey: wineQueryKey,
-      fetchFn: (cursor) =>
-        getUserWines({
-          limit: 6,
-          cursor,
-        }),
-    });
+  const {
+    allItems: userWines,
+    totalCount: totalWines,
+    observerRef: wineObserverRef,
+  } = useInfiniteScroll<WineType>({
+    queryKey: wineQueryKey,
+    fetchFn: (cursor) =>
+      getUserWines({
+        limit: 6,
+        cursor,
+      }),
+  });
 
   if (!userInfo) return redirect("/login");
 
@@ -51,8 +58,8 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
         <ProfileTabs
           tab={tab}
           setTab={setTab}
-          reviewTotal={userReview?.length}
-          registeredTotal={userWines?.length}
+          reviewTotal={totalReviews}
+          registeredTotal={totalWines}
         />
         <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
           {tab === "review" && (
