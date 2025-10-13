@@ -1,5 +1,10 @@
 import instance from "@/lib/axios";
 import { WineFormData } from "@/types/wine";
+import postImage from "../image/post-image";
+
+interface ImageData {
+  url: File;
+}
 
 const postRegisterWine = async (wineFormData: WineFormData) => {
   try {

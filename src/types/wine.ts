@@ -65,7 +65,8 @@ export interface WineDetail extends Wine {
 export interface WineFormData {
   name: string;
   region: string;
-  image: string;
+  image: File | string;
   price: number;
   type: "RED" | "WHITE" | "SPARKLING";
+  avgRating?: number;
 }
