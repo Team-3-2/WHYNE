@@ -1,11 +1,9 @@
-import { AromaKey } from "@/types/AromaType";
+import { AromaKey } from "@/types/aroma-type";
 import Image from "next/image";
 import { aromaMap } from "./aroma-map";
-
 interface FlavorItemProps {
   aroma: AromaKey;
 }
-
 const FlavorItem = ({ aroma }: FlavorItemProps) => {
   const { img, label } = aromaMap[aroma];
   return (
@@ -17,16 +15,16 @@ const FlavorItem = ({ aroma }: FlavorItemProps) => {
         height={90}
         className="rounded-4 h-[90px] w-full tablet:h-[100px] pc:h-[100px]"
       />
-      <span className="text-body-md tracking-[-0.02em]">{label}</span>
+      <span className="select-none text-body-md tracking-[-0.02em]">
+        {label}
+      </span>
     </div>
   );
 };
-
 interface FlavorProps {
   count: number;
   items: AromaKey[];
 }
-
 const Flavor = ({ count, items }: FlavorProps) => {
   return (
     <div className="flex min-h-[197px] w-full flex-col items-start justify-between gap-[17px]">
@@ -38,8 +36,7 @@ const Flavor = ({ count, items }: FlavorProps) => {
           (<span>{count}</span>명 참여)
         </span>
       </div>
-
-      <div className="scrollbar-hide w-[calc(3*90px+2*14px+16px)] overflow-x-auto tablet:w-[calc(4*100px+2*14px+2*16px)] pc:w-[calc(4*100px+2*14px+2*16px)]">
+      <div className="scrollbar-hide overflow-hidden overflow-x-auto">
         <div className="flex flex-nowrap gap-4">
           {items.map((item, index) => (
             <FlavorItem aroma={item} key={index} />
@@ -49,5 +46,4 @@ const Flavor = ({ count, items }: FlavorProps) => {
     </div>
   );
 };
-
 export default Flavor;

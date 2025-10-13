@@ -62,16 +62,16 @@ const PriceOption = ({ resetSignal }: { resetSignal: number }) => {
   };
 
   return (
-    <fieldset className="mt-6">
+    <fieldset className="pc:mt-6">
       <legend className="text-heading-xs mb-3 block text-body-lg text-default">
         가격
       </legend>
       <div className="flex flex-col gap-2">
         <div className="flex w-full items-center justify-between text-sm">
-          <span aria-live="polite" className="text-body-md">
+          <span aria-live="polite" className="text-body-sm pc:text-body-md">
             ₩ {minPrice.toLocaleString()}
           </span>
-          <span aria-live="polite" className="text-body-md">
+          <span aria-live="polite" className="text-body-sm pc:text-body-md">
             ₩ {maxPrice.toLocaleString()}
           </span>
         </div>

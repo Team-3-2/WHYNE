@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { Review } from "@/types/wine";
-import type { AromaKey } from "@/types/AromaType";
+import type { AromaKey } from "@/types/aroma-type";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -10,19 +10,22 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * 스크롤바를 숨겨 스크롤 방지
  */
-export const lockingScroll = () => {
-  const scrollbarWidth =
-    window.innerWidth - document.documentElement.clientWidth;
-  document.body.style.overflow = "hidden";
-  document.body.style.paddingRight = `${scrollbarWidth}px`;
+export const lockingScroll = (currentScrollY: number) => {
+  document.body.style.position = "fixed";
+  document.body.style.width = "100%";
+  document.body.style.top = `-${currentScrollY}px`;
+  document.body.style.overflowY = "scroll";
 };
 
 /**
  * 스크롤바를 다시 표출하여 스크롤 동작
  */
-export const allowScroll = () => {
-  document.body.style.overflow = "auto";
-  document.body.style.paddingRight = "0px";
+export const allowScroll = (currentScrollY: number) => {
+  document.body.style.position = "";
+  document.body.style.width = "";
+  document.body.style.top = "";
+  document.body.style.overflowY = "";
+  window.scrollTo(0, currentScrollY);
 };
 
 /** 숫자 표기 포맷을 변경한다.
