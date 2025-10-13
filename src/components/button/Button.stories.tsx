@@ -4,6 +4,7 @@ import {
   IconButton,
   CarouselNavButton,
   LikeButton,
+  ScrollTopButton,
 } from "@/components";
 import ICON_MAP from "@/components/icon/icon-map";
 import STATIC_ICON_MAP from "@/components/icon/static-icon-map";
@@ -144,5 +145,11 @@ export const DefaultLike: Story = {
 export const Liked: Story = {
   render: () => {
     return <LikeButton count={24} isLike={true} />;
+  },
+};
+
+export const ScrollToTop: Story = {
+  render: () => {
+    return <ScrollTopButton />;
   },
 };
