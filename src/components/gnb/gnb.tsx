@@ -40,7 +40,7 @@ const Gnb = ({ user }: { user: User }) => {
       <AsciiArt />
       <header
         className={cn(
-          "fixed top-0 z-50 flex items-center justify-between bg-[#171A21]",
+          "fixed top-0 z-[9999] flex items-center justify-between bg-[#171A21]",
           "h-[60px] w-full gap-[10px] px-5 py-[15px]",
           "tablet:h-[70px] tablet:px-[30px] tablet:py-[11px]",
           "pc:h-[70px] pc:px-[300px] pc:py-[11px]"
