@@ -1,13 +1,15 @@
-import getRecommendedWines from "@/api/wines/get-recommended";
+"use client";
+
 import RecommendWineSlider from "@/app/wines/_components/wine-recommended/recommend-slider";
+import { useGetRecommendedWines } from "@/hooks/api/wines/use-get-recommended-wines";
 
 /**
  * [이번 달 추천 와인] 영역
  * @author yeonsu
  */
 
-const WineRecommended = async () => {
-  const wines = await getRecommendedWines(10);
+const WineRecommended = () => {
+  const { data: wines } = useGetRecommendedWines();
 
   return (
     <>
@@ -17,7 +19,7 @@ const WineRecommended = async () => {
             이번 달 추천 와인
           </h2>
           <div className="flex-center min-h-[243px] tablet:min-h-[303px] pc:min-h-[319px]">
-            <RecommendWineSlider wines={wines} />
+            <RecommendWineSlider wines={wines ?? []} />
           </div>
         </div>
       </section>

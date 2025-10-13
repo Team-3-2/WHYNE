@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { Card, EmptyState } from "@/components";
 import { Wine } from "@/types/wine";
 
@@ -23,7 +24,13 @@ const WineList = ({ wine, isLoading }: WineListProps) => {
   }
 
   return (
-    <>
+    <div
+      className={cn(
+        "grid w-full gap-y-[48px]",
+        "tablet:grid-cols-2 tablet:gap-x-[16px]",
+        "pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
+      )}
+    >
       {wine.map((wine) => (
         <div key={wine.id}>
           <Card
@@ -37,7 +44,7 @@ const WineList = ({ wine, isLoading }: WineListProps) => {
           />
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

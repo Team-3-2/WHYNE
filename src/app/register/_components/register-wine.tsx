@@ -1,14 +1,23 @@
 "use client";
 
+import postImage from "@/api/image/post-image";
 import { Button, SelectType, TextInput } from "@/components";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 import WineImg from "@/components/wine-img/wine-img";
+import usePatchWine from "@/hooks/api/wines/use-patch-wine";
+import usePostWine from "@/hooks/api/wines/use-post-wine";
 import { WineFormData } from "@/types/wine";
 import Image from "next/image";
-import { ChangeEvent, useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { ChangeEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 
-const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
+const RegisterWine = ({
+  wineData,
+  id,
+}: {
+  wineData: WineFormData | null;
+  id: string | null;
+}) => {
   const {
     register,
     handleSubmit,
@@ -23,33 +32,48 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
     },
   });
   const [previewImgUrl, setPreviewImgUrl] = useState<string | null>(
-    wineData ? wineData.image : null
+    wineData && typeof wineData.image === "string" ? wineData.image : null
   );
-  const imageRegister = register("image", {
-    required: "와인 사진은 필수입니다.",
-  });
+  const [imgUrl, setImgUrl] = useState<string>(
+    wineData && typeof wineData.image === "string"
+      ? wineData.image
+      : "not_found_img"
+  );
+  const { mutate: postWine } = usePostWine();
+  const { mutate: patchWine } = usePatchWine();
 
-  const onSubmit: SubmitHandler<WineFormData> = (data) => {
-    console.log(data);
+  const onSubmit = async (data: WineFormData) => {
+    const price = Number(data.price);
+
+    if (wineData) {
+      const avgRating = wineData.avgRating || 0;
+      const patchData = { ...data, price, avgRating };
+      const path = Number(id);
+
+      patchWine({ patchData, path });
+    } else {
+      const registerData = { ...data, price: price, image: imgUrl };
+      postWine({ registerData });
+    }
   };
 
   /**
-   * 이미지 미리보기
+   * 이미지 미리보기 url을 만들고, 실제 이미지 경로를 받아온다.
    * @author hwitae
    * @param e input 파일 선택 이벤트
    */
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const imgFile = e.target.files?.[0];
-    console.log(imgFile);
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const uploadImg = e.target.files?.[0];
 
-    if (!imgFile) return;
+    if (!uploadImg) return;
 
     if (previewImgUrl) URL.revokeObjectURL(previewImgUrl);
 
-    const newPreviewImgUrl = URL.createObjectURL(imgFile);
-    console.log(newPreviewImgUrl);
-
+    const newPreviewImgUrl = URL.createObjectURL(uploadImg);
     setPreviewImgUrl(newPreviewImgUrl);
+
+    const { url } = await postImage({ url: uploadImg });
+    setImgUrl(url);
   };
 
   return (
@@ -61,7 +85,7 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
         {previewImgUrl ? (
           <label htmlFor="changeImg" className="w-fit cursor-pointer">
             <Image
-              src={previewImgUrl}
+              src={previewImgUrl ? previewImgUrl : ""}
               width={360}
               height={370}
               alt="미리보기 이미지"
@@ -104,9 +128,10 @@ const RegisterWine = ({ wineData }: { wineData: WineFormData | null }) => {
           {...register("price", { required: "가격은 필수 입력입니다." })}
         />
         <SelectType
-          id="type"
+          id="wine-type"
           isError={errors.type ? true : false}
-          {...register("type", { required: "와인 타입은 필수 입력입니다." })}
+          name="type"
+          register={register}
         />
         <TextInput
           id="region"
