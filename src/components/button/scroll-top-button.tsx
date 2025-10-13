@@ -6,7 +6,9 @@ import { IconButton } from "@/components";
  * @author yeonsu
  */
 
-const ScrollTopButton = () => {
+interface ScrollTopButtonProps {}
+
+const ScrollTopButton = ({}: ScrollTopButtonProps) => {
   const isVisible = useScrollVisibility({ threshold: 0 });
 
   const scrollToTop = () => {
@@ -22,7 +24,7 @@ const ScrollTopButton = () => {
     <IconButton
       icon="ArrowTopIcon"
       iconSize="md"
-      className="rounded-full border-gray-300"
+      className="h-[40px] w-[40px] rounded-full border-gray-300 tablet:h-[50px] tablet:w-[50px] pc:h-[50px] pc:w-[50px]"
       onClick={scrollToTop}
       aria-label="최상단으로 이동"
     />

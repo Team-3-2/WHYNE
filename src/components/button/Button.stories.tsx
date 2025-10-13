@@ -1,10 +1,10 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import {
   Button,
   IconButton,
   CarouselNavButton,
   LikeButton,
-  ScrollTopButton,
 } from "@/components";
 import ICON_MAP from "@/components/icon/icon-map";
 import STATIC_ICON_MAP from "@/components/icon/static-icon-map";
@@ -148,8 +148,23 @@ export const Liked: Story = {
   },
 };
 
+const ScrollTopButtonWrapper = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  return (
+    <IconButton
+      icon="ArrowTopIcon"
+      iconSize="md"
+      className="h-[40px] w-[40px] rounded-full border-gray-300 tablet:h-[50px] tablet:w-[50px] pc:h-[50px] pc:w-[50px]"
+      onClick={scrollToTop}
+      aria-label="최상단으로 이동"
+    />
+  );
+};
+
 export const ScrollToTop: Story = {
   render: () => {
-    return <ScrollTopButton />;
+    return <ScrollTopButtonWrapper />;
   },
 };

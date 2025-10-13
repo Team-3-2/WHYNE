@@ -56,18 +56,7 @@ export const BreakpointsRecommendWine: Story = {
   },
   render: (args) => (
     <div className="p-6">
-      <h3 className="mb-2 text-xl font-bold">
-        이 달의 추천 와인 breakpoints 옵션
-      </h3>
-      <div className="mb-4 rounded-lg bg-gray-100 pb-4">
-        <p className="text-sm">
-          [Mobile] 2개 슬라이드, 스크롤바 표시, spaceBetween:74
-          <br />
-          [Tablet] 3개 슬라이드, 네비게이션 버튼 표시, spaceBetween:4
-          <br />
-          [PC] 4개 슬라이드, 네비게이션 버튼 표시, spaceBetween:32
-        </p>
-      </div>
+      <h3 className="mb-2 text-xl font-bold">이 달의 추천 와인</h3>
       <Carousel breakpoints={CAROUSEL_BREAKPOINTS.recommendWine}>
         {wines.map((wine) => (
           <RecommendCard key={wine.id} wine={wine} />
