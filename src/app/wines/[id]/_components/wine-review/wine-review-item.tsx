@@ -19,6 +19,7 @@ import WineReviewRating from "./wine-review-rating";
 import useReviewLike from "../../../../../hooks/api/reviews/use-review-like";
 import useReviewDelete from "../../../../../hooks/api/reviews/use-review-delete";
 import type { Review } from "@/types/wine";
+import { useToast } from "@/hooks/use-toast";
 
 interface WineReviewItemProps {
   review: Review;
@@ -75,6 +76,7 @@ const WineReviewItem = ({
   wineId,
 }: WineReviewItemProps) => {
   const router = useRouter();
+  const { reviewDeleteSuccess, reviewDeleteError } = useToast();
 
   const isLiked =
     typeof review.isLiked === "boolean"
@@ -128,11 +130,10 @@ const WineReviewItem = ({
     deleteReview(undefined, {
       onSuccess: () => {
         setIsDeleteModalOpen(false);
-        alert("리뷰가 삭제되었습니다.");
-        router.refresh();
+        reviewDeleteSuccess();
       },
       onError: () => {
-        alert("리뷰 삭제에 실패했습니다. 다시 시도해주세요.");
+        reviewDeleteError();
       },
     });
   };
@@ -266,7 +267,7 @@ const WineReviewItem = ({
         </div>
       </article>
 
-      <ConfirmModal
+      {/* <ConfirmModal
         isOpen={isDeleteModalOpen}
         msg={{
           text: "정말 삭제하시겠습니까?",
@@ -275,7 +276,7 @@ const WineReviewItem = ({
         }}
         onClose={handleDeleteCancel}
         onConfirm={handleDeleteConfirm}
-      />
+      /> */}
     </>
   );
 };

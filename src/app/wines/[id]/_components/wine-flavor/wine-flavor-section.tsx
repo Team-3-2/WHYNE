@@ -37,19 +37,23 @@ const FlavorSection = ({ reviews, reviewCount }: FlavorSectionProps) => {
       <div
         className={cn(
           "mb-4 flex flex-col items-start gap-1",
-          "tablet:mb-0 tablet:flex-col tablet:gap-3",
-          "pc:flex-row pc:items-center pc:justify-between pc:pr-8"
+          "tablet:mb-0 tablet:ml-9 tablet:flex-col tablet:gap-3",
+          "pc:flex-row pc:items-center pc:justify-between"
         )}
       >
-        <h2 className="text-heading-lg text-gray-900">어떤 향이 있나요?</h2>
+        <h2 className="text-heading-lg text-gray-900 pc:ml-10">
+          어떤 향이 있나요?
+        </h2>
         <span className="text-body-sm text-gray-400">
           ({reviewCount}명 참여)
         </span>
       </div>
       {/* Flavor 컴포넌트 */}
       <div className="flex w-full justify-center tablet:justify-start">
-        <div className="scrollbar-hide overflow-x-auto [&>div>div:first-child]:hidden">
-          <Flavor count={reviewCount} items={displayAromas} />
+        <div className="w-full max-w-[300px] tablet:max-w-none pc:ml-16 pc:max-w-none">
+          <div className="scrollbar-hide overflow-hidden [&>div>div:first-child]:hidden">
+            <Flavor count={reviewCount} items={displayAromas} />
+          </div>
         </div>
       </div>
     </div>
