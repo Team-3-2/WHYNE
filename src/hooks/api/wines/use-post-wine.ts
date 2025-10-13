@@ -15,7 +15,7 @@ const usePostWine = () => {
     mutationFn: ({ registerData }: { registerData: WineFormData }) =>
       postRegisterWine(registerData),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["wineList"] });
+      queryClient.invalidateQueries({ queryKey: ["wine-lst"] });
       router.back();
     },
     onError: (error) => {

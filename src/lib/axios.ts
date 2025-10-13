@@ -47,7 +47,13 @@ const authRefreshToken = async () => {
 
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const noTokenUrls = ["/", "/login", "/wines", "/wines/recommended"];
+    const noTokenUrls = [
+      "/",
+      "/login",
+      "/wines",
+      "/wines/recommended",
+      "/auth/",
+    ];
 
     if (noTokenUrls.includes(config.url ?? "")) {
       return config;

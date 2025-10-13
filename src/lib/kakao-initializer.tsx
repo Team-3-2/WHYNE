@@ -11,7 +11,6 @@ declare global {
 const KaKaoInitializer = () => {
   const handleLoad = () => {
     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
-    console.log(window.Kakao.isInitialized());
   };
 
   return (
