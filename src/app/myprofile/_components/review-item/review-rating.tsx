@@ -1,7 +1,8 @@
 import { DropdownMenu, Icon, Rating } from "@/components";
 import useDeleteUserReview from "@/hooks/api/reviews/use-delete-user-review";
+import { useOutsideClick } from "@/hooks/use-outside-click";
 import { getTimeAgo } from "@/lib/utils";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 
 interface ReviewRatingProps {
   setOptionMenu: Dispatch<SetStateAction<boolean>>;
@@ -18,6 +19,9 @@ const ReviewRating = ({
   rating,
   id,
 }: ReviewRatingProps) => {
+  const menuRef = useRef<HTMLDivElement>(null);
+  useOutsideClick(menuRef, () => setOptionMenu(false), optionMenu);
+
   const { mutate } = useDeleteUserReview();
 
   const handleReviewDelete = () => {

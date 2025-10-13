@@ -1,4 +1,4 @@
-import { AromaKey } from "@/types/AromaType";
+import { AromaKey } from "@/types/aroma-type";
 
 type AromaInfo = {
   img: string;

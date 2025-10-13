@@ -33,7 +33,7 @@ const ProfileTabs = ({
     <nav
       aria-label="프로필 탭 메뉴"
       className={cn(
-        "sticky top-[60px] z-40 flex w-full items-center justify-start gap-5 overflow-x-auto whitespace-nowrap border-b border-gray-300 bg-white pb-[14px] pl-1 pt-4",
+        "sticky top-[60px] z-[999] flex w-full items-center justify-start gap-5 overflow-x-auto whitespace-nowrap border-b border-gray-300 bg-white pb-[14px] pl-1 pt-4",
         "tablet:top-[70px] tablet:gap-8 tablet:pb-[18px] tablet:pl-5 tablet:pt-[18px]",
         "pc:top-[70px] pc:h-[85px] pc:items-end pc:gap-8 pc:pb-[18px]"
       )}
