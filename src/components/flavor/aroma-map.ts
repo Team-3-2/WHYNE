@@ -19,8 +19,7 @@ export const aromaMap: Record<AromaKey, AromaInfo> = {
     label: "오크",
   },
   VANILLA: {
-    // 이미지 없음
-    img: "/images/aroma/aroma-no-image.jpg",
+    img: "/images/aroma/aroma-vanilla.jpg",
     label: "바닐라",
   },
   PEPPER: {
@@ -60,8 +59,7 @@ export const aromaMap: Record<AromaKey, AromaInfo> = {
     label: "꽃",
   },
   TOBACCO: {
-    // 이미지 없음
-    img: "/images/aroma/aroma-no-image.jpg",
+    img: "/images/aroma/aroma-tobacco.jpg",
     label: "담배",
   },
   EARTH: {
@@ -73,18 +71,15 @@ export const aromaMap: Record<AromaKey, AromaInfo> = {
     label: "초콜릿",
   },
   SPICE: {
-    // 이미지 없음
-    img: "/images/aroma/aroma-no-image.jpg",
+    img: "/images/aroma/aroma-spice.jpg",
     label: "향신료",
   },
   CARAMEL: {
-    // 이미지 없음
-    img: "/images/aroma/aroma-no-image.jpg",
+    img: "/images/aroma/aroma-caramel.jpg",
     label: "카라멜",
   },
   LEATHER: {
-    // 이미지 없음
-    img: "/images/aroma/aroma-no-image.jpg",
+    img: "/images/aroma/aroma-leather.jpg",
     label: "가죽",
   },
   EMPTY: {

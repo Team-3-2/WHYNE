@@ -34,7 +34,7 @@ const TypeItem = ({
       <label
         htmlFor={item}
         className={cn(
-          "flex-center cursor-pointer select-none gap-2 rounded-full py-2 pl-2 pr-3 text-default hover:bg-gray-700 hover:text-white pc:pr-4",
+          "flex-center cursor-pointer select-none gap-2 rounded-full py-2 pl-2 pr-4 text-default hover:bg-gray-100 hover:text-gray-800 pc:pr-4",
           "peer-checked:bg-gray-800 peer-checked:text-white",
           selectedType !== "" &&
             selectedType === item &&

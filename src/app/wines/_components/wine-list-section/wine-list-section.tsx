@@ -1,16 +1,18 @@
 "use client";
 
+import { useMemo, useEffect, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineList from "../wine-list/wine-list";
-import useGetWineList from "@/hooks/api/wines/use-get-wine-list";
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
+import getWineList from "@/api/wines/get-wine-list";
 import { useSearchParams } from "next/navigation";
 import WineSearchOption from "../wine-search-option/wine-search-option";
-import { useState, useCallback } from "react";
+
 import debounce from "lodash/debounce";
 import { parseQueryParams } from "../../_utils/parse-query-params";
 
-const limit = 10;
+const limit = 4;
 
 const WineListSection = () => {
   const params = useSearchParams();
@@ -19,9 +21,19 @@ const WineListSection = () => {
 
   const { type, rating, maxPrice, minPrice } = parseQueryParams(params);
 
-  const debouncedSetSearch = debounce((value: string) => {
-    setDebouncedSearch(value);
-  }, 400);
+  const debouncedSetSearch = useMemo(
+    () =>
+      debounce((value: string) => {
+        setDebouncedSearch(value);
+      }, 400),
+    []
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedSetSearch.cancel();
+    };
+  }, [debouncedSetSearch]);
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,17 +44,39 @@ const WineListSection = () => {
     [debouncedSetSearch]
   );
 
-  const { data, isLoading } = useGetWineList({
-    limit,
-    type,
-    rating,
-    maxPrice,
-    minPrice,
-    name: debouncedSearch,
+  const filters = useMemo(
+    () => ({
+      limit,
+      type,
+      rating,
+      maxPrice,
+      minPrice,
+      name: debouncedSearch,
+    }),
+    [type, rating, maxPrice, minPrice, debouncedSearch]
+  );
+
+  const queryKey = useMemo(() => ["wine-list", filters], [filters]);
+
+  const {
+    data,
+    allItems: wines,
+    observerRef,
+    isLoading,
+    isFetchingNextPage,
+  } = useInfiniteScroll({
+    queryKey,
+    fetchFn: (cursor) =>
+      getWineList({
+        cursor,
+        ...filters,
+      }),
+    staleTime: 1000 * 60 * 5,
   });
 
-  const wineList = data?.list ?? [];
-  console.log(data);
+  const wineList = wines;
+
+  const isInitialLoading = isLoading && wines.length === 0;
 
   return (
     <section
@@ -78,12 +112,15 @@ const WineListSection = () => {
       <div
         className={cn(
           wineList.length === 0 ? "pc:float-right" : "grid pc:left-[60px]",
-          "relative order-3 gap-y-[48px]",
-          "tablet:grid-cols-2 tablet:gap-x-[16px]",
-          "pc:top-[64px] pc:order-3 pc:w-[calc(100%-284px-60px)] pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
+          "relative order-3",
+          "pc:top-[64px] pc:w-[calc(100%-284px-60px)]"
         )}
       >
-        <WineList wine={wineList} isLoading={isLoading} />
+        <WineList wine={wineList} isLoading={isInitialLoading} />
+        <div ref={observerRef} className="mt-[20px] h-1 w-full" />
+        {isFetchingNextPage && (
+          <p className="text-center text-sm text-gray-500">Loading…</p>
+        )}
       </div>
     </section>
   );
