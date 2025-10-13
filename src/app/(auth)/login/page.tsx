@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, TextInput } from "@/components";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import AuthRedirect from "../_components/auth-redirect";
 import login from "@/api/auth/login";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
+import RememberId from "../_components/remember-id";
 
 interface LoginFormData {
   email: string;
@@ -22,6 +23,8 @@ const Page = () => {
     register,
     formState: { errors, isValid },
   } = useForm<LoginFormData>();
+
+  const [checked, setChecked] = useState(false);
 
   const [state, formAction, isPending] = useActionState(login, null);
 
@@ -73,6 +76,7 @@ const Page = () => {
               },
             })}
           />
+          <RememberId checked={checked} setChecked={setChecked} />
         </div>
         <Button
           label="로그인"
