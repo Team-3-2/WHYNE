@@ -4,7 +4,7 @@ import AccountItem from "./account-item";
 import { User } from "@/types/user-type";
 
 const meta: Meta<typeof AccountItem> = {
-  title: "My-profile/AccountItem",
+  title: "페이지/마이페이지/AccountItem",
   component: AccountItem,
   tags: ["autodocs"],
   parameters: {

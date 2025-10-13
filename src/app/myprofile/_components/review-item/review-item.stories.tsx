@@ -4,7 +4,7 @@ import { ReviewItemType } from "../../_types/review-type";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const meta: Meta<typeof ReviewItem> = {
-  title: "MY-PROFILE/ReviewItem",
+  title: "페이지/마이페이지/ReviewItem",
   component: ReviewItem,
   tags: ["autodocs"],
   parameters: {
