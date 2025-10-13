@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import FlavorIconList from "./flavor-icon-list";
-import { AromaKey } from "@/types/AromaType";
+import { AromaKey } from "@/types/aroma-type";
 
 const ALL_AROMAS: AromaKey[] = [
   "CHERRY",
