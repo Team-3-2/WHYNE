@@ -52,7 +52,7 @@ instance.interceptors.request.use(
       "/login",
       "/wines",
       "/wines/recommended",
-      "/auth/",
+      "/auth",
     ];
 
     if (noTokenUrls.includes(config.url ?? "")) {
