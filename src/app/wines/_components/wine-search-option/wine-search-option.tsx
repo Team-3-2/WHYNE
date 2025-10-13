@@ -16,16 +16,18 @@ interface ModalProps {
 
 const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const currentScrollY = window.scrollY;
+
   useEffect(() => {
     if (!dialogRef.current?.open && open) {
       dialogRef.current?.showModal();
-      lockingScroll();
+      lockingScroll(currentScrollY);
     } else {
       dialogRef.current?.close();
     }
 
     return () => {
-      allowScroll();
+      allowScroll(currentScrollY);
     };
   }, [open]);
 
