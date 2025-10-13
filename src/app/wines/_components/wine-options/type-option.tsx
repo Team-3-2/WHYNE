@@ -34,7 +34,7 @@ const TypeItem = ({
       <label
         htmlFor={item}
         className={cn(
-          "flex-center cursor-pointer select-none gap-2 rounded-full py-2 pl-2 pr-4 text-default hover:bg-gray-700 hover:text-white",
+          "flex-center cursor-pointer select-none gap-2 rounded-full py-2 pl-2 pr-4 text-default hover:bg-gray-100 hover:text-gray-800 pc:pr-4",
           "peer-checked:bg-gray-800 peer-checked:text-white",
           selectedType !== "" &&
             selectedType === item &&
@@ -42,7 +42,7 @@ const TypeItem = ({
         )}
       >
         <Image
-          className="h-8 w-8 rounded-full object-cover"
+          className="h-6 w-6 rounded-full object-cover pc:h-8 pc:w-8"
           src={imgMap[item]}
           width={24}
           height={24}
@@ -75,7 +75,7 @@ const TypeOption = () => {
   return (
     <div className="flex flex-col gap-5">
       <h2 className="text-body-lg">타입</h2>
-      <div className="flex flex-col gap-2">
+      <div className="flex gap-2 pc:flex-col">
         {(WINE_TYPE as WineType[]).map((item) => (
           <TypeItem
             key={item}

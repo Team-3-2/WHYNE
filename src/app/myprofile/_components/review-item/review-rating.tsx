@@ -55,7 +55,7 @@ const ReviewRating = ({
           >
             <DropdownMenu
               items={[
-                { label: "수정하기", onClick: () => {} },
+                { label: "수정하기", href: `/reviews/${id}/edit` },
                 { label: "삭제하기", onClick: handleReviewDelete },
               ]}
             />
