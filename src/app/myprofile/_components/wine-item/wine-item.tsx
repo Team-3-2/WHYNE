@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/components";
 import useDeleteWine from "@/hooks/api/wines/use-delete-wine";
-import { ConfirmModal } from "@/components";
+import { Card, ConfirmModal } from "@/components";
 import { WineType } from "@/app/myprofile/_types/review-type";
 
 const WineItem = ({ wine }: { wine: WineType }) => {
@@ -18,6 +17,7 @@ const WineItem = ({ wine }: { wine: WineType }) => {
   return (
     <>
       <Card
+        href={`/wines/${wine.id}`}
         image={wine.image}
         name={wine.name}
         region={wine.region}
@@ -27,7 +27,8 @@ const WineItem = ({ wine }: { wine: WineType }) => {
           { label: "삭제하기", onClick: () => setIsModalOpen(true) },
         ]}
       />
-      <ConfirmModal
+
+      {/* <ConfirmModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleWineDelete}
@@ -37,7 +38,7 @@ const WineItem = ({ wine }: { wine: WineType }) => {
           cancelMsg: "취소",
           confirmMsg: "삭제하기",
         }}
-      />
+      /> */}
     </>
   );
 };
