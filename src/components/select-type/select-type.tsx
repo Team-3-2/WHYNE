@@ -4,6 +4,8 @@ import redWine from "../../../public/images/wine-type/red.jpg";
 import whiteWine from "../../../public/images/wine-type/white.jpg";
 import sparklingWine from "../../../public/images/wine-type/sparkling.jpg";
 import { ComponentProps } from "react";
+import { UseFormRegister } from "react-hook-form";
+import { WineFormData } from "@/types/wine";
 
 const imgMap = {
   RED: redWine,
@@ -16,7 +18,7 @@ type WineType = keyof typeof imgMap;
 interface SelectTypeValue extends ComponentProps<"input"> {
   isError: boolean;
   className?: string;
-  name: string;
+  register: UseFormRegister<WineFormData>;
 }
 
 interface TypeInputProps extends ComponentProps<"input"> {
@@ -51,6 +53,7 @@ export const TypeInput = ({
         "pc:h-[48px]",
         className
       )}
+      {...props}
       onClick={onClick}
     >
       <input
@@ -59,7 +62,6 @@ export const TypeInput = ({
         value={value}
         name={name}
         className="peer hidden"
-        {...props}
       />
       <label
         htmlFor={id}
@@ -97,7 +99,7 @@ export const TypeInput = ({
 const SelectType = ({
   isError,
   className,
-  name,
+  register,
   ...props
 }: SelectTypeValue) => {
   return (
@@ -111,9 +113,21 @@ const SelectType = ({
         )}
       </div>
       <div className={cn("flex gap-[10px]", className)} {...props}>
-        <TypeInput id={"wine-red"} name={name} value="RED" />
-        <TypeInput id={"wine-white"} name={name} value="WHITE" />
-        <TypeInput id={"wine-spark"} name={name} value="SPARKLING" />
+        <TypeInput
+          id={"wine-red"}
+          value="RED"
+          {...register("type", { required: "와인 타입은 필수 입력입니다." })}
+        />
+        <TypeInput
+          id={"wine-white"}
+          value="WHITE"
+          {...register("type", { required: "와인 타입은 필수 입력입니다." })}
+        />
+        <TypeInput
+          id={"wine-spark"}
+          value="SPARKLING"
+          {...register("type", { required: "와인 타입은 필수 입력입니다." })}
+        />
       </div>
     </div>
   );

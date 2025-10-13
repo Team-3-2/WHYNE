@@ -1,15 +1,15 @@
 import instance from "@/lib/axios";
 import { WineFormData } from "@/types/wine";
+import postImage from "../image/post-image";
 
-const patchRegisteredWine = async (wineFormData: WineFormData, id: string) => {
-  const imgUrl = wineFormData.image;
-  const data = {};
-
+const patchRegisteredWine = async (wineFormData: WineFormData, id: number) => {
   try {
-    const response = await instance.patch(`/wines/${id}`);
+    const response = await instance.patch(`/wines/${id}`, wineFormData);
 
     if (!response) throw new Error("데이터 수정에 실패했습니다.");
   } catch (error) {
     console.error(error);
   }
 };
+
+export default patchRegisteredWine;
