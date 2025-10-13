@@ -1,7 +1,7 @@
 import { getAromaIconName } from "@/lib/utils";
 import { aromaMap } from "../flavor/aroma-map";
 import Icon from "../icon/icon";
-import { AromaKey } from "@/types/AromaType";
+import { AromaKey } from "@/types/aroma-type";
 
 interface FlavorIconListProps {
   aroma: AromaKey[];

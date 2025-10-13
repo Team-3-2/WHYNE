@@ -5,6 +5,7 @@ import { Gnb } from "@/components";
 import QueryProvider from "@/providers/query-provider";
 import getMe from "@/api/user/get-me";
 import KaKaoInitializer from "@/lib/kakao-initializer";
+import ToastProvider from "@/providers/toast/toast-provider";
 
 export const metadata: Metadata = {
   title: "Wine App",
@@ -27,6 +28,7 @@ export default async function RootLayout({
           <Gnb user={userInfo} />
           {children}
           {modal}
+          <ToastProvider />
         </QueryProvider>
         <KaKaoInitializer />
       </body>
