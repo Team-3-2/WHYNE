@@ -31,7 +31,11 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
     }
   }, [tab]);
 
-  const { allItems: userReview, observerRef } = useInfiniteScroll({
+  const {
+    allItems: userReview,
+    observerRef: reviewObserverRef,
+    isError: reviewIsError,
+  } = useInfiniteScroll({
     queryKey,
     fetchFn: (cursor) =>
       getUserReview({
@@ -44,6 +48,7 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
     allItems: userWines,
     totalCount: userWinesTotalCount,
     observerRef: wineObserverRef,
+    isError: wineIsError,
   } = useInfiniteScroll<WineType>({
     queryKey: ["user-wine", wineScrollKey],
     fetchFn: (cursor) =>
@@ -63,16 +68,23 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
         <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
           {tab === "review" && (
             <>
+              {(userReview?.length === 0 || reviewIsError) && (
+                <EmptyState
+                  icon="EmptyStateIcon"
+                  title="아직 등록된 리뷰가 없습니다."
+                  description="리뷰를 등록해보세요!"
+                />
+              )}
               {(userReview as ReviewItemType[])?.map((review) => (
                 <ReviewItem key={review.id} review={review} />
               ))}
-              <div ref={observerRef} className="mt-[100px] h-1 w-full" />
+              <div ref={reviewObserverRef} className="mt-[100px] h-1 w-full" />
             </>
           )}
 
           {tab === "registered" && (
             <>
-              {userWinesTotalCount === 0 ? (
+              {(userWinesTotalCount === 0 || wineIsError) && (
                 <EmptyState
                   icon="EmptyStateIcon"
                   title="아직 등록한 와인이 없어요!"
@@ -80,25 +92,21 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                   actionLabel="와인 등록하기"
                   actionHref="/register/new"
                 />
-              ) : (
-                <>
-                  <div
-                    className={cn(
-                      "grid w-full gap-y-[16px] pt-[24px]",
-                      "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
-                      "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
-                    )}
-                  >
-                    {(userWines as WineType[])?.map((wine) => (
-                      <WineItem key={wine.id} wine={wine} />
-                    ))}
-                  </div>
-                  <div
-                    ref={wineObserverRef}
-                    className="mt-[100px] h-1 w-full"
-                  />
-                </>
               )}
+              <>
+                <div
+                  className={cn(
+                    "grid w-full gap-y-[16px] pt-[24px]",
+                    "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+                    "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
+                  )}
+                >
+                  {(userWines as WineType[])?.map((wine) => (
+                    <WineItem key={wine.id} wine={wine} />
+                  ))}
+                </div>
+                <div ref={wineObserverRef} className="mt-[100px] h-1 w-full" />
+              </>
             </>
           )}
 
