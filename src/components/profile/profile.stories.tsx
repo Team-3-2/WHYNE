@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Profile from "./profile";
 
 const meta: Meta<typeof Profile> = {
-  title: "Components/Profile",
+  title: "공통 컴포넌트/Profile",
   component: Profile,
   parameters: {
     layout: "centered",

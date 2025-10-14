@@ -1,17 +1,17 @@
 "use client";
 
 import { redirect, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useMemo, useState } from "react";
 import AccountItem from "../account-item/account-item";
 import ReviewItem from "../review-item/review-item";
 import WineItem from "../wine-item/wine-item";
 import ProfileTabs from "../profile-tabs/profile-tabs";
-import useGetUserWine from "@/hooks/api/my-profile/use-get-user-wine";
 import { ReviewItemType, WineType } from "../../_types/review-type";
 import { User } from "@/types/user-type";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import getUserReview from "@/api/my-profile/get-user-review";
+import getUserWines from "@/api/user/get-user-wines";
 
 interface MyProfileProps {
   userInfo: User;
@@ -22,8 +22,13 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
   const [tab, setTab] = useState(searchParams.get("tab") || "review");
 
   const queryKey = useMemo(() => ["user-review"], []);
+  const wineQueryKey = useMemo(() => ["user-wine"], []);
 
-  const { allItems: userReview, observerRef } = useInfiniteScroll({
+  const {
+    allItems: userReview,
+    totalCount: totalReviews,
+    observerRef,
+  } = useInfiniteScroll({
     queryKey,
     fetchFn: (cursor) =>
       getUserReview({
@@ -32,7 +37,18 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
       }),
   });
 
-  const { data: userWines } = useGetUserWine();
+  const {
+    allItems: userWines,
+    totalCount: totalWines,
+    observerRef: wineObserverRef,
+  } = useInfiniteScroll<WineType>({
+    queryKey: wineQueryKey,
+    fetchFn: (cursor) =>
+      getUserWines({
+        limit: 6,
+        cursor,
+      }),
+  });
 
   if (!userInfo) return redirect("/login");
 
@@ -42,8 +58,8 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
         <ProfileTabs
           tab={tab}
           setTab={setTab}
-          reviewTotal={userReview?.length}
-          registeredTotal={userWines?.totalCount}
+          reviewTotal={totalReviews}
+          registeredTotal={totalWines}
         />
         <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
           {tab === "review" && (
@@ -56,17 +72,20 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
           )}
 
           {tab === "registered" && (
-            <div
-              className={cn(
-                "grid gap-y-[16px] pt-[24px]",
-                "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
-                "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
-              )}
-            >
-              {userWines?.list?.map((wine: WineType) => (
-                <WineItem key={wine.id} wine={wine} />
-              ))}
-            </div>
+            <>
+              <div
+                className={cn(
+                  "grid w-full gap-y-[16px] pt-[24px]",
+                  "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+                  "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
+                )}
+              >
+                {(userWines as WineType[])?.map((wine) => (
+                  <WineItem key={wine.id} wine={wine} />
+                ))}
+              </div>
+              <div ref={wineObserverRef} className="mt-[100px] h-1 w-full" />
+            </>
           )}
 
           {tab === "account" && <AccountItem user={userInfo} />}

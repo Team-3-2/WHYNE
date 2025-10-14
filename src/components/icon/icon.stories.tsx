@@ -9,7 +9,7 @@ const unifiedIconMap = {
 };
 
 const meta = {
-  title: "Components/Icon",
+  title: "아이콘/Icon",
   component: Icon,
   parameters: {
     layout: "centered",

@@ -3,7 +3,7 @@ import ProfileTabs from "./profile-tabs";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const meta: Meta<typeof ProfileTabs> = {
-  title: "My-profile/ProfileTabs",
+  title: "페이지/마이페이지/ProfileTabs",
   component: ProfileTabs,
   tags: ["autodocs"],
   parameters: {

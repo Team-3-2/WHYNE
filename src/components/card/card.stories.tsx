@@ -5,7 +5,7 @@ import { recommendwinemock } from "@/mock";
 const DATA = recommendwinemock;
 
 const meta: Meta<typeof Card> = {
-  title: "Components/Card",
+  title: "공통 컴포넌트/Card",
   component: Card,
   parameters: {
     layout: "fullscreen",

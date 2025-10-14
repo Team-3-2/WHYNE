@@ -1,3 +1,4 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import {
   Button,
@@ -14,7 +15,7 @@ const unifiedIconMap = {
 };
 
 const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+  title: "공통 컴포넌트/Button",
   component: Button,
   parameters: {
     layout: "centered",
@@ -144,5 +145,26 @@ export const DefaultLike: Story = {
 export const Liked: Story = {
   render: () => {
     return <LikeButton count={24} isLike={true} />;
+  },
+};
+
+const ScrollTopButtonWrapper = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  return (
+    <IconButton
+      icon="ArrowTopIcon"
+      iconSize="md"
+      className="h-[40px] w-[40px] rounded-full border-gray-300 tablet:h-[50px] tablet:w-[50px] pc:h-[50px] pc:w-[50px]"
+      onClick={scrollToTop}
+      aria-label="최상단으로 이동"
+    />
+  );
+};
+
+export const ScrollToTop: Story = {
+  render: () => {
+    return <ScrollTopButtonWrapper />;
   },
 };

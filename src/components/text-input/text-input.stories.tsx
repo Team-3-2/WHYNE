@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import TextInput from "./text-input";
 
 const meta: Meta<typeof TextInput> = {
-  title: "Components/text-input",
+  title: "공통 컴포넌트/TextInput",
   component: TextInput,
   parameters: {
     layout: "centered",

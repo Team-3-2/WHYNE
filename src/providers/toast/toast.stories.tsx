@@ -1,4 +1,3 @@
-// src/providers/toast/toast.stories.tsx
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import ToastProvider from "./toast-provider";
 import { useToast } from "@/hooks/use-toast";
@@ -147,7 +146,7 @@ const ToastButtons = () => {
 };
 
 const meta: Meta<typeof ToastButtons> = {
-  title: "Toast/Toast",
+  title: "토스트/Toast",
   component: ToastButtons,
   tags: ["autodocs"],
   parameters: {

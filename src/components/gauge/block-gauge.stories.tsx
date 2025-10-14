@@ -3,7 +3,7 @@ import { useState } from "react";
 import BlockGauge, { type GaugeLevel } from "./block-gauge";
 
 const meta: Meta = {
-  title: "Components/BlockGauge",
+  title: "공통 컴포넌트/BlockGauge",
   component: BlockGauge,
   parameters: {
     layout: "centered",

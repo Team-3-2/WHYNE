@@ -3,7 +3,7 @@ import ConfirmModal from "./confirm-modal";
 import { useState } from "react";
 
 const meta: Meta<typeof ConfirmModal> = {
-  title: "Components/Modal",
+  title: "공통 컴포넌트/Modal",
   component: ConfirmModal,
   parameters: {
     layout: "centered",

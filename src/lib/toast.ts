@@ -1,4 +1,3 @@
-// src/lib/toast.ts
 import { toast } from "react-toastify";
 import type { ToastOptions } from "react-toastify";
 

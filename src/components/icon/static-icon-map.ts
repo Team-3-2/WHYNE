@@ -11,6 +11,7 @@ import StarIcon from "/public/icons/ic-star.svg";
 import AlertIcon from "/public/icons/ic-alert.svg";
 import ArrowLeftIcon from "/public/icons/ic-arrow-left.svg";
 import ArrowRightIcon from "/public/icons/ic-arrow-right.svg";
+import ArrowTopIcon from "/public/icons/ic-arrow-top.svg";
 import CameraIcon from "/public/icons/ic-camera.svg";
 import FilterIcon from "/public/icons/ic-filter.svg";
 import HamburgerIcon from "/public/icons/ic-hamburger.svg";
@@ -31,6 +32,7 @@ const STATIC_ICON_MAP = {
   AlertIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  ArrowTopIcon,
   CameraIcon,
   FilterIcon,
   HamburgerIcon,
