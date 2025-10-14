@@ -13,6 +13,7 @@ import {
   RatingInput,
   RatingDistribution,
   Button,
+  ScrollTopButton,
 } from "@/components";
 import LikeButton from "@/components/button/like-button";
 import ConfirmModal from "@/components/modal/confirm-modal";
@@ -381,7 +382,7 @@ const Page = () => {
           />
         </div>
       </section>
-
+      <ScrollTopButton />
       <br />
     </>
   );

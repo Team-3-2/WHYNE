@@ -1,6 +1,6 @@
-import LinkButton from "@/components/button/link-button";
 import LandingBanner from "./(landing)/_components/landing-banner";
 import LandingSection from "./(landing)/_components/landing-section";
+import LandingFloatingCTA from "./(landing)/_components/landing-floating-cta";
 import {
   LANDING_BANNER,
   LANDING_SECTIONS,
@@ -27,13 +27,8 @@ const Home = () => {
         ))}
       </main>
 
-      <footer className="flex-center w-full px-16 py-16">
-        <LinkButton
-          href="/wines"
-          label="와인 보러가기"
-          className="h-[50px] w-[283px]"
-        />
-      </footer>
+      <footer className="h-32" aria-hidden="true" />
+      <LandingFloatingCTA />
     </>
   );
 };
