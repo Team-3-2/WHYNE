@@ -79,11 +79,8 @@ const RegisterWine = ({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="pb-40 tablet:pb-0 pc:pb-0"
-    >
-      <div className="flex flex-col gap-[18px]">
+    <form onSubmit={handleSubmit(onSubmit)} className="tablet:pb-0 pc:pb-0">
+      <div className="flex flex-col gap-[18px] pb-6 tablet:pb-16 pc:pb-16">
         {previewImgUrl ? (
           <label
             htmlFor="changeImg"
@@ -158,7 +155,7 @@ const RegisterWine = ({
           {...register("region", { required: "원산지는 필수 입력입니다." })}
         />
       </div>
-      <PageModalBtnWrapper className="tablet:h-[130px] tablet:px-0 pc:h-[130px] pc:px-0">
+      <PageModalBtnWrapper className="tablet:px-0 pc:px-0">
         <Button label="와인 등록하기" />
       </PageModalBtnWrapper>
     </form>
