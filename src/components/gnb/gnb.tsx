@@ -68,7 +68,7 @@ const Gnb = ({ user }: { user: User }) => {
                   alt="프로필 이미지"
                   width={45}
                   height={45}
-                  className="h-[45px] w-[45px] rounded-full"
+                  className="h-[45px] w-[45px] rounded-full object-contain"
                 />
               </button>
             ) : (
