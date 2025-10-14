@@ -1,11 +1,14 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 import RatingDistribution from "@/components/rating/rating-distribution";
+import ReviewListHeader from "./wine-review-list-header";
 import WineReviewItem from "./wine-review-item";
 import ReviewEmptyState from "../wine-state/review-empty-state";
-import ReviewListHeader from "./wine-review-list-header";
-import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import type { Review } from "@/types/wine";
 import Loader from "@/components/loader/loader";
+import Button from "@/components/button/basic-button";
+import type { Review } from "@/types/wine";
 
 interface ReviewSectionProps {
   reviews: Review[];
@@ -22,6 +25,8 @@ interface ReviewSectionProps {
   currentUserId?: number;
 }
 
+const PAGE_SIZE = 5;
+
 const ReviewSection = ({
   reviews,
   avgRating,
@@ -30,7 +35,21 @@ const ReviewSection = ({
   wineId,
   currentUserId,
 }: ReviewSectionProps) => {
-  const router = useRouter();
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const visibleReviews = reviews.slice(0, visibleCount);
+  const hasMore = visibleCount < reviews.length;
+
+  useEffect(() => {
+    setVisibleCount((prev) => {
+      const nextLen = reviews.length;
+      if (nextLen < prev) return nextLen;
+      return prev;
+    });
+  }, [reviews.length]);
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, reviews.length));
+  };
 
   if (isLoading) {
     return (
@@ -40,10 +59,8 @@ const ReviewSection = ({
     );
   }
 
-  // 리뷰가 없을 때
   if (reviews.length === 0) return <ReviewEmptyState wineId={wineId} />;
 
-  // 리뷰가 있을 때
   return (
     <div>
       {/* 모바일/태블릿: 평점 분포 */}
@@ -61,16 +78,19 @@ const ReviewSection = ({
         />
       </div>
 
-      {/* PC: 그리드 레이아웃 (타이틀부터 시작) */}
-      <div className="flex flex-col pc:grid pc:grid-cols-[1fr_280px] pc:gap-x-8">
-        {/* 왼쪽 영역: 리뷰 목록 타이틀 + 리뷰들 */}
+      {/* PC: 그리드 레이아웃 */}
+      <div
+        className={cn(
+          "flex flex-col",
+          "pc:grid pc:grid-cols-[1fr_280px] pc:gap-x-8"
+        )}
+      >
+        {/* 왼쪽: 리뷰 목록 */}
         <div>
-          {/* 리뷰 목록 타이틀 */}
           <ReviewListHeader totalCount={reviews.length} />
 
-          {/* 리뷰 목록 */}
           <div className="space-y-3 tablet:space-y-4">
-            {reviews.map((review, index) => (
+            {visibleReviews.map((review, index) => (
               <WineReviewItem
                 key={review.id}
                 review={review}
@@ -80,10 +100,23 @@ const ReviewSection = ({
               />
             ))}
           </div>
+
+          {/* 더보기 버튼 */}
+          {hasMore && (
+            <div className="mt-8 flex justify-center">
+              <Button
+                label={"더보기"}
+                variant="default"
+                onClick={handleLoadMore}
+              />
+            </div>
+          )}
         </div>
 
-        {/* 오른쪽 영역: PC 평점 분포 (sticky) */}
-        <div className="hidden pc:sticky pc:top-[70px] pc:block pc:h-fit">
+        {/* 오른쪽: PC 평점 분포 */}
+        <div
+          className={cn("hidden", "pc:sticky pc:top-[70px] pc:block pc:h-fit")}
+        >
           <RatingDistribution
             average={avgRating}
             distribution={avgRatings}

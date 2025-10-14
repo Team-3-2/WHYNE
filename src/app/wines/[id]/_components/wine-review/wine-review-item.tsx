@@ -131,9 +131,12 @@ const WineReviewItem = ({
   };
 
   const handleDeleteConfirm = () => {
+    const scrollYBeforeDelete = window.scrollY;
+
     deleteReview(undefined, {
       onSuccess: () => {
         setIsDeleteModalOpen(false);
+        requestAnimationFrame(() => window.scrollTo(0, scrollYBeforeDelete));
         reviewDeleteSuccess();
       },
       onError: () => {
@@ -146,18 +149,18 @@ const WineReviewItem = ({
     <>
       <article
         className={cn(
-          "flex w-full flex-col items-center gap-6 px-4 py-8",
-          "tablet:items-start tablet:gap-8 tablet:px-6 tablet:py-10",
-          "pc:gap-6 pc:px-4 pc:py-8",
+          "flex w-full flex-col items-center gap-6 py-8",
+          "tablet:items-center tablet:gap-8 tablet:py-10",
+          "pc:gap-6 pc:py-8",
           !isFirst && "border-t border-gray-300"
         )}
         aria-label={`${review.user.nickname}님의 리뷰`}
       >
         <div
           className={cn(
-            "flex w-full max-w-[420px] flex-col gap-6",
-            "tablet:max-w-none tablet:gap-8",
-            "pc:max-w-[720px] pc:gap-6"
+            "flex w-full max-w-[calc(100%-30px)] flex-col gap-6",
+            "tablet:max-w-[calc(100%-30px)] tablet:gap-8",
+            "pc:max-w-[calc(100%-100px)] pc:gap-6"
           )}
         >
           {/* 1. 별점 */}
@@ -168,7 +171,7 @@ const WineReviewItem = ({
           </div>
 
           {/* 2. 프로필 + 시간 + 좋아요 or 햄버거 버튼*/}
-          <header className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <WineReviewRating createdAt={review.createdAt} user={review.user} />
             <div className="flex items-center gap-2">
               {!isMyReview && (
@@ -191,7 +194,7 @@ const WineReviewItem = ({
                 />
               )}
             </div>
-          </header>
+          </div>
 
           {/* 3. 향 정보 */}
           {review.aroma && review.aroma.length > 0 && (
