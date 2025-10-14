@@ -13,7 +13,7 @@ const WineItem = ({ wine }: { wine: WineType }) => {
 
   const { mutate: deleteWine, isPending: deletePending } = useDeleteWine();
 
-  const { wineDeleteSuccess } = useToast();
+  const { wineDeleteSuccess, wineDeleteError } = useToast();
 
   const handleWineDelete = () => {
     deleteWine(
@@ -25,7 +25,7 @@ const WineItem = ({ wine }: { wine: WineType }) => {
           router.refresh();
         },
         onError: () => {
-          alert("삭제 실패");
+          wineDeleteError();
         },
       }
     );
