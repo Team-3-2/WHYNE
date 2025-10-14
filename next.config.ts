@@ -47,6 +47,11 @@ const nextConfig: NextConfig = {
         hostname: "k.kakaocdn.net",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "img1.kakaocdn.net",
+        pathname: "/**",
+      },
     ],
   },
 };
