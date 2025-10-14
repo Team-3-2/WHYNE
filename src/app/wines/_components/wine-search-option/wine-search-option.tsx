@@ -61,15 +61,10 @@ const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
         </div>
         <div className="mt-10 flex w-full items-center justify-between gap-[8px]">
           <Button
-            className="h-[54px] w-[1/3]"
+            className="h-[54px] w-full"
             variant="outline"
             onClick={resetFn}
             label="초기화"
-          />
-          <Button
-            className="h-[54px] flex-1"
-            onClick={() => setModalOpen(0)}
-            label="필터 적용하기"
           />
         </div>
       </div>
