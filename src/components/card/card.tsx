@@ -7,6 +7,7 @@ import CardImage from "./card-img";
 import CardInfo from "./card-info";
 import CardReview from "./card-review";
 import CardActionMenu from "./card-action-menu";
+import type { DropdownItem } from "@/components/dropdown-menu/dropdown-menu";
 
 /**
  * 카드 컴포넌트(카드 구성/레이아웃/페이지 링크 처리 역할)
@@ -19,11 +20,11 @@ import CardActionMenu from "./card-action-menu";
  * @param price : 가격
  * @param recentReview : 최신 후기 객체 (content 속성 포함)
  * @param href : 카드 클릭 시 이동할 링크 (없으면 클릭 불가)
- * @param actionMenu : 액션 메뉴 표시 여부 (기본값: false)
+ * @param actionMenuItems : 드롭다운 메뉴 아이템 배열 (없으면 액션 메뉴 미표시)
  */
 
 interface CardProps {
-  image: string;
+  image: string | null;
   blurDataURL?: string;
   avgRating?: number;
   reviewCount?: number;
@@ -32,7 +33,7 @@ interface CardProps {
   price?: number;
   recentReview?: { content?: string } | null;
   href?: string;
-  actionMenu?: boolean;
+  actionMenuItems?: DropdownItem[];
 }
 
 const Card = ({
@@ -45,9 +46,12 @@ const Card = ({
   price,
   recentReview,
   href,
-  actionMenu = false,
+  actionMenuItems,
 }: CardProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const hasActionMenu =
+    Array.isArray(actionMenuItems) && actionMenuItems.length > 0;
+
   const {
     isOn: isMenuOpen,
     toggle: toggleMenu,
@@ -55,48 +59,65 @@ const Card = ({
   } = useToggle(false);
   useClickOutside(menuRef, closeMenu);
 
-  const content = (
-    <div className="relative w-full">
-      <CardImage src={image} alt={`${name} 이미지`} blurDataURL={blurDataURL} />
-      <div className="relative mt-[24px]">
-        <CardInfo
-          name={name}
-          region={region}
-          price={price}
-          avgRating={avgRating}
-          reviewCount={reviewCount}
+  return (
+    <div className="group relative w-full">
+      {href ? (
+        <Link href={href}>
+          <CardImage
+            src={image}
+            alt={`${name} 이미지`}
+            blurDataURL={blurDataURL}
+          />
+        </Link>
+      ) : (
+        <CardImage
+          src={image}
+          alt={`${name} 이미지`}
+          blurDataURL={blurDataURL}
         />
-        {recentReview?.content && <CardReview content={recentReview.content} />}
-        {actionMenu && (
-          <div className="absolute right-0 top-0 z-10" ref={menuRef}>
+      )}
+      <div className="relative pt-[24px]">
+        {href ? (
+          <Link href={href}>
+            <CardInfo
+              name={name}
+              region={region}
+              price={price}
+              avgRating={avgRating}
+              reviewCount={reviewCount}
+            />
+            {recentReview?.content && (
+              <CardReview content={recentReview.content} />
+            )}
+          </Link>
+        ) : (
+          <>
+            <CardInfo
+              name={name}
+              region={region}
+              price={price}
+              avgRating={avgRating}
+              reviewCount={reviewCount}
+            />
+            {recentReview?.content && (
+              <CardReview content={recentReview.content} />
+            )}
+          </>
+        )}
+
+        {hasActionMenu && (
+          <div className="absolute right-0 top-[24px] z-10" ref={menuRef}>
             <CardActionMenu
               isOpen={isMenuOpen}
               toggleMenu={toggleMenu}
               closeMenu={closeMenu}
-              items={[
-                {
-                  label: "수정하기",
-                  onClick: () => {
-                    closeMenu();
-                    console.log("수정 모달창 열기");
-                  },
-                },
-                {
-                  label: "삭제하기",
-                  onClick: () => {
-                    closeMenu();
-                    console.log("삭제하기");
-                  },
-                },
-              ]}
+              items={actionMenuItems}
             />
           </div>
         )}
       </div>
     </div>
   );
-
-  return href ? <Link href={href}>{content}</Link> : content;
 };
 
 export default Card;

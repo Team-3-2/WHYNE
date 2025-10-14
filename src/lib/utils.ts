@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { Review } from "@/types/wine";
-import type { AromaKey } from "@/types/AromaType";
+import type { AromaKey } from "@/types/aroma-type";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -10,19 +10,22 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * 스크롤바를 숨겨 스크롤 방지
  */
-export const lockingScroll = () => {
-  const scrollbarWidth =
-    window.innerWidth - document.documentElement.clientWidth;
-  document.body.style.overflow = "hidden";
-  document.body.style.paddingRight = `${scrollbarWidth}px`;
+export const lockingScroll = (currentScrollY: number) => {
+  document.body.style.position = "fixed";
+  document.body.style.width = "100%";
+  document.body.style.top = `-${currentScrollY}px`;
+  document.body.style.overflowY = "scroll";
 };
 
 /**
  * 스크롤바를 다시 표출하여 스크롤 동작
  */
-export const allowScroll = () => {
-  document.body.style.overflow = "auto";
-  document.body.style.paddingRight = "0px";
+export const allowScroll = (currentScrollY: number) => {
+  document.body.style.position = "";
+  document.body.style.width = "";
+  document.body.style.top = "";
+  document.body.style.overflowY = "";
+  window.scrollTo(0, currentScrollY);
 };
 
 /** 숫자 표기 포맷을 변경한다.
@@ -114,7 +117,7 @@ export const calculateAverageTastes = (reviews: Review[]) => {
 
 /**
  * 현재 시간을 기준으로 글이 작성 시간 계산 로직
- * @autor junyeol
+ * @author junyeol
  * @param dateString : 리뷰 작성 시간
  * @returns : 작성 시간 텍스트
  */
@@ -175,4 +178,34 @@ export const getAromaIconName = (aroma: AromaKey): string => {
     EMPTY: "WineIcon",
   };
   return iconMap[aroma] || "WineIcon";
+};
+
+/**
+ * 쿠키의 값을 가져옵니다.
+ *
+ * @author hwitae
+ * @param cookieName 쿠키 이름
+ * @returns 쿠키 문자열
+ */
+export const getCookie = (cookieName: string) => {
+  const cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+
+    if (cookie.startsWith(cookieName + "=")) {
+      return cookie.slice(cookieName.length + 1);
+    }
+  }
+  return undefined;
+};
+
+/**
+ * 해당하는 이름의 쿠키를 삭제합니다.
+ *
+ * @author hwitae
+ * @param cookieName 쿠키 이름
+ */
+export const deleteCookie = (cookieName: string) => {
+  document.cookie = `${cookieName}=""; max-age=0; path=/;`;
 };

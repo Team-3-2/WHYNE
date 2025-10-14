@@ -5,5 +5,11 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   image: string;
-  email: string;
+  email?: string;
+}
+
+export interface LoginData {
+  user: User;
+  accessToken: string;
+  refreshToken: string;
 }

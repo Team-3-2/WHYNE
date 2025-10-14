@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Searchbar from "./searchbar";
 
 const meta: Meta<typeof Searchbar> = {
-  title: "Components/Searchbar",
+  title: "공통 컴포넌트/Searchbar",
   component: Searchbar,
   parameters: {
     layout: "centered",

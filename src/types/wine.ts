@@ -1,9 +1,5 @@
-/**
- * 와인 타입 정의
- * @author junyeol
- */
-
-import type { AromaKey } from "./AromaType";
+// types/wine.ts
+import type { AromaKey } from "./aroma-type";
 
 export interface Wine {
   id: number;
@@ -14,10 +10,16 @@ export interface Wine {
   type: "RED" | "WHITE" | "SPARKLING";
   avgRating: number;
   reviewCount: number;
+  recentReview: {
+    content: string;
+  } | null;
 }
 
-export interface Review {
-  id: number;
+/**
+ * 리뷰 핵심 데이터 (작성/수정/제출용)
+ * @author junyeol
+ */
+export interface ReviewBase {
   rating: number;
   lightBold: number;
   smoothTannic: number;
@@ -25,6 +27,15 @@ export interface Review {
   softAcidic: number;
   aroma: AromaKey[];
   content: string;
+  wineId: number;
+}
+
+/**
+ * API 응답 리뷰 타입
+ * @author junyeol
+ */
+export interface Review extends ReviewBase {
+  id: number;
   createdAt: string;
   updatedAt: string;
   user: {
@@ -32,16 +43,13 @@ export interface Review {
     nickname: string;
     image: string | null;
   };
-  isLiked: boolean;
-  wineId: number;
+  isLiked: object;
 }
 
 export interface WineDetail extends Wine {
   description?: string;
   year?: number;
   alcohol?: number;
-
-  // API 응답에 포함된 필드
   userId: number;
   recentReview: Review | null;
   reviews: Review[];
@@ -52,4 +60,13 @@ export interface WineDetail extends Wine {
     "4": number;
     "5": number;
   };
+}
+
+export interface WineFormData {
+  name: string;
+  region: string;
+  image: File | string;
+  price: number;
+  type: "RED" | "WHITE" | "SPARKLING";
+  avgRating?: number;
 }

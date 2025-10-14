@@ -4,6 +4,8 @@ import redWine from "../../../public/images/wine-type/red.jpg";
 import whiteWine from "../../../public/images/wine-type/white.jpg";
 import sparklingWine from "../../../public/images/wine-type/sparkling.jpg";
 import { ComponentProps } from "react";
+import { UseFormRegister } from "react-hook-form";
+import { WineFormData } from "@/types/wine";
 
 const imgMap = {
   RED: redWine,
@@ -16,11 +18,29 @@ type WineType = keyof typeof imgMap;
 interface SelectTypeValue extends ComponentProps<"input"> {
   isError: boolean;
   className?: string;
+  register: UseFormRegister<WineFormData>;
 }
 
-const TypeInput = ({ name }: { name: WineType }) => {
-  const imgSrc = imgMap[name] || "";
-  const typeName = name.slice(0, 1) + name.slice(1).toLowerCase();
+interface TypeInputProps extends ComponentProps<"input"> {
+  id: string;
+  name: string;
+  onClick?: () => void;
+  className?: string;
+  labelClassName?: string;
+  value: WineType;
+}
+
+export const TypeInput = ({
+  id,
+  name,
+  onClick,
+  className,
+  labelClassName,
+  value,
+  ...props
+}: TypeInputProps) => {
+  const imgSrc = imgMap[value] || "";
+  const typeName = value.slice(0, 1) + value.slice(1).toLowerCase();
 
   return (
     <div
@@ -30,18 +50,21 @@ const TypeInput = ({ name }: { name: WineType }) => {
         "flex items-center",
         "bg-white",
         "tablet:h-[48px]",
-        "pc:h-[48px]"
+        "pc:h-[48px]",
+        className
       )}
+      {...props}
+      onClick={onClick}
     >
       <input
         type="radio"
-        id={name}
-        value={name}
-        name="wine-type"
+        id={id}
+        value={value}
+        name={name}
         className="peer hidden"
       />
       <label
-        htmlFor={name}
+        htmlFor={id}
         className={cn(
           "py-[7px] pl-2 pr-3",
           "flex-center gap-[6px]",
@@ -49,7 +72,8 @@ const TypeInput = ({ name }: { name: WineType }) => {
           "text-default hover:bg-gray-200",
           "peer-checked:bg-gray-800 peer-checked:text-white",
           "tablet:gap-2 tablet:py-2 tablet:pl-2 tablet:pr-4",
-          "pc:gap-2 pc:py-2 pc:pl-2 pc:pr-4"
+          "pc:gap-2 pc:py-2 pc:pl-2 pc:pr-4",
+          labelClassName
         )}
       >
         <Image
@@ -72,7 +96,12 @@ const TypeInput = ({ name }: { name: WineType }) => {
   );
 };
 
-const SelectType = ({ isError, className, ...props }: SelectTypeValue) => {
+const SelectType = ({
+  isError,
+  className,
+  register,
+  ...props
+}: SelectTypeValue) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
@@ -84,9 +113,21 @@ const SelectType = ({ isError, className, ...props }: SelectTypeValue) => {
         )}
       </div>
       <div className={cn("flex gap-[10px]", className)} {...props}>
-        <TypeInput name="RED" />
-        <TypeInput name="WHITE" />
-        <TypeInput name="SPARKLING" />
+        <TypeInput
+          id={"wine-red"}
+          value="RED"
+          {...register("type", { required: "와인 타입은 필수 입력입니다." })}
+        />
+        <TypeInput
+          id={"wine-white"}
+          value="WHITE"
+          {...register("type", { required: "와인 타입은 필수 입력입니다." })}
+        />
+        <TypeInput
+          id={"wine-spark"}
+          value="SPARKLING"
+          {...register("type", { required: "와인 타입은 필수 입력입니다." })}
+        />
       </div>
     </div>
   );

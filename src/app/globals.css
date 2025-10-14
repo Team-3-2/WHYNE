@@ -18,6 +18,7 @@
     @apply mx-auto max-w-[1140px] px-[16px] tablet:px-[32px] pc:px-0;
   }
 }
+
 :root {
   --color-black: #1a1918;
   --color-white: #ffffff;
@@ -55,6 +56,28 @@ body {
   [class*="text-"] svg polygon {
     fill: currentColor;
     /* stroke: currentColor; */
+  }
+
+  /* range input 기본 스타일 초기화 */
+  .range-reset {
+    @apply w-full appearance-none bg-transparent;
+  }
+
+  .range-reset::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .range-reset::-moz-range-thumb {
+    appearance: none;
+  }
+
+  .range-reset::-webkit-slider-runnable-track {
+    background: transparent;
+  }
+
+  .range-reset::-moz-range-track {
+    background: transparent;
   }
 }
 

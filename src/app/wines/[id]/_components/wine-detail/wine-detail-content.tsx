@@ -1,7 +1,6 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import getWine from "@/api/wines/get-wine";
 import getCurrentUser from "@/api/user/get-current-user";
 import WineHeader from "../wine-header/wine-header";
 import WineTasteSection from "../wine-taste/wine-taste-section";
@@ -10,6 +9,7 @@ import ReviewSection from "../wine-review/wine-review-section";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 import Loader from "@/components/loader/loader";
 import { useRouter } from "next/navigation";
+import useWineQuery from "@/hooks/api/wines/use-wine-query";
 
 interface WineDetailContentProps {
   wineId: number;
@@ -18,14 +18,7 @@ interface WineDetailContentProps {
 const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   const router = useRouter();
 
-  const {
-    data: wine,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["wine", wineId],
-    queryFn: () => getWine(wineId),
-  });
+  const { data: wine, isLoading, isError } = useWineQuery(wineId);
 
   const { data: currentUser } = useQuery({
     queryKey: ["currentUser"],
@@ -48,14 +41,14 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   return (
     <main className="min-h-screen bg-white">
       {/* 헤더 */}
-      <section className="rounded-b-none bg-[rgba(217,217,217,0.2)] pt-[60px] tablet:rounded-b-none tablet:pt-[70px] pc:rounded-b-[88px] pc:pt-[70px]">
+      <section className="rounded-b-none bg-[url('/images/wines/bg-recommended.png')] bg-cover bg-center pt-[60px] tablet:rounded-b-none tablet:pt-[70px] pc:rounded-b-[88px] pc:pt-[70px]">
         <WineHeader wine={wine} />
       </section>
 
       {/* 맛/향 섹션 */}
-      <section className="bg-white pb-0 pt-6 tablet:pb-0 tablet:pt-16 pc:pb-12 pc:pt-16">
+      <section className="mb-0 mt-12 bg-white tablet:mb-0 tablet:mt-16 pc:mb-12 pc:mt-16">
         <div className="container">
-          <div className="flex flex-col gap-8 tablet:gap-20 pc:flex-row pc:gap-32">
+          <div className="flex flex-col gap-12 tablet:gap-20 pc:flex-row pc:gap-32">
             <div className="pc:flex-1">
               <WineTasteSection
                 reviews={wine.reviews}

@@ -11,6 +11,7 @@ import StarIcon from "/public/icons/ic-star.svg";
 import AlertIcon from "/public/icons/ic-alert.svg";
 import ArrowLeftIcon from "/public/icons/ic-arrow-left.svg";
 import ArrowRightIcon from "/public/icons/ic-arrow-right.svg";
+import ArrowTopIcon from "/public/icons/ic-arrow-top.svg";
 import CameraIcon from "/public/icons/ic-camera.svg";
 import FilterIcon from "/public/icons/ic-filter.svg";
 import HamburgerIcon from "/public/icons/ic-hamburger.svg";
@@ -20,6 +21,7 @@ import GoogleIcon from "/public/icons/ic-sns-google.svg";
 import KakaoIcon from "/public/icons/ic-sns-kakao.svg";
 import WineIcon from "/public/icons/ic-wine.svg";
 import XIcon from "/public/icons/ic-x.svg";
+import EmptyStateIcon from "/public/icons/ic-empty-state.svg";
 
 const STATIC_ICON_MAP = {
   ArrowUpIcon,
@@ -30,6 +32,7 @@ const STATIC_ICON_MAP = {
   AlertIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  ArrowTopIcon,
   CameraIcon,
   FilterIcon,
   HamburgerIcon,
@@ -39,6 +42,7 @@ const STATIC_ICON_MAP = {
   KakaoIcon,
   WineIcon,
   XIcon,
+  EmptyStateIcon,
 };
 
 export type StaticIconName = keyof typeof STATIC_ICON_MAP;

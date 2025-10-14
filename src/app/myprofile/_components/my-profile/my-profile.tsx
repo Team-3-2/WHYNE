@@ -1,42 +1,94 @@
 "use client";
 
 import { redirect, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { useMemo, useState } from "react";
 import AccountItem from "../account-item/account-item";
 import ReviewItem from "../review-item/review-item";
+import WineItem from "../wine-item/wine-item";
 import ProfileTabs from "../profile-tabs/profile-tabs";
-import useUserStore from "@/store/user-store";
-import useGetUserReview from "@/hooks/api/myprofile/use-get-user-review";
-import { ReviewItemType } from "../../_types/review-type";
+import { ReviewItemType, WineType } from "../../_types/review-type";
+import { User } from "@/types/user-type";
+import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
+import getUserReview from "@/api/my-profile/get-user-review";
+import getUserWines from "@/api/user/get-user-wines";
 
-// TODO(지권): 이슈 발생...
+interface MyProfileProps {
+  userInfo: User;
+}
 
-const MyProfile = () => {
+const MyProfile = ({ userInfo }: MyProfileProps) => {
   const searchParams = useSearchParams();
   const [tab, setTab] = useState(searchParams.get("tab") || "review");
-  const { user } = useUserStore((state) => state);
 
-  const { data: userReview } = useGetUserReview();
+  const queryKey = useMemo(() => ["user-review"], []);
+  const wineQueryKey = useMemo(() => ["user-wine"], []);
 
-  if (!user) return redirect("/login");
+  const {
+    allItems: userReview,
+    totalCount: totalReviews,
+    observerRef,
+  } = useInfiniteScroll({
+    queryKey,
+    fetchFn: (cursor) =>
+      getUserReview({
+        limit: 5,
+        cursor,
+      }),
+  });
+
+  const {
+    allItems: userWines,
+    totalCount: totalWines,
+    observerRef: wineObserverRef,
+  } = useInfiniteScroll<WineType>({
+    queryKey: wineQueryKey,
+    fetchFn: (cursor) =>
+      getUserWines({
+        limit: 6,
+        cursor,
+      }),
+  });
+
+  if (!userInfo) return redirect("/login");
 
   return (
     <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
-      <article className="w-full px-4 tablet:px-8 pc:mx-[300px]">
+      <article className="container w-full">
         <ProfileTabs
           tab={tab}
           setTab={setTab}
-          reviewTotal={userReview?.totalCount}
-          // registeredTotal={}
+          reviewTotal={totalReviews}
+          registeredTotal={totalWines}
         />
+        <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
+          {tab === "review" && (
+            <>
+              {(userReview as ReviewItemType[])?.map((review) => (
+                <ReviewItem key={review.id} review={review} />
+              ))}
+              <div ref={observerRef} className="mt-[100px] h-1 w-full" />
+            </>
+          )}
 
-        <section className="mt-20">
-          {tab === "review" &&
-            userReview?.list?.map((review: ReviewItemType) => (
-              <ReviewItem key={review.id} review={review} />
-            ))}
+          {tab === "registered" && (
+            <>
+              <div
+                className={cn(
+                  "grid w-full gap-y-[16px] pt-[24px]",
+                  "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+                  "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
+                )}
+              >
+                {(userWines as WineType[])?.map((wine) => (
+                  <WineItem key={wine.id} wine={wine} />
+                ))}
+              </div>
+              <div ref={wineObserverRef} className="mt-[100px] h-1 w-full" />
+            </>
+          )}
 
-          {tab === "account" && <AccountItem user={user} />}
+          {tab === "account" && <AccountItem user={userInfo} />}
         </section>
       </article>
     </main>

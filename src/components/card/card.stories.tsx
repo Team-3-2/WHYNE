@@ -5,7 +5,7 @@ import { recommendwinemock } from "@/mock";
 const DATA = recommendwinemock;
 
 const meta: Meta<typeof Card> = {
-  title: "Components/Card",
+  title: "공통 컴포넌트/Card",
   component: Card,
   parameters: {
     layout: "fullscreen",
@@ -27,7 +27,10 @@ export const CardActionMenu: Story = {
           name={DATA[3].name}
           region={DATA[3].region}
           price={DATA[3].price}
-          actionMenu
+          actionMenuItems={[
+            { label: "수정하기", onClick: () => console.log("edit") },
+            { label: "삭제하기", onClick: () => console.log("delete") },
+          ]}
         />
       </div>
     </div>

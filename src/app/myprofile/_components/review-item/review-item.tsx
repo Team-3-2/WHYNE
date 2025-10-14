@@ -21,7 +21,7 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
   return (
     <div
       className={cn(
-        "flex flex-col gap-[51px] border-t border-gray-300 py-[16px] pb-[28px] pt-[39px]",
+        "flex flex-col gap-[51px] border-b border-gray-300 py-[16px] pb-[28px] pt-[39px]",
         "tablet:gap-[54px]",
         "pc:gap-[50px] pc:py-[80px]"
       )}

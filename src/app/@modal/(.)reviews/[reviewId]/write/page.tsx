@@ -1,0 +1,23 @@
+import PageModal from "@/components/modal/page-modal";
+import ReviewFormClient from "@/app/wines/[id]/_components/wine-review-form/review-form-client";
+
+interface WriteModalPageProps {
+  params: Promise<{ reviewId: string }>;
+}
+
+/**
+ * 리뷰 작성 모달 페이지
+ * - 클라이언트 네비게이션으로 /wines/[id]/write 접근 시 모달로 표시
+ */
+
+async function WriteModalPage({ params }: WriteModalPageProps) {
+  const { reviewId } = await params;
+
+  return (
+    <PageModal title="리뷰 등록">
+      <ReviewFormClient wineId={Number(reviewId)} />
+    </PageModal>
+  );
+}
+
+export default WriteModalPage;

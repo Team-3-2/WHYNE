@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useRef } from "react";
 import Button from "../button/basic-button";
 import Modal from "./modal";
 import { allowScroll, cn, lockingScroll } from "@/lib/utils";
@@ -12,6 +12,7 @@ interface ModalProps {
     cancelMsg?: string;
     confirmMsg: string;
   };
+  className?: string;
   onClose?: () => void;
   onConfirm?: () => void;
 }
@@ -27,23 +28,29 @@ interface ModalProps {
  */
 const ConfirmModal = ({
   isOpen = false,
-  msg = { text: <>수정하시겠습니까?</>, cancelMsg: "취소", confirmMsg: "확인" },
+  msg,
+  className,
   onClose = () => {},
   onConfirm = () => {},
 }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
+  useLayoutEffect(() => {
+    const currentScrollY = window.scrollY;
+
+    if (isOpen) lockingScroll(currentScrollY);
+
+    return () => {
+      allowScroll(currentScrollY);
+    };
+  }, []);
+
   useEffect(() => {
     if (!dialogRef.current?.open && isOpen) {
       dialogRef.current?.showModal();
-      lockingScroll();
     } else {
       dialogRef.current?.close();
     }
-
-    return () => {
-      allowScroll();
-    };
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -52,7 +59,7 @@ const ConfirmModal = ({
     <Modal
       ref={dialogRef}
       onCancel={onClose}
-      className="px-4 pb-6 pt-8 tablet:gap-8 pc:gap-8"
+      className={cn("px-4 pb-6 pt-8 tablet:gap-8 pc:gap-8", className)}
     >
       <p
         className={cn(
@@ -73,7 +80,7 @@ const ConfirmModal = ({
             "pc:h-[50px] pc:w-[156px]"
           )}
           onClick={onClose}
-          label={msg.cancelMsg}
+          label={msg.cancelMsg || "취소"}
         />
         <Button
           className={cn(

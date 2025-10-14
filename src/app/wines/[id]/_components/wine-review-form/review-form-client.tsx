@@ -1,57 +1,78 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import getWine from "@/api/wines/get-wine";
-import { useReviewSubmit } from "../../_hooks/use-review-submit";
+import useReviewMutation from "../../_hooks/use-review-mutation";
+import useWineQuery from "../../../../../hooks/api/wines/use-wine-query";
+import useReviewQuery from "../../../../../hooks/api/reviews/use-review-query";
 import ReviewForm from "./review-form";
 import Loader from "@/components/loader/loader";
-import type { ReviewFormData } from "../../_types";
+import { useToast } from "@/hooks/use-toast";
+import type { ReviewBase } from "@/types/wine";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 
 interface ReviewFormClientProps {
-  wineId: number;
+  wineId?: number;
+  reviewId?: number;
+  mode?: "create" | "edit";
+  className?: string;
 }
 
-/**
- * 리뷰 작성 폼 클라이언트 래퍼
- * @author junyrol
- * - 와인 정보 페칭
- * - 리뷰 제출 처리
- * - 로딩/에러 상태 관리
- */
-const ReviewFormClient = ({ wineId }: ReviewFormClientProps) => {
+const ReviewFormClient = ({
+  wineId,
+  reviewId,
+  mode = "create",
+  className,
+}: ReviewFormClientProps) => {
   const router = useRouter();
-  const { mutate, isPending } = useReviewSubmit();
+  const {
+    reviewCreateSuccess,
+    reviewCreateError,
+    reviewUpdateSuccess,
+    reviewUpdateError,
+  } = useToast();
 
-  // 와인 정보 페칭
+  const reviewMutation = useReviewMutation({ mode, reviewId });
+  const { mutate, isPending } = reviewMutation;
+
+  const {
+    data: review,
+    isLoading: reviewLoading,
+    isError: reviewError,
+  } = useReviewQuery(reviewId, mode === "edit");
+
+  const actualWineId = wineId ?? review?.wineId;
+
   const {
     data: wine,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["wine", wineId],
-    queryFn: () => getWine(wineId),
-    retry: 1,
-  });
+    isLoading: wineLoading,
+    isError: wineError,
+  } = useWineQuery(actualWineId);
 
-  const handleSubmit = (data: ReviewFormData) => {
+  const handleSubmit = (data: ReviewBase) => {
     mutate(data, {
       onSuccess: () => {
-        alert("리뷰가 등록되었습니다!");
+        if (mode === "edit") {
+          reviewUpdateSuccess();
+        } else {
+          reviewCreateSuccess();
+        }
         router.back();
       },
       onError: () => {
-        alert("리뷰 등록에 실패했습니다. 다시 시도해주세요.");
+        if (mode === "edit") {
+          reviewUpdateError();
+        } else {
+          reviewCreateError();
+        }
       },
     });
   };
 
   const handleCancel = () => {
-    router.replace(`/wines/${wineId}`);
+    router.back();
   };
 
-  if (isLoading) {
+  if (wineLoading || reviewLoading) {
     return (
       <div className="flex-center min-h-[400px]">
         <Loader />
@@ -59,19 +80,18 @@ const ReviewFormClient = ({ wineId }: ReviewFormClientProps) => {
     );
   }
 
-  if (isError || !wine) {
+  if (wineError || !wine || (mode === "edit" && (reviewError || !review))) {
     return <ReviewFormErrorState onRetry={handleCancel} />;
   }
 
   return (
     <ReviewForm
-      wineId={wine.id}
-      wineName={wine.name}
-      wineRegion={wine.region}
-      wineImage={wine.image}
+      className={className}
+      wine={wine}
       onSubmit={handleSubmit}
       onCancel={handleCancel}
       isSubmitting={isPending}
+      initialData={review ?? undefined}
     />
   );
 };

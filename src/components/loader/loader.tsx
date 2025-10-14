@@ -2,83 +2,40 @@
 
 import { cn } from "@/lib/utils";
 
-const style = {
-  bgColor: "bg-black/5",
-  innerColor: "rgb(22,26,33)",
-  text: "WHYNE",
-  fontSize: "text-[50px]",
+const TITLE = "WHYNE";
+
+const TITLE_STYLES = {
+  fontStyle: "text-[50px] font-semibold",
+  baseStyle: "text-gray-100",
+  stroke: "[-webkit-text-stroke-width:.8px] [-webkit-text-stroke-color:#aaa]",
 };
 
-export default function Loader() {
+const Loader = () => {
   return (
-    <div
-      className={cn(
-        "flex h-screen w-screen items-center justify-center",
-        style.bgColor
-      )}
-    >
-      <div className="relative">
-        <span
-          className={cn(
-            "absolute left-1/2 top-1/2 tracking-[5px] text-white",
-            style.fontSize
-          )}
-          style={{
-            transform: "translate(-50%, -50%)",
-            color: "transparent",
-            WebkitTextStroke: `0.3px ${style.innerColor}`,
-          }}
-        >
-          {style.text}
-        </span>
-        <span
-          className={cn(
-            "absolute left-1/2 top-1/2 tracking-[5px]",
-            style.fontSize
-          )}
-          style={{
-            transform: "translate(-50%, -50%)",
-            color: style.innerColor,
-            WebkitTextStroke: `1px ${style.innerColor}`,
-            animation: "whyne723 2s ease-in-out infinite",
-          }}
-        >
-          {style.text}
-        </span>
+    <div className="flex-center h-screen w-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat">
+      <div className="container text-center">
+        <h2 className="relative m-auto inline-block leading-none">
+          <span
+            className={cn(
+              TITLE_STYLES.fontStyle,
+              TITLE_STYLES.baseStyle,
+              TITLE_STYLES.stroke
+            )}
+          >
+            {TITLE}
+          </span>
+          <span
+            className={cn(
+              "absolute left-0 top-0 animate-wave-mask",
+              TITLE_STYLES.fontStyle
+            )}
+          >
+            {TITLE}
+          </span>
+        </h2>
       </div>
-
-      {/* keyframes 정의 */}
-      <style jsx>{`
-        @keyframes whyne723 {
-          0%,
-          100% {
-            clip-path: polygon(
-              0% 45%,
-              15% 44%,
-              32% 50%,
-              54% 60%,
-              70% 61%,
-              84% 59%,
-              100% 52%,
-              100% 100%,
-              0% 100%
-            );
-          }
-          50% {
-            clip-path: polygon(
-              0% 60%,
-              16% 65%,
-              34% 66%,
-              51% 62%,
-              67% 50%,
-              84% 45%,
-              100% 46%,
-              100% 100%,
-              0% 100%
-            );
-          }
-        }
-      `}</style>
     </div>
   );
-}
+};
+
+export default Loader;

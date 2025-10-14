@@ -4,10 +4,9 @@ import { Button, TextInput } from "@/components";
 import { useActionState, useEffect } from "react";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
-import useUserStore from "@/store/user-store";
 import login from "@/api/auth/login";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
@@ -19,7 +18,6 @@ interface LoginFormData {
 
 const Page = () => {
   const router = useRouter();
-  const { user, setUser } = useUserStore((state) => state);
   const {
     register,
     formState: { errors, isValid },
@@ -27,12 +25,16 @@ const Page = () => {
 
   const [state, formAction, isPending] = useActionState(login, null);
 
+  const kakaoLogin = () => {
+    const domain = window.location.origin;
+
+    window.Kakao.Auth.authorize({
+      redirectUri: `${domain}/redirect`,
+    });
+  };
+
   useEffect(() => {
     if (state && !state.isError) {
-      setUser(state.data.user);
-
-      sessionStorage.setItem("accessToken", state.data?.accessToken);
-      localStorage.setItem("refreshToken", state.data?.refreshToken);
       router.push("/");
     }
   }, [state]);
@@ -46,7 +48,7 @@ const Page = () => {
         action={formAction}
         className="flex-col-center mb-4 gap-10 tablet:gap-8 pc:gap-8"
       >
-        <div className="flex flex-col gap-3 tablet:gap-[14px] pc:gap-[14px]">
+        <div className="flex w-[303px] flex-col gap-3 tablet:w-[400px] tablet:gap-[14px] pc:w-[400px] pc:gap-[14px]">
           <TextInput
             id="email"
             type="text"
@@ -94,6 +96,7 @@ const Page = () => {
             variant="outline"
             type="button"
             label="kakao로 시작하기"
+            onClick={kakaoLogin}
           />
         </div>
         <AuthRedirect

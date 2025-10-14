@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/nextjs";
 import FlavorIconList from "./flavor-icon-list";
-import { AromaKey } from "@/types/AromaType";
+import { AromaKey } from "@/types/aroma-type";
 
 const ALL_AROMAS: AromaKey[] = [
   "CHERRY",
@@ -26,7 +26,7 @@ const ALL_AROMAS: AromaKey[] = [
 ];
 
 const meta = {
-  title: "Components/FlavorIconList",
+  title: "공통 컴포넌트/FlavorIconList",
   component: FlavorIconList,
   parameters: {
     layout: "centered",
