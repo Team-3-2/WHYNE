@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import Gnb from "./gnb";
 
 const meta = {
-  title: "Components/Gnb",
+  title: "공통 컴포넌트/Gnb",
   component: Gnb,
   parameters: {
     layout: "centered",

@@ -15,7 +15,7 @@ const unifiedIconMap = {
 };
 
 const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+  title: "공통 컴포넌트/Button",
   component: Button,
   parameters: {
     layout: "centered",

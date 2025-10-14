@@ -7,7 +7,7 @@ import { recommendwinemock } from "@/mock";
 const wines = recommendwinemock;
 
 const meta: Meta<typeof Carousel> = {
-  title: "Components/Carousel",
+  title: "공통 컴포넌트/Carousel",
   component: Carousel,
   tags: ["autodocs"],
   parameters: {

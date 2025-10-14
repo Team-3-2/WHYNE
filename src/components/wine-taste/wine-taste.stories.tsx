@@ -8,7 +8,7 @@ import WineTaste, {
 import { GaugeLevel } from "@/components/gauge/block-gauge";
 
 const meta: Meta<typeof WineTaste> = {
-  title: "Components/WineTaste",
+  title: "공통 컴포넌트/WineTaste",
   component: WineTaste,
   parameters: {
     layout: "centered",
