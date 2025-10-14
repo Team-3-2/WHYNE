@@ -7,6 +7,7 @@ import { User } from "@/types/user-type";
 import usePostImage from "@/hooks/api/use-post-image";
 import usePatchProfile from "@/hooks/api/my-profile/use-patch-profile";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 interface AccountItemProps {
   user: User | undefined;
@@ -17,6 +18,7 @@ const AccountItem = ({ user }: AccountItemProps) => {
   const [image, setImage] = useState<string | undefined>(user?.image);
   const [nickname, setNickname] = useState<string | undefined>(user?.nickname);
   const [confirmModal, setConfirmModal] = useState(false);
+  const { profileUpdateError, uploadImageError } = useToast();
 
   const { mutateAsync: uploadImage } = usePostImage();
   const { mutateAsync: updateProfile } = usePatchProfile();
@@ -31,11 +33,11 @@ const AccountItem = ({ user }: AccountItemProps) => {
     if (!file) return;
 
     if (!/^image\//.test(file.type)) {
-      alert("이미지 파일만 업로드 가능합니다.");
+      uploadImageError("이미지 파일만 업로드 가능합니다.");
       return;
     }
     if (file.size > 5 * 1024 * 1024) {
-      alert("5MB 이하 이미지만 업로드 가능합니다.");
+      uploadImageError("5MB 이하 이미지만 업로드 가능합니다.");
       return;
     }
 
@@ -45,7 +47,7 @@ const AccountItem = ({ user }: AccountItemProps) => {
       setImage(`${url}?v=${Date.now()}`);
       router.refresh();
     } catch (err) {
-      alert("프로필 갱신 실패");
+      profileUpdateError("프로필 갱신 실패");
       setImage(user?.image);
     }
   };
@@ -60,7 +62,7 @@ const AccountItem = ({ user }: AccountItemProps) => {
       setNickname("");
       router.refresh();
     } catch (err) {
-      alert("닉네임 변경 실패");
+      profileUpdateError("닉네임 변경 실패");
     } finally {
       setConfirmModal(false);
     }

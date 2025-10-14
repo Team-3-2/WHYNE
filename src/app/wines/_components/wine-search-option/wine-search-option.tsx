@@ -6,6 +6,7 @@ import { cn, allowScroll, lockingScroll } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { PriceOption, RatingOption, TypeOption } from "../wine-options";
 import { useEffect, useRef, useState } from "react";
+import LinkButton from "@/components/button/link-button";
 
 interface ModalProps {
   open: number;
@@ -45,7 +46,7 @@ const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
       >
         <div className="flex flex-col gap-y-[32px]">
           <div className="flex w-full items-center justify-between">
-            <h2 className="text-heading-md">필터</h2>
+            <h2 className="select-none text-heading-md">필터</h2>
             <button onClick={() => setModalOpen(0)} aria-label="검색 필터 닫기">
               <Icon icon="XIcon" size="lg" className="select-none" />
             </button>
@@ -60,15 +61,10 @@ const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
         </div>
         <div className="mt-10 flex w-full items-center justify-between gap-[8px]">
           <Button
-            className="h-[54px] w-[1/3]"
+            className="h-[54px] w-full"
             variant="outline"
             onClick={resetFn}
             label="초기화"
-          />
-          <Button
-            className="h-[54px] flex-1"
-            onClick={() => setModalOpen(0)}
-            label="필터 적용하기"
           />
         </div>
       </div>
@@ -99,12 +95,13 @@ const WineSearchOption = ({
         <div className="order-2 flex justify-between">
           <button
             aria-label="옵션 열기"
-            className="flex-center h-[42px] w-[42px] rounded-[8px] border border-gray-300 bg-white tablet:h-12 tablet:w-12"
+            className="flex-center h-[42px] w-[42px] select-none rounded-[8px] border border-gray-300 bg-white tablet:h-12 tablet:w-12"
             onClick={() => setModalOpen((prev) => prev + 1)}
           >
             <Icon icon="FilterIcon" className="select-none text-secondary" />
           </button>
-          <Button
+          <LinkButton
+            href="/register/new"
             label="와인 등록하기"
             className="w-[160px] tablet:w-[220px]"
           />
