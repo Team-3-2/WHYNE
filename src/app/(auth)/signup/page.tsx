@@ -3,7 +3,7 @@
 import Link from "next/link";
 import FormWrapper from "../_components/form-wrapper";
 import Logo from "@/../public/logo.svg";
-import { Button, ConfirmModal, TextInput } from "@/components";
+import { Button, TextInput } from "@/components";
 import AuthRedirect from "../_components/auth-redirect";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
