@@ -13,13 +13,15 @@ const WineInfo = ({ name, region, image }: WineInfoProps) => {
     <div className="flex items-center gap-4">
       <div className="flex-center h-[96px] w-[62px] flex-shrink-0 bg-gray-200">
         {isValidImageSrc(image) ? (
-          <Image
-            src={image}
-            alt={name}
-            width={62}
-            height={96}
-            className="h-full w-auto object-contain"
-          />
+          <div className="relative h-full w-full">
+            <Image
+              src={image}
+              alt={name}
+              fill
+              className="object-contain"
+              sizes="62px"
+            />
+          </div>
         ) : (
           <PlaceholderImgWine
             className="h-full w-auto object-contain"

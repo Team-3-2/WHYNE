@@ -47,7 +47,13 @@ const authRefreshToken = async () => {
 
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const noTokenUrls = ["/", "/login", "/wines", "/wines/recommended"];
+    const noTokenUrls = [
+      "/",
+      "/login",
+      "/wines",
+      "/wines/recommended",
+      "/auth",
+    ];
 
     if (noTokenUrls.includes(config.url ?? "")) {
       return config;
@@ -69,8 +75,6 @@ instance.interceptors.response.use(
   },
   async (error: AxiosError) => {
     if (error.response?.status === 401) {
-      console.error("Unauthorized!");
-
       const prevRequest = error.config as InternalAxiosRequestConfig;
 
       try {

@@ -1,4 +1,3 @@
-// src/providers/toast/toast.stories.tsx
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import ToastProvider from "./toast-provider";
 import { useToast } from "@/hooks/use-toast";

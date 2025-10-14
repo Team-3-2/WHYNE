@@ -6,6 +6,7 @@ import useWineQuery from "../../../../../hooks/api/wines/use-wine-query";
 import useReviewQuery from "../../../../../hooks/api/reviews/use-review-query";
 import ReviewForm from "./review-form";
 import Loader from "@/components/loader/loader";
+import { useToast } from "@/hooks/use-toast";
 import type { ReviewBase } from "@/types/wine";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 
@@ -23,6 +24,12 @@ const ReviewFormClient = ({
   className,
 }: ReviewFormClientProps) => {
   const router = useRouter();
+  const {
+    reviewCreateSuccess,
+    reviewCreateError,
+    reviewUpdateSuccess,
+    reviewUpdateError,
+  } = useToast();
 
   const reviewMutation = useReviewMutation({ mode, reviewId });
   const { mutate, isPending } = reviewMutation;
@@ -44,17 +51,19 @@ const ReviewFormClient = ({
   const handleSubmit = (data: ReviewBase) => {
     mutate(data, {
       onSuccess: () => {
-        alert(
-          mode === "edit" ? "리뷰가 수정되었습니다!" : "리뷰가 등록되었습니다!"
-        );
+        if (mode === "edit") {
+          reviewUpdateSuccess();
+        } else {
+          reviewCreateSuccess();
+        }
         router.back();
       },
       onError: () => {
-        alert(
-          mode === "edit"
-            ? "리뷰 수정에 실패했습니다. 다시 시도해주세요."
-            : "리뷰 등록에 실패했습니다. 다시 시도해주세요."
-        );
+        if (mode === "edit") {
+          reviewUpdateError();
+        } else {
+          reviewCreateError();
+        }
       },
     });
   };

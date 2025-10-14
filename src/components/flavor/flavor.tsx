@@ -36,7 +36,7 @@ const Flavor = ({ count, items }: FlavorProps) => {
           (<span>{count}</span>명 참여)
         </span>
       </div>
-      <div className="scrollbar-hide overflow-hidden overflow-x-auto">
+      <div className="scrollbar-hide overflow-hidden">
         <div className="flex flex-nowrap gap-4">
           {items.map((item, index) => (
             <FlavorItem aroma={item} key={index} />

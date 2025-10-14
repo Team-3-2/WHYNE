@@ -35,7 +35,8 @@ const ConfirmModal = ({
 
   useLayoutEffect(() => {
     const currentScrollY = window.scrollY;
-    lockingScroll(currentScrollY);
+
+    if (isOpen) lockingScroll(currentScrollY);
 
     return () => {
       allowScroll(currentScrollY);
