@@ -52,7 +52,8 @@ const LandingFloatingCTA = ({ footerId }: LandingFloatingCTAProps) => {
   return (
     <div
       className={cn(
-        "pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4 transition-all duration-300",
+        "pointer-events-none fixed inset-x-0 bottom-6 z-50 px-4 transition-all duration-300",
+        "flex-center",
         isVisible
           ? "pointer-events-auto opacity-100"
           : "translate-y-4 opacity-0",
@@ -63,6 +64,7 @@ const LandingFloatingCTA = ({ footerId }: LandingFloatingCTAProps) => {
       <LinkButton
         href="/wines"
         label="와인 보러가기"
+        scroll={true}
         className={cn(
           "h-[54px] w-[260px] select-none px-8",
           "tablet:w-[320px]",

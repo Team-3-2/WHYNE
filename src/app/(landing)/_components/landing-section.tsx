@@ -2,17 +2,30 @@
 
 import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { LandingSectionData } from "../_types";
 
-let isScrollTriggerRegistered = false;
+type GSAPInstance = (typeof import("gsap"))["gsap"];
+type GSAPContext = ReturnType<GSAPInstance["context"]>;
 
-const registerScrollTrigger = () => {
-  if (typeof window === "undefined" || isScrollTriggerRegistered) return;
-  gsap.registerPlugin(ScrollTrigger);
-  isScrollTriggerRegistered = true;
+let scrollTriggerRegistration: Promise<GSAPInstance> | null = null;
+
+const ensureScrollTrigger = async () => {
+  if (typeof window === "undefined") return null;
+
+  if (!scrollTriggerRegistration) {
+    scrollTriggerRegistration = (async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+
+      gsap.registerPlugin(ScrollTrigger);
+      return gsap;
+    })();
+  }
+
+  return scrollTriggerRegistration;
 };
 
 /**
@@ -36,56 +49,67 @@ const LandingSection = ({
   const imageRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
-    registerScrollTrigger();
-
     const sectionElement = sectionRef.current;
     const textElement = textRef.current;
     const imageElement = imageRef.current;
     if (!sectionElement || !textElement || !imageElement) return;
 
-    const prefersReducedMotion =
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+    let isCancelled = false;
+    let ctx: GSAPContext | undefined;
 
-    const textFromX = layout === "reverse" ? 80 : -80;
-    const imageFromX = layout === "reverse" ? -80 : 80;
+    const animate = async () => {
+      const gsap = await ensureScrollTrigger();
+      if (!gsap || isCancelled) return;
 
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion) {
-        gsap.set([textElement, imageElement], { opacity: 1, x: 0 });
-        return;
-      }
+      const prefersReducedMotion =
+        window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ??
+        false;
 
-      gsap.set(textElement, { opacity: 0, x: textFromX });
-      gsap.set(imageElement, { opacity: 0, x: imageFromX });
+      const textFromX = layout === "reverse" ? 80 : -80;
+      const imageFromX = layout === "reverse" ? -80 : 80;
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: sectionElement,
-            start: "top 75%",
-            once: true,
-          },
-        })
-        .to(textElement, {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-        })
-        .to(
-          imageElement,
-          {
+      ctx = gsap.context(() => {
+        if (prefersReducedMotion) {
+          gsap.set([textElement, imageElement], { opacity: 1, x: 0 });
+          return;
+        }
+
+        gsap.set(textElement, { opacity: 0, x: textFromX });
+        gsap.set(imageElement, { opacity: 0, x: imageFromX });
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: sectionElement,
+              start: "top 75%",
+              end: "top 60%",
+              toggleActions: "play none none reverse",
+            },
+          })
+          .to(textElement, {
             x: 0,
             opacity: 1,
             duration: 0.8,
             ease: "power3.out",
-          },
-          "-=0.4"
-        );
-    }, sectionElement);
+          })
+          .to(
+            imageElement,
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+            },
+            "-=0.4"
+          );
+      }, sectionElement);
+    };
+
+    void animate();
 
     return () => {
-      ctx.revert();
+      isCancelled = true;
+      ctx?.revert();
     };
   }, [layout]);
 
@@ -127,7 +151,7 @@ const LandingSection = ({
       <div
         ref={imageRef}
         className={cn(
-          "w-full pc:w-[725px]",
+          "w-full pc:w-[680px]",
           layout === "default" ? "pl-4 tablet:pl-8" : "pr-4 tablet:pr-8",
           "pc:px-0"
         )}
