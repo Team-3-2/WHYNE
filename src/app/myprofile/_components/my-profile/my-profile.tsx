@@ -2,7 +2,7 @@
 
 import { redirect, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import AccountItem from "../account-item/account-item";
 import ReviewItem from "../review-item/review-item";
 import WineItem from "../wine-item/wine-item";
@@ -21,13 +21,18 @@ interface MyProfileProps {
 const MyProfile = ({ userInfo }: MyProfileProps) => {
   const searchParams = useSearchParams();
   const [tab, setTab] = useState(searchParams.get("tab") || "review");
+  const [wineScrollKey, setWineScrollKey] = useState(0);
 
   const queryKey = useMemo(() => ["user-review"], []);
-  const wineQueryKey = useMemo(() => ["user-wine"], []);
+
+  useEffect(() => {
+    if (tab === "registered") {
+      setWineScrollKey((prev) => prev + 1);
+    }
+  }, [tab]);
 
   const {
     allItems: userReview,
-    totalCount: totalReviews,
     observerRef: reviewObserverRef,
     isError: reviewIsError,
   } = useInfiniteScroll({
@@ -41,15 +46,17 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
 
   const {
     allItems: userWines,
-    totalCount: totalWines,
+    totalCount: userWinesTotalCount,
     observerRef: wineObserverRef,
+    isError: wineIsError,
   } = useInfiniteScroll<WineType>({
-    queryKey: wineQueryKey,
+    queryKey: ["user-wine", wineScrollKey],
     fetchFn: (cursor) =>
       getUserWines({
         limit: 6,
         cursor,
       }),
+    enabled: tab === "registered",
   });
 
   if (!userInfo) return redirect("/login");
@@ -57,12 +64,7 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
   return (
     <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
       <article className="container w-full">
-        <ProfileTabs
-          tab={tab}
-          setTab={setTab}
-          reviewTotal={totalReviews}
-          registeredTotal={totalWines}
-        />
+        <ProfileTabs tab={tab} setTab={setTab} />
         <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
           {tab === "review" && (
             <>
@@ -82,18 +84,29 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
 
           {tab === "registered" && (
             <>
-              <div
-                className={cn(
-                  "grid w-full gap-y-[16px] pt-[24px]",
-                  "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
-                  "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
-                )}
-              >
-                {(userWines as WineType[])?.map((wine) => (
-                  <WineItem key={wine.id} wine={wine} />
-                ))}
-              </div>
-              <div ref={wineObserverRef} className="mt-[100px] h-1 w-full" />
+              {(userWinesTotalCount === 0 || wineIsError) && (
+                <EmptyState
+                  icon="EmptyStateIcon"
+                  title="아직 등록한 와인이 없어요!"
+                  description="지금 첫 번째 와인을 등록해보세요"
+                  actionLabel="와인 등록하기"
+                  actionHref="/register/new"
+                />
+              )}
+              <>
+                <div
+                  className={cn(
+                    "grid w-full gap-y-[16px] pt-[24px]",
+                    "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+                    "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
+                  )}
+                >
+                  {(userWines as WineType[])?.map((wine) => (
+                    <WineItem key={wine.id} wine={wine} />
+                  ))}
+                </div>
+                <div ref={wineObserverRef} className="mt-[100px] h-1 w-full" />
+              </>
             </>
           )}
 
