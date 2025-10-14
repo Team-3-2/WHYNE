@@ -2,7 +2,7 @@
 
 import { redirect, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import AccountItem from "../account-item/account-item";
 import ReviewItem from "../review-item/review-item";
 import WineItem from "../wine-item/wine-item";
@@ -21,15 +21,17 @@ interface MyProfileProps {
 const MyProfile = ({ userInfo }: MyProfileProps) => {
   const searchParams = useSearchParams();
   const [tab, setTab] = useState(searchParams.get("tab") || "review");
+  const [wineScrollKey, setWineScrollKey] = useState(0);
 
   const queryKey = useMemo(() => ["user-review"], []);
-  const wineQueryKey = useMemo(() => ["user-wine"], []);
 
-  const {
-    allItems: userReview,
-    totalCount: totalReviews,
-    observerRef,
-  } = useInfiniteScroll({
+  useEffect(() => {
+    if (tab === "registered") {
+      setWineScrollKey((prev) => prev + 1);
+    }
+  }, [tab]);
+
+  const { allItems: userReview, observerRef } = useInfiniteScroll({
     queryKey,
     fetchFn: (cursor) =>
       getUserReview({
@@ -40,15 +42,16 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
 
   const {
     allItems: userWines,
-    totalCount: totalWines,
+    totalCount: userWinesTotalCount,
     observerRef: wineObserverRef,
   } = useInfiniteScroll<WineType>({
-    queryKey: wineQueryKey,
+    queryKey: ["user-wine", wineScrollKey],
     fetchFn: (cursor) =>
       getUserWines({
         limit: 6,
         cursor,
       }),
+    enabled: tab === "registered",
   });
 
   if (!userInfo) return redirect("/login");
@@ -56,12 +59,7 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
   return (
     <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
       <article className="container w-full">
-        <ProfileTabs
-          tab={tab}
-          setTab={setTab}
-          reviewTotal={totalReviews}
-          registeredTotal={totalWines}
-        />
+        <ProfileTabs tab={tab} setTab={setTab} />
         <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
           {tab === "review" && (
             <>
@@ -74,7 +72,7 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
 
           {tab === "registered" && (
             <>
-              {userWines.length === 0 ? (
+              {userWinesTotalCount === 0 ? (
                 <EmptyState
                   icon="EmptyStateIcon"
                   title="아직 등록한 와인이 없어요!"
