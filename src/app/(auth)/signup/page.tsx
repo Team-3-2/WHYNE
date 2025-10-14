@@ -31,7 +31,7 @@ const Page = () => {
 
   useEffect(() => {
     if (state && !state.isError) {
-      router.push("/login");
+      router.push("/");
       signupSuccess();
     } else if (state && state.isError) {
       signupError();
