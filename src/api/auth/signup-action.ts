@@ -1,5 +1,7 @@
 "use server";
 
+import login from "./login";
+
 const signup = async (prevState: any, formData: FormData) => {
   const email = formData.get("email");
   const nickname = formData.get("nickname");
@@ -27,7 +29,13 @@ const signup = async (prevState: any, formData: FormData) => {
 
     if (!response.ok) return { isError: true, message: "다시 시도해주세요." };
 
-    return { isError: false, message: "가입이 완료되었습니다." };
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+
+    const loginResult = await login(prevState, formData);
+
+    return loginResult;
   } catch (error) {
     console.error(error);
   }
