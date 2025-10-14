@@ -12,6 +12,7 @@ interface ModalProps {
     cancelMsg?: string;
     confirmMsg: string;
   };
+  className?: string;
   onClose?: () => void;
   onConfirm?: () => void;
 }
@@ -28,6 +29,7 @@ interface ModalProps {
 const ConfirmModal = ({
   isOpen = false,
   msg,
+  className,
   onClose = () => {},
   onConfirm = () => {},
 }: ModalProps) => {
@@ -35,7 +37,8 @@ const ConfirmModal = ({
 
   useLayoutEffect(() => {
     const currentScrollY = window.scrollY;
-    lockingScroll(currentScrollY);
+
+    if (isOpen) lockingScroll(currentScrollY);
 
     return () => {
       allowScroll(currentScrollY);
@@ -56,7 +59,7 @@ const ConfirmModal = ({
     <Modal
       ref={dialogRef}
       onCancel={onClose}
-      className="px-4 pb-6 pt-8 tablet:gap-8 pc:gap-8"
+      className={cn("px-4 pb-6 pt-8 tablet:gap-8 pc:gap-8", className)}
     >
       <p
         className={cn(

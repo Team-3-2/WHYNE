@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 const ToastProvider = (props: ToastContainerProps) => {
   return (
     <ToastContainer
-      position="top-right"
+      position="top-center"
       autoClose={2000}
       newestOnTop
       closeButton={false}
