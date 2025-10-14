@@ -12,6 +12,7 @@ import { User } from "@/types/user-type";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import getUserReview from "@/api/my-profile/get-user-review";
 import getUserWines from "@/api/user/get-user-wines";
+import { EmptyState } from "@/components";
 
 interface MyProfileProps {
   userInfo: User;
@@ -73,18 +74,33 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
 
           {tab === "registered" && (
             <>
-              <div
-                className={cn(
-                  "grid w-full gap-y-[16px] pt-[24px]",
-                  "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
-                  "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
-                )}
-              >
-                {(userWines as WineType[])?.map((wine) => (
-                  <WineItem key={wine.id} wine={wine} />
-                ))}
-              </div>
-              <div ref={wineObserverRef} className="mt-[100px] h-1 w-full" />
+              {userWines.length === 0 ? (
+                <EmptyState
+                  icon="EmptyStateIcon"
+                  title="아직 등록한 와인이 없어요!"
+                  description="지금 첫 번째 와인을 등록해보세요"
+                  actionLabel="와인 등록하기"
+                  actionHref="/register/new"
+                />
+              ) : (
+                <>
+                  <div
+                    className={cn(
+                      "grid w-full gap-y-[16px] pt-[24px]",
+                      "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+                      "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
+                    )}
+                  >
+                    {(userWines as WineType[])?.map((wine) => (
+                      <WineItem key={wine.id} wine={wine} />
+                    ))}
+                  </div>
+                  <div
+                    ref={wineObserverRef}
+                    className="mt-[100px] h-1 w-full"
+                  />
+                </>
+              )}
             </>
           )}
 
