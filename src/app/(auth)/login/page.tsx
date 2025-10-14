@@ -4,7 +4,6 @@ import { Button, TextInput } from "@/components";
 import { useActionState, useEffect } from "react";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
 import login from "@/api/auth/login";
@@ -18,7 +17,6 @@ interface LoginFormData {
 }
 
 const Page = () => {
-  const router = useRouter();
   const {
     register,
     formState: { errors, isValid },
@@ -36,7 +34,7 @@ const Page = () => {
 
   useEffect(() => {
     if (state && !state.isError) {
-      router.push("/");
+      window.location.href = "/";
     } else if (state && state.isError) {
       loginError();
     }
