@@ -7,3 +7,9 @@ export interface User {
   image: string;
   email?: string;
 }
+
+export interface LoginData {
+  user: User;
+  accessToken: string;
+  refreshToken: string;
+}
