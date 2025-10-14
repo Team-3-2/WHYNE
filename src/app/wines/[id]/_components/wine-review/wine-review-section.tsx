@@ -25,7 +25,7 @@ interface ReviewSectionProps {
   currentUserId?: number;
 }
 
-const PAGE_SIZE = 5;
+const REVIEW_PIECES = 5;
 
 const ReviewSection = ({
   reviews,
@@ -35,7 +35,7 @@ const ReviewSection = ({
   wineId,
   currentUserId,
 }: ReviewSectionProps) => {
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [visibleCount, setVisibleCount] = useState(REVIEW_PIECES);
   const visibleReviews = reviews.slice(0, visibleCount);
   const hasMore = visibleCount < reviews.length;
 
@@ -48,7 +48,7 @@ const ReviewSection = ({
   }, [reviews.length]);
 
   const handleLoadMore = () => {
-    setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, reviews.length));
+    setVisibleCount((prev) => Math.min(prev + REVIEW_PIECES, reviews.length));
   };
 
   if (isLoading) {
