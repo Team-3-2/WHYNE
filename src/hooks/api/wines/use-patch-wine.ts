@@ -16,7 +16,7 @@ const usePatchWine = () => {
       path: number;
     }) => patchRegisteredWine(patchData, path),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["wineList"] });
+      queryClient.invalidateQueries({ queryKey: ["wine-list"] });
       router.back();
     },
     onError: (error) => {

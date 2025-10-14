@@ -14,7 +14,7 @@ const ReviewEmptyState = ({ wineId }: ReviewEmptyStateProps) => (
       작성된 리뷰가 없어요
     </p>
     <LinkButton
-      href={`/wines/${wineId}/write`}
+      href={`/reviews/${wineId}/write`}
       scroll={false}
       label="리뷰 남기기"
       className="h-[42px] w-[240px] tablet:h-[50px] tablet:w-[283px]"
