@@ -2,15 +2,23 @@
 
 import { useMutation } from "@tanstack/react-query";
 import deleteUserReview from "@/api/reviews/delete-user-review";
+import { useToast } from "@/hooks/use-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 const useDeleteUserReview = () => {
+  const { reviewDeleteError, reviewDeleteSuccess } = useToast();
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: ({ id }: { id: number }) => deleteUserReview({ id }),
     onSuccess: () => {
-      alert("요청 성공");
+      reviewDeleteSuccess();
+      queryClient.invalidateQueries({
+        queryKey: ["user-review"],
+      });
     },
     onError: () => {
-      alert("요청 실패");
+      reviewDeleteError();
     },
   });
 };
