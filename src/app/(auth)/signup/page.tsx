@@ -31,7 +31,7 @@ const Page = () => {
     <>
       <FormWrapper>
         <Link href={"/"}>
-          <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100 tablet:mb-[64px] pc:mb-[64px]" />
+          <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100 tablet:mb-8 pc:mb-8" />
         </Link>
         <form
           action={formAction}

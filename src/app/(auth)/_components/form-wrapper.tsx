@@ -8,8 +8,8 @@ const FormWrapper = ({ children }: { children: ReactNode }) => {
         className={cn(
           "flex-col-center h-[689px] rounded-2xl bg-white px-5",
           "drop-shadow-[0_2px_20px_rgba(0,0,0,0.04)]",
-          "tablet:h-[843px] tablet:px-12",
-          "pc:h-[843px] pc:px-12"
+          "tablet:h-[761px] tablet:px-12",
+          "pc:h-[761px] pc:px-12"
         )}
       >
         {children}
