@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo, memo } from "react";
 import { useRouter } from "next/navigation";
 import { cn, getAromaIconName } from "@/lib/utils";
 import WineTaste, { buildTasteData } from "@/components/wine-taste";
@@ -36,13 +36,13 @@ interface OptionMenuProps {
   onClose: () => void;
 }
 
-const OptionMenu = ({
+const OptionMenu = memo(function OptionMenu({
   isOpen,
   onToggle,
   onEdit,
   onDelete,
   onClose,
-}: OptionMenuProps) => {
+}: OptionMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   useClickOutside(menuRef, onClose);
 
@@ -67,7 +67,7 @@ const OptionMenu = ({
       )}
     </div>
   );
-};
+});
 
 const WineReviewItem = ({
   review,
@@ -78,10 +78,11 @@ const WineReviewItem = ({
   const router = useRouter();
   const { reviewDeleteSuccess, reviewDeleteError } = useToast();
 
-  const isLiked =
-    typeof review.isLiked === "boolean"
+  const isLiked = useMemo(() => {
+    return typeof review.isLiked === "boolean"
       ? review.isLiked
       : Object.keys(review.isLiked).length > 0;
+  }, [review.isLiked]);
 
   const [isTasteOpen, setIsTasteOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -105,12 +106,19 @@ const WineReviewItem = ({
     wineId,
   });
 
-  const tastes = buildTasteData({
-    lightBold: review.lightBold,
-    smoothTannic: review.smoothTannic,
-    drySweet: review.drySweet,
-    softAcidic: review.softAcidic,
-  });
+  const tastes = useMemo(() => {
+    return buildTasteData({
+      lightBold: review.lightBold,
+      smoothTannic: review.smoothTannic,
+      drySweet: review.drySweet,
+      softAcidic: review.softAcidic,
+    });
+  }, [
+    review.lightBold,
+    review.smoothTannic,
+    review.drySweet,
+    review.softAcidic,
+  ]);
 
   const handleEdit = () => {
     closeMenu();
@@ -170,6 +178,7 @@ const WineReviewItem = ({
                   onClick={() => {
                     toggleLike();
                   }}
+                  aria-label={isLiked ? "좋아요 취소" : "좋아요"}
                 />
               )}
               {isMyReview && (
