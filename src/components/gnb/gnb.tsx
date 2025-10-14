@@ -5,19 +5,23 @@ import Link from "next/link";
 import Logo from "@/../public/logo.svg";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DropdownMenu from "../dropdown-menu/dropdown-menu";
 import { User } from "@/types/user-type";
 import { useLogout } from "@/hooks/use-logout";
 import AsciiArt from "../ascii-art/ascii-art";
+import useClickOutside from "@/hooks/use-click-outside";
 
 const Gnb = ({ user }: { user: User }) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
+
+  useClickOutside(dropdownRef, () => setIsOpen(false));
 
   const isHidden = pathname === "/login" || pathname === "/signup";
 
@@ -55,12 +59,15 @@ const Gnb = ({ user }: { user: User }) => {
             <Logo className="w-[100px]" />
           </Link>
 
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             {user ? (
               <button
                 type="button"
                 aria-label="메뉴 열기"
-                onClick={() => setIsOpen((prev) => !prev)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpen((prev) => !prev);
+                }}
                 className="flex items-center"
               >
                 <Image
