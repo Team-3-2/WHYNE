@@ -66,5 +66,15 @@ export const useToast = () => {
       showSuccessToast(msg, { icon: ALERT_ICON }),
     signupError: (msg = "회원가입 실패 !") =>
       showErrorToast(msg, { icon: ALERT_ERROR_ICON }),
+
+    uploadImageSuccess: (msg = "이미지 업로드 성공 !") =>
+      showSuccessToast(msg, { icon: ALERT_ICON }),
+    uploadImageError: (msg = "이미지 업로드 실패 !") =>
+      showErrorToast(msg, { icon: ALERT_ERROR_ICON }),
+
+    profileUpdateSuccess: (msg = "프로필 수정 성공 !") =>
+      showSuccessToast(msg, { icon: ALERT_ICON }),
+    profileUpdateError: (msg = "프로필 수정 실패 !") =>
+      showErrorToast(msg, { icon: ALERT_ERROR_ICON }),
   };
 };
