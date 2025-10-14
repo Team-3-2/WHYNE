@@ -3,13 +3,14 @@
 import Link from "next/link";
 import FormWrapper from "../_components/form-wrapper";
 import Logo from "@/../public/logo.svg";
-import { Button, ConfirmModal, TextInput } from "@/components";
+import { Button, TextInput } from "@/components";
 import AuthRedirect from "../_components/auth-redirect";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import signup from "@/api/auth/signup-action";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 interface SignupFormData {
   email: string;
@@ -25,13 +26,23 @@ const Page = () => {
     formState: { errors, isValid },
   } = useForm<SignupFormData>({ mode: "onBlur" });
   const router = useRouter();
+  const { signupSuccess, signupError } = useToast();
   const [state, formAction, isPending] = useActionState(signup, null);
+
+  useEffect(() => {
+    if (state && !state.isError) {
+      router.push("/login");
+      signupSuccess();
+    } else if (state && state.isError) {
+      signupError();
+    }
+  }, [state]);
 
   return (
     <>
       <FormWrapper>
         <Link href={"/"}>
-          <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100 tablet:mb-[64px] pc:mb-[64px]" />
+          <Logo className="mb-10 h-[30px] w-[104px] text-gray-1100 tablet:mb-8 pc:mb-8" />
         </Link>
         <form
           action={formAction}
@@ -116,13 +127,6 @@ const Page = () => {
           url="/login"
         />
       </FormWrapper>
-
-      <ConfirmModal
-        isOpen={state !== null && !state?.isError}
-        msg={{ text: <>{state?.message}</>, confirmMsg: "확인" }}
-        onConfirm={() => router.replace("/")}
-        onClose={() => router.back()}
-      />
     </>
   );
 };
