@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo, memo } from "react";
 import { useRouter } from "next/navigation";
 import { cn, getAromaIconName } from "@/lib/utils";
 import WineTaste, { buildTasteData } from "@/components/wine-taste";
@@ -19,6 +19,7 @@ import WineReviewRating from "./wine-review-rating";
 import useReviewLike from "../../../../../hooks/api/reviews/use-review-like";
 import useReviewDelete from "../../../../../hooks/api/reviews/use-review-delete";
 import type { Review } from "@/types/wine";
+import { useToast } from "@/hooks/use-toast";
 
 interface WineReviewItemProps {
   review: Review;
@@ -35,13 +36,13 @@ interface OptionMenuProps {
   onClose: () => void;
 }
 
-const OptionMenu = ({
+const OptionMenu = memo(function OptionMenu({
   isOpen,
   onToggle,
   onEdit,
   onDelete,
   onClose,
-}: OptionMenuProps) => {
+}: OptionMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   useClickOutside(menuRef, onClose);
 
@@ -66,7 +67,7 @@ const OptionMenu = ({
       )}
     </div>
   );
-};
+});
 
 const WineReviewItem = ({
   review,
@@ -75,11 +76,13 @@ const WineReviewItem = ({
   wineId,
 }: WineReviewItemProps) => {
   const router = useRouter();
+  const { reviewDeleteSuccess, reviewDeleteError } = useToast();
 
-  const isLiked =
-    typeof review.isLiked === "boolean"
+  const isLiked = useMemo(() => {
+    return typeof review.isLiked === "boolean"
       ? review.isLiked
       : Object.keys(review.isLiked).length > 0;
+  }, [review.isLiked]);
 
   const [isTasteOpen, setIsTasteOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -103,12 +106,19 @@ const WineReviewItem = ({
     wineId,
   });
 
-  const tastes = buildTasteData({
-    lightBold: review.lightBold,
-    smoothTannic: review.smoothTannic,
-    drySweet: review.drySweet,
-    softAcidic: review.softAcidic,
-  });
+  const tastes = useMemo(() => {
+    return buildTasteData({
+      lightBold: review.lightBold,
+      smoothTannic: review.smoothTannic,
+      drySweet: review.drySweet,
+      softAcidic: review.softAcidic,
+    });
+  }, [
+    review.lightBold,
+    review.smoothTannic,
+    review.drySweet,
+    review.softAcidic,
+  ]);
 
   const handleEdit = () => {
     closeMenu();
@@ -120,19 +130,14 @@ const WineReviewItem = ({
     setIsDeleteModalOpen(true);
   };
 
-  const handleDeleteCancel = () => {
-    setIsDeleteModalOpen(false);
-  };
-
   const handleDeleteConfirm = () => {
     deleteReview(undefined, {
       onSuccess: () => {
         setIsDeleteModalOpen(false);
-        alert("리뷰가 삭제되었습니다.");
-        router.refresh();
+        reviewDeleteSuccess();
       },
       onError: () => {
-        alert("리뷰 삭제에 실패했습니다. 다시 시도해주세요.");
+        reviewDeleteError();
       },
     });
   };
@@ -173,6 +178,7 @@ const WineReviewItem = ({
                   onClick={() => {
                     toggleLike();
                   }}
+                  aria-label={isLiked ? "좋아요 취소" : "좋아요"}
                 />
               )}
               {isMyReview && (
@@ -268,13 +274,13 @@ const WineReviewItem = ({
 
       <ConfirmModal
         isOpen={isDeleteModalOpen}
-        msg={{
-          text: "정말 삭제하시겠습니까?",
-          cancelMsg: "취소",
-          confirmMsg: "삭제하기",
-        }}
-        onClose={handleDeleteCancel}
+        onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteConfirm}
+        msg={{
+          text: "리뷰를 정말 삭제할까요?",
+          cancelMsg: "취소",
+          confirmMsg: deletePending ? "삭제 중..." : "삭제",
+        }}
       />
     </>
   );

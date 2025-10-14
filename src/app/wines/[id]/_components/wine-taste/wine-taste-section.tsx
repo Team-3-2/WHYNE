@@ -35,6 +35,13 @@ const WineTasteSection = ({ reviews, reviewCount }: WineTasteSectionProps) => {
     softAcidic: avgSoftAcidic,
   });
 
+  const tasteA11yLabel =
+    tastes.length > 0
+      ? tastes
+          .map(({ type, taste, data }) => `${type}은 ${taste} (${data}단계)`)
+          .join(", ")
+      : "아직 맛 데이터가 없습니다.";
+
   return (
     <section
       aria-labelledby={tasteHeadingId}
@@ -45,25 +52,25 @@ const WineTasteSection = ({ reviews, reviewCount }: WineTasteSectionProps) => {
       )}
     >
       {/* 제목 + 갯수 */}
-      <header
+      <div
         className={cn(
           "mb-4 flex flex-col items-start gap-1",
-          "tablet:mb-0 tablet:flex-col tablet:gap-3",
-          "pc:flex-row pc:items-center pc:justify-between pc:pr-3"
+          "tablet:mb-0 tablet:ml-9 tablet:flex-col tablet:gap-3",
+          "pc:flex-row pc:items-center pc:justify-between pc:pr-6"
         )}
       >
         <h2 id={tasteHeadingId} className="text-heading-lg text-gray-900">
           어떤 맛이 나나요?
         </h2>
         <p className="text-body-sm text-gray-400">({reviewCount}명 참여)</p>
-      </header>
+      </div>
 
       {/* 와인 맛 분포 컴포넌트 */}
       <section
-        aria-label="와인 맛 분포"
+        aria-label={`와인 맛 분포: ${tasteA11yLabel}`}
         className="flex w-full justify-center tablet:justify-start"
       >
-        <div className="w-full max-w-[360px] tablet:max-w-[480px] pc:max-w-[560px]">
+        <div className="w-full max-w-[470px] tablet:max-w-[480px] pc:max-w-[560px]">
           <WineTaste type="detail" tastes={tastes} />
         </div>
       </section>

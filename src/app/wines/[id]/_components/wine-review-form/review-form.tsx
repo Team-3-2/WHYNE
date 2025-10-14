@@ -220,7 +220,7 @@ export default function ReviewForm({
             onClick={handleSubmit}
             label={isSubmitting ? "리뷰 남기는 중..." : "리뷰 남기기"}
             disabled={isSubmitting}
-            className="h-[50px] w-full"
+            className="h-[50px] w-full select-none"
           />
         </PageModalBtnWrapper>
       </div>
