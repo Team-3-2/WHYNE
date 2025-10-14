@@ -66,10 +66,6 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
         <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
           {tab === "review" && (
             <>
-              {(userReview as ReviewItemType[])?.map((review) => (
-                <ReviewItem key={review.id} review={review} />
-              ))}
-              <div ref={reviewObserverRef} className="mt-[100px] h-1 w-full" />
               {(userReview?.length === 0 || reviewIsError) && (
                 <EmptyState
                   icon="EmptyStateIcon"
@@ -77,6 +73,10 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                   description="리뷰를 등록해보세요!"
                 />
               )}
+              {(userReview as ReviewItemType[])?.map((review) => (
+                <ReviewItem key={review.id} review={review} />
+              ))}
+              <div ref={reviewObserverRef} className="mt-[100px] h-1 w-full" />
             </>
           )}
 
