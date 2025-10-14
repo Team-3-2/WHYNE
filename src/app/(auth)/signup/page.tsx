@@ -7,9 +7,10 @@ import { Button, ConfirmModal, TextInput } from "@/components";
 import AuthRedirect from "../_components/auth-redirect";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import signup from "@/api/auth/signup-action";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 interface SignupFormData {
   email: string;
@@ -25,7 +26,17 @@ const Page = () => {
     formState: { errors, isValid },
   } = useForm<SignupFormData>({ mode: "onBlur" });
   const router = useRouter();
+  const { signupSuccess, signupError } = useToast();
   const [state, formAction, isPending] = useActionState(signup, null);
+
+  useEffect(() => {
+    if (state && !state.isError) {
+      router.push("/login");
+      signupSuccess();
+    } else if (state && state.isError) {
+      signupError();
+    }
+  }, [state]);
 
   return (
     <>
@@ -116,13 +127,6 @@ const Page = () => {
           url="/login"
         />
       </FormWrapper>
-
-      <ConfirmModal
-        isOpen={state !== null && !state?.isError}
-        msg={{ text: <>{state?.message}</>, confirmMsg: "확인" }}
-        onConfirm={() => router.replace("/")}
-        onClose={() => router.back()}
-      />
     </>
   );
 };
