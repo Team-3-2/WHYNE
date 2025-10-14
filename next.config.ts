@@ -42,6 +42,16 @@ const nextConfig: NextConfig = {
         hostname: "www.gangnam.wine",
         pathname: "/**",
       },
+      {
+        protocol: "http",
+        hostname: "k.kakaocdn.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img1.kakaocdn.net",
+        pathname: "/**",
+      },
     ],
   },
 };

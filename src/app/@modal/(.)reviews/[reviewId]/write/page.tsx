@@ -2,7 +2,7 @@ import PageModal from "@/components/modal/page-modal";
 import ReviewFormClient from "@/app/wines/[id]/_components/wine-review-form/review-form-client";
 
 interface WriteModalPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ reviewId: string }>;
 }
 
 /**
@@ -11,11 +11,11 @@ interface WriteModalPageProps {
  */
 
 async function WriteModalPage({ params }: WriteModalPageProps) {
-  const { id } = await params;
+  const { reviewId } = await params;
 
   return (
     <PageModal title="리뷰 등록">
-      <ReviewFormClient wineId={Number(id)} />
+      <ReviewFormClient wineId={Number(reviewId)} />
     </PageModal>
   );
 }

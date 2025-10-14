@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs";
 import Header from "./header";
 
 const meta: Meta<typeof Header> = {
-  title: "Components/header",
+  title: "공통 컴포넌트/header",
   component: Header,
   parameters: {
     layout: "centered",

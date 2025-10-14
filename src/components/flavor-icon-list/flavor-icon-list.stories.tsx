@@ -26,7 +26,7 @@ const ALL_AROMAS: AromaKey[] = [
 ];
 
 const meta = {
-  title: "Components/FlavorIconList",
+  title: "공통 컴포넌트/FlavorIconList",
   component: FlavorIconList,
   parameters: {
     layout: "centered",

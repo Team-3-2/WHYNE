@@ -4,7 +4,7 @@ import Rating from "./rating";
 import RatingInput from "./rating-input";
 
 const meta: Meta<typeof Rating> = {
-  title: "Components/Rating",
+  title: "공통 컴포넌트/Rating",
   component: Rating,
   parameters: {
     layout: "centered",

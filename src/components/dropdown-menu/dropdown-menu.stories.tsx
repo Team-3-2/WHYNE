@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs";
 import DropdownMenu from "./dropdown-menu";
 
 const meta = {
-  title: "Components/DropdownMenu",
+  title: "공통 컴포넌트/DropdownMenu",
   component: DropdownMenu,
   tags: ["autodocs"],
   parameters: {

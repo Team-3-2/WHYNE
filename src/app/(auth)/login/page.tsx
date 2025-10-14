@@ -4,7 +4,7 @@ import { Button, TextInput } from "@/components";
 import { useActionState, useEffect, useState } from "react";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
 import login from "@/api/auth/login";
@@ -27,6 +27,14 @@ const Page = () => {
   const [checked, setChecked] = useState(false);
 
   const [state, formAction, isPending] = useActionState(login, null);
+
+  const kakaoLogin = () => {
+    const domain = window.location.origin;
+
+    window.Kakao.Auth.authorize({
+      redirectUri: `${domain}/redirect`,
+    });
+  };
 
   useEffect(() => {
     if (state && !state.isError) {
@@ -92,6 +100,7 @@ const Page = () => {
             variant="outline"
             type="button"
             label="kakao로 시작하기"
+            onClick={kakaoLogin}
           />
         </div>
         <AuthRedirect

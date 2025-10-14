@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/nextjs";
 import WineImg from "./wine-img";
 
 const meta: Meta<typeof WineImg> = {
-  title: "Components/WineImg",
+  title: "공통 컴포넌트/WineImg",
   component: WineImg,
   parameters: {
     layout: "centered",
