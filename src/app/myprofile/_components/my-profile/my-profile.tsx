@@ -12,6 +12,7 @@ import { User } from "@/types/user-type";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import getUserReview from "@/api/my-profile/get-user-review";
 import getUserWines from "@/api/user/get-user-wines";
+import { showSuccessToast } from "@/lib/toast";
 
 interface MyProfileProps {
   userInfo: User;
@@ -61,6 +62,12 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
           reviewTotal={totalReviews}
           registeredTotal={totalWines}
         />
+        <button
+          onClick={() => showSuccessToast("성공")}
+          className="h-[100px] w-[300px] rounded-md bg-black text-white"
+        >
+          성공
+        </button>
         <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
           {tab === "review" && (
             <>
