@@ -122,10 +122,6 @@ const WineReviewItem = ({
     setIsDeleteModalOpen(true);
   };
 
-  const handleDeleteCancel = () => {
-    setIsDeleteModalOpen(false);
-  };
-
   const handleDeleteConfirm = () => {
     deleteReview(undefined, {
       onSuccess: () => {
@@ -267,16 +263,16 @@ const WineReviewItem = ({
         </div>
       </article>
 
-      {/* <ConfirmModal
+      <ConfirmModal
         isOpen={isDeleteModalOpen}
-        msg={{
-          text: "정말 삭제하시겠습니까?",
-          cancelMsg: "취소",
-          confirmMsg: "삭제하기",
-        }}
-        onClose={handleDeleteCancel}
+        onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteConfirm}
-      /> */}
+        msg={{
+          text: "리뷰를 정말 삭제할까요?",
+          cancelMsg: "취소",
+          confirmMsg: deletePending ? "삭제 중..." : "삭제",
+        }}
+      />
     </>
   );
 };
