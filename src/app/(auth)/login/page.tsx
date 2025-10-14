@@ -4,12 +4,13 @@ import { Button, TextInput } from "@/components";
 import { useActionState, useEffect } from "react";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
 import login from "@/api/auth/login";
 import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
+import { useToast } from "@/hooks/use-toast";
 
 interface LoginFormData {
   email: string;
@@ -22,7 +23,7 @@ const Page = () => {
     register,
     formState: { errors, isValid },
   } = useForm<LoginFormData>();
-
+  const { loginError } = useToast();
   const [state, formAction, isPending] = useActionState(login, null);
 
   const kakaoLogin = () => {
@@ -36,6 +37,8 @@ const Page = () => {
   useEffect(() => {
     if (state && !state.isError) {
       router.push("/");
+    } else if (state && state.isError) {
+      loginError();
     }
   }, [state]);
 
