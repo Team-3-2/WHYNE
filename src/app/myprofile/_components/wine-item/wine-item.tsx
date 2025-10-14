@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useDeleteWine from "@/hooks/api/wines/use-delete-wine";
+import { useToast } from "@/hooks/use-toast";
 import { Card, ConfirmModal } from "@/components";
 import { WineType } from "@/app/myprofile/_types/review-type";
 
@@ -12,17 +13,19 @@ const WineItem = ({ wine }: { wine: WineType }) => {
 
   const { mutate: deleteWine, isPending: deletePending } = useDeleteWine();
 
+  const { wineDeleteSuccess, wineDeleteError } = useToast();
+
   const handleWineDelete = () => {
     deleteWine(
       { id: wine.id },
       {
         onSuccess: () => {
-          alert("삭제되었습니다.");
           setIsModalOpen(false);
+          wineDeleteSuccess();
           router.refresh();
         },
         onError: () => {
-          alert("삭제 실패");
+          wineDeleteError();
         },
       }
     );
