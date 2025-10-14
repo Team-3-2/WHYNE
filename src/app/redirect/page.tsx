@@ -2,17 +2,22 @@
 
 import kakaoRedirect from "@/api/auth/kakao-redirect";
 import Loader from "@/components/loader/loader";
+import { useToast } from "@/hooks/use-toast";
 import { deleteCookie } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 const Page = () => {
   const code = useSearchParams().get("code") || "";
+  const { loginError } = useToast();
 
   const socialLogin = async (code: string) => {
     const response = await kakaoRedirect(code);
 
-    if (!response) return;
+    if (!response) {
+      window.location.href = "/login";
+      loginError();
+    }
 
     deleteCookie("accessToken");
     deleteCookie("refreshToken");
