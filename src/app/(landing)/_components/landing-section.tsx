@@ -43,7 +43,7 @@ const LandingSection = ({
             <span key={index}>{line}</span>
           ))}
         </h2>
-        <div className="flex flex-col text-gray-600">
+        <div className="flex flex-col text-gray-700">
           {subtitle.map((line, index) => (
             <span key={index}>{line}</span>
           ))}

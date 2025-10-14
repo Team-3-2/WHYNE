@@ -86,25 +86,15 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
 
           gsap.set(text, { opacity: 0, x: textFromX });
           gsap.set(image, { opacity: 0, x: imageFromX });
-        });
 
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: container,
-            start: "top 75%",
-            end: "bottom 60%",
-            toggleActions: "play none none reset",
-          },
-        });
-
-        sectionElements.forEach((section, index) => {
-          const text = section.querySelector<HTMLElement>(
-            "[data-landing-section-text]"
-          );
-          const image = section.querySelector<HTMLElement>(
-            "[data-landing-section-image]"
-          );
-          if (!text || !image) return;
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play none none reverse",
+            },
+          });
 
           timeline
             .to(
@@ -112,20 +102,20 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
               {
                 x: 0,
                 opacity: 1,
-                duration: 0.7,
-                ease: "power3.inOut",
+                duration: 0.5,
+                ease: "power2.out",
               },
-              index * 0.7
+              0
             )
             .to(
               image,
               {
                 x: 0,
                 opacity: 1,
-                duration: 0.7,
-                ease: "power3.inOut",
+                duration: 0.5,
+                ease: "power2.out",
               },
-              index * 0.7 + 0.2
+              0.1
             );
         });
       }, container);
