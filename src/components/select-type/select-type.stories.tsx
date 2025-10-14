@@ -7,7 +7,7 @@ const meta: Meta<typeof SelectType> = {
   parameters: {
     layout: "centered",
   },
-  argTypes: {},
+  argTypes: { register: () => {} },
 };
 
 export default meta;
