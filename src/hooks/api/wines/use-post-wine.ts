@@ -1,15 +1,13 @@
 import postRegisterWine from "@/api/register/post-register-wine";
+import { useToast } from "@/hooks/use-toast";
 import { WineFormData } from "@/types/wine";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
-interface ImageData {
-  url: File;
-}
-
 const usePostWine = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { wineCreateSuccess, wineCreateError } = useToast();
 
   const { mutate, isSuccess } = useMutation({
     mutationFn: ({ registerData }: { registerData: WineFormData }) =>
@@ -18,10 +16,11 @@ const usePostWine = () => {
       queryClient.invalidateQueries({ queryKey: ["wine-list"] });
       queryClient.invalidateQueries({ queryKey: ["user-wine"] });
       router.back();
+      wineCreateSuccess();
     },
     onError: (error) => {
       console.error(error);
-      alert("와인 등록을 실패했습니다.");
+      wineCreateError();
     },
   });
 

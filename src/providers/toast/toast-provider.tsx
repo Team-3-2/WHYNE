@@ -1,19 +1,24 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { ToastContainer, ToastContainerProps } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ToastProvider = (props: ToastContainerProps) => {
   return (
     <ToastContainer
-      position="top-center"
-      autoClose={2000}
+      position="top-right"
+      autoClose={1500}
       newestOnTop
       closeButton={false}
       closeOnClick
       pauseOnHover
+      className="mt-12 flex w-full flex-col gap-3"
       toastClassName={() =>
-        "relative flex-center min-h-10 cursor-pointer overflow-hidden rounded-md bg-white p-4 text-gray-900 shadow-lg"
+        cn(
+          "relative flex items-center justify-start min-h-10 w-[300px] cursor-pointer overflow-hidden rounded-md",
+          "bg-white backdrop-blur-md p-4 text-gray-900 shadow-lg"
+        )
       }
       progressClassName="Toastify__progress-bar--animated"
       {...props}

@@ -1,7 +1,7 @@
 "use client";
 
 import postImage from "@/api/image/post-image";
-import { Button, SelectType, TextInput } from "@/components";
+import { Button, SelectType, TextInput, Icon } from "@/components";
 import PageModalBtnWrapper from "@/components/modal/page-modal-btn-wrapper";
 import WineImg from "@/components/wine-img/wine-img";
 import usePatchWine from "@/hooks/api/wines/use-patch-wine";
@@ -10,6 +10,8 @@ import { WineFormData } from "@/types/wine";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
+import { cn } from "@/lib/utils";
+import { REGISTER_STYLES } from "@/components/wine-img/style";
 
 const RegisterWine = ({
   wineData,
@@ -77,18 +79,26 @@ const RegisterWine = ({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="pb-40 tablet:pb-0 pc:pb-0"
-    >
-      <div className="flex flex-col gap-[18px]">
+    <form onSubmit={handleSubmit(onSubmit)} className="tablet:pb-0 pc:pb-0">
+      <div className="flex flex-col gap-[18px] pb-6 tablet:pb-16 pc:pb-16">
         {previewImgUrl ? (
-          <label htmlFor="changeImg" className="w-fit cursor-pointer">
+          <label
+            htmlFor="changeImg"
+            className={cn("cursor-pointer", REGISTER_STYLES.label)}
+          >
             <Image
               src={previewImgUrl ? previewImgUrl : ""}
-              width={360}
-              height={370}
+              layout="fill"
               alt="미리보기 이미지"
+              className={REGISTER_STYLES.img}
+            />
+            <Icon
+              icon="CameraIcon"
+              size={"lg"}
+              className={cn(
+                REGISTER_STYLES.icon,
+                "text-gray-600 opacity-0 duration-100 group-hover:opacity-100"
+              )}
             />
             <input
               type="file"
@@ -98,12 +108,14 @@ const RegisterWine = ({
             />
           </label>
         ) : (
-          <WineImg
-            isError={errors.image ? true : false}
-            errorMsg={errors.image && errors.image.message}
-            {...register("image", { required: "와인 사진은 필수입니다." })}
-            onChange={handleFileChange}
-          />
+          <>
+            <WineImg
+              isError={errors.image ? true : false}
+              errorMsg={errors.image && errors.image.message}
+              {...register("image", { required: "와인 사진은 필수입니다." })}
+              onChange={handleFileChange}
+            />
+          </>
         )}
 
         <TextInput
@@ -143,7 +155,7 @@ const RegisterWine = ({
           {...register("region", { required: "원산지는 필수 입력입니다." })}
         />
       </div>
-      <PageModalBtnWrapper className="tablet:h-[130px] tablet:px-0 pc:h-[130px] pc:px-0">
+      <PageModalBtnWrapper className="tablet:px-0 pc:px-0">
         <Button label="와인 등록하기" />
       </PageModalBtnWrapper>
     </form>

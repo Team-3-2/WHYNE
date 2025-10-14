@@ -4,7 +4,7 @@ import { LoginData } from "@/types/user-type";
 const kakaoRedirect = async (code: string): Promise<LoginData | undefined> => {
   const body = {
     state: "login",
-    redirectUri: `${process.env.NEXT_PUBLIC_REDIRECT_URI}`,
+    redirectUri: `${window.location.origin}/redirect`,
     token: code,
   };
 

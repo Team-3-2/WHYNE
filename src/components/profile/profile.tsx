@@ -31,12 +31,17 @@ const Profile = ({
     <div className="group relative">
       <div
         className={cn(
-          "rounded-full bg-white",
-          isEditing && "hover:border hover:border-gray-300 hover:bg-gray-300",
+          "relative cursor-pointer overflow-hidden rounded-full border border-transparent bg-white",
+          isEditing && "hover:border-gray-300 hover:bg-gray-300",
           className
         )}
       >
-        <label className="hover:cursor-pointer">
+        <label
+          className={cn(
+            "after:absolute after:left-0 after:top-0 after:z-[2] after:h-full after:w-full after:rounded-[4px] after:bg-[rgba(233,233,233,0.7)] after:opacity-0 after:duration-100 after:[backdrop-filter:blur(4px)]",
+            "hover:cursor-pointer hover:after:opacity-100"
+          )}
+        >
           {url ? (
             <Image
               src={url}
@@ -65,7 +70,7 @@ const Profile = ({
             <Icon
               icon="CameraIcon"
               size={"2xl"}
-              className="absolute left-1/2 right-4 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 group-hover:block"
+              className="absolute left-1/2 right-4 top-1/2 z-[3] hidden -translate-x-1/2 -translate-y-1/2 duration-100 group-hover:block"
             />
           )}
         </label>
