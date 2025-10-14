@@ -58,7 +58,7 @@ const Page = () => {
     } else if (state && state.isError) {
       loginError();
     }
-  }, [state, loginError]);
+  }, [state]);
 
   return (
     <FormWrapper>
