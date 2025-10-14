@@ -120,7 +120,7 @@ const WineSearchOption = ({
           <aside
             className={cn(
               isMobileOrTablet ? "w-full" : "w-[284px]",
-              "order-1 flex flex-col gap-12"
+              "order-1 flex flex-col gap-5"
             )}
             aria-label="필터"
           >
@@ -138,7 +138,7 @@ const WineSearchOption = ({
               {/* 평점 선택 필터 */}
               <RatingOption />
             </form>
-            <div className="flex w-full flex-col gap-3">
+            <div className="flex w-full gap-3">
               <Button
                 label="초기화"
                 variant="outline"
