@@ -12,6 +12,7 @@ import { User } from "@/types/user-type";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import getUserReview from "@/api/my-profile/get-user-review";
 import getUserWines from "@/api/user/get-user-wines";
+import { EmptyState } from "@/components";
 
 interface MyProfileProps {
   userInfo: User;
@@ -27,7 +28,8 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
   const {
     allItems: userReview,
     totalCount: totalReviews,
-    observerRef,
+    observerRef: reviewObserverRef,
+    isError: reviewIsError,
   } = useInfiniteScroll({
     queryKey,
     fetchFn: (cursor) =>
@@ -64,10 +66,17 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
         <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
           {tab === "review" && (
             <>
+              {(userReview?.length === 0 || reviewIsError) && (
+                <EmptyState
+                  icon="EmptyStateIcon"
+                  title="아직 등록된 리뷰가 없습니다."
+                  description="리뷰를 등록해보세요!"
+                />
+              )}
               {(userReview as ReviewItemType[])?.map((review) => (
                 <ReviewItem key={review.id} review={review} />
               ))}
-              <div ref={observerRef} className="mt-[100px] h-1 w-full" />
+              <div ref={reviewObserverRef} className="mt-[100px] h-1 w-full" />
             </>
           )}
 

@@ -25,6 +25,9 @@ const useReviewMutation = ({ mode, reviewId }: ReviewMutationOptions) => {
       queryClient.invalidateQueries({
         queryKey: ["reviews", variables.wineId],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["user-review"],
+      });
       queryClient.invalidateQueries({ queryKey: ["wine", variables.wineId] });
       if (mode === "edit" && reviewId) {
         queryClient.invalidateQueries({ queryKey: ["review", reviewId] });
