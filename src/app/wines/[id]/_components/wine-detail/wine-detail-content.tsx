@@ -46,9 +46,9 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
       </section>
 
       {/* 맛/향 섹션 */}
-      <section className="bg-white pb-0 pt-6 tablet:pb-0 tablet:pt-16 pc:pb-12 pc:pt-16">
+      <section className="mb-0 mt-12 bg-white tablet:mb-0 tablet:mt-16 pc:mb-12 pc:mt-16">
         <div className="container">
-          <div className="flex flex-col gap-8 tablet:gap-20 pc:flex-row pc:gap-32">
+          <div className="flex flex-col gap-12 tablet:gap-20 pc:flex-row pc:gap-32">
             <div className="pc:flex-1">
               <WineTasteSection
                 reviews={wine.reviews}

@@ -1,4 +1,3 @@
-// src/hooks/useToast.ts
 import Icon from "@/components/icon/icon";
 import { showSuccessToast, showErrorToast } from "@/lib/toast";
 

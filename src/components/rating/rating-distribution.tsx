@@ -62,11 +62,11 @@ const RatingDistribution = ({
         </div>
       </div>
       <LinkButton
-        href={`/wines/${wineId}/write`}
+        href={`/reviews/${wineId}/write`}
         scroll={false}
         label="리뷰 남기기"
         className={cn(
-          "w-full",
+          "w-full select-none",
           "tablet:absolute tablet:bottom-[-10px] tablet:mt-0 tablet:w-[280px]"
         )}
       />

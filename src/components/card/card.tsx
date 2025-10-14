@@ -59,20 +59,54 @@ const Card = ({
   } = useToggle(false);
   useClickOutside(menuRef, closeMenu);
 
-  const content = (
+  return (
     <div className="group relative w-full">
-      <CardImage src={image} alt={`${name} 이미지`} blurDataURL={blurDataURL} />
-      <div className="relative mt-[24px]">
-        <CardInfo
-          name={name}
-          region={region}
-          price={price}
-          avgRating={avgRating}
-          reviewCount={reviewCount}
+      {href ? (
+        <Link href={href}>
+          <CardImage
+            src={image}
+            alt={`${name} 이미지`}
+            blurDataURL={blurDataURL}
+          />
+        </Link>
+      ) : (
+        <CardImage
+          src={image}
+          alt={`${name} 이미지`}
+          blurDataURL={blurDataURL}
         />
-        {recentReview?.content && <CardReview content={recentReview.content} />}
+      )}
+      <div className="relative pt-[24px]">
+        {href ? (
+          <Link href={href}>
+            <CardInfo
+              name={name}
+              region={region}
+              price={price}
+              avgRating={avgRating}
+              reviewCount={reviewCount}
+            />
+            {recentReview?.content && (
+              <CardReview content={recentReview.content} />
+            )}
+          </Link>
+        ) : (
+          <>
+            <CardInfo
+              name={name}
+              region={region}
+              price={price}
+              avgRating={avgRating}
+              reviewCount={reviewCount}
+            />
+            {recentReview?.content && (
+              <CardReview content={recentReview.content} />
+            )}
+          </>
+        )}
+
         {hasActionMenu && (
-          <div className="absolute right-0 top-0 z-10" ref={menuRef}>
+          <div className="absolute right-0 top-[24px] z-10" ref={menuRef}>
             <CardActionMenu
               isOpen={isMenuOpen}
               toggleMenu={toggleMenu}
@@ -84,8 +118,6 @@ const Card = ({
       </div>
     </div>
   );
-
-  return href ? <Link href={href}>{content}</Link> : content;
 };
 
 export default Card;
