@@ -37,9 +37,7 @@ const Rating = ({
     if (fillPercent > 0) return fillPercent * 100;
     return 0;
   });
-  const ratingValue = Number.isInteger(rating)
-    ? rating.toString()
-    : rating.toFixed(1);
+  const ratingValue = rating.toFixed(1);
   const maxRatingValue = maxRating.toFixed(1);
 
   return (

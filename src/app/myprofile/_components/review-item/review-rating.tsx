@@ -1,6 +1,6 @@
 import { DropdownMenu, Icon, Rating } from "@/components";
 import useDeleteUserReview from "@/hooks/api/reviews/use-delete-user-review";
-import { useOutsideClick } from "@/hooks/use-outside-click";
+import useClickOutside from "@/hooks/use-click-outside";
 import { getTimeAgo } from "@/lib/utils";
 import { Dispatch, SetStateAction, useRef } from "react";
 
@@ -20,7 +20,8 @@ const ReviewRating = ({
   id,
 }: ReviewRatingProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(menuRef, () => setOptionMenu(false), optionMenu);
+
+  useClickOutside(menuRef, () => setOptionMenu(false));
 
   const { mutate } = useDeleteUserReview();
 
@@ -38,11 +39,15 @@ const ReviewRating = ({
           {getTimeAgo(createdAt)}
         </span>
       </div>
-      <div className="relative inline-flex">
+      <div className="relative inline-flex" ref={menuRef}>
         <button
           aria-label="옵션 메뉴"
-          onClick={() => setOptionMenu((v) => !v)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setOptionMenu((v) => !v);
+          }}
           className="p-1"
+          type="button"
         >
           <Icon icon="HamburgerIcon" size="md" />
         </button>

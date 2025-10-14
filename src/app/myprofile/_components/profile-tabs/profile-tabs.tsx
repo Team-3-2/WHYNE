@@ -4,23 +4,16 @@ import { cn } from "@/lib/utils";
 interface ProfileTabsProps {
   tab: string;
   setTab: (tab: string) => void;
-  reviewTotal: number;
-  registeredTotal?: number; // 옵셔널만 제거해주세요
 }
 
-const ProfileTabs = ({
-  tab,
-  setTab,
-  reviewTotal,
-  registeredTotal,
-}: ProfileTabsProps) => {
+const ProfileTabs = ({ tab, setTab }: ProfileTabsProps) => {
   const tabs = [
     {
-      label: `내가 쓴 후기 ${reviewTotal || 0}`,
+      label: `내가 쓴 후기`,
       href: "review",
     },
     {
-      label: `내가 등록한 와인 ${registeredTotal || 0}`,
+      label: `내가 등록한 와인`,
       href: "registered",
     },
     {

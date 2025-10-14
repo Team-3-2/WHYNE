@@ -38,7 +38,7 @@ const getMe = async () => {
         }
       );
 
-      if (!response.ok) throw new Error("재로그인이 필요합니다.");
+      if (!response.ok) return;
 
       return await response.json();
     }

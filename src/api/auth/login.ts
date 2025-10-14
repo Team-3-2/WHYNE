@@ -1,13 +1,6 @@
 "use server";
 
-import { User } from "@/types/user-type";
 import { cookies } from "next/headers";
-
-interface LoginData {
-  user: User;
-  accessToken: string;
-  refreshToken: string;
-}
 
 const login = async (prevState: any, formData: FormData) => {
   const email = formData.get("email");
