@@ -14,6 +14,7 @@ import getUserReview from "@/api/my-profile/get-user-review";
 import getUserWines from "@/api/user/get-user-wines";
 import { EmptyState } from "@/components";
 import Loader from "@/components/loader/loader";
+import CardSkeleton from "@/components/card/card-skeleton";
 
 interface MyProfileProps {
   userInfo: User;
@@ -46,6 +47,7 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
     observerRef: wineObserverRef,
     isError: wineIsError,
     isLoading: wineIsLoading,
+    isFetchingNextPage,
   } = useInfiniteScroll<WineType>({
     queryKey: ["user-wine", wineScrollKey],
     fetchFn: (cursor) =>
@@ -111,6 +113,19 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                     ref={wineObserverRef}
                     className="mt-[100px] h-1 w-full"
                   />
+                  {wineIsLoading === false && isFetchingNextPage && (
+                    <div
+                      className={cn(
+                        "grid w-full gap-y-[16px] pt-[24px]",
+                        "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+                        "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
+                      )}
+                    >
+                      {Array.from({ length: 6 }).map((_, i) => (
+                        <CardSkeleton key={i} />
+                      ))}
+                    </div>
+                  )}
                 </>
               )}
             </>
