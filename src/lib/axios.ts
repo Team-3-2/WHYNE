@@ -37,9 +37,7 @@ const authRefreshToken = async () => {
     deleteCookie("accessToken");
     deleteCookie("refreshToken");
 
-    if (window.location.pathname !== "/login") {
-      window.location.href = "/login";
-    }
+    return null;
   }
 };
 
@@ -78,10 +76,16 @@ instance.interceptors.response.use(
       try {
         const newAccessToken = await authRefreshToken();
 
-        instance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
-        prevRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        if (newAccessToken) {
+          instance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+          prevRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
-        return instance(prevRequest);
+          return instance(prevRequest);
+        }
+
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login";
+        }
       } catch (error) {
         return Promise.reject(error);
       }
