@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
 
-const RecentLoginBadge = () => {
+const RecentLoginBadge = ({ className }: { className?: string }) => {
   return (
-    <div className="relative inline-block">
+    <div className={cn("relative inline-block", className)}>
       <span
         className={cn(
-          "relative rounded-[12px] bg-black px-3 py-2 text-body-sm text-white",
+          "animate-floatY relative rounded-[12px] bg-black px-3 py-2 text-[12px] font-semibold leading-[16px] tracking-[-0.02em] text-white",
           "before:absolute before:left-0 before:top-1/2 before:-translate-x-full before:-translate-y-1/2 before:border-4 before:border-transparent before:border-r-black"
         )}
       >

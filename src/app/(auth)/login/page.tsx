@@ -12,7 +12,8 @@ import REGEX from "@/constants/regex";
 import RememberId from "../_components/remember-id";
 import { useToast } from "@/hooks/use-toast";
 import { useRememberId } from "../_hooks/use-remember-id";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
+import RecentLoginBadge from "../_components/recent-login-badge/recent-login-badge";
 
 interface LoginFormData {
   email: string;
@@ -47,6 +48,7 @@ const Page = () => {
   const kakaoLogin = () => {
     const domain = window.location.origin;
 
+    setCookie("login_type", "kakao", opts);
     window.Kakao.Auth.authorize({
       redirectUri: `${domain}/redirect`,
     });
@@ -104,15 +106,20 @@ const Page = () => {
           />
           <RememberId checked={checked} setChecked={setChecked} />
         </div>
-        <Button
-          label="로그인"
-          className="mobile:font-medium"
-          disabled={isValid ? false : true}
-        />
+        <div className="relative w-full">
+          <Button
+            label="로그인"
+            className="mobile:font-medium"
+            disabled={isValid ? false : true}
+          />
+          {getCookie("login_type") === "basic" && (
+            <RecentLoginBadge className="absolute -right-2 bottom-4" />
+          )}
+        </div>
       </form>
 
       <div className="flex-col-center w-full gap-8">
-        <div className="flex-col-center w-full gap-4">
+        <div className="flex-col-center relative w-full gap-4">
           <Button
             icon="KakaoIcon"
             variant="outline"
@@ -120,6 +127,9 @@ const Page = () => {
             label="kakao로 시작하기"
             onClick={kakaoLogin}
           />
+          {getCookie("login_type") === "kakao" && (
+            <RecentLoginBadge className="absolute -right-2 bottom-4" />
+          )}
         </div>
         <AuthRedirect
           text="계정이 없으신가요?"
