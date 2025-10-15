@@ -8,7 +8,7 @@ import usePatchWine from "@/hooks/api/wines/use-patch-wine";
 import usePostWine from "@/hooks/api/wines/use-post-wine";
 import { WineFormData } from "@/types/wine";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { REGISTER_STYLES } from "@/components/wine-img/style";
@@ -49,12 +49,12 @@ const RegisterWine = ({
 
     if (wineData) {
       const avgRating = wineData.avgRating || 0;
-      const patchData = { ...data, price, avgRating };
+      const patchData = { ...data, price, avgRating, image: imgUrl };
       const path = Number(id);
 
       patchWine({ patchData, path });
     } else {
-      const registerData = { ...data, price: price, image: imgUrl };
+      const registerData = { ...data, price: price };
       postWine({ registerData });
     }
   };
@@ -132,6 +132,8 @@ const RegisterWine = ({
           variant="modal"
           {...register("name", {
             required: "와인 이름은 필수 입력입니다.",
+            validate: (value) =>
+              value.trim() !== "" || "공백으로 입력할 수 없습니다.",
           })}
         />
         <TextInput
@@ -141,7 +143,15 @@ const RegisterWine = ({
           variant="modal"
           isError={errors.price ? true : false}
           errorMsg={errors.price && errors.price.message}
-          {...register("price", { required: "가격은 필수 입력입니다." })}
+          {...register("price", {
+            required: "가격은 필수 입력입니다.",
+            pattern: {
+              value: /^[1-9][0-9]*$/,
+              message: "올바른 숫자 형식을 입력해주세요.",
+            },
+            validate: (value) =>
+              value.toString().trim() !== "" || "공백으로 입력할 수 없습니다.",
+          })}
         />
         <SelectType
           id="wine-type"
@@ -156,7 +166,11 @@ const RegisterWine = ({
           variant="modal"
           isError={errors.region ? true : false}
           errorMsg={errors.region && errors.region.message}
-          {...register("region", { required: "원산지는 필수 입력입니다." })}
+          {...register("region", {
+            required: "원산지는 필수 입력입니다.",
+            validate: (value) =>
+              value.toString().trim() !== "" || "공백으로 입력할 수 없습니다.",
+          })}
         />
       </div>
       <PageModalBtnWrapper className="tablet:px-0 pc:px-0">
