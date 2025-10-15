@@ -122,7 +122,7 @@ const WineListSection = () => {
         {isFetchingNextPage && (
           <div
             className={cn(
-              "grid w-full gap-y-[48px] mt-4",
+              "grid w-full gap-y-[48px]",
               "tablet:grid-cols-2 tablet:gap-x-[16px]",
               "pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
             )}
