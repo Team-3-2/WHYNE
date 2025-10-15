@@ -1,8 +1,8 @@
 import { Suspense } from "react";
-import instance from "@/lib/axios";
-import { METADATA } from "@/constants/metadata";
-import type { Metadata, ResolvingMetadata } from "next";
-import { cookies } from "next/headers";
+//import instance from "@/lib/axios";
+//import { METADATA } from "@/constants/metadata";
+//import type { Metadata, ResolvingMetadata } from "next";
+//import { cookies } from "next/headers";
 import WineDetailContent from "@/app/wines/[id]/_components/wine-detail/wine-detail-content";
 import Loader from "@/components/loader/loader";
 
