@@ -7,20 +7,9 @@ import ReviewFormErrorState from "../wine-state/review-error-state";
 import Loader from "@/components/loader/loader";
 import { useRouter } from "next/navigation";
 import useWineQuery from "@/hooks/api/wines/use-wine-query";
-import dynamic from "next/dynamic";
-
-const WineTasteSection = dynamic(
-  () => import("../wine-taste/wine-taste-section"),
-  { ssr: true }
-);
-const FlavorSection = dynamic(
-  () => import("../wine-flavor/wine-flavor-section"),
-  { ssr: true }
-);
-const ReviewSection = dynamic(
-  () => import("../wine-review/wine-review-section"),
-  { ssr: true }
-);
+import WineTasteSection from "../wine-taste/wine-taste-section";
+import FlavorSection from "../wine-flavor/wine-flavor-section";
+import ReviewSection from "../wine-review/wine-review-section";
 
 interface WineDetailContentProps {
   wineId: number;
