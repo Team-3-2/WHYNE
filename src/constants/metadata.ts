@@ -16,14 +16,18 @@ export const METADATA = {
     images: [
       {
         url: `${SITE_URL}/opengraph-image.jpg`,
-        width: 900,
-        height: 900,
+        width: 1200,
+        height: 630,
         alt: `${SITE_NAME} 서비스의 대표 이미지입니다.`,
       },
     ],
   },
   icons: {
-    icon: ["/favicon.ico", "/icon-192.png"],
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", sizes: "32x32" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
     shortcut: ["/favicon.ico"],
     apple: ["/apple-icon.png"],
     other: [
@@ -39,7 +43,7 @@ export const METADATA = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: `${SITE_URL}/twitter-image.jpg`,
+        url: `${SITE_URL}/opengraph-image.jpg`,
         alt: `${SITE_URL} 서비스 트위터 공유용 이미지`,
       },
     ],
