@@ -1,8 +1,17 @@
 import { LandingSectionData, LandingBannerData } from "../_types";
 
 export const LANDING_BANNER: LandingBannerData = {
-  title: [""],
-  imgSrc: "/images/landing/landing-banner.jpg",
+  title: [
+    [
+      { text: "한 ", className: "text-white" },
+      { text: "곳", className: "text-white" },
+      { text: "에서 ", className: "text-white/60" },
+      { text: "관리", className: "text-white" },
+      { text: "하는", className: "text-white/60" },
+    ],
+    [{ text: " 나만의 와인 창고", className: "text-white" }],
+  ],
+  imgSrc: "/images/landing/banner.jpg",
   imgAlt: "와인 추천 서비스 메인 배너",
 } as const;
 
