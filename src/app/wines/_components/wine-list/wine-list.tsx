@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { Card, EmptyState } from "@/components";
+import CardSkeleton from "@/components/card/card-skeleton";
 import { Wine } from "@/types/wine";
 
 interface WineListProps {
@@ -10,7 +11,19 @@ interface WineListProps {
 
 const WineList = ({ wine, isLoading }: WineListProps) => {
   if (isLoading) {
-    return;
+    return (
+      <div
+        className={cn(
+          "grid w-full gap-y-[48px]",
+          "tablet:grid-cols-2 tablet:gap-x-[16px]",
+          "pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
+        )}
+      >
+        {Array.from({ length: 6 }).map((_, i) => (
+          <CardSkeleton key={i} showReview />
+        ))}
+      </div>
+    );
   }
 
   if (wine.length === 0) {
