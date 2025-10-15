@@ -54,7 +54,7 @@ const RegisterWine = ({
 
       patchWine({ patchData, path });
     } else {
-      const registerData = { ...data, price: price };
+      const registerData = { ...data, price: price, image: imgUrl };
       postWine({ registerData });
     }
   };
