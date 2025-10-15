@@ -1,32 +1,59 @@
 "use client";
 
 import { Button, TextInput } from "@/components";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
 import login from "@/api/auth/login";
-import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
+import RememberId from "../_components/remember-id";
 import { useToast } from "@/hooks/use-toast";
+import { useRememberId } from "../_hooks/use-remember-id";
+import { getCookie, setCookie } from "cookies-next";
+import RecentLoginBadge from "../_components/recent-login-badge/recent-login-badge";
 
 interface LoginFormData {
   email: string;
   password: string;
 }
 
+const styles = {
+  badge: "absolute bottom-3 -right-4 pc:right-2 pc:bottom-4",
+};
+
 const Page = () => {
   const {
     register,
     formState: { errors, isValid },
+    setValue,
+    watch,
   } = useForm<LoginFormData>();
+
   const { loginError } = useToast();
+  const [loginType, setLoginType] = useState<string | null>(null);
   const [state, formAction, isPending] = useActionState(login, null);
+
+  const { checked, setChecked, initialId, opts } = useRememberId();
+
+  const email = watch("email");
+
+  useEffect(() => {
+    if (initialId) setValue("email", initialId, { shouldValidate: true });
+  }, [initialId, setValue]);
+
+  useEffect(() => {
+    if (checked && email?.trim()) {
+      setCookie("saved_id", email, opts);
+    }
+  }, [checked, email, opts]);
 
   const kakaoLogin = () => {
     const domain = window.location.origin;
 
+    setCookie("login_type", "kakao", opts);
     window.Kakao.Auth.authorize({
       redirectUri: `${domain}/redirect`,
     });
@@ -39,6 +66,16 @@ const Page = () => {
       loginError();
     }
   }, [state]);
+
+  // 하이드레이션 방지
+  useEffect(() => {
+    try {
+      const v = getCookie("login_type");
+      setLoginType(typeof v === "string" ? v : v ? String(v) : null);
+    } catch {
+      setLoginType(null);
+    }
+  }, []);
 
   return (
     <FormWrapper>
@@ -82,16 +119,22 @@ const Page = () => {
               },
             })}
           />
+          <RememberId checked={checked} setChecked={setChecked} />
         </div>
-        <Button
-          label="로그인"
-          className="mobile:font-medium"
-          disabled={isValid ? false : true}
-        />
+        <div className="relative w-full">
+          <Button
+            label="로그인"
+            className="mobile:font-medium"
+            disabled={isValid ? false : true}
+          />
+          {loginType === "basic" && (
+            <RecentLoginBadge className={styles.badge} />
+          )}
+        </div>
       </form>
 
       <div className="flex-col-center w-full gap-8">
-        <div className="flex-col-center w-full gap-4">
+        <div className="flex-col-center relative w-full gap-4">
           <Button
             icon="KakaoIcon"
             variant="outline"
@@ -99,6 +142,9 @@ const Page = () => {
             label="kakao로 시작하기"
             onClick={kakaoLogin}
           />
+          {loginType === "kakao" && (
+            <RecentLoginBadge className={styles.badge} />
+          )}
         </div>
         <AuthRedirect
           text="계정이 없으신가요?"

@@ -3,13 +3,13 @@
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "@/api/user/get-current-user";
 import WineHeader from "../wine-header/wine-header";
-import WineTasteSection from "../wine-taste/wine-taste-section";
-import FlavorSection from "../wine-flavor/wine-flavor-section";
-import ReviewSection from "../wine-review/wine-review-section";
 import ReviewFormErrorState from "../wine-state/review-error-state";
 import Loader from "@/components/loader/loader";
 import { useRouter } from "next/navigation";
 import useWineQuery from "@/hooks/api/wines/use-wine-query";
+import WineTasteSection from "../wine-taste/wine-taste-section";
+import FlavorSection from "../wine-flavor/wine-flavor-section";
+import ReviewSection from "../wine-review/wine-review-section";
 
 interface WineDetailContentProps {
   wineId: number;
@@ -41,7 +41,7 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
   return (
     <main className="min-h-screen bg-white">
       {/* 헤더 */}
-      <section className="rounded-b-none bg-[url('/images/wines/bg-recommended.png')] bg-cover bg-center pt-[60px] tablet:rounded-b-none tablet:pt-[70px] pc:rounded-b-[88px] pc:pt-[70px]">
+      <section className="rounded-b-none pt-[60px] tablet:rounded-b-none tablet:pt-[70px] pc:rounded-b-[88px] pc:pt-[70px]">
         <WineHeader wine={wine} />
       </section>
 

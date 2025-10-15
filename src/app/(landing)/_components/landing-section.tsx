@@ -1,28 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { LandingSectionData } from "../_types";
 
-let isScrollTriggerRegistered = false;
-
-const registerScrollTrigger = () => {
-  if (typeof window === "undefined" || isScrollTriggerRegistered) return;
-  gsap.registerPlugin(ScrollTrigger);
-  isScrollTriggerRegistered = true;
-};
-
 /**
  * 랜딩 페이지 기능 소개 섹션
- * @author junyeol
- * @param title : 섹션 제목
- * @param subtitle : 섹션 부제목
- * @param imgSrc : 섹션 이미지
- * @param imgAlt : 섹션 이미지 alt
- * @param layout : 섹션 레이아웃
+ * 애니메이션은 상위 컨테이너에서 제어
  */
 const LandingSection = ({
   title,
@@ -31,77 +13,22 @@ const LandingSection = ({
   imgAlt,
   layout = "default",
 }: LandingSectionData) => {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const textRef = useRef<HTMLDivElement | null>(null);
-  const imageRef = useRef<HTMLDivElement | null>(null);
-
-  useLayoutEffect(() => {
-    registerScrollTrigger();
-
-    const sectionElement = sectionRef.current;
-    const textElement = textRef.current;
-    const imageElement = imageRef.current;
-    if (!sectionElement || !textElement || !imageElement) return;
-
-    const prefersReducedMotion =
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
-
-    const textFromX = layout === "reverse" ? 80 : -80;
-    const imageFromX = layout === "reverse" ? -80 : 80;
-
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion) {
-        gsap.set([textElement, imageElement], { opacity: 1, x: 0 });
-        return;
-      }
-
-      gsap.set(textElement, { opacity: 0, x: textFromX });
-      gsap.set(imageElement, { opacity: 0, x: imageFromX });
-
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: sectionElement,
-            start: "top 75%",
-            once: true,
-          },
-        })
-        .to(textElement, {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-        })
-        .to(
-          imageElement,
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power3.out",
-          },
-          "-=0.4"
-        );
-    }, sectionElement);
-
-    return () => {
-      ctx.revert();
-    };
-  }, [layout]);
+  const isReverse = layout === "reverse";
 
   return (
     <section
-      ref={sectionRef}
+      data-landing-section
+      data-landing-section-layout={layout}
       className={cn(
         "flex w-full max-w-6xl flex-col items-start gap-8",
-        layout === "reverse"
+        isReverse
           ? "pc:flex-row-reverse pc:items-center pc:gap-36"
           : "pc:flex-row pc:items-center pc:gap-36"
       )}
     >
       {/* 텍스트 영역 */}
       <div
-        ref={textRef}
+        data-landing-section-text
         className={cn(
           "flex flex-col gap-4 text-left pc:flex-1",
           "pl-4 pr-8",
@@ -116,7 +43,7 @@ const LandingSection = ({
             <span key={index}>{line}</span>
           ))}
         </h2>
-        <div className="flex flex-col text-gray-600">
+        <div className="flex flex-col text-gray-700">
           {subtitle.map((line, index) => (
             <span key={index}>{line}</span>
           ))}
@@ -125,10 +52,10 @@ const LandingSection = ({
 
       {/* 이미지 영역 */}
       <div
-        ref={imageRef}
+        data-landing-section-image
         className={cn(
-          "w-full pc:w-[725px]",
-          layout === "default" ? "pl-4 tablet:pl-8" : "pr-4 tablet:pr-8",
+          "w-full pc:w-[680px]",
+          isReverse ? "pr-4 tablet:pr-8" : "pl-4 tablet:pl-8",
           "pc:px-0"
         )}
       >
