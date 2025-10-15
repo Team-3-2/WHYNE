@@ -197,7 +197,7 @@ export default function ReviewForm({
         </div>
 
         {/* 향 선택 */}
-        <div>
+        <div className="tablet:pb-12 pc:pb-12">
           <label className="mb-4 block text-heading-md">
             기억에 남는 향이 있나요?
           </label>

@@ -113,15 +113,16 @@ const LandingBanner = ({ title, imgSrc, imgAlt }: LandingBannerData) => {
             className={cn(
               "flex items-center justify-center",
               "text-[60px] tablet:text-[90px] pc:text-[130px]",
-              "font-bold tracking-wider"
+              "font-bold tracking-wider text-white drop-shadow-2xl",
+              "select-none"
             )}
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            <span className="text-white drop-shadow-2xl">W</span>
-            <span className="text-white drop-shadow-2xl">H</span>
-            <span className="text-white drop-shadow-2xl">Y</span>
-            <span className="text-white drop-shadow-2xl">N</span>
-            <span className="text-white drop-shadow-2xl">E</span>
+            <span>W</span>
+            <span>H</span>
+            <span>Y</span>
+            <span>N</span>
+            <span>E</span>
           </div>
 
           {/* 언더라인 */}
