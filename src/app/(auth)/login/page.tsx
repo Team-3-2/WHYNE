@@ -2,14 +2,17 @@
 
 import { Button, TextInput } from "@/components";
 import { useActionState, useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
 import FormWrapper from "../_components/form-wrapper";
 import AuthRedirect from "../_components/auth-redirect";
 import login from "@/api/auth/login";
-import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
+import RememberId from "../_components/remember-id";
 import { useToast } from "@/hooks/use-toast";
+import { useRememberId } from "../_hooks/use-remember-id";
+import { setCookie } from "cookies-next";
 
 interface LoginFormData {
   email: string;
@@ -20,9 +23,26 @@ const Page = () => {
   const {
     register,
     formState: { errors, isValid },
+    setValue,
+    watch,
   } = useForm<LoginFormData>();
+
   const { loginError } = useToast();
   const [state, formAction, isPending] = useActionState(login, null);
+
+  const { checked, setChecked, initialId, opts } = useRememberId();
+
+  const email = watch("email");
+
+  useEffect(() => {
+    if (initialId) setValue("email", initialId, { shouldValidate: true });
+  }, [initialId, setValue]);
+
+  useEffect(() => {
+    if (checked && email?.trim()) {
+      setCookie("saved_id", email, opts);
+    }
+  }, [checked, email, opts]);
 
   const kakaoLogin = () => {
     const domain = window.location.origin;
@@ -82,6 +102,7 @@ const Page = () => {
               },
             })}
           />
+          <RememberId checked={checked} setChecked={setChecked} />
         </div>
         <Button
           label="로그인"
