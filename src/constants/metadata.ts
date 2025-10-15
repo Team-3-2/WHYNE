@@ -18,7 +18,7 @@ export const METADATA = {
         url: `${SITE_URL}/opengraph-image.jpg`,
         width: 900,
         height: 900,
-        alt: `${SITE_NAME} 대표 이미지`,
+        alt: `${SITE_NAME} 서비스의 대표 이미지입니다.`,
       },
     ],
   },
@@ -37,7 +37,12 @@ export const METADATA = {
     card: "summary_large_image",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    images: [`${SITE_URL}/twitter-image.jpg`],
+    images: [
+      {
+        url: `${SITE_URL}/twitter-image.jpg`,
+        alt: `${SITE_URL} 서비스 트위터 공유용 이미지`,
+      },
+    ],
   },
   robots: {
     index: true,
