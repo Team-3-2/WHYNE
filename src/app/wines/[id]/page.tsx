@@ -6,6 +6,10 @@ import { cookies } from "next/headers";
 import WineDetailContent from "@/app/wines/[id]/_components/wine-detail/wine-detail-content";
 import Loader from "@/components/loader/loader";
 
+type Props = {
+  params: { id: string };
+};
+
 // type Props = {
 //   params: { id: string };
 //   searchParams: { [key: string]: string | string[] | undefined };
@@ -48,13 +52,11 @@ import Loader from "@/components/loader/loader";
 //   };
 // }
 
-const WineDetailPage = async ({ params }: { params: { id: string } }) => {
-  //const wine = await fetchWineDetail(params.id);
+const WineDetailPage = async ({ params }: Props) => {
   return (
     <Suspense fallback={<Loader />}>
       <WineDetailContent wineId={Number(params.id)} />
     </Suspense>
   );
 };
-
 export default WineDetailPage;
