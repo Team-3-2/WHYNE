@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, TextInput } from "@/components";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import Logo from "@/../public/logo.svg";
 import Link from "next/link";
@@ -20,6 +20,10 @@ interface LoginFormData {
   password: string;
 }
 
+const styles = {
+  badge: "absolute bottom-3 -right-4 pc:right-2 pc:bottom-4",
+};
+
 const Page = () => {
   const {
     register,
@@ -29,6 +33,7 @@ const Page = () => {
   } = useForm<LoginFormData>();
 
   const { loginError } = useToast();
+  const [loginType, setLoginType] = useState<string | null>(null);
   const [state, formAction, isPending] = useActionState(login, null);
 
   const { checked, setChecked, initialId, opts } = useRememberId();
@@ -61,6 +66,16 @@ const Page = () => {
       loginError();
     }
   }, [state]);
+
+  // 하이드레이션 방지
+  useEffect(() => {
+    try {
+      const v = getCookie("login_type");
+      setLoginType(typeof v === "string" ? v : v ? String(v) : null);
+    } catch {
+      setLoginType(null);
+    }
+  }, []);
 
   return (
     <FormWrapper>
@@ -112,8 +127,8 @@ const Page = () => {
             className="mobile:font-medium"
             disabled={isValid ? false : true}
           />
-          {getCookie("login_type") === "basic" && (
-            <RecentLoginBadge className="absolute -right-2 bottom-4" />
+          {loginType === "basic" && (
+            <RecentLoginBadge className={styles.badge} />
           )}
         </div>
       </form>
@@ -127,8 +142,8 @@ const Page = () => {
             label="kakao로 시작하기"
             onClick={kakaoLogin}
           />
-          {getCookie("login_type") === "kakao" && (
-            <RecentLoginBadge className="absolute -right-2 bottom-4" />
+          {loginType === "kakao" && (
+            <RecentLoginBadge className={styles.badge} />
           )}
         </div>
         <AuthRedirect
