@@ -1,13 +1,13 @@
 "use server";
 
-import { User } from "@/types/user-type";
 import { cookies } from "next/headers";
 
-interface LoginData {
-  user: User;
-  accessToken: string;
-  refreshToken: string;
-}
+const opts = {
+  maxAge: 60 * 60 * 24 * 30,
+  path: "/",
+  sameSite: "lax" as const,
+  secure: process.env.NODE_ENV === "production",
+};
 
 const login = async (prevState: any, formData: FormData) => {
   const email = formData.get("email");
@@ -34,6 +34,7 @@ const login = async (prevState: any, formData: FormData) => {
     const cookieStore = await cookies();
     cookieStore.set("accessToken", `${data.accessToken}`);
     cookieStore.set("refreshToken", `${data.refreshToken}`);
+    cookieStore.set("login_type", "basic", opts);
 
     return { isError: false, data: data };
   } catch (error) {

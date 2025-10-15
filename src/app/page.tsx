@@ -1,11 +1,10 @@
 import LandingBanner from "./(landing)/_components/landing-banner";
-import LandingSection from "./(landing)/_components/landing-section";
+import LandingSections from "./(landing)/_components/landing-animations";
 import LandingFloatingCTA from "./(landing)/_components/landing-floating-cta";
 import {
   LANDING_BANNER,
   LANDING_SECTIONS,
 } from "./(landing)/_constants/sections";
-import { cn } from "@/lib/utils";
 
 /**
  * 랜딩 페이지
@@ -19,13 +18,7 @@ const Home = () => {
       <LandingBanner {...LANDING_BANNER} />
 
       {/* 기능 소개 섹션 */}
-      <main
-        className={cn("flex flex-col items-center pt-16", "gap-12 pc:gap-24")}
-      >
-        {LANDING_SECTIONS.map((section, index) => (
-          <LandingSection key={index} {...section} />
-        ))}
-      </main>
+      <LandingSections sections={LANDING_SECTIONS} />
 
       <footer className="h-32" aria-hidden="true" />
       <LandingFloatingCTA />

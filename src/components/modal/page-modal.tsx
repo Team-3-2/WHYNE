@@ -73,8 +73,9 @@ const PageModal = ({
           iconSize={"lg"}
           iconColor="gray300"
           aria-label="모달 닫기"
-          className="h-6 w-6 border-none"
+          className="h-6 w-6 border-none focus:outline-none"
           onClick={() => router.back()}
+          autoFocus={false}
         />
       </div>
       <div className="mobile:h-[526px] tablet:h-[764px] pc:h-[764px]">
