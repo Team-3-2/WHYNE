@@ -79,7 +79,10 @@ const RegisterWine = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="tablet:pb-0 pc:pb-0">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="pb-40 tablet:pb-0 pc:pb-0"
+    >
       <div className="flex flex-col gap-[18px] pb-6 tablet:pb-16 pc:pb-16">
         {previewImgUrl ? (
           <label
@@ -114,6 +117,7 @@ const RegisterWine = ({
               errorMsg={errors.image && errors.image.message}
               {...register("image", { required: "와인 사진은 필수입니다." })}
               onChange={handleFileChange}
+              autoFocus
             />
           </>
         )}

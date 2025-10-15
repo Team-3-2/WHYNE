@@ -134,7 +134,12 @@ export default function ReviewForm({
   );
 
   return (
-    <div className={cn("flex w-full max-w-[480px] flex-col", className)}>
+    <div
+      className={cn(
+        "flex w-full max-w-[480px] flex-col pb-40 tablet:pb-0 pc:pb-0",
+        className
+      )}
+    >
       {/* 모든 컨텐츠 */}
       <div className="flex flex-col gap-8">
         {/* 와인 정보 */}
@@ -197,7 +202,7 @@ export default function ReviewForm({
         </div>
 
         {/* 향 선택 */}
-        <div>
+        <div className="tablet:pb-12 pc:pb-12">
           <label className="mb-4 block text-heading-md">
             기억에 남는 향이 있나요?
           </label>

@@ -13,7 +13,17 @@ const reviewLabel = (count: number) =>
 
 const WineHeader = ({ wine }: WineHeaderProps) => {
   return (
-    <div className="container py-8 tablet:py-10 pc:py-12">
+    <div className="container relative py-8 tablet:py-10 pc:py-12">
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/wines/bg-recommended.png"
+          alt="와인 배경"
+          fill
+          className="object-cover"
+          quality={60}
+        />
+      </div>
+
       <div
         className={cn(
           "flex w-full flex-col gap-8 overflow-hidden rounded-2xl bg-white px-6 py-8 shadow-sm",
@@ -42,8 +52,10 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                   alt={wine.name}
                   fill
                   priority
+                  fetchPriority="high"
+                  quality={75}
+                  sizes="(max-width: 743px) 220px, (max-width: 1279px) 280px, 320px"
                   className="object-contain"
-                  sizes="(min-width: 1200px) 320px, (min-width: 768px) 280px, 220px"
                 />
               </div>
             ) : (
