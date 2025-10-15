@@ -41,6 +41,10 @@ export async function generateMetadata({
       title: tabTitle,
       description: tabDescription,
     },
+    robots: {
+      index: false,
+      follow: false,
+    },
   };
 }
 

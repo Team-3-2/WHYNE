@@ -2,10 +2,22 @@ import { ReactNode } from "react";
 import { METADATA } from "@/constants/metadata";
 
 export function generateMetadata() {
+  const TITLE = "로그인";
+  const DESCRIPTION = `${METADATA.title.default} 로그인`;
   return {
     ...METADATA,
-    title: `로그인`,
-    description: `${METADATA.title.default} 로그인`,
+    title: TITLE,
+    description: DESCRIPTION,
+    openGraph: {
+      ...METADATA.openGraph,
+      title: TITLE,
+      description: DESCRIPTION,
+    },
+    twitter: {
+      ...METADATA.twitter,
+      title: TITLE,
+      description: DESCRIPTION,
+    },
   };
 }
 

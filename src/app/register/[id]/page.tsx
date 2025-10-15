@@ -20,11 +20,24 @@ export async function generateMetadata({
       title = "와인 수정";
     }
   }
+  const DESCRIPTION = wineData
+    ? "와인 정보 수정 페이지"
+    : "새 와인 등록 페이지";
 
   return {
     ...METADATA,
     title,
-    description: wineData ? "와인 정보 수정 페이지" : "새 와인 등록 페이지",
+    description: DESCRIPTION,
+    openGraph: {
+      ...METADATA.openGraph,
+      title: title,
+      description: DESCRIPTION,
+    },
+    twitter: {
+      ...METADATA.twitter,
+      title: title,
+      description: DESCRIPTION,
+    },
   };
 }
 
