@@ -25,7 +25,7 @@ const WineListSection = () => {
     () =>
       debounce((value: string) => {
         setDebouncedSearch(value);
-      }, 400),
+      }, 200),
     []
   );
 
