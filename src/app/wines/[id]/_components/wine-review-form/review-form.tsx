@@ -134,7 +134,12 @@ export default function ReviewForm({
   );
 
   return (
-    <div className={cn("flex w-full max-w-[480px] flex-col pb-40", className)}>
+    <div
+      className={cn(
+        "flex w-full max-w-[480px] flex-col pb-40 tablet:pb-0 pc:pb-0",
+        className
+      )}
+    >
       {/* 모든 컨텐츠 */}
       <div className="flex flex-col gap-8">
         {/* 와인 정보 */}
