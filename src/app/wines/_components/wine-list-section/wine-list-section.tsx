@@ -21,29 +21,6 @@ const WineListSection = () => {
 
   const { type, rating, maxPrice, minPrice } = parseQueryParams(params);
 
-  const debouncedSetSearch = useMemo(
-    () =>
-      debounce((value: string) => {
-        setDebouncedSearch(value);
-      }, 200),
-    []
-  );
-
-  useEffect(() => {
-    return () => {
-      debouncedSetSearch.cancel();
-    };
-  }, [debouncedSetSearch]);
-
-  const handleSearchChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setSearch(value);
-      debouncedSetSearch(value);
-    },
-    [debouncedSetSearch]
-  );
-
   const filters = useMemo(
     () => ({
       limit,
@@ -77,6 +54,39 @@ const WineListSection = () => {
   const wineList = wines;
 
   const isInitialLoading = isLoading && wines.length === 0;
+
+  const debouncedSetSearch = useMemo(
+    () =>
+      debounce((value: string) => {
+        setDebouncedSearch(value);
+      }, 200),
+    []
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedSetSearch.cancel();
+    };
+  }, [debouncedSetSearch]);
+
+  const handleSearchChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      const trimmedValue = value.trim();
+
+      setSearch(value);
+
+      if (trimmedValue === "") {
+        setDebouncedSearch("");
+        return;
+      }
+
+      if (wineList.length === 0) return;
+
+      debouncedSetSearch(trimmedValue);
+    },
+    [debouncedSetSearch, wineList.length]
+  );
 
   return (
     <section
