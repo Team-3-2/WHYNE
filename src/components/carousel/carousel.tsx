@@ -44,20 +44,9 @@ const Carousel = ({
   const scrollbarId = `carousel-scrollbar-${id}`;
 
   const currentBreakpoint = useBreakpoint();
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const showNavigation = navigationEnabled && currentBreakpoint !== "mobile";
   const showScrollbar = draggableScrollbar && currentBreakpoint === "mobile";
-
-  if (!isClient) {
-    return (
-      <div className={`flex-center w-full text-body-md`}>불러 오는 중...</div>
-    );
-  }
 
   return (
     <div className={`relative w-full overflow-hidden mobile:pb-[34px]`}>

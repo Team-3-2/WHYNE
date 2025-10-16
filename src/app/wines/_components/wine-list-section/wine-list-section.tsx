@@ -4,9 +4,10 @@ import { useMemo, useEffect, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineList from "../wine-list/wine-list";
+import CardSkeleton from "@/components/card/card-skeleton";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import getWineList from "@/api/wines/get-wine-list";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import WineSearchOption from "../wine-search-option/wine-search-option";
 
 import debounce from "lodash/debounce";
@@ -15,6 +16,7 @@ import { parseQueryParams } from "../../_utils/parse-query-params";
 const limit = 4;
 
 const WineListSection = () => {
+  const router = useRouter();
   const params = useSearchParams();
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -88,6 +90,23 @@ const WineListSection = () => {
     [debouncedSetSearch, wineList.length]
   );
 
+  useEffect(() => {
+    const q = new URLSearchParams(Array.from(params.entries()));
+    if (debouncedSearch) {
+      q.set("name", debouncedSearch);
+    } else {
+      q.delete("name");
+    }
+    router.push(`?${q.toString()}`, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && params.get("name")) {
+      router.replace("?", { scroll: false });
+    }
+  }, []);
+
   return (
     <section
       aria-labelledby="browse-title"
@@ -129,7 +148,17 @@ const WineListSection = () => {
         <WineList wine={wineList} isLoading={isInitialLoading} />
         <div ref={observerRef} className="mt-[20px] h-1 w-full" />
         {isFetchingNextPage && (
-          <p className="text-center text-sm text-gray-500">Loading…</p>
+          <div
+            className={cn(
+              "grid w-full gap-y-[48px]",
+              "tablet:grid-cols-2 tablet:gap-x-[16px]",
+              "pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
+            )}
+          >
+            {Array.from({ length: 4 }).map((_, i) => (
+              <CardSkeleton key={i} showReview />
+            ))}
+          </div>
         )}
       </div>
     </section>
