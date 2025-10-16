@@ -24,6 +24,10 @@ const PageModal = ({
     e.preventDefault();
   };
 
+  const handleCancelEsc = (e: KeyboardEvent) => {
+    if (e.key === "Escape") e.preventDefault();
+  };
+
   useLayoutEffect(() => {
     const currentScrollY = window.scrollY;
     lockingScroll(currentScrollY);
@@ -38,11 +42,12 @@ const PageModal = ({
 
     if (modalRef.current) {
       modalRef.current.addEventListener("cancel", handleCancel);
+      modalRef.current.addEventListener("keydown", handleCancelEsc);
     }
 
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       modalRef.current?.removeEventListener("cancel", handleCancel);
+      modalRef.current?.removeEventListener("keydown", handleCancelEsc);
     };
   }, [modalRef]);
 
