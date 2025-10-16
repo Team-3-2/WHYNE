@@ -21,6 +21,10 @@ type Message = {
   time: string;
 };
 
+const styles = {
+  box: "max-w-[200px] text-[16px] tracking-[-0.02em] px-[4px] py-[2px]",
+};
+
 const AVATAR_IMAGE =
   "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/10362e2b-df25-5614-88fd-01a520d2f89c/03daec0e-4d19-577c-98ca-aa63b3185aa3.jpg";
 
@@ -72,9 +76,9 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="absolute bottom-[10px] right-[70px] h-[500px] max-h-[600px] w-[400px] max-w-[700px] resize overflow-auto rounded-[15px] border border-black bg-white p-4">
+    <div className="absolute bottom-[10px] right-[70px] h-[500px] max-h-[600px] w-[400px] max-w-[700px] resize overflow-auto rounded-[12px] border border-[#6F7172] bg-[#15191B] px-4 py-6">
       <MainContainer responsive className="h-full w-full border-none">
-        <ChatContainer className="h-full w-full">
+        <ChatContainer className="">
           <MessageList
             className="mb-2 h-full overflow-y-auto"
             scrollBehavior="smooth"
@@ -83,24 +87,15 @@ const ChatBot = () => {
               isTyping && <TypingIndicator content="GPT가 입력 중..." />
             }
           >
-            {/* <Message model={{ direction: "incoming", position: "first" }} className="w-[200px] text-[14px] tracking-[-0.02em]">
-              <Avatar src={AVATAR_IMAGE} name="GPT" />
+            <Message
+              model={{ direction: "incoming", position: "first" }}
+              className={styles.box}
+            >
+              {/* <Avatar src={AVATAR_IMAGE} name="GPT" /> */}
               <Message.CustomContent>
                 안녕하세요, 무엇을 도와드릴까요?
               </Message.CustomContent>
-            </Message> */}
-            {Array.from({ length: 20 }).map((_, index) => (
-              <Message
-                key={index}
-                model={{ direction: "incoming", position: "first" }}
-                className="w-[200px] text-[14px] tracking-[-0.02em]"
-              >
-                <Avatar src={AVATAR_IMAGE} name="GPT" className="bg-black" />
-                <Message.CustomContent className="bg-black text-white">
-                  안녕하세요, 무엇을 도와드릴까요?
-                </Message.CustomContent>
-              </Message>
-            ))}
+            </Message>
             {messages.map((message) => (
               <div key={message.id}>
                 <Message
@@ -111,10 +106,10 @@ const ChatBot = () => {
                     position: "first",
                   }}
                 >
-                  <Avatar src={AVATAR_IMAGE} name="User" />
+                  {/* <Avatar src={AVATAR_IMAGE} name="User" /> */}
                   <Message.CustomContent
                     className={cn(
-                      "max-w-[200px] !rounded-[20px] text-[14px] tracking-[-0.02em]",
+                      styles.box,
                       message.role === "user" ? "text-right" : "text-left"
                     )}
                   >
@@ -129,8 +124,6 @@ const ChatBot = () => {
             onSend={handleSend}
             disabled={isTyping}
             attachButton={false}
-            // sendDisabled={isTyping}
-            // style={{ backgroundColor: "black" }}
           />
         </ChatContainer>
       </MainContainer>
@@ -140,5 +133,5 @@ const ChatBot = () => {
 
 export default ChatBot;
 
-// TODO: placeholder 스타일 수정
+// TODO: 스타일 수정
 // TODO: 와인 API 연동
