@@ -30,7 +30,7 @@ const ChatButton = () => {
         aria-label="채팅 봇 열기"
         onClick={() => setIsOpen(!isOpen)}
       />
-      {isOpen && <ChatBot />}
+      {isOpen && <ChatBot open={isOpen} />}
     </>
   );
 };

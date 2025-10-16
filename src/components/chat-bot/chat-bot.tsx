@@ -1,7 +1,7 @@
 "use client";
 
 import { showErrorToast } from "@/lib/toast";
-import { cn } from "@/lib/utils";
+import { allowScroll, cn, lockingScroll } from "@/lib/utils";
 import {
   Avatar,
   ChatContainer,
@@ -11,7 +11,7 @@ import {
   MainContainer,
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./chat-style.css";
 
 type Message = {
@@ -25,13 +25,30 @@ const styles = {
   box: "max-w-[200px] text-[16px] tracking-[-0.02em] px-[4px] py-[2px]",
 };
 
-const ChatBot = () => {
+const ChatBot = ({ open }: { open: boolean }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
 
   const addMessage = (message: Message) => {
     setMessages((prev) => [...prev, message]);
   };
+
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const currentScrollY = window.scrollY;
+
+  useEffect(() => {
+    if (!dialogRef.current?.open && open) {
+      dialogRef.current?.showModal();
+      lockingScroll(currentScrollY);
+    } else {
+      dialogRef.current?.close();
+    }
+
+    return () => {
+      allowScroll(currentScrollY);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   const handleSend = async (text: string) => {
     const tempDiv = document.createElement("div");
