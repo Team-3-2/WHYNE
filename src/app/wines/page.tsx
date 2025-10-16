@@ -11,11 +11,9 @@ import WineListSection from "./_components/wine-list-section/wine-list-section";
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams:
-    | { [key: string]: string | undefined }
-    | Promise<{ [key: string]: string | undefined }>;
+  searchParams?: Promise<Record<string, string | undefined>>;
 }) {
-  const params = await searchParams;
+  const params = (await searchParams) ?? {};
   const name = params.name ?? "";
 
   const PAGE_TITLE = name ? `${name} 검색 결과` : "맞춤 와인 찾기";
