@@ -5,9 +5,15 @@ import { useRouter } from "next/navigation";
 import useDeleteWine from "@/hooks/api/wines/use-delete-wine";
 import { useToast } from "@/hooks/use-toast";
 import { Card, ConfirmModal } from "@/components";
+import CardSkeleton from "@/components/card/card-skeleton";
 import { WineType } from "@/app/myprofile/_types/review-type";
 
-const WineItem = ({ wine }: { wine: WineType }) => {
+interface WineItemProps {
+  wine?: WineType;
+  skeleton?: boolean;
+}
+
+const WineItem = ({ wine, skeleton = false }: WineItemProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
@@ -16,6 +22,7 @@ const WineItem = ({ wine }: { wine: WineType }) => {
   const { wineDeleteSuccess, wineDeleteError } = useToast();
 
   const handleWineDelete = () => {
+    if (!wine) return;
     deleteWine(
       { id: wine.id },
       {
@@ -30,6 +37,12 @@ const WineItem = ({ wine }: { wine: WineType }) => {
       }
     );
   };
+
+  if (skeleton) {
+    return <CardSkeleton hasActionMenu />;
+  }
+
+  if (!wine) return null;
 
   return (
     <>

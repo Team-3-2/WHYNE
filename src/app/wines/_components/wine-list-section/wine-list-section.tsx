@@ -4,6 +4,7 @@ import { useMemo, useEffect, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import Searchbar from "@/components/searchbar/searchbar";
 import WineList from "../wine-list/wine-list";
+import CardSkeleton from "@/components/card/card-skeleton";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import getWineList from "@/api/wines/get-wine-list";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -136,7 +137,17 @@ const WineListSection = () => {
         <WineList wine={wineList} isLoading={isInitialLoading} />
         <div ref={observerRef} className="mt-[20px] h-1 w-full" />
         {isFetchingNextPage && (
-          <p className="text-center text-sm text-gray-500">Loading…</p>
+          <div
+            className={cn(
+              "grid w-full gap-y-[48px]",
+              "tablet:grid-cols-2 tablet:gap-x-[16px]",
+              "pc:grid-cols-2 pc:gap-x-[61px] pc:gap-y-[64px]"
+            )}
+          >
+            {Array.from({ length: 4 }).map((_, i) => (
+              <CardSkeleton key={i} showReview />
+            ))}
+          </div>
         )}
       </div>
     </section>
