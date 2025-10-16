@@ -30,6 +30,7 @@ const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
     return () => {
       allowScroll(currentScrollY);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   if (!open) return null;
