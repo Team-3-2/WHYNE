@@ -55,7 +55,7 @@ const PageModal = ({
     <Modal
       ref={modalRef}
       className={cn(
-        "border-none px-6 mobile:mt-[94px] tablet:relative pc:relative",
+        "h-[738px] border-none px-6 tablet:relative pc:relative",
         "mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:mb-0 mobile:w-full mobile:max-w-full",
         "mobile:rounded-none mobile:rounded-t-2xl",
         "tablet:h-[1010px]",
