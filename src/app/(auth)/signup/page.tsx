@@ -24,7 +24,7 @@ const Page = () => {
     register,
     getValues,
     formState: { errors, isValid },
-  } = useForm<SignupFormData>({ mode: "onBlur" });
+  } = useForm<SignupFormData>();
   const router = useRouter();
   const { signupSuccess, signupError } = useToast();
   const [state, formAction, isPending] = useActionState(signup, null);
@@ -119,7 +119,10 @@ const Page = () => {
               })}
             />
           </div>
-          <Button label="가입하기" disabled={isValid ? false : true} />
+          <Button
+            label="가입하기"
+            disabled={isValid && !isPending ? false : true}
+          />
         </form>
         <AuthRedirect
           text="계정이 이미 있으신가요?"
