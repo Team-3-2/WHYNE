@@ -6,6 +6,7 @@ import QueryProvider from "@/providers/query-provider";
 import getMe from "@/api/user/get-me";
 import KaKaoInitializer from "@/lib/kakao-initializer";
 import ToastProvider from "@/providers/toast/toast-provider";
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
 export function generateMetadata() {
   return METADATA;
