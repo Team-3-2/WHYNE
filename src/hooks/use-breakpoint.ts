@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import debounce from "lodash/debounce";
+import throttle from "lodash/throttle";
 import { BREAKPOINTS } from "@/constants/responsive";
 
 /**
@@ -19,14 +19,14 @@ export const useBreakpoint = (): Breakpoint => {
       else setBreakpoint("pc");
     };
 
-    const debouncedResize = debounce(handleResize, 100);
+    const throttledResize = throttle(handleResize, 50);
 
     handleResize();
-    window.addEventListener("resize", debouncedResize);
+    window.addEventListener("resize", throttledResize);
 
     return () => {
-      window.removeEventListener("resize", debouncedResize);
-      debouncedResize.cancel();
+      window.removeEventListener("resize", throttledResize);
+      throttledResize.cancel();
     };
   }, []);
 

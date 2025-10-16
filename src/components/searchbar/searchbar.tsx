@@ -26,8 +26,8 @@ const Searchbar = ({ className, ...props }: ComponentProps<"input">) => {
         placeholder="와인을 검색해 보세요"
         className={cn(
           "h-5 min-w-0 flex-1 text-body-sm font-semibold tracking-[-0.02em] text-gray-900",
-          "placeholder:font-normal placeholder:text-gray-400",
-          "focus:font-normal focus:outline-none"
+          "placeholder:font-semibold placeholder:text-gray-400",
+          "focus:font-semibold focus:outline-none"
         )}
         {...props}
       />

@@ -1,88 +1,48 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { LandingBannerData } from "../_types";
+import IconButton from "@/components/button/icon-button";
+import useLandingBannerAnimation from "../_hooks/use-landing-banner-animation";
 
-type GSAPInstance = (typeof import("gsap"))["gsap"];
-type GSAPTimeline = ReturnType<GSAPInstance["timeline"]>;
+const LANDING_SECTIONS_ID = "landing-sections";
+
+const scrollToSections = () => {
+  const target = document.getElementById(LANDING_SECTIONS_ID);
+  if (!target) return;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
 const LandingBanner = ({ title, imgSrc, imgAlt }: LandingBannerData) => {
   const logoRef = useRef<HTMLDivElement>(null);
   const underlineRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    let isCancelled = false;
-    let timeline: GSAPTimeline | null = null;
-
-    const animate = async () => {
-      if (!logoRef.current || !underlineRef.current) return;
-
-      const { gsap } = await import("gsap");
-      if (!gsap || isCancelled) return;
-
-      const letters = logoRef.current.children;
-
-      timeline = gsap.timeline();
-
-      timeline.fromTo(
-        letters,
-        {
-          opacity: 0,
-          y: 20,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.3,
-          ease: "power2.out",
-          stagger: 0.15,
-        }
-      );
-
-      timeline.fromTo(
-        underlineRef.current,
-        {
-          width: "0%",
-        },
-        {
-          width: "100%",
-          duration: 0.8,
-          ease: "power2.inOut",
-        },
-        "-=0.3"
-      );
-
-      timeline.to(letters, {
-        textShadow: "0 0 15px rgba(255, 255, 255, 0.5)",
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
-    };
-
-    void animate();
-
-    return () => {
-      isCancelled = true;
-      timeline?.kill();
-    };
-  }, []);
+  useLandingBannerAnimation({
+    logoRef,
+    underlineRef,
+    ctaRef,
+  });
 
   return (
     <section
       className={cn(
         "relative flex w-full justify-center overflow-hidden",
-        "h-[400px] tablet:h-[550px] pc:h-[650px]",
-        "mt-[60px] tablet:mt-[70px] pc:mt-[70px]"
+        "min-h-[100vh] tablet:min-h-[100vh] pc:min-h-[100vh]",
+        "pt-[60px] tablet:pt-[70px] pc:pt-[70px]",
+        "bg-[#171A21]"
       )}
     >
+      {/* 배너 이미지 */}
       <Image
         src={imgSrc}
         alt={imgAlt}
         fill
         priority
         fetchPriority="high"
+        sizes="100vw"
         className="object-cover"
       />
       <div className="z-5 absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
@@ -90,19 +50,32 @@ const LandingBanner = ({ title, imgSrc, imgAlt }: LandingBannerData) => {
       <div
         className={cn(
           "absolute inset-0 z-20",
-          "flex flex-col items-center justify-center gap-8 tablet:gap-12 pc:gap-16",
+          "flex-center flex-col gap-6 tablet:gap-8 pc:gap-8",
           "px-8"
         )}
       >
+        {/* 배너 메인 텍스트 */}
         <h1
           className={cn(
-            "flex flex-col text-center leading-tight text-white",
-            "text-[20px] tablet:text-[28px] pc:text-[32px]",
-            "font-medium drop-shadow-lg"
+            "flex select-none flex-col text-center leading-tight text-white",
+            "text-[32px] tablet:text-[40px] pc:text-[48px]",
+            "font-bold drop-shadow-lg"
           )}
         >
-          {title.map((line, index) => (
-            <span key={index}>{line}</span>
+          {title.map((line, lineIndex) => (
+            <span
+              key={lineIndex}
+              className="mx-auto flex w-fit flex-wrap text-center"
+            >
+              {line.map((segment, segmentIndex) => (
+                <span
+                  key={segmentIndex}
+                  className={cn("whitespace-pre-wrap", segment.className)}
+                >
+                  {segment.text}
+                </span>
+              ))}
+            </span>
           ))}
         </h1>
 
@@ -111,9 +84,9 @@ const LandingBanner = ({ title, imgSrc, imgAlt }: LandingBannerData) => {
           <div
             ref={logoRef}
             className={cn(
-              "flex items-center justify-center",
-              "text-[60px] tablet:text-[90px] pc:text-[130px]",
+              "flex-center",
               "font-bold tracking-wider text-white drop-shadow-2xl",
+              "text-[60px] tablet:text-[100px] pc:mb-10 pc:text-[130px]",
               "select-none"
             )}
             style={{ fontFamily: "'Georgia', serif" }}
@@ -135,13 +108,36 @@ const LandingBanner = ({ title, imgSrc, imgAlt }: LandingBannerData) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        {/* 하단 정보 */}
+        <div className="mt-2 flex items-center gap-4">
           <div className="h-[1px] w-12 bg-white/50" />
-          <span className="text-sm text-white/70 tablet:text-base">
+          <span className="select-none text-sm text-white/70 tablet:text-base">
             Codeit. 2025
           </span>
           <div className="h-[1px] w-12 bg-white/50" />
         </div>
+      </div>
+
+      <div
+        ref={ctaRef}
+        className={cn(
+          "pointer-events-auto absolute bottom-8 left-1/2 z-30 -translate-x-1/2 opacity-0",
+          "tablet:bottom-12"
+        )}
+      >
+        {/* 하단 플로팅 버튼 */}
+        <IconButton
+          icon="ArrowDownIcon"
+          iconColor="white"
+          iconSize="lg"
+          aria-label="다음 섹션으로 이동"
+          onClick={scrollToSections}
+          className={cn(
+            "origin-center scale-x-[2.5]",
+            "h-auto w-auto bg-transparent shadow-none",
+            "border-none hover:bg-transparent focus-visible:outline-none"
+          )}
+        />
       </div>
     </section>
   );
