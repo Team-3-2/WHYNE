@@ -20,7 +20,7 @@ const LandingSection = ({
       data-landing-section
       data-landing-section-layout={layout}
       className={cn(
-        "flex w-full max-w-6xl flex-col items-start gap-8",
+        "flex w-full max-w-6xl select-none flex-col items-start gap-8",
         isReverse
           ? "pc:flex-row-reverse pc:items-center pc:gap-36"
           : "pc:flex-row pc:items-center pc:gap-36"
