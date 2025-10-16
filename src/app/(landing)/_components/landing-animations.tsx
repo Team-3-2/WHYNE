@@ -60,7 +60,7 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
         sectionElements.forEach((section) => {
           section
             .querySelectorAll<HTMLElement>(
-              "[data-landing-section-text],[data-landing-section-image]"
+              "[data-landing-section-text-inner],[data-landing-section-image-inner]"
             )
             .forEach((el) => {
               el.style.opacity = "1";
@@ -74,10 +74,10 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
         sectionElements.forEach((section) => {
           const layout = section.dataset.landingSectionLayout ?? "default";
           const text = section.querySelector<HTMLElement>(
-            "[data-landing-section-text]"
+            "[data-landing-section-text-inner]"
           );
           const image = section.querySelector<HTMLElement>(
-            "[data-landing-section-image]"
+            "[data-landing-section-image-inner]"
           );
           if (!text || !image) return;
 
@@ -134,7 +134,7 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
       id="landing-sections"
       ref={containerRef}
       className={cn(
-        "flex flex-col items-center pt-16",
+        "flex flex-col items-center overflow-x-hidden pt-16",
         "gap-12 pc:gap-24",
         "tablet:scroll-mt-[70px] pc:scroll-mt-[70px]"
       )}

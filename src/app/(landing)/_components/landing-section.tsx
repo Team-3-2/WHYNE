@@ -30,36 +30,44 @@ const LandingSection = ({
       <div
         data-landing-section-text
         className={cn(
-          "flex flex-col gap-4 text-left pc:flex-1",
+          "flex flex-col gap-4 overflow-hidden text-left pc:flex-1",
           "pl-4 pr-8",
           "pc:px-0 pc:pl-4 pc:pr-8",
           "tablet:pl-8 tablet:pr-8"
         )}
       >
-        <h2
-          className={cn("flex flex-col", "text-heading-lg pc:text-heading-lg")}
-        >
-          {title.map((line, index) => (
-            <span key={index}>{line}</span>
-          ))}
-        </h2>
-        <div className="flex flex-col text-gray-700">
-          {subtitle.map((line, index) => (
-            <span key={index}>{line}</span>
-          ))}
+        <div data-landing-section-text-inner>
+          <h2
+            className={cn(
+              "flex flex-col",
+              "text-heading-lg pc:text-heading-lg"
+            )}
+          >
+            {title.map((line, index) => (
+              <span key={index}>{line}</span>
+            ))}
+          </h2>
+          <div className="flex flex-col text-gray-700">
+            {subtitle.map((line, index) => (
+              <span key={index}>{line}</span>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* 이미지 영역 */}
       <div
-        data-landing-section-image
+        data-landing-section-image-inner
         className={cn(
-          "w-full pc:w-[680px]",
+          "w-full overflow-hidden pc:w-[680px]",
           isReverse ? "pr-4 tablet:pr-8" : "pl-4 tablet:pl-8",
           "pc:px-0"
         )}
       >
-        <div className="relative aspect-[145/94] w-full overflow-hidden">
+        <div
+          data-landing-section-image-inner
+          className="relative aspect-[145/94] w-full overflow-hidden"
+        >
           <Image
             src={imgSrc}
             alt={imgAlt}
