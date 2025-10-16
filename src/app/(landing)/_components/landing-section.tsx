@@ -57,7 +57,7 @@ const LandingSection = ({
 
       {/* 이미지 영역 */}
       <div
-        data-landing-section-image-inner
+        data-landing-section-image
         className={cn(
           "w-full overflow-hidden pc:w-[680px]",
           isReverse ? "pr-4 tablet:pr-8" : "pl-4 tablet:pl-8",
