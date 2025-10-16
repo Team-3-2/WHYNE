@@ -68,7 +68,7 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
           </div>
         </div>
 
-        <div className="flex flex-1 flex-col gap-6 pc:max-w-[496px]">
+        <div className="flex min-w-0 flex-1 flex-col gap-6 pc:max-w-[496px]">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-gray-500">
               <Rating rating={wine.avgRating} size="md2" />
@@ -76,11 +76,16 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                 {reviewLabel(wine.reviewCount)}
               </span>
             </div>
-
-            <h1 className="text-title-page-md text-gray-900 tablet:text-title-page-md pc:text-title-page-md">
+            <h1
+              title={wine.name}
+              className="truncate text-title-page-md text-gray-900 tablet:text-title-page-md pc:text-title-page-md"
+            >
               {wine.name}
             </h1>
-            <p className="text-body-sm text-gray-600 tablet:text-body-md">
+            <p
+              title={wine.region}
+              className="truncate text-body-sm text-gray-600 tablet:text-body-md"
+            >
               {wine.region}
             </p>
           </div>
