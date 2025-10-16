@@ -1,6 +1,45 @@
 import { cn } from "@/lib/utils";
 import RegisterWine from "../_components/register-wine";
+import { METADATA } from "@/constants/metadata";
+import type { Metadata } from "next";
 import getRegisterWine from "@/api/register/get-register-wine";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  let title = "와인 등록하기";
+  let wineData = null;
+  if (Number(id)) {
+    const wineData = await getRegisterWine(id);
+    if (wineData) {
+      title = `${wineData.name} 와인 수정하기`;
+    } else {
+      title = "와인 수정";
+    }
+  }
+  const DESCRIPTION = wineData
+    ? "와인 정보 수정 페이지"
+    : "새 와인 등록 페이지";
+
+  return {
+    ...METADATA,
+    title,
+    description: DESCRIPTION,
+    openGraph: {
+      ...METADATA.openGraph,
+      title: title,
+      description: DESCRIPTION,
+    },
+    twitter: {
+      ...METADATA.twitter,
+      title: title,
+      description: DESCRIPTION,
+    },
+  };
+}
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;

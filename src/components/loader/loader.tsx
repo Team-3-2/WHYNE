@@ -12,7 +12,7 @@ const TITLE_STYLES = {
 
 const Loader = () => {
   return (
-    <div className="flex-center h-screen w-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat">
+    <div className="flex-center fixed left-0 top-0 z-[10000] h-screen w-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat">
       <div className="container text-center">
         <h2 className="relative m-auto inline-block leading-none">
           <span

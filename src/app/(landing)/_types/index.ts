@@ -31,7 +31,25 @@ export interface LandingSectionData {
  * @param imgAlt : 배너 이미지 alt
  */
 export interface LandingBannerData {
-  title: string[];
+  title: LandingBannerTitleLine[];
   imgSrc: string;
   imgAlt: string;
 }
+
+/**
+ * 랜딩 페이지 메인 배너 텍스트 스타일을 위한 인터페이스
+ * @author junyeol
+ * @param text : 텍스트
+ * @param className : 텍스트 스타일
+ */
+export interface LandingBannerTitleSegment {
+  text: string;
+  className?: string;
+}
+
+/**
+ * 랜딩 페이지 메인 배너 텍스트 라인을 위한 인터페이스
+ * @author junyeol
+ * @param segments : 텍스트 스타일
+ */
+export type LandingBannerTitleLine = LandingBannerTitleSegment[];

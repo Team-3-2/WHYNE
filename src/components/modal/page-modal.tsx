@@ -41,6 +41,7 @@ const PageModal = ({
     }
 
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       modalRef.current?.removeEventListener("cancel", handleCancel);
     };
   }, [modalRef]);

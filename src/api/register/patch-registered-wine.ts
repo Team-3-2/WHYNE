@@ -1,6 +1,5 @@
 import instance from "@/lib/axios";
 import { WineFormData } from "@/types/wine";
-import postImage from "../image/post-image";
 
 const patchRegisteredWine = async (wineFormData: WineFormData, id: number) => {
   try {
@@ -8,7 +7,7 @@ const patchRegisteredWine = async (wineFormData: WineFormData, id: number) => {
 
     if (!response) throw new Error("데이터 수정에 실패했습니다.");
   } catch (error) {
-    console.error(error);
+    throw new Error("데이터 수정에 실패했습니다.");
   }
 };
 

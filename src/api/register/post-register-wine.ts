@@ -1,6 +1,5 @@
 import instance from "@/lib/axios";
 import { WineFormData } from "@/types/wine";
-import postImage from "../image/post-image";
 
 interface ImageData {
   url: File;
@@ -14,7 +13,7 @@ const postRegisterWine = async (wineFormData: WineFormData) => {
 
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error("데이터 전송에 실패했습니다.");
   }
 };
 
