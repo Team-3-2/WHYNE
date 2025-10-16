@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "./site";
 
-export const METADATA = {
+export const METADATA: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
@@ -47,4 +49,28 @@ export const METADATA = {
     index: true,
     follow: true,
   },
+};
+
+/**
+ * 페이지별 title, description
+ */
+export const createPageInfoMetadata = (
+  title: string,
+  description: string
+): Metadata => {
+  return {
+    ...METADATA,
+    title,
+    description,
+    openGraph: {
+      ...METADATA.openGraph,
+      title,
+      description,
+    },
+    twitter: {
+      ...METADATA.twitter,
+      title,
+      description,
+    },
+  };
 };
