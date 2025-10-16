@@ -30,9 +30,16 @@ const WineInfo = ({ name, region, image }: WineInfoProps) => {
           />
         )}
       </div>
-      <div className="flex flex-col gap-1">
-        <h3 className="text-body-md font-bold text-gray-900">{name}</h3>
-        <p className="text-body-sm text-gray-500">{region}</p>
+      <div className="flex min-w-0 flex-col gap-1">
+        <h3
+          title={name}
+          className="truncate text-body-md font-bold text-gray-900"
+        >
+          {name}
+        </h3>
+        <p title={region} className="truncate text-body-sm text-gray-500">
+          {region}
+        </p>
       </div>
     </div>
   );
