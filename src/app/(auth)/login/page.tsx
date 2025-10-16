@@ -65,6 +65,7 @@ const Page = () => {
     } else if (state && state.isError) {
       loginError();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   // 하이드레이션 방지

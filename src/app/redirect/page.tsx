@@ -30,6 +30,7 @@ const Page = () => {
 
   useEffect(() => {
     if (code) socialLogin(code);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <Loader />;
