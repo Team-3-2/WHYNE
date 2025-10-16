@@ -11,6 +11,8 @@ const getMe = async () => {
   const cookieStore = await cookies();
   let accessToken = cookieStore.get("accessToken")?.value;
 
+  if (!accessToken) return;
+
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
@@ -34,7 +36,6 @@ const getMe = async () => {
             Authorization: `Bearer ${newAccessToken}`,
           },
           method: "GET",
-          cache: "force-cache",
         }
       );
 
@@ -48,8 +49,6 @@ const getMe = async () => {
     return await response.json();
   } catch (error) {
     console.log(error);
-
-    return;
   }
 };
 
