@@ -25,9 +25,6 @@ const styles = {
   box: "max-w-[200px] text-[16px] tracking-[-0.02em] px-[4px] py-[2px]",
 };
 
-const AVATAR_IMAGE =
-  "https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/10362e2b-df25-5614-88fd-01a520d2f89c/03daec0e-4d19-577c-98ca-aa63b3185aa3.jpg";
-
 const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -97,7 +94,6 @@ const ChatBot = () => {
               model={{ direction: "incoming", position: "first" }}
               className={styles.box}
             >
-              {/* <Avatar src={AVATAR_IMAGE} name="GPT" /> */}
               <Message.CustomContent>
                 안녕하세요, 무엇을 도와드릴까요?
               </Message.CustomContent>
@@ -112,7 +108,6 @@ const ChatBot = () => {
                     position: "first",
                   }}
                 >
-                  {/* <Avatar src={AVATAR_IMAGE} name="User" /> */}
                   <Message.CustomContent
                     className={cn(
                       styles.box,
@@ -138,6 +133,3 @@ const ChatBot = () => {
 };
 
 export default ChatBot;
-
-// TODO: 스타일 수정
-// TODO: 와인 API 연동
