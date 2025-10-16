@@ -19,7 +19,7 @@ const usePostWine = () => {
       wineCreateSuccess();
     },
     onError: (error) => {
-      console.error(error);
+      router.back();
       wineCreateError();
     },
   });

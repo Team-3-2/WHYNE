@@ -126,7 +126,7 @@ const Page = () => {
           <Button
             label="로그인"
             className="mobile:font-medium"
-            disabled={isValid ? false : true}
+            disabled={isValid && !isPending ? false : true}
           />
           {loginType === "basic" && (
             <RecentLoginBadge className={styles.badge} />
