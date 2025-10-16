@@ -64,12 +64,12 @@ export const createPageInfoMetadata = (
     description,
     openGraph: {
       ...METADATA.openGraph,
-      title,
+      title: `${title} | ${SITE_NAME}`,
       description,
     },
     twitter: {
       ...METADATA.twitter,
-      title,
+      title: `${title} | ${SITE_NAME}`,
       description,
     },
   };
