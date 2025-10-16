@@ -65,6 +65,7 @@ const Page = () => {
     } else if (state && state.isError) {
       loginError();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   // 하이드레이션 방지
@@ -125,7 +126,7 @@ const Page = () => {
           <Button
             label="로그인"
             className="mobile:font-medium"
-            disabled={isValid ? false : true}
+            disabled={isValid && !isPending ? false : true}
           />
           {loginType === "basic" && (
             <RecentLoginBadge className={styles.badge} />

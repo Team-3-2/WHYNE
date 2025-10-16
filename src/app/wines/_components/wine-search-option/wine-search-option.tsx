@@ -30,6 +30,7 @@ const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
     return () => {
       allowScroll(currentScrollY);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   if (!open) return null;
@@ -66,6 +67,11 @@ const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
             onClick={resetFn}
             label="초기화"
           />
+          <Button
+            className="h-[54px] w-full"
+            onClick={() => setModalOpen(0)}
+            label="닫기"
+          />
         </div>
       </div>
     </dialog>
@@ -83,10 +89,12 @@ const WineSearchOption = ({
   const [resetSignal, setResetSignal] = useState(0);
   const isMobileOrTablet = breakpoint === "mobile" || breakpoint === "tablet";
 
-  const handleResetClick = () => {
+  const handleResetClick = (responsive = false) => {
     router.replace("/wines", { scroll: false });
     setSearch("");
     setResetSignal((prev) => prev + 1);
+
+    if (responsive) return setModalOpen(0);
   };
 
   return (
@@ -108,7 +116,7 @@ const WineSearchOption = ({
           <Modal
             open={modalOpen}
             setModalOpen={setModalOpen}
-            resetFn={handleResetClick}
+            resetFn={() => handleResetClick(true)}
             resetSignal={resetSignal}
           />
         </div>
@@ -139,7 +147,7 @@ const WineSearchOption = ({
               <Button
                 label="초기화"
                 variant="outline"
-                onClick={handleResetClick}
+                onClick={() => handleResetClick()}
               />
               <Button
                 label="와인 등록하기"
