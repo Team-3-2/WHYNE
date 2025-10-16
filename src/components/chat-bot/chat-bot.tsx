@@ -76,7 +76,13 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="absolute bottom-[10px] right-[70px] h-[500px] max-h-[600px] w-[400px] max-w-[700px] resize overflow-auto rounded-[12px] border border-[#6F7172] bg-[#15191B] px-4 py-6">
+    <div
+      className={cn(
+        "absolute -right-[5px] bottom-[100px] h-[500px] max-h-[600px] w-[400px] max-w-[700px] resize overflow-auto rounded-[12px] border border-[#6F7172] bg-[#15191B] px-4 py-6",
+        "tablet:bottom-[10px] tablet:right-[70px]",
+        "pc:bottom-[10px] pc:right-[70px]"
+      )}
+    >
       <MainContainer responsive className="h-full w-full border-none">
         <ChatContainer className="">
           <MessageList

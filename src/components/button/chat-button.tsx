@@ -15,12 +15,12 @@ const ChatButton = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  // if (pathname !== "/list" && pathname !== "/myprofile") return null;
+  if (pathname !== "/wines") return null;
 
   return (
     <>
       <IconButton
-        icon="ArrowTopIcon"
+        icon="GptIcon"
         iconSize="md"
         className={cn(
           "relative h-[40px] w-[40px] rounded-full border-gray-300",
