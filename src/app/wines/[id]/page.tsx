@@ -6,9 +6,8 @@ import WineDetailContent from "@/app/wines/[id]/_components/wine-detail/wine-det
 import Loader from "@/components/loader/loader";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
-
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
