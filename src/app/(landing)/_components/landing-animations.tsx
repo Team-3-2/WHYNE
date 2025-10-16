@@ -131,8 +131,13 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
 
   return (
     <main
+      id="landing-sections"
       ref={containerRef}
-      className={cn("flex flex-col items-center pt-16", "gap-12 pc:gap-24")}
+      className={cn(
+        "flex flex-col items-center pt-16",
+        "gap-12 pc:gap-24",
+        "tablet:scroll-mt-[70px] pc:scroll-mt-[70px]"
+      )}
     >
       {sections.map((section, index) => (
         <LandingSection key={index} {...section} />
