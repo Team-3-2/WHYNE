@@ -61,59 +61,44 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
   if (!userInfo) return redirect("/login");
 
   return (
-    <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
-      <article className="container w-full">
-        <ProfileTabs tab={tab} setTab={setTab} />
-        <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
-          {tab === "review" && (
-            <>
-              {reviewIsLoading ? (
-                <Loader />
-              ) : userReview?.length === 0 || reviewIsError ? (
-                <EmptyState
-                  icon="EmptyStateIcon"
-                  title="아직 등록된 리뷰가 없습니다."
-                  description="리뷰를 등록해보세요!"
-                />
-              ) : (
-                (userReview as ReviewItemType[])?.map((review) => (
-                  <ReviewItem key={review.id} review={review} />
-                ))
-              )}
-              <div ref={reviewObserverRef} className="mt-[100px] h-1 w-full" />
-            </>
-          )}
-
-          {tab === "registered" && (
-            <>
-              {wineIsLoading ? (
-                <Loader />
-              ) : userWinesTotalCount === 0 || wineIsError ? (
-                <EmptyState
-                  icon="EmptyStateIcon"
-                  title="아직 등록한 와인이 없어요!"
-                  description="지금 첫 번째 와인을 등록해보세요"
-                  actionLabel="와인 등록하기"
-                  actionHref="/register/new"
-                />
-              ) : (
-                <>
-                  <div
-                    className={cn(
-                      "grid w-full gap-y-[16px] pt-[24px]",
-                      "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
-                      "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
-                    )}
-                  >
-                    {(userWines as WineType[])?.map((wine) => (
-                      <WineItem key={wine.id} wine={wine} />
-                    ))}
-                  </div>
-                  <div
-                    ref={wineObserverRef}
-                    className="mt-[100px] h-1 w-full"
+    <>
+      {wineIsLoading || reviewIsLoading ? <Loader /> : null}
+      <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
+        <article className="container w-full">
+          <ProfileTabs tab={tab} setTab={setTab} />
+          <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
+            {tab === "review" && (
+              <>
+                {userReview?.length === 0 || reviewIsError ? (
+                  <EmptyState
+                    icon="EmptyStateIcon"
+                    title="아직 등록된 리뷰가 없습니다."
+                    description="리뷰를 등록해보세요!"
                   />
-                  {wineIsLoading === false && isFetchingNextPage && (
+                ) : (
+                  (userReview as ReviewItemType[])?.map((review) => (
+                    <ReviewItem key={review.id} review={review} />
+                  ))
+                )}
+                <div
+                  ref={reviewObserverRef}
+                  className="mt-[100px] h-1 w-full"
+                />
+              </>
+            )}
+
+            {tab === "registered" && (
+              <>
+                {userWinesTotalCount === 0 || wineIsError ? (
+                  <EmptyState
+                    icon="EmptyStateIcon"
+                    title="아직 등록한 와인이 없어요!"
+                    description="지금 첫 번째 와인을 등록해보세요"
+                    actionLabel="와인 등록하기"
+                    actionHref="/register/new"
+                  />
+                ) : (
+                  <>
                     <div
                       className={cn(
                         "grid w-full gap-y-[16px] pt-[24px]",
@@ -121,20 +106,37 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                         "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
                       )}
                     >
-                      {Array.from({ length: 6 }).map((_, i) => (
-                        <CardSkeleton key={i} />
+                      {(userWines as WineType[])?.map((wine) => (
+                        <WineItem key={wine.id} wine={wine} />
                       ))}
                     </div>
-                  )}
-                </>
-              )}
-            </>
-          )}
+                    <div
+                      ref={wineObserverRef}
+                      className="mt-[100px] h-1 w-full"
+                    />
+                    {wineIsLoading === false && isFetchingNextPage && (
+                      <div
+                        className={cn(
+                          "grid w-full gap-y-[16px] pt-[24px]",
+                          "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+                          "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
+                        )}
+                      >
+                        {Array.from({ length: 6 }).map((_, i) => (
+                          <CardSkeleton key={i} />
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            )}
 
-          {tab === "account" && <AccountItem user={userInfo} />}
-        </section>
-      </article>
-    </main>
+            {tab === "account" && <AccountItem user={userInfo} />}
+          </section>
+        </article>
+      </main>
+    </>
   );
 };
 
