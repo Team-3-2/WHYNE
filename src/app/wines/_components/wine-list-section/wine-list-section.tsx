@@ -105,6 +105,7 @@ const WineListSection = () => {
     if (typeof window !== "undefined" && params.get("name")) {
       router.replace("?", { scroll: false });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
