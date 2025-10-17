@@ -54,7 +54,7 @@ export default {
         "title-hero": ["32px", { lineHeight: "46px", fontWeight: "700" }],
         "title-page-md": ["40px", { lineHeight: "52px", fontWeight: "700" }],
         "title-page-sm": ["32px", { lineHeight: "46px", fontWeight: "700" }],
-        "title-page-xs": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+        "title-page-xs": ["28px", { lineHeight: "36px", fontWeight: "700" }],
         "heading-lg": ["24px", { lineHeight: "32px", fontWeight: "600" }],
         "heading-md": ["20px", { lineHeight: "30px", fontWeight: "700" }],
         "heading-sm": ["18px", { lineHeight: "30px", fontWeight: "700" }],
