@@ -161,7 +161,7 @@ const WineReviewItem = ({
     <>
       <article
         className={cn(
-          "flex w-full flex-col items-center gap-6 py-8",
+          "flex w-full select-none flex-col items-center gap-6 py-8",
           "tablet:items-center tablet:gap-8 tablet:py-10",
           "pc:gap-6 pc:py-8",
           !isFirst && "border-t border-gray-300"

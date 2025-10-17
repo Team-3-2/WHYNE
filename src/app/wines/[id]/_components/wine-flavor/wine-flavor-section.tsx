@@ -41,7 +41,7 @@ const FlavorSection = ({ reviews, reviewCount }: FlavorSectionProps) => {
     >
       <div
         className={cn(
-          "mb-4 flex flex-col items-start gap-1",
+          "mb-4 flex select-none flex-col items-start gap-1",
           "tablet:mb-0 tablet:ml-9 tablet:flex-col tablet:gap-3",
           "pc:flex-row pc:items-center pc:justify-between"
         )}
@@ -54,7 +54,7 @@ const FlavorSection = ({ reviews, reviewCount }: FlavorSectionProps) => {
         </span>
       </div>
 
-      <div className="flex w-full justify-center tablet:justify-start">
+      <div className="flex w-full select-none justify-center tablet:justify-start">
         <div className="w-full max-w-[340px] tablet:max-w-[440px] pc:ml-10 pc:max-w-none">
           <Flavor
             count={reviewCount}
