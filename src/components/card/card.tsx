@@ -76,7 +76,7 @@ const Card = ({
           blurDataURL={blurDataURL}
         />
       )}
-      <div className="relative pt-[24px]">
+      <div className="relative break-words pt-[24px]">
         {href ? (
           <Link href={href}>
             <CardInfo
