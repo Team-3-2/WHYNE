@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo, memo, useEffect } from "react";
+import { useState, useRef, useMemo, memo } from "react";
 import { useRouter } from "next/navigation";
 import { cn, getAromaIconName } from "@/lib/utils";
 import WineTaste, { buildTasteData } from "@/components/wine-taste";
