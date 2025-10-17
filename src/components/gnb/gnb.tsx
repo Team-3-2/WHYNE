@@ -56,7 +56,7 @@ const Gnb = ({ user }: { user: User }) => {
             aria-label="메인페이지 이동"
             className="flex items-center leading-[26px] text-white"
           >
-            <Logo className="w-[100px]" />
+            <Logo className="w-[71px]" />
           </Link>
 
           <div className="relative" ref={dropdownRef}>
