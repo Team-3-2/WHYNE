@@ -18,7 +18,13 @@ const ReviewItemSkeleton = () => {
             {/*별점 컴포넌트 */}
             <Skeleton width={200} height={20} />
             {/* 와인 정보 */}
-            <div className="flex w-full items-center gap-2 tablet:gap-4 pc:gap-[17px]">
+            <div
+              className={cn(
+                "flex w-full items-center gap-2",
+                "tablet:gap-4",
+                "pc:gap-[17px]"
+              )}
+            >
               <div className="relative h-[80px] w-[60px]">
                 <Image
                   src="/images/placeholder/img-wine.svg"
@@ -26,7 +32,7 @@ const ReviewItemSkeleton = () => {
                   fill
                 />
               </div>
-              <div className="">
+              <div>
                 <Skeleton width={300} height={20} style={{ marginBottom: 6 }} />
                 <Skeleton width={100} height={16} />
               </div>
@@ -44,7 +50,13 @@ const ReviewItemSkeleton = () => {
         </div>
 
         {/* WineTaste 컴포넌트 */}
-        <div className="flex w-full flex-col gap-3 tablet:grid tablet:grid-cols-2 tablet:gap-4 pc:grid pc:grid-cols-2 pc:gap-4">
+        <div
+          className={cn(
+            "flex w-full flex-col gap-3",
+            "tablet:grid tablet:grid-cols-2 tablet:gap-4",
+            "pc:grid pc:grid-cols-2 pc:gap-4"
+          )}
+        >
           {Array.from({ length: 4 }).map((_, i) => (
             <Skeleton key={i} width="100%" height={16} />
           ))}
