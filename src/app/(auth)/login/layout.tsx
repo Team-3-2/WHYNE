@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import ErrorBoundary from "@/error/error-boundary";
 import { createPageInfoMetadata } from "@/constants/metadata";
 
 export function generateMetadata() {
@@ -9,5 +10,9 @@ export function generateMetadata() {
 }
 
 export default function LoginLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <ErrorBoundary>{children}</ErrorBoundary>
+    </>
+  );
 }
