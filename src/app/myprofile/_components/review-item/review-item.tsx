@@ -22,7 +22,9 @@ const ReviewItem = ({
     return <ReviewItemSkeleton />;
   }
 
-  if (!review) return null;
+  if (!review) {
+    return null;
+  }
 
   const tastes = buildTasteData({
     lightBold: review.lightBold,

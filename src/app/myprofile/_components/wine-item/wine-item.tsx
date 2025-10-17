@@ -42,7 +42,9 @@ const WineItem = ({ wine, skeleton = false }: WineItemProps) => {
     return <CardSkeleton />;
   }
 
-  if (!wine) return null;
+  if (!wine) {
+    return null;
+  }
 
   return (
     <>
