@@ -5,7 +5,9 @@ import { ReactNode } from "react";
 const Layout = ({ children }: { children: Readonly<ReactNode> }) => {
   return (
     <main aria-labelledby="회원가입 영역">
-      <div className="flex-center min-h-screen bg-gray-200">{children}</div>
+      <div className="flex-center min-h-screen bg-gray-200 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat">
+        {children}
+      </div>
     </main>
   );
 };

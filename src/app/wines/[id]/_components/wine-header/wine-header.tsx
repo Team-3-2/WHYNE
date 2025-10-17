@@ -79,7 +79,7 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
             </div>
             <h2
               title={wine.name}
-              className="text-title-page-xs line-clamp-4 text-gray-900 tablet:text-title-page-sm pc:text-title-page-md"
+              className="text-title-page-xs text-gray-900 tablet:text-title-page-sm pc:text-title-page-md"
             >
               {wine.name}
             </h2>
