@@ -79,18 +79,18 @@ const WineReviewItem = ({
   const { reviewDeleteSuccess, reviewDeleteError } = useToast();
 
   const derivedIsLiked = useMemo(() => {
-    return typeof review.isLiked === "boolean"
-      ? review.isLiked
-      : Object.keys(review.isLiked).length > 0;
+    if (typeof review.isLiked === "boolean") {
+      return review.isLiked;
+    }
+    if (!review.isLiked) {
+      return false;
+    }
+    return Object.keys(review.isLiked).length > 0;
   }, [review.isLiked]);
 
   const [isTasteOpen, setIsTasteOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [liked, setLiked] = useState(derivedIsLiked);
-
-  useEffect(() => {
-    setLiked(derivedIsLiked);
-  }, [derivedIsLiked]);
 
   const {
     isOn: isMenuOpen,
@@ -135,8 +135,6 @@ const WineReviewItem = ({
   };
 
   const handleDeleteConfirm = () => {
-    const scrollYBeforeDelete = window.scrollY;
-
     deleteReview(undefined, {
       onSuccess: () => {
         setIsDeleteModalOpen(false);
