@@ -23,7 +23,6 @@ const useReviewMutation = ({ mode, reviewId }: ReviewMutationOptions) => {
     },
     onSuccess: (response, variables) => {
       const { wineId } = variables;
-
       queryClient.setQueryData(["wine", wineId], (old: any) => {
         if (!old) return old;
 
@@ -57,16 +56,11 @@ const useReviewMutation = ({ mode, reviewId }: ReviewMutationOptions) => {
         }
       );
 
-      queryClient.setQueryData(["user-review"], (old: Review[] | undefined) => {
-        if (!old) return old;
+      if (mode === "edit" && reviewId) {
+        queryClient.setQueryData(["review", reviewId], response);
+      }
 
-        if (mode === "create") {
-          return [response, ...old];
-        } else if (mode === "edit") {
-          return old.map((r) => (r.id === reviewId ? response : r));
-        }
-        return old;
-      });
+      queryClient.invalidateQueries({ queryKey: ["user-review"] });
     },
   });
 };
