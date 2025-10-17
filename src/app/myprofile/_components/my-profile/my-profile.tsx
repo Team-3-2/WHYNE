@@ -13,8 +13,12 @@ import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import getUserReview from "@/api/my-profile/get-user-review";
 import getUserWines from "@/api/user/get-user-wines";
 import { EmptyState } from "@/components";
-import Loader from "@/components/loader/loader";
-import CardSkeleton from "@/components/card/card-skeleton";
+
+const WINE_ITEM_CONTAINER = cn(
+  "grid w-full gap-y-[16px] pt-[24px]",
+  "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
+  "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
+);
 
 interface MyProfileProps {
   userInfo: User;
@@ -62,13 +66,19 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
 
   return (
     <>
-      {wineIsLoading || reviewIsLoading ? <Loader /> : null}
       <main className="flex-col-center mx-auto w-full pc:flex-row pc:items-start">
         <article className="container w-full">
           <ProfileTabs tab={tab} setTab={setTab} />
           <section className="mt-[61px] tablet:mt-[67px] pc:mt-[70px]">
             {tab === "review" && (
               <>
+                {reviewIsLoading && (
+                  <>
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <ReviewItem key={`skeleton-${i}`} skeleton />
+                    ))}
+                  </>
+                )}
                 {userReview?.length === 0 || reviewIsError ? (
                   <EmptyState
                     icon="EmptyStateIcon"
@@ -80,15 +90,25 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                     <ReviewItem key={review.id} review={review} />
                   ))
                 )}
-                <div
-                  ref={reviewObserverRef}
-                  className="mt-[100px] h-1 w-full"
-                />
+                {isFetchingNextPage && (
+                  <div className={WINE_ITEM_CONTAINER} ref={reviewObserverRef}>
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <ReviewItem key={`skeleton-${i}`} skeleton />
+                    ))}
+                  </div>
+                )}
               </>
             )}
 
             {tab === "registered" && (
               <>
+                {wineIsLoading && (
+                  <div className={WINE_ITEM_CONTAINER}>
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <WineItem key={`skeleton-${i}`} skeleton />
+                    ))}
+                  </div>
+                )}
                 {userWinesTotalCount === 0 || wineIsError ? (
                   <EmptyState
                     icon="EmptyStateIcon"
@@ -98,36 +118,18 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                     actionHref="/register/new"
                   />
                 ) : (
-                  <>
-                    <div
-                      className={cn(
-                        "grid w-full gap-y-[16px] pt-[24px]",
-                        "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
-                        "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
-                      )}
-                    >
-                      {(userWines as WineType[])?.map((wine) => (
-                        <WineItem key={wine.id} wine={wine} />
-                      ))}
-                    </div>
-                    <div
-                      ref={wineObserverRef}
-                      className="mt-[100px] h-1 w-full"
-                    />
-                    {wineIsLoading === false && isFetchingNextPage && (
-                      <div
-                        className={cn(
-                          "grid w-full gap-y-[16px] pt-[24px]",
-                          "pc:grid-cols-3 pc:gap-x-[15px] pc:gap-y-[40px] pc:pt-[40px]",
-                          "tablet:grid-cols-2 tablet:gap-x-[16px] tablet:gap-y-[32px]"
-                        )}
-                      >
-                        {Array.from({ length: 6 }).map((_, i) => (
-                          <CardSkeleton key={i} />
-                        ))}
-                      </div>
-                    )}
-                  </>
+                  <div className={WINE_ITEM_CONTAINER}>
+                    {(userWines as WineType[])?.map((wine) => (
+                      <WineItem key={wine.id} wine={wine} />
+                    ))}
+                  </div>
+                )}
+                {isFetchingNextPage && (
+                  <div className={WINE_ITEM_CONTAINER} ref={wineObserverRef}>
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <WineItem key={`skeleton-${i}`} skeleton />
+                    ))}
+                  </div>
                 )}
               </>
             )}

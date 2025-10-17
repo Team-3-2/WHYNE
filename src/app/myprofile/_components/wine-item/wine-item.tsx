@@ -39,7 +39,7 @@ const WineItem = ({ wine, skeleton = false }: WineItemProps) => {
   };
 
   if (skeleton) {
-    return <CardSkeleton hasActionMenu />;
+    return <CardSkeleton />;
   }
 
   if (!wine) return null;

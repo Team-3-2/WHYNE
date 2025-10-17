@@ -7,9 +7,22 @@ import { buildTasteData } from "@/components/wine-taste";
 import { ReviewItemType } from "../../_types/review-type";
 import { ReviewInfo, ReviewRating } from ".";
 import FlavorIconList from "@/components/flavor-icon-list/flavor-icon-list";
+import ReviewItemSkeleton from "./review-item-skeleton";
 
-const ReviewItem = ({ review }: { review: ReviewItemType }) => {
+const ReviewItem = ({
+  review,
+  skeleton = false,
+}: {
+  review?: ReviewItemType;
+  skeleton?: boolean;
+}) => {
   const [optionMenu, setOptionMenu] = useState(false);
+
+  if (skeleton) {
+    return <ReviewItemSkeleton />;
+  }
+
+  if (!review) return null;
 
   const tastes = buildTasteData({
     lightBold: review.lightBold,
@@ -17,7 +30,6 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
     drySweet: review.drySweet,
     softAcidic: review.softAcidic,
   });
-
   return (
     <div
       className={cn(
