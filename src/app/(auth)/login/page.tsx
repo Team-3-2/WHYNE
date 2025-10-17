@@ -35,13 +35,6 @@ const Page = () => {
   const { loginError } = useToast();
   const [loginType, setLoginType] = useState<string | null>(null);
   const [state, formAction, isPending] = useActionState(login, null);
-  const [showError, setShowError] = useState(false);
-  useEffect(() => {
-    if (showError) {
-      throw new Error("Test error for ErrorBoundary");
-    }
-  }, [showError]);
-
   const { checked, setChecked, initialId, opts } = useRememberId();
 
   const email = watch("email");
@@ -159,9 +152,6 @@ const Page = () => {
           url="/signup"
         />
       </div>
-      <button onClick={() => setShowError((prevState) => !prevState)}>
-        오류 표출
-      </button>
     </FormWrapper>
   );
 };

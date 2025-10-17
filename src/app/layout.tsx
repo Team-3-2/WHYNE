@@ -32,11 +32,7 @@ export default async function RootLayout({
           <ToastProvider />
         </QueryProvider>
         <KaKaoInitializer />
-        <ToastContainer
-          position="top-right"
-          autoClose={1500}
-          hideProgressBar={false}
-        />
+        <ToastContainer position="top-right" autoClose={1500} />
       </body>
     </html>
   );
