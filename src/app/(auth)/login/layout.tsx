@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { METADATA } from "@/constants/metadata";
+import ErrorBoundary from "@/error/error-boundary";
 
 export function generateMetadata() {
   const TITLE = "로그인";
@@ -22,5 +23,9 @@ export function generateMetadata() {
 }
 
 export default function LoginLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <ErrorBoundary>{children}</ErrorBoundary>
+    </>
+  );
 }

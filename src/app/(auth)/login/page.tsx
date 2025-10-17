@@ -35,7 +35,6 @@ const Page = () => {
   const { loginError } = useToast();
   const [loginType, setLoginType] = useState<string | null>(null);
   const [state, formAction, isPending] = useActionState(login, null);
-
   const { checked, setChecked, initialId, opts } = useRememberId();
 
   const email = watch("email");

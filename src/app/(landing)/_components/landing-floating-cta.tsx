@@ -54,8 +54,8 @@ const LandingFloatingCTA = ({ footerId }: LandingFloatingCTAProps) => {
   return (
     <div
       className={cn(
-        "pointer-events-auto fixed inset-x-0 bottom-6 z-50 px-4 transition-all duration-300",
-        "flex-center animate-in fade-in slide-in-from-bottom-4 duration-300",
+        "pointer-events-none fixed inset-x-0 bottom-6 z-50 px-4 transition-all duration-300",
+        "flex-center animate-in fade-in slide-in-from-bottom-4",
         "pc:bottom-10 pc:justify-center pc:px-10"
       )}
     >
@@ -64,7 +64,7 @@ const LandingFloatingCTA = ({ footerId }: LandingFloatingCTAProps) => {
         label="와인 보러가기"
         scroll={true}
         className={cn(
-          "h-[54px] w-[260px] select-none px-8",
+          "pointer-events-auto h-[54px] w-[260px] select-none px-8",
           "tablet:w-[320px]",
           "pc:h-[60px] pc:w-[260px]"
         )}
