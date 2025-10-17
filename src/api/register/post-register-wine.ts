@@ -1,10 +1,6 @@
 import instance from "@/lib/axios";
 import { WineFormData } from "@/types/wine";
 
-interface ImageData {
-  url: File;
-}
-
 const postRegisterWine = async (wineFormData: WineFormData) => {
   try {
     const response = await instance.post("/wines", wineFormData);
