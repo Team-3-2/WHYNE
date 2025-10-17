@@ -48,11 +48,15 @@ const ReviewSection = ({
 
   useEffect(() => {
     const prevLength = prevLengthRef.current;
+    const scrollY = window.scrollY;
 
     if (reviews.length > prevLength) {
       setVisibleCount(Math.min(REVIEW_PIECES, reviews.length));
     } else if (reviews.length < prevLength) {
       setVisibleCount((prev) => Math.min(prev, reviews.length));
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollY);
+      });
     }
 
     prevLengthRef.current = reviews.length;

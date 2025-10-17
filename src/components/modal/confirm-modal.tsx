@@ -42,6 +42,9 @@ const ConfirmModal = ({
 
     return () => {
       allowScroll(currentScrollY);
+      requestAnimationFrame(() => {
+        window.scrollTo(0, currentScrollY);
+      });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
