@@ -26,11 +26,7 @@ const ReviewItemSkeleton = () => {
               )}
             >
               <div className="relative h-[80px] w-[60px]">
-                <Image
-                  src="/images/placeholder/img-wine.svg"
-                  alt="wine placeholder"
-                  fill
-                />
+                <Image src="/images/placeholder/img-wine.svg" alt="" fill />
               </div>
               <div>
                 <Skeleton width={300} height={20} style={{ marginBottom: 6 }} />
