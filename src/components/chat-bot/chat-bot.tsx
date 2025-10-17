@@ -112,7 +112,7 @@ const ChatBot = ({ open }: { open: boolean }) => {
               className={styles.box}
             >
               <Message.CustomContent>
-                안녕하세요, 무엇을 도와드릴까요?
+                안녕하세요! 무엇을 도와드릴까요?
               </Message.CustomContent>
             </Message>
             {messages.map((message) => (
