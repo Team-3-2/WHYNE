@@ -55,7 +55,7 @@ const AccountItem = ({ user }: AccountItemProps) => {
   // 닉네임 변경
   const handleNicknameUpdate = async () => {
     const trimmed = nickname?.trim();
-    if (!trimmed) return;
+    if (!trimmed) return profileUpdateError("닉네임은 공백이 불가능합니다.");
 
     try {
       await updateProfile({ nickname: trimmed });

@@ -21,45 +21,6 @@ const WineListSection = () => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  const debouncedSetSearch = useMemo(
-    () =>
-      debounce((value: string) => {
-        setDebouncedSearch(value);
-      }, 400),
-    []
-  );
-
-  useEffect(() => {
-    return () => {
-      debouncedSetSearch.cancel();
-    };
-  }, [debouncedSetSearch]);
-
-  const handleSearchChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setSearch(value);
-      debouncedSetSearch(value);
-    },
-    [debouncedSetSearch]
-  );
-
-  useEffect(() => {
-    const q = new URLSearchParams(Array.from(params.entries()));
-    if (debouncedSearch) {
-      q.set("name", debouncedSearch);
-    } else {
-      q.delete("name");
-    }
-    router.push(`?${q.toString()}`, { scroll: false });
-  }, [debouncedSearch]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && params.get("name")) {
-      router.replace("?", { scroll: false });
-    }
-  }, []);
-
   const { type, rating, maxPrice, minPrice } = parseQueryParams(params);
 
   const filters = useMemo(
@@ -95,6 +56,57 @@ const WineListSection = () => {
   const wineList = wines;
 
   const isInitialLoading = isLoading && wines.length === 0;
+
+  const debouncedSetSearch = useMemo(
+    () =>
+      debounce((value: string) => {
+        setDebouncedSearch(value);
+      }, 200),
+    []
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedSetSearch.cancel();
+    };
+  }, [debouncedSetSearch]);
+
+  const handleSearchChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      const trimmedValue = value.trim();
+
+      setSearch(value);
+
+      if (trimmedValue === "") {
+        setDebouncedSearch("");
+        return;
+      }
+
+      if (wineList.length === 0) return;
+
+      debouncedSetSearch(trimmedValue);
+    },
+    [debouncedSetSearch, wineList.length]
+  );
+
+  useEffect(() => {
+    const q = new URLSearchParams(Array.from(params.entries()));
+    if (debouncedSearch) {
+      q.set("name", debouncedSearch);
+    } else {
+      q.delete("name");
+    }
+    router.push(`?${q.toString()}`, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && params.get("name")) {
+      router.replace("?", { scroll: false });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section

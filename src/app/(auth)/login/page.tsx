@@ -35,7 +35,6 @@ const Page = () => {
   const { loginError } = useToast();
   const [loginType, setLoginType] = useState<string | null>(null);
   const [state, formAction, isPending] = useActionState(login, null);
-
   const { checked, setChecked, initialId, opts } = useRememberId();
 
   const email = watch("email");
@@ -65,6 +64,7 @@ const Page = () => {
     } else if (state && state.isError) {
       loginError();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   // 하이드레이션 방지

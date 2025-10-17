@@ -63,7 +63,11 @@ export async function generateMetadata(
   }
 }
 
-const WineDetailPage = async ({ params }: { params: { id: string } }) => {
+const WineDetailPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
   const { id } = await params;
   return (
     <Suspense fallback={<Loader />}>

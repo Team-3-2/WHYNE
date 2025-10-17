@@ -24,3 +24,5 @@ export { default as LikeButton } from "./button/like-button";
 export { default as Carousel } from "./carousel/carousel";
 export { default as EmptyState } from "./empty-state/empty-state";
 export { default as FloatingActions } from "./floating-actions/floating-actions";
+export { default as ChatButton } from "./button/chat-button";
+export { default as ChatBot } from "./chat-bot/chat-bot";

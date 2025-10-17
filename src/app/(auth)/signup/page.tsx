@@ -36,6 +36,7 @@ const Page = () => {
     } else if (state && state.isError) {
       signupError();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   return (
