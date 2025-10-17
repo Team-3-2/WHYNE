@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo, memo } from "react";
+import { useState, useRef, useMemo, memo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { cn, getAromaIconName } from "@/lib/utils";
 import WineTaste, { buildTasteData } from "@/components/wine-taste";
@@ -78,7 +78,7 @@ const WineReviewItem = ({
   const router = useRouter();
   const { reviewDeleteSuccess, reviewDeleteError } = useToast();
 
-  const isLiked = useMemo(() => {
+  const derivedIsLiked = useMemo(() => {
     return typeof review.isLiked === "boolean"
       ? review.isLiked
       : Object.keys(review.isLiked).length > 0;
@@ -86,6 +86,11 @@ const WineReviewItem = ({
 
   const [isTasteOpen, setIsTasteOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [liked, setLiked] = useState(derivedIsLiked);
+
+  useEffect(() => {
+    setLiked(derivedIsLiked);
+  }, [derivedIsLiked]);
 
   const {
     isOn: isMenuOpen,
@@ -97,8 +102,7 @@ const WineReviewItem = ({
 
   const { mutate: toggleLike, isPending: likePending } = useReviewLike(
     review.id,
-    wineId,
-    isLiked
+    wineId
   );
 
   const { mutate: deleteReview, isPending: deletePending } = useReviewDelete({
@@ -136,11 +140,21 @@ const WineReviewItem = ({
     deleteReview(undefined, {
       onSuccess: () => {
         setIsDeleteModalOpen(false);
-        requestAnimationFrame(() => window.scrollTo(0, scrollYBeforeDelete));
         reviewDeleteSuccess();
       },
       onError: () => {
         reviewDeleteError();
+      },
+    });
+  };
+
+  const handleLikeClick = () => {
+    const next = !liked;
+    setLiked(next);
+
+    toggleLike(next, {
+      onError: () => {
+        setLiked((prev) => !prev);
       },
     });
   };
@@ -176,12 +190,10 @@ const WineReviewItem = ({
             <div className="flex items-center gap-2">
               {!isMyReview && (
                 <LikeButton
-                  isLike={isLiked}
+                  isLike={liked}
                   disabled={likePending}
-                  onClick={() => {
-                    toggleLike();
-                  }}
-                  aria-label={isLiked ? "좋아요 취소" : "좋아요"}
+                  onClick={handleLikeClick}
+                  aria-label={liked ? "좋아요 취소" : "좋아요"}
                 />
               )}
               {isMyReview && (
