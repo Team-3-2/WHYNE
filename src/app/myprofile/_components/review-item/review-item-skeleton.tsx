@@ -13,7 +13,7 @@ const ReviewItemSkeleton = () => {
       )}
     >
       <div className="flex w-full flex-col items-start justify-center gap-8 px-[14px]">
-        <div className="flex w-full flex-col items-center justify-center gap-[26px]">
+        <div className="flex-col-center w-full gap-[26px]">
           <div className="flex w-full flex-col items-start gap-5">
             {/*별점 컴포넌트 */}
             <Skeleton width={200} height={20} />
