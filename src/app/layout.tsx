@@ -6,6 +6,8 @@ import QueryProvider from "@/providers/query-provider";
 import getMe from "@/api/user/get-me";
 import KaKaoInitializer from "@/lib/kakao-initializer";
 import ToastProvider from "@/providers/toast/toast-provider";
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import { ToastContainer } from "react-toastify";
 
 export function generateMetadata() {
   return METADATA;
@@ -31,6 +33,7 @@ export default async function RootLayout({
           <ToastProvider />
         </QueryProvider>
         <KaKaoInitializer />
+        <ToastContainer position="top-right" autoClose={1500} />
       </body>
     </html>
   );
