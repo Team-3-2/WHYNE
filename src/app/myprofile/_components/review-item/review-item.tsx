@@ -41,7 +41,7 @@ const ReviewItem = ({
       )}
     >
       <div className="flex w-full flex-col items-start justify-center gap-8 px-[14px]">
-        <div className="flex w-full flex-col items-center justify-center gap-[26px]">
+        <div className="flex-col-center w-full gap-[26px]">
           <div className="flex w-full flex-col items-start gap-5">
             <ReviewRating
               setOptionMenu={setOptionMenu}
