@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "./site";
 
+/**
+ * 사이트 공통 메타데이터
+ * @author yeonsu
+ */
 export const METADATA: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -52,7 +56,11 @@ export const METADATA: Metadata = {
 };
 
 /**
- * 페이지별 title, description
+ * 페이지마다 다른 title과 description을 설정하기 위한 메타데이터 생성 함수
+ * 공통 메타데이터를 기반으로 페이지별 정보를 덮어씌웁니다.
+ * @author yeonsu
+ * @param title : 해당 페이지 제목
+ * @param description : 해당 페이지 설명
  */
 export const createPageInfoMetadata = (
   title: string,
