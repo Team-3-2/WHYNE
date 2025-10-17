@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 type GSAPInstance = (typeof import("gsap"))["gsap"];
 type GSAPContext = ReturnType<GSAPInstance["context"]>;
-
 let gsapRegistration: Promise<GSAPInstance> | null = null;
 
 const ensureGsapWithScrollTrigger = async () => {
@@ -53,7 +52,6 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
       const sectionElements = Array.from(
         container.querySelectorAll<HTMLElement>("[data-landing-section]")
       );
-
       if (sectionElements.length === 0) return;
 
       if (prefersReducedMotion) {
@@ -81,8 +79,8 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
           );
           if (!text || !image) return;
 
-          const textFromX = layout === "reverse" ? 80 : -80;
-          const imageFromX = layout === "reverse" ? -80 : 80;
+          const textFromX = layout === "reverse" ? 40 : -40;
+          const imageFromX = layout === "reverse" ? -40 : 40;
 
           gsap.set(text, { opacity: 0, x: textFromX });
           gsap.set(image, { opacity: 0, x: imageFromX });
@@ -93,28 +91,19 @@ const LandingSections = ({ sections }: LandingSectionsProps) => {
               start: "top 80%",
               end: "bottom 20%",
               toggleActions: "play none none reverse",
+              fastScrollEnd: true,
             },
           });
 
           timeline
             .to(
               text,
-              {
-                x: 0,
-                opacity: 1,
-                duration: 0.5,
-                ease: "power2.out",
-              },
+              { x: 0, opacity: 1, duration: 0.4, ease: "power1.out" },
               0
             )
             .to(
               image,
-              {
-                x: 0,
-                opacity: 1,
-                duration: 0.5,
-                ease: "power2.out",
-              },
+              { x: 0, opacity: 1, duration: 0.4, ease: "power1.out" },
               0.1
             );
         });

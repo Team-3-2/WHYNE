@@ -2,10 +2,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { LandingSectionData } from "../_types";
 
-/**
- * 랜딩 페이지 기능 소개 섹션
- * 애니메이션은 상위 컨테이너에서 제어
- */
 const LandingSection = ({
   title,
   subtitle,
@@ -26,17 +22,20 @@ const LandingSection = ({
           : "pc:flex-row pc:items-center pc:gap-36"
       )}
     >
-      {/* 텍스트 영역 */}
       <div
         data-landing-section-text
         className={cn(
-          "flex flex-col gap-4 overflow-hidden text-left pc:flex-1",
+          "flex flex-col gap-4 text-left pc:flex-1",
           "pl-4 pr-8",
           "pc:px-0 pc:pl-4 pc:pr-8",
-          "tablet:pl-8 tablet:pr-8"
+          "tablet:pl-8 tablet:pr-8",
+          "overflow-hidden"
         )}
       >
-        <div data-landing-section-text-inner>
+        <div
+          data-landing-section-text-inner
+          className="flex flex-col gap-4 text-left will-change-transform"
+        >
           <h2
             className={cn(
               "flex flex-col",
@@ -55,24 +54,23 @@ const LandingSection = ({
         </div>
       </div>
 
-      {/* 이미지 영역 */}
       <div
         data-landing-section-image
         className={cn(
-          "w-full overflow-hidden pc:w-[680px]",
+          "w-full pc:w-[680px]",
           isReverse ? "pr-4 tablet:pr-8" : "pl-4 tablet:pl-8",
-          "pc:px-0"
+          "pc:px-0",
+          "overflow-hidden"
         )}
       >
         <div
           data-landing-section-image-inner
-          className="relative aspect-[145/94] w-full overflow-hidden"
+          className="relative aspect-[145/94] w-full overflow-hidden will-change-transform"
         >
           <Image
             src={imgSrc}
             alt={imgAlt}
             fill
-            priority
             sizes="(min-width: 1024px) 725px, 100vw"
             className="object-cover"
           />
