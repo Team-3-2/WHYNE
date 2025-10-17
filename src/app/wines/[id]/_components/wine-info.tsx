@@ -1,5 +1,4 @@
 import Image from "next/image";
-// import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
 import { isValidImageSrc } from "@/lib/utils";
 
 interface WineInfoProps {
