@@ -14,14 +14,17 @@ const useReviewDelete = ({ wineId, reviewId }: UseReviewDeleteOptions) => {
   return useMutation({
     mutationFn: () => deleteReview({ id: reviewId }),
     onSuccess: () => {
-      queryClient.setQueryData(["wine", wineId], (old: any) => ({
-        ...old,
-        reviews: old.reviews.filter((r: any) => r.id !== reviewId),
-      }));
+      queryClient.setQueryData(["wine", wineId], (old: any) => {
+        if (!old) return old;
+        return {
+          ...old,
+          reviews: old.reviews.filter((r: any) => r.id !== reviewId),
+          reviewCount: Math.max((old.reviewCount || 1) - 1, 0),
+        };
+      });
 
-      queryClient.setQueryData(["reviews", wineId], (old: any) =>
-        old?.filter((r: any) => r.id !== reviewId)
-      );
+      queryClient.invalidateQueries({ queryKey: ["review", reviewId] });
+      queryClient.invalidateQueries({ queryKey: ["user-review"] });
     },
   });
 };
