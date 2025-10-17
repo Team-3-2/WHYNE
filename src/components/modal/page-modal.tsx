@@ -24,6 +24,13 @@ const PageModal = ({
     e.preventDefault();
   };
 
+  const handleCancelEsc = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      router.back();
+      e.preventDefault();
+    }
+  };
+
   useLayoutEffect(() => {
     const currentScrollY = window.scrollY;
     lockingScroll(currentScrollY);
@@ -38,11 +45,12 @@ const PageModal = ({
 
     if (modalRef.current) {
       modalRef.current.addEventListener("cancel", handleCancel);
+      modalRef.current.addEventListener("keydown", handleCancelEsc);
     }
 
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       modalRef.current?.removeEventListener("cancel", handleCancel);
+      modalRef.current?.removeEventListener("keydown", handleCancelEsc);
     };
   }, [modalRef]);
 
@@ -50,7 +58,7 @@ const PageModal = ({
     <Modal
       ref={modalRef}
       className={cn(
-        "border-none px-6 mobile:mt-[94px] tablet:relative pc:relative",
+        "h-[738px] border-none px-6 tablet:relative pc:relative",
         "mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:mb-0 mobile:w-full mobile:max-w-full",
         "mobile:rounded-none mobile:rounded-t-2xl",
         "tablet:h-[1010px]",
