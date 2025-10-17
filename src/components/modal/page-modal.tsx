@@ -25,7 +25,10 @@ const PageModal = ({
   };
 
   const handleCancelEsc = (e: KeyboardEvent) => {
-    if (e.key === "Escape") e.preventDefault();
+    if (e.key === "Escape") {
+      router.back();
+      e.preventDefault();
+    }
   };
 
   useLayoutEffect(() => {
