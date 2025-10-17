@@ -35,7 +35,7 @@ const RecommendCard = ({ wine }: RecommendCardProps) => {
           "pc:text-body-md"
         )}
         regionClassName={cn(
-          "text-caption text-secondary",
+          "mobile:text-caption text-secondary",
           "tablet:text-body-sm tablet:mt-[8px]",
           "pc:text-body-sm pc:mt-[8px]"
         )}

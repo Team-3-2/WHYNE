@@ -77,12 +77,12 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                 {reviewLabel(wine.reviewCount)}
               </span>
             </div>
-            <h1
+            <h2
               title={wine.name}
-              className="truncate text-title-page-md text-gray-900 tablet:text-title-page-md pc:text-title-page-md"
+              className="text-title-page-xs line-clamp-4 text-gray-900 tablet:text-title-page-sm pc:text-title-page-md"
             >
               {wine.name}
-            </h1>
+            </h2>
             <p
               title={wine.region}
               className="truncate text-body-sm text-gray-600 tablet:text-body-md"
