@@ -30,8 +30,9 @@ const LandingBanner = ({ title, imgSrc, imgAlt }: LandingBannerData) => {
     <section
       className={cn(
         "relative flex w-full justify-center overflow-hidden",
-        "min-h-[100vh] tablet:min-h-[100vh] pc:min-h-[100vh]",
-        "pt-[60px] tablet:pt-[70px] pc:pt-[70px]",
+        "min-h-[100vh] supports-[height:100dvh]:min-h-[100dvh]",
+        "tablet:min-h-[100vh] tablet:pt-[70px]",
+        "pt-[60px] pc:min-h-[100vh] pc:pt-[70px]",
         "bg-[#171A21]"
       )}
     >
