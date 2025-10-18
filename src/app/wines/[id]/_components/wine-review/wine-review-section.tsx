@@ -104,7 +104,7 @@ const ReviewSection = ({
         <div>
           <ReviewListHeader totalCount={reviews.length} />
 
-          <div className={cn("pc:ml-[52px]")}>
+          <div className={cn("break-words pc:ml-[52px]")}>
             {visibleReviews.map((review, index) => (
               <WineReviewItem
                 key={review.id}

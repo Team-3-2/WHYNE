@@ -43,7 +43,7 @@ const Flavor = ({ count, items, showHeader = true }: FlavorProps) => {
           </span>
         </div>
       )}
-      <div className="scrollbar-hide overflow-hidden">
+      <div className="scrollbar-hide overflow-auto">
         <div className="flex flex-nowrap gap-4 tablet:gap-3 pc:gap-3">
           {items.map((item, index) => (
             <FlavorItem

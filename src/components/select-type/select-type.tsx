@@ -112,7 +112,7 @@ const SelectType = ({
           </p>
         )}
       </div>
-      <div className={cn("flex gap-[10px]", className)} {...props}>
+      <div className={cn("flex flex-wrap gap-[10px]", className)} {...props}>
         <TypeInput
           id={"wine-red"}
           value="RED"

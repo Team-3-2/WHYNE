@@ -72,7 +72,7 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col gap-6 pc:max-w-[496px]">
+        <div className="break-word flex min-w-0 flex-1 flex-col gap-6 pc:max-w-[496px]">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-gray-500">
               <Rating rating={wine.avgRating} size="md2" />

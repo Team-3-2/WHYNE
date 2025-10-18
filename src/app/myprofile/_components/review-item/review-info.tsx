@@ -40,7 +40,7 @@ const ReviewInfo = ({ info }: { info: WineType }) => {
       )}
       <div
         className={cn(
-          "flex flex-col items-start gap-[2px]",
+          "break-word flex flex-col items-start gap-[2px]",
           "tablet:gap-[4px]",
           "pc:gap-[2px]"
         )}
