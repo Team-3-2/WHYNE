@@ -14,12 +14,17 @@ const useReviewDelete = ({ wineId, reviewId }: UseReviewDeleteOptions) => {
   return useMutation({
     mutationFn: () => deleteReview({ id: reviewId }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reviews", wineId] });
-      queryClient.invalidateQueries({ queryKey: ["wine", wineId] });
+      queryClient.setQueryData(["wine", wineId], (old: any) => {
+        if (!old) return old;
+        return {
+          ...old,
+          reviews: old.reviews.filter((r: any) => r.id !== reviewId),
+          reviewCount: Math.max((old.reviewCount || 1) - 1, 0),
+        };
+      });
+
       queryClient.invalidateQueries({ queryKey: ["review", reviewId] });
-    },
-    onError: (error: unknown) => {
-      console.error("리뷰 삭제 실패:", error);
+      queryClient.invalidateQueries({ queryKey: ["user-review"] });
     },
   });
 };
