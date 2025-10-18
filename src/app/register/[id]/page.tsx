@@ -47,7 +47,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         "pc:py-[70px]"
       )}
     >
-      <div className="container mt-[60px] flex max-w-[496px] flex-col gap-6 overflow-hidden rounded-2xl bg-white py-8 drop-shadow-[0_2px_20px_rgba(0,0,0,0.04)]">
+      <div className="container mt-[60px] flex max-w-[480px] flex-col gap-6 overflow-hidden rounded-2xl bg-white py-8 drop-shadow-[0_2px_20px_rgba(0,0,0,0.04)]">
         <p
           className={cn(
             "w-fit px-6 text-default mobile:text-heading-md",
