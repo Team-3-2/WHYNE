@@ -4,7 +4,6 @@ import { cn, isValidImageSrc } from "@/lib/utils";
 import Image from "next/image";
 import { WineType } from "../../_types/review-type";
 import { useState } from "react";
-import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
 
 const PLACEHOLDER = "/images/placeholder/img-wine.svg";
 
@@ -29,10 +28,12 @@ const ReviewInfo = ({ info }: { info: WineType }) => {
           onError={() => setImgSrc(PLACEHOLDER)}
         />
       ) : (
-        <PlaceholderImgWine
+        <Image
+          src={"/images/placeholder/img-wine.svg"}
+          width={60}
+          height={60}
           className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
-          role="img"
-          aria-label={`${info.name} 이미지 불러오기 실패`}
+          alt={`${info.name} 이미지 불러오기 실패`}
         />
       )}
       <div

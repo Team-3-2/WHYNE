@@ -19,7 +19,7 @@
 }
 
 .cs-message-input {
-  @apply !flex-center !gap-4 !border-none !bg-[#15191b] !p-0 !pt-2;
+  @apply !flex !items-center !justify-center !gap-4 !border-none !bg-[#15191b] !p-0 !pt-2;
 }
 
 .cs-message-input__content-editor-wrapper {
@@ -51,7 +51,7 @@
 }
 
 .cs-button {
-  @apply !flex-center !h-[40px] !w-[40px] !rounded-[100%] !bg-[#292e31];
+  @apply !flex !h-[40px] !w-[40px] !items-center !justify-center !rounded-[100%] !bg-[#292e31];
 }
 
 .svg-inline--fa {

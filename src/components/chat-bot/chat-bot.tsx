@@ -22,7 +22,7 @@ type Message = {
 };
 
 const styles = {
-  box: "max-w-[200px] text-[16px] tracking-[-0.02em] px-[4px] py-[2px]",
+  box: "max-w-[200px] text-[16px] tracking-[-0.02em]",
 };
 
 const ChatBot = ({ open }: { open: boolean }) => {
@@ -112,7 +112,7 @@ const ChatBot = ({ open }: { open: boolean }) => {
               className={styles.box}
             >
               <Message.CustomContent>
-                안녕하세요, 무엇을 도와드릴까요?
+                안녕하세요! 무엇을 도와드릴까요?
               </Message.CustomContent>
             </Message>
             {messages.map((message) => (

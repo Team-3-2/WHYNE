@@ -42,7 +42,7 @@ const Modal = ({ open, setModalOpen, resetSignal, resetFn }: ModalProps) => {
       onClick={() => setModalOpen(0)}
     >
       <div
-        className="mx-auto my-0 flex w-[375px] flex-col items-start overflow-hidden rounded-[16px] bg-white p-[24px] shadow-lg"
+        className="mx-auto my-0 flex max-w-[375px] flex-col items-start overflow-hidden rounded-[16px] bg-white p-[24px] shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-col gap-y-[32px]">

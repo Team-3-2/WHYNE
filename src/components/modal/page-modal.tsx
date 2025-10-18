@@ -37,6 +37,9 @@ const PageModal = ({
 
     return () => {
       allowScroll(currentScrollY);
+      requestAnimationFrame(() => {
+        window.scrollTo(0, currentScrollY);
+      });
     };
   }, []);
 
