@@ -88,7 +88,7 @@ export const TypeInput = ({
           alt="레드와인"
           draggable={false}
         />
-        <span className="text-body-sm tracking-[-0.02em] tablet:text-body-md pc:text-body-md">
+        <span className="text-body-sm tracking-[-0.02em] tablet:text-body-sm pc:text-body-md">
           {typeName}
         </span>
       </label>
@@ -112,7 +112,7 @@ const SelectType = ({
           </p>
         )}
       </div>
-      <div className={cn("flex gap-[10px]", className)} {...props}>
+      <div className={cn("flex flex-wrap gap-[10px]", className)} {...props}>
         <TypeInput
           id={"wine-red"}
           value="RED"

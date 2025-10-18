@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Rating from "@/components/rating/rating";
 
 /**
@@ -35,21 +36,27 @@ const CardInfo = ({
   avgRating,
   reviewCount = 0,
   className,
-  ratingWrapperClassName,
-  reviewCountClassName,
-  nameClassName,
-  regionClassName,
-  priceClassName,
+  ratingWrapperClassName = "",
+  reviewCountClassName = "",
+  nameClassName = "",
+  regionClassName = "",
+  priceClassName = "",
 }: CardInfoProps) => {
   return (
-    <div className={`pb-[24px] pr-[26px] ${className}`}>
+    <div className={cn("pb-[24px] pr-[26px]", className)}>
       {typeof avgRating === "number" && (
         <div
-          className={`mb-[12px] flex items-center gap-[14px] ${ratingWrapperClassName}`}
+          className={cn(
+            "mb-[12px] flex items-center gap-[14px]",
+            ratingWrapperClassName
+          )}
         >
           <Rating rating={avgRating} />
           <span
-            className={`relative text-body-sm font-normal text-gray-500 ${reviewCountClassName}`}
+            className={cn(
+              "relative text-body-sm font-normal text-gray-500",
+              reviewCountClassName
+            )}
           >
             {reviewCount > 0
               ? `${reviewCount.toLocaleString()}개의 후기`
@@ -58,18 +65,25 @@ const CardInfo = ({
         </div>
       )}
       <div>
-        <div className={`line-clamp-2 text-heading-lg ${nameClassName}`}>
+        <div className={cn("line-clamp-2 text-heading-lg", nameClassName)}>
           {name}
         </div>
         <div
-          className={`mt-[6px] line-clamp-2 text-body-sm font-normal text-gray-500 ${regionClassName}`}
+          className={cn(
+            "mt-[6px] line-clamp-2 text-body-sm font-normal text-gray-500",
+            regionClassName
+          )}
         >
           {region}
         </div>
       </div>
       {typeof price === "number" && (
         <div
-          className={`mt-[20px] text-heading-lg font-bold pc:mt-[24px] ${priceClassName}`}
+          className={cn(
+            "mt-[20px] text-heading-lg font-bold",
+            "pc:mt-[24px]",
+            priceClassName
+          )}
         >
           {price.toLocaleString()}원
         </div>

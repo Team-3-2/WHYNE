@@ -16,7 +16,7 @@ export default function EditPage() {
   if (!reviewId) return null;
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat">
       <section className="container mx-auto flex max-w-[460px] flex-col gap-10 py-12 pt-24 tablet:max-w-[740px] pc:max-w-[1020px]">
         <h1 className="text-heading-lg">리뷰 수정</h1>
         <ReviewFormClient

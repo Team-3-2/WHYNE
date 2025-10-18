@@ -17,6 +17,7 @@ const FlavorItem = ({ aroma, className }: FlavorItemProps) => {
         width={100}
         height={100}
         className="rounded-4"
+        draggable={false}
       />
       <span className="select-none text-body-md tracking-[-0.02em]">
         {label}
@@ -42,7 +43,7 @@ const Flavor = ({ count, items, showHeader = true }: FlavorProps) => {
           </span>
         </div>
       )}
-      <div className="scrollbar-hide overflow-hidden">
+      <div className="scrollbar-hide overflow-auto">
         <div className="flex flex-nowrap gap-4 tablet:gap-3 pc:gap-3">
           {items.map((item, index) => (
             <FlavorItem

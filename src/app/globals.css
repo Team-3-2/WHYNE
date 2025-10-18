@@ -133,3 +133,7 @@ div.swiper-scrollbar-drag {
 div.swiper-scrollbar {
   background: var(--color-gray-300);
 }
+
+.break-word {
+  word-break: break-word;
+}

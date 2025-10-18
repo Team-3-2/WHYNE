@@ -136,7 +136,7 @@ export default function ReviewForm({
   return (
     <div
       className={cn(
-        "flex w-full max-w-[480px] flex-col pb-40 tablet:pb-0 pc:pb-0",
+        "flex w-full flex-col pb-40 tablet:max-w-[480px] tablet:pb-0 pc:max-w-[480px] pc:pb-0",
         className
       )}
     >

@@ -161,18 +161,18 @@ const WineReviewItem = ({
     <>
       <article
         className={cn(
-          "flex w-full select-none flex-col items-center gap-6 py-8",
-          "tablet:items-center tablet:gap-8 tablet:py-10",
-          "pc:gap-6 pc:py-8",
+          "flex w-full select-none flex-col items-center gap-[14px] py-8",
+          "tablet:items-center tablet:gap-[20px] tablet:py-10",
+          "pc:gap-[20px] pc:py-8",
           !isFirst && "border-t border-gray-300"
         )}
         aria-label={`${review.user.nickname}님의 리뷰`}
       >
         <div
           className={cn(
-            "flex w-full max-w-[calc(100%-30px)] flex-col gap-6",
-            "tablet:max-w-[calc(100%-30px)] tablet:gap-8",
-            "pc:max-w-[calc(100%-100px)] pc:gap-6"
+            "flex w-full flex-col gap-[14px]",
+            "tablet:gap-[20px]",
+            "pc:gap-[20px]"
           )}
         >
           {/* 1. 별점 */}
@@ -245,7 +245,7 @@ const WineReviewItem = ({
           </p>
 
           {/* 5. 맛 평가 토글 영역 */}
-          <div className="flex flex-col gap-4">
+          <div>
             <div
               id={`taste-${review.id}`}
               className={cn(
@@ -259,7 +259,13 @@ const WineReviewItem = ({
               aria-hidden={!isTasteOpen}
             >
               <div className="overflow-hidden">
-                <div className="pb-2">
+                <div
+                  className={cn(
+                    "my-[18px]",
+                    "tablet:my-[20px]",
+                    "pc:my-[28px]"
+                  )}
+                >
                   <WineTaste type="review" tastes={tastes} />
                 </div>
               </div>
@@ -267,21 +273,21 @@ const WineReviewItem = ({
           </div>
 
           {/* 6. 토글 */}
-          <footer className="flex w-full justify-center">
+          <div className="flex w-full justify-center">
             <IconButton
-              icon="ArrowUpIcon"
+              icon="ArrowDownIcon"
               aria-label={isTasteOpen ? "맛 평가 숨기기" : "맛 평가 보기"}
               aria-expanded={isTasteOpen}
               aria-controls={`taste-${review.id}`}
               onClick={() => setIsTasteOpen(!isTasteOpen)}
               className={cn(
-                "h-auto w-auto p-2",
+                "!h-[32px] !w-full",
                 "!border-none !bg-transparent hover:!bg-transparent active:!bg-transparent",
                 "text-gray-600 transition-transform duration-300 ease-in-out",
                 isTasteOpen && "rotate-180"
               )}
             />
-          </footer>
+          </div>
         </div>
       </article>
 

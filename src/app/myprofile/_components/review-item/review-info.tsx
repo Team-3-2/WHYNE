@@ -26,6 +26,7 @@ const ReviewInfo = ({ info }: { info: WineType }) => {
           height={60}
           className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
           onError={() => setImgSrc(PLACEHOLDER)}
+          draggable={false}
         />
       ) : (
         <Image
@@ -34,11 +35,12 @@ const ReviewInfo = ({ info }: { info: WineType }) => {
           height={60}
           className="h-[60px] w-[46px] tablet:h-[80px] tablet:w-[60px] pc:h-[80px] pc:w-[60px]"
           alt={`${info.name} 이미지 불러오기 실패`}
+          draggable={false}
         />
       )}
       <div
         className={cn(
-          "flex flex-col items-start gap-[2px]",
+          "break-word flex flex-col items-start gap-[2px]",
           "tablet:gap-[4px]",
           "pc:gap-[2px]"
         )}

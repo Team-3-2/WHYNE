@@ -17,7 +17,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <PageModal
       title={wineData ? "와인 수정" : "와인 등록"}
-      className="tablet:h-[794px] tablet:w-[460px] pc:h-[794px] pc:w-[460px]"
+      className="tablet:h-[767px] tablet:w-[460px] pc:h-[767px] pc:w-[460px]"
     >
       <RegisterWine wineData={wineData} id={id} />
     </PageModal>

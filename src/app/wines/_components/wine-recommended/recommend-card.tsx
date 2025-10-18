@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import CardImg from "@/components/card/card-img";
 import CardInfo from "@/components/card/card-info";
 import { CardItem } from "@/types/card-item-type";
@@ -23,9 +24,21 @@ const RecommendCard = ({ wine }: RecommendCardProps) => {
       <CardInfo
         name={wine.name}
         region={wine.region}
-        className="!p-[0 10px] mt-[12px] text-center tablet:mt-[16px] pc:mt-[16px]"
-        nameClassName="mobile:text-body-sm tablet:text-body-md pc:text-body-md text-default"
-        regionClassName="text-caption tablet:text-body-sm pc:text-body-sm text-secondary tablet:mt-[8px] pc:mt-[8px]"
+        className={cn(
+          "mt-[12px] !px-[10px] !py-[0px] text-center",
+          "tablet:mt-[16px]",
+          "pc:mt-[16px]"
+        )}
+        nameClassName={cn(
+          "mobile:text-body-sm text-default",
+          "tablet:text-body-md",
+          "pc:text-body-md"
+        )}
+        regionClassName={cn(
+          "mobile:text-caption text-secondary",
+          "tablet:text-body-sm tablet:mt-[8px]",
+          "pc:text-body-sm pc:mt-[8px]"
+        )}
       />
     </div>
   );

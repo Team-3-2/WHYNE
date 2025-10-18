@@ -23,7 +23,7 @@ const ChatButton = () => {
         icon="GptIcon"
         iconSize="md"
         className={cn(
-          "relative h-[40px] w-[40px] rounded-full border-gray-300",
+          "relative h-[45px] w-[45px] rounded-full border-gray-300",
           "tablet:h-[50px] tablet:w-[50px]",
           "pc:h-[50px] pc:w-[50px]"
         )}
