@@ -1,5 +1,4 @@
 import Image from "next/image";
-import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
 import Rating from "@/components/rating/rating";
 import type { WineDetail } from "@/types/wine";
 import { cn, isValidImageSrc } from "@/lib/utils";
@@ -45,8 +44,8 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
               "pc:h-[320px] pc:w-[320px] pc:max-w-none"
             )}
           >
-            {isValidImageSrc(wine.image) ? (
-              <div className="relative h-full w-full">
+            <div className="relative h-full w-full">
+              {isValidImageSrc(wine.image) ? (
                 <Image
                   src={wine.image}
                   alt={wine.name}
@@ -57,14 +56,16 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                   sizes="(max-width: 743px) 220px, (max-width: 1279px) 280px, 320px"
                   className="object-contain"
                 />
-              </div>
-            ) : (
-              <PlaceholderImgWine
-                className="h-full w-auto object-contain"
-                role="img"
-                aria-label={`${wine.name} 이미지 불러오기 실패`}
-              />
-            )}
+              ) : (
+                <Image
+                  src={"/images/placeholder/img-wine.svg"}
+                  fill
+                  sizes="(max-width: 743px) 220px, (max-width: 1279px) 280px, 320px"
+                  className="object-contain"
+                  alt={`${name} 이미지 불러오기 실패`}
+                />
+              )}
+            </div>
           </div>
         </div>
 

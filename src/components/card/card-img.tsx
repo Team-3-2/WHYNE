@@ -5,7 +5,6 @@ import { SVGProps } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import BASE64_IMAGES from "@/constants/base64-images";
-import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
 
 const { WINE_BASE64 } = BASE64_IMAGES;
 
@@ -33,7 +32,6 @@ const CardImage = ({
   alt,
   blurDataURL,
   fallbackBlurDataURL = WINE_BASE64,
-  fallbackImage: FallbackImage = PlaceholderImgWine,
   className,
   imageClassName,
 }: CardImageProps) => {
@@ -79,11 +77,7 @@ const CardImage = ({
             onError={() => setHasError(true)}
           />
         ) : (
-          <FallbackImage
-            className="relative left-[50%] h-full w-auto translate-x-[-50%] object-contain"
-            role="img"
-            aria-label={`${alt} 이미지 불러오기 실패`}
-          />
+          <Image src={"/images/placeholder/img-wine.svg"} fill alt={alt} />
         )}
       </span>
     </div>
