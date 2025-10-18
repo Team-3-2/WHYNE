@@ -3,13 +3,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 interface CardSkeletonProps {
   showReview?: boolean;
-  hasActionMenu?: boolean;
 }
 
-const CardSkeleton = ({
-  showReview = false,
-  hasActionMenu = false,
-}: CardSkeletonProps) => {
+const CardSkeleton = ({ showReview = false }: CardSkeletonProps) => {
   return (
     <div className="group relative w-full">
       {/* 이미지 영역 */}
@@ -28,12 +24,6 @@ const CardSkeleton = ({
             <Skeleton width="100%" height={16} style={{ marginBottom: 8 }} />
             <Skeleton width="83%" height={16} />
           </>
-        )}
-        {/* 액션메뉴 (우측 상단) */}
-        {hasActionMenu && (
-          <div style={{ position: "absolute", right: 0, top: 0, zIndex: 10 }}>
-            <Skeleton circle width={32} height={32} />
-          </div>
         )}
       </div>
     </div>

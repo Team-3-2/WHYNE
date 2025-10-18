@@ -1,9 +1,9 @@
 "use client";
 
-import { ReactNode, useEffect, useLayoutEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import Button from "../button/basic-button";
 import Modal from "./modal";
-import { allowScroll, cn, lockingScroll } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface ModalProps {
   isOpen: boolean;
@@ -35,23 +35,28 @@ const ConfirmModal = ({
 }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  useLayoutEffect(() => {
-    const currentScrollY = window.scrollY;
+  const lockingConfirmModal = () => {
+    const scrollbarWidth = window.innerWidth - document.body.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.style.overflow = "hidden";
+  };
 
-    if (isOpen) lockingScroll(currentScrollY);
-
-    return () => {
-      allowScroll(currentScrollY);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const unlockConfirmModal = () => {
+    document.body.style.paddingRight = "0px";
+    document.body.style.overflow = "unset";
+  };
 
   useEffect(() => {
     if (!dialogRef.current?.open && isOpen) {
+      lockingConfirmModal();
       dialogRef.current?.showModal();
     } else {
       dialogRef.current?.close();
     }
+
+    return () => {
+      unlockConfirmModal();
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -65,7 +70,7 @@ const ConfirmModal = ({
       <p
         className={cn(
           "text-heading-sm font-semibold tracking-[-0.02em] text-gray-950",
-          "whitespace-pre-wrap text-center",
+          "whitespace-pre-wrap break-words text-center",
           "tablet:text-heading-md",
           "pc:text-heading-md"
         )}

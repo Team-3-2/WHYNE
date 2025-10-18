@@ -1,24 +1,11 @@
 import { ReactNode } from "react";
-import { METADATA } from "@/constants/metadata";
+import { createPageInfoMetadata } from "@/constants/metadata";
 
 export function generateMetadata() {
-  const TITLE = "회원가입";
-  const DESCRIPTION = `${METADATA.title.default} 회원가입`;
-  return {
-    ...METADATA,
-    title: TITLE,
-    description: DESCRIPTION,
-    openGraph: {
-      ...METADATA.openGraph,
-      title: TITLE,
-      description: DESCRIPTION,
-    },
-    twitter: {
-      ...METADATA.twitter,
-      title: TITLE,
-      description: DESCRIPTION,
-    },
-  };
+  return createPageInfoMetadata(
+    "회원가입",
+    "서비스 이용을 위한 회원가입 페이지입니다."
+  );
 }
 
 export default function SignupLayout({ children }: { children: ReactNode }) {

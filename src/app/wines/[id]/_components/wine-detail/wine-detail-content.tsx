@@ -68,7 +68,7 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
 
       {/* 구분선 */}
       <div className="container">
-        <hr className="border-t border-gray-300" />
+        <hr className="mt-[-5px] border-t border-gray-300 tablet:mt-0 pc:mt-0" />
       </div>
 
       {/* 리뷰 섹션 */}
