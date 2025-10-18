@@ -2,7 +2,7 @@
 
 import { redirect, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import AccountItem from "../account-item/account-item";
 import ReviewItem from "../review-item/review-item";
 import WineItem from "../wine-item/wine-item";
@@ -90,8 +90,11 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                     <ReviewItem key={review.id} review={review} />
                   ))
                 )}
+
+                <div ref={reviewObserverRef} className="mt-4 h-1 w-full" />
+
                 {isFetchingNextPage && (
-                  <div className={WINE_ITEM_CONTAINER} ref={reviewObserverRef}>
+                  <div className={WINE_ITEM_CONTAINER}>
                     {Array.from({ length: 4 }).map((_, i) => (
                       <ReviewItem key={`skeleton-${i}`} skeleton />
                     ))}
@@ -122,10 +125,12 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                     {(userWines as WineType[])?.map((wine) => (
                       <WineItem key={wine.id} wine={wine} />
                     ))}
+
+                    <div ref={wineObserverRef} className="mt-4 h-1 w-full" />
                   </div>
                 )}
                 {isFetchingNextPage && (
-                  <div className={WINE_ITEM_CONTAINER} ref={wineObserverRef}>
+                  <div className={WINE_ITEM_CONTAINER}>
                     {Array.from({ length: 6 }).map((_, i) => (
                       <WineItem key={`skeleton-${i}`} skeleton />
                     ))}

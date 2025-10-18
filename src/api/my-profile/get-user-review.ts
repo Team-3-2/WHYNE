@@ -23,6 +23,6 @@ export default async function getUserReview({
   const res = await instance.get(url);
   return {
     ...res.data,
-    list: [...res.data.list].reverse(),
+    list: [...res.data.list],
   };
 }
