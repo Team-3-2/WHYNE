@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { METADATA } from "@/constants/metadata";
+import { createPageInfoMetadata } from "@/constants/metadata";
 import type { Metadata } from "next";
 import { MyProfile } from "./_components";
 import Loader from "@/components/loader/loader";
@@ -24,23 +24,12 @@ export async function generateMetadata({
     case "account":
       tabTitle = "내 계정";
       tabDescription = "내 계정 관리";
-      break;
   }
 
+  const metadata = createPageInfoMetadata(tabTitle, tabDescription);
+
   return {
-    ...METADATA,
-    title: tabTitle,
-    description: tabDescription,
-    openGraph: {
-      ...METADATA.openGraph,
-      title: tabTitle,
-      description: tabDescription,
-    },
-    twitter: {
-      ...METADATA.twitter,
-      title: tabTitle,
-      description: tabDescription,
-    },
+    ...metadata,
     robots: {
       index: false,
       follow: false,
