@@ -1,25 +1,12 @@
 import { ReactNode } from "react";
-import { METADATA } from "@/constants/metadata";
 import ErrorBoundary from "@/error/error-boundary";
+import { createPageInfoMetadata } from "@/constants/metadata";
 
 export function generateMetadata() {
-  const TITLE = "로그인";
-  const DESCRIPTION = `${METADATA.title.default} 로그인`;
-  return {
-    ...METADATA,
-    title: TITLE,
-    description: DESCRIPTION,
-    openGraph: {
-      ...METADATA.openGraph,
-      title: TITLE,
-      description: DESCRIPTION,
-    },
-    twitter: {
-      ...METADATA.twitter,
-      title: TITLE,
-      description: DESCRIPTION,
-    },
-  };
+  return createPageInfoMetadata(
+    "로그인",
+    "서비스를 이용하려면 로그인이 필요합니다."
+  );
 }
 
 export default function LoginLayout({ children }: { children: ReactNode }) {
