@@ -11,8 +11,6 @@ const getMe = async () => {
   const cookieStore = await cookies();
   let accessToken = cookieStore.get("accessToken")?.value;
 
-  if (!accessToken) return;
-
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
