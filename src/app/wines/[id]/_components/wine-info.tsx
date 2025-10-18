@@ -1,5 +1,4 @@
 import Image from "next/image";
-import PlaceholderImgWine from "@/../public/images/placeholder/img-wine.svg";
 import { isValidImageSrc } from "@/lib/utils";
 
 interface WineInfoProps {
@@ -12,8 +11,8 @@ const WineInfo = ({ name, region, image }: WineInfoProps) => {
   return (
     <div className="flex items-center gap-4">
       <div className="flex-center h-[96px] w-[62px] flex-shrink-0 bg-gray-200">
-        {isValidImageSrc(image) ? (
-          <div className="relative h-full w-full">
+        <div className="relative h-full w-full">
+          {isValidImageSrc(image) ? (
             <Image
               src={image}
               alt={name}
@@ -21,14 +20,15 @@ const WineInfo = ({ name, region, image }: WineInfoProps) => {
               className="object-contain"
               sizes="62px"
             />
-          </div>
-        ) : (
-          <PlaceholderImgWine
-            className="h-full w-auto object-contain"
-            role="img"
-            aria-label={`${name} 이미지 불러오기 실패`}
-          />
-        )}
+          ) : (
+            <Image
+              src={"/images/placeholder/img-wine.svg"}
+              fill
+              className="object-contain"
+              alt={`${name} 이미지 불러오기 실패`}
+            />
+          )}
+        </div>
       </div>
       <div className="flex min-w-0 flex-col gap-1">
         <h3

@@ -7,7 +7,6 @@ import getMe from "@/api/user/get-me";
 import KaKaoInitializer from "@/lib/kakao-initializer";
 import ToastProvider from "@/providers/toast/toast-provider";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-import { ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -35,7 +34,6 @@ export default async function RootLayout({
           <ToastProvider />
         </QueryProvider>
         <KaKaoInitializer />
-        <ToastContainer position="top-right" autoClose={1500} />
         <Analytics />
         <SpeedInsights />
       </body>
