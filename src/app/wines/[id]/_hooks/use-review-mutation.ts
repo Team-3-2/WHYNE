@@ -3,11 +3,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import postReview from "@/api/reviews/post-review";
 import patchReview from "@/api/reviews/patch-review";
-import type { ReviewBase } from "@/types/wine";
+import type { ReviewBase, Review } from "@/types/wine";
 
 interface ReviewMutationOptions {
   mode: "create" | "edit";
-  reviewId?: number; // edit일 때만 필요
+  reviewId?: number;
 }
 
 const useReviewMutation = ({ mode, reviewId }: ReviewMutationOptions) => {
@@ -21,23 +21,35 @@ const useReviewMutation = ({ mode, reviewId }: ReviewMutationOptions) => {
       }
       return postReview(data);
     },
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["reviews", variables.wineId],
+    onSuccess: (response, variables) => {
+      const { wineId } = variables;
+
+      queryClient.setQueryData(["wine", wineId], (old: any) => {
+        if (!old) return old;
+
+        if (mode === "create") {
+          return {
+            ...old,
+            reviews: [response, ...old.reviews],
+            reviewCount: (old.reviewCount || 0) + 1,
+          };
+        } else if (mode === "edit") {
+          return {
+            ...old,
+            reviews: old.reviews.map((r: Review) =>
+              r.id === reviewId ? response : r
+            ),
+          };
+        }
+        return old;
       });
-      queryClient.invalidateQueries({
-        queryKey: ["user-review"],
-      });
-      queryClient.invalidateQueries({ queryKey: ["wine", variables.wineId] });
+
       if (mode === "edit" && reviewId) {
-        queryClient.invalidateQueries({ queryKey: ["review", reviewId] });
+        queryClient.setQueryData(["review", reviewId], response);
       }
-    },
-    onError: (error: unknown) => {
-      console.error(
-        mode === "edit" ? "리뷰 수정 실패:" : "리뷰 등록 실패:",
-        error
-      );
+
+      queryClient.invalidateQueries({ queryKey: ["wine", wineId] });
+      queryClient.invalidateQueries({ queryKey: ["user-review"] });
     },
   });
 };

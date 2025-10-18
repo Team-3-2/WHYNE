@@ -54,7 +54,7 @@ const WineTasteSection = ({ reviews, reviewCount }: WineTasteSectionProps) => {
       {/* 제목 + 갯수 */}
       <div
         className={cn(
-          "mb-4 flex flex-col items-start gap-1",
+          "mb-4 flex select-none flex-col items-start gap-1",
           "tablet:mb-0 tablet:ml-9 tablet:flex-col tablet:gap-3",
           "pc:flex-row pc:items-center pc:justify-between pc:pr-6"
         )}
@@ -68,7 +68,7 @@ const WineTasteSection = ({ reviews, reviewCount }: WineTasteSectionProps) => {
       {/* 와인 맛 분포 컴포넌트 */}
       <section
         aria-label={`와인 맛 분포: ${tasteA11yLabel}`}
-        className="flex w-full justify-center tablet:justify-start"
+        className="flex w-full select-none justify-center tablet:justify-start"
       >
         <div className="w-full max-w-[470px] tablet:max-w-[480px] pc:max-w-[560px]">
           <WineTaste type="detail" tastes={tastes} />
