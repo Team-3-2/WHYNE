@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { METADATA } from "@/constants/metadata";
+import { createPageInfoMetadata } from "@/constants/metadata";
 import WineRecommended from "@/app/wines/_components/wine-recommended/wine-recommended";
 import Loader from "@/components/loader/loader";
 import WineListSection from "./_components/wine-list-section/wine-list-section";
@@ -16,25 +16,10 @@ export async function generateMetadata({
   const params = (await searchParams) ?? {};
   const name = params.name ?? "";
 
-  const PAGE_TITLE = name ? `${name} 검색 결과` : "맞춤 와인 찾기";
-  const DESCRIPTION =
-    "매달 새롭게 만나는 와인 추천 콘텐츠와 다양한 필터로 나만의 와인을 찾아보세요.";
-
-  return {
-    ...METADATA,
-    title: PAGE_TITLE,
-    description: DESCRIPTION,
-    openGraph: {
-      ...METADATA.openGraph,
-      title: PAGE_TITLE,
-      description: DESCRIPTION,
-    },
-    twitter: {
-      ...METADATA.twitter,
-      title: PAGE_TITLE,
-      description: DESCRIPTION,
-    },
-  };
+  return createPageInfoMetadata(
+    name ? `${name} 검색 결과` : "맞춤 와인 찾기",
+    "매달 새롭게 만나는 와인 추천 콘텐츠와 다양한 필터로 나만의 와인을 찾아보세요."
+  );
 }
 
 const WineListPage = async () => {

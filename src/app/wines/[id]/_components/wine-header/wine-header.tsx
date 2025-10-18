@@ -12,7 +12,7 @@ const reviewLabel = (count: number) =>
 
 const WineHeader = ({ wine }: WineHeaderProps) => {
   return (
-    <div className="container relative py-8 tablet:py-10 pc:py-12">
+    <div className="container relative select-none py-8 tablet:py-10 pc:py-12">
       <div className="absolute inset-0 -z-10">
         <Image
           src="/images/wines/bg-recommended.png"

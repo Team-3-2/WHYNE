@@ -7,9 +7,24 @@ import { buildTasteData } from "@/components/wine-taste";
 import { ReviewItemType } from "../../_types/review-type";
 import { ReviewInfo, ReviewRating } from ".";
 import FlavorIconList from "@/components/flavor-icon-list/flavor-icon-list";
+import ReviewItemSkeleton from "./review-item-skeleton";
 
-const ReviewItem = ({ review }: { review: ReviewItemType }) => {
+const ReviewItem = ({
+  review,
+  skeleton = false,
+}: {
+  review?: ReviewItemType;
+  skeleton?: boolean;
+}) => {
   const [optionMenu, setOptionMenu] = useState(false);
+
+  if (skeleton) {
+    return <ReviewItemSkeleton />;
+  }
+
+  if (!review) {
+    return null;
+  }
 
   const tastes = buildTasteData({
     lightBold: review.lightBold,
@@ -17,7 +32,6 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
     drySweet: review.drySweet,
     softAcidic: review.softAcidic,
   });
-
   return (
     <div
       className={cn(
@@ -27,7 +41,7 @@ const ReviewItem = ({ review }: { review: ReviewItemType }) => {
       )}
     >
       <div className="flex w-full flex-col items-start justify-center gap-8 px-[14px]">
-        <div className="flex w-full flex-col items-center justify-center gap-[26px]">
+        <div className="flex-col-center w-full gap-[26px]">
           <div className="flex w-full flex-col items-start gap-5">
             <ReviewRating
               setOptionMenu={setOptionMenu}

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { METADATA } from "@/constants/metadata";
+import { createPageInfoMetadata } from "@/constants/metadata";
 import type { Metadata, ResolvingMetadata } from "next";
 import { cookies } from "next/headers";
 import WineDetailContent from "@/app/wines/[id]/_components/wine-detail/wine-detail-content";
@@ -29,37 +29,23 @@ export async function generateMetadata(
     );
 
     if (!response.ok) {
-      return {
-        title: "와인 상세 정보",
-        description: "와인 정보를 불러오는 데 실패했습니다.",
-      };
+      return createPageInfoMetadata(
+        "와인 상세 정보",
+        "와인 정보를 불러오는 데 실패했습니다."
+      );
     }
     const wine = await response.json();
 
     const PAGE_TITLE = `${wine.name} 와인 상세 정보`;
     const DESCRIPTION = "와인 상세 정보 페이지입니다.";
 
-    return {
-      ...METADATA,
-      title: PAGE_TITLE,
-      description: DESCRIPTION,
-      openGraph: {
-        ...METADATA.openGraph,
-        title: PAGE_TITLE,
-        description: DESCRIPTION,
-      },
-      twitter: {
-        ...METADATA.twitter,
-        title: PAGE_TITLE,
-        description: DESCRIPTION,
-      },
-    };
+    return createPageInfoMetadata(PAGE_TITLE, DESCRIPTION);
   } catch (error) {
     console.error(error);
-    return {
-      title: "와인 상세 정보",
-      description: "와인 정보를 불러오는 데 실패했습니다.",
-    };
+    return createPageInfoMetadata(
+      "와인 상세 정보",
+      "와인 정보를 불러오는 데 실패했습니다."
+    );
   }
 }
 

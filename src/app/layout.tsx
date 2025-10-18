@@ -7,6 +7,8 @@ import getMe from "@/api/user/get-me";
 import KaKaoInitializer from "@/lib/kakao-initializer";
 import ToastProvider from "@/providers/toast/toast-provider";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export function generateMetadata() {
   return METADATA;
@@ -32,6 +34,8 @@ export default async function RootLayout({
           <ToastProvider />
         </QueryProvider>
         <KaKaoInitializer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
