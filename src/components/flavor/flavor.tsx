@@ -17,6 +17,7 @@ const FlavorItem = ({ aroma, className }: FlavorItemProps) => {
         width={100}
         height={100}
         className="rounded-4"
+        draggable={false}
       />
       <span className="select-none text-body-md tracking-[-0.02em]">
         {label}

@@ -20,6 +20,7 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
           fill
           className="object-cover"
           quality={60}
+          draggable={false}
         />
       </div>
 
@@ -55,6 +56,7 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                   quality={75}
                   sizes="(max-width: 743px) 220px, (max-width: 1279px) 280px, 320px"
                   className="object-contain"
+                  draggable={false}
                 />
               ) : (
                 <Image
@@ -63,6 +65,7 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                   sizes="(max-width: 743px) 220px, (max-width: 1279px) 280px, 320px"
                   className="object-contain"
                   alt={`${name} 이미지 불러오기 실패`}
+                  draggable={false}
                 />
               )}
             </div>

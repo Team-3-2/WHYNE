@@ -75,9 +75,15 @@ const CardImage = ({
             placeholder="blur"
             blurDataURL={blurDataURL ?? fallbackBlurDataURL}
             onError={() => setHasError(true)}
+            draggable={false}
           />
         ) : (
-          <Image src={"/images/placeholder/img-wine.svg"} fill alt={alt} />
+          <Image
+            src={"/images/placeholder/img-wine.svg"}
+            fill
+            alt={alt}
+            draggable={false}
+          />
         )}
       </span>
     </div>
