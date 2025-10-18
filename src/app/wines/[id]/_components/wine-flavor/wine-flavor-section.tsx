@@ -2,29 +2,35 @@ import Flavor from "@/components/flavor/flavor";
 import type { AromaKey } from "@/types/aroma-type";
 import type { Review } from "@/types/wine";
 import { cn } from "@/lib/utils";
+
 interface FlavorSectionProps {
   reviews: Review[];
   reviewCount: number;
 }
+
 const getTopAromas = (reviews: Review[]): AromaKey[] => {
   const aromaCount = new Map<AromaKey, number>();
+
   reviews.forEach((review) => {
     review.aroma.forEach((aroma) => {
       aromaCount.set(aroma, (aromaCount.get(aroma) || 0) + 1);
     });
   });
-  const sortedAromas = Array.from(aromaCount.entries())
+
+  return Array.from(aromaCount.entries())
     .sort((a, b) => b[1] - a[1])
     .slice(0, 4)
     .map(([aroma]) => aroma);
-  return sortedAromas;
 };
+
 const FlavorSection = ({ reviews, reviewCount }: FlavorSectionProps) => {
   const topAromas = getTopAromas(reviews);
   const displayAromas: AromaKey[] = [...topAromas];
+
   while (displayAromas.length < 4) {
     displayAromas.push("EMPTY");
   }
+
   return (
     <div
       className={cn(
@@ -33,10 +39,9 @@ const FlavorSection = ({ reviews, reviewCount }: FlavorSectionProps) => {
         "pc:flex pc:flex-col pc:gap-6"
       )}
     >
-      {/* 제목 + 참여 인원 */}
       <div
         className={cn(
-          "mb-4 flex flex-col items-start gap-1",
+          "mb-4 flex select-none flex-col items-start gap-1",
           "tablet:mb-0 tablet:ml-9 tablet:flex-col tablet:gap-3",
           "pc:flex-row pc:items-center pc:justify-between"
         )}
@@ -44,19 +49,22 @@ const FlavorSection = ({ reviews, reviewCount }: FlavorSectionProps) => {
         <h2 className="text-heading-lg text-gray-900 pc:ml-10">
           어떤 향이 있나요?
         </h2>
-        <span className="text-body-sm text-gray-400">
+        <span className="mr-8 text-body-sm text-gray-400">
           ({reviewCount}명 참여)
         </span>
       </div>
-      {/* Flavor 컴포넌트 */}
-      <div className="flex w-full justify-center tablet:justify-start">
-        <div className="w-full max-w-[300px] tablet:max-w-none pc:ml-16 pc:max-w-none">
-          <div className="scrollbar-hide overflow-hidden [&>div>div:first-child]:hidden">
-            <Flavor count={reviewCount} items={displayAromas} />
-          </div>
+
+      <div className="flex w-full select-none justify-center tablet:justify-start">
+        <div className="w-full max-w-[340px] tablet:max-w-[440px] pc:ml-10 pc:max-w-none">
+          <Flavor
+            count={reviewCount}
+            items={displayAromas}
+            showHeader={false}
+          />
         </div>
       </div>
     </div>
   );
 };
+
 export default FlavorSection;

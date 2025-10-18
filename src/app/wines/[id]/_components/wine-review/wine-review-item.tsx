@@ -78,14 +78,19 @@ const WineReviewItem = ({
   const router = useRouter();
   const { reviewDeleteSuccess, reviewDeleteError } = useToast();
 
-  const isLiked = useMemo(() => {
-    return typeof review.isLiked === "boolean"
-      ? review.isLiked
-      : Object.keys(review.isLiked).length > 0;
+  const derivedIsLiked = useMemo(() => {
+    if (typeof review.isLiked === "boolean") {
+      return review.isLiked;
+    }
+    if (!review.isLiked) {
+      return false;
+    }
+    return Object.keys(review.isLiked).length > 0;
   }, [review.isLiked]);
 
   const [isTasteOpen, setIsTasteOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [liked, setLiked] = useState(derivedIsLiked);
 
   const {
     isOn: isMenuOpen,
@@ -97,8 +102,7 @@ const WineReviewItem = ({
 
   const { mutate: toggleLike, isPending: likePending } = useReviewLike(
     review.id,
-    wineId,
-    isLiked
+    wineId
   );
 
   const { mutate: deleteReview, isPending: deletePending } = useReviewDelete({
@@ -131,12 +135,9 @@ const WineReviewItem = ({
   };
 
   const handleDeleteConfirm = () => {
-    const scrollYBeforeDelete = window.scrollY;
-
     deleteReview(undefined, {
       onSuccess: () => {
         setIsDeleteModalOpen(false);
-        requestAnimationFrame(() => window.scrollTo(0, scrollYBeforeDelete));
         reviewDeleteSuccess();
       },
       onError: () => {
@@ -145,11 +146,22 @@ const WineReviewItem = ({
     });
   };
 
+  const handleLikeClick = () => {
+    const next = !liked;
+    setLiked(next);
+
+    toggleLike(next, {
+      onError: () => {
+        setLiked((prev) => !prev);
+      },
+    });
+  };
+
   return (
     <>
       <article
         className={cn(
-          "flex w-full flex-col items-center gap-6 py-8",
+          "flex w-full select-none flex-col items-center gap-6 py-8",
           "tablet:items-center tablet:gap-8 tablet:py-10",
           "pc:gap-6 pc:py-8",
           !isFirst && "border-t border-gray-300"
@@ -176,12 +188,10 @@ const WineReviewItem = ({
             <div className="flex items-center gap-2">
               {!isMyReview && (
                 <LikeButton
-                  isLike={isLiked}
+                  isLike={liked}
                   disabled={likePending}
-                  onClick={() => {
-                    toggleLike();
-                  }}
-                  aria-label={isLiked ? "좋아요 취소" : "좋아요"}
+                  onClick={handleLikeClick}
+                  aria-label={liked ? "좋아요 취소" : "좋아요"}
                 />
               )}
               {isMyReview && (

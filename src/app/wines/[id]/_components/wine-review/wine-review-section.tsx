@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import RatingDistribution from "@/components/rating/rating-distribution";
 import ReviewListHeader from "./wine-review-list-header";
@@ -35,16 +35,31 @@ const ReviewSection = ({
   wineId,
   currentUserId,
 }: ReviewSectionProps) => {
-  const [visibleCount, setVisibleCount] = useState(REVIEW_PIECES);
+  const [visibleCount, setVisibleCount] = useState(() =>
+    Math.min(REVIEW_PIECES, reviews.length)
+  );
+
   const visibleReviews = reviews.slice(0, visibleCount);
-  const hasMore = visibleCount < reviews.length;
+
+  const hasMore =
+    reviews.length > REVIEW_PIECES && visibleCount < reviews.length;
+
+  const prevLengthRef = useRef(reviews.length);
 
   useEffect(() => {
-    setVisibleCount((prev) => {
-      const nextLen = reviews.length;
-      if (nextLen < prev) return nextLen;
-      return prev;
-    });
+    const prevLength = prevLengthRef.current;
+    const scrollY = window.scrollY;
+
+    if (reviews.length > prevLength) {
+      setVisibleCount(Math.min(REVIEW_PIECES, reviews.length));
+    } else if (reviews.length < prevLength) {
+      setVisibleCount((prev) => Math.min(prev, reviews.length));
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollY);
+      });
+    }
+
+    prevLengthRef.current = reviews.length;
   }, [reviews.length]);
 
   const handleLoadMore = () => {
