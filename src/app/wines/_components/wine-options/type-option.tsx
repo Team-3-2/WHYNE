@@ -49,7 +49,7 @@ const TypeItem = ({
           alt="타입"
           draggable={false}
         />
-        <span className="text-body-sm tracking-[-0.02em] tablet:text-body-md pc:text-body-md">
+        <span className="text-body-sm tracking-[-0.02em] tablet:text-body-sm pc:text-body-md">
           {item}
         </span>
       </label>
