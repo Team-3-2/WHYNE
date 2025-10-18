@@ -24,7 +24,7 @@ const getUserWines = async ({ cursor, limit }: GetUserWinesData) => {
 
   return {
     ...res.data,
-    list: [...res.data.list].reverse(),
+    list: [...res.data.list],
   };
 };
 
