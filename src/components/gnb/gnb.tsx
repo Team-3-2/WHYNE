@@ -51,16 +51,13 @@ const Gnb = ({ user }: { user: User }) => {
         )}
       >
         <div className="container flex items-center justify-between">
-          <h1>
-            <Link
-              href="/"
-              aria-label="메인페이지 이동"
-              className="flex items-center leading-[26px] text-white"
-            >
-              <Logo className="w-[71px]" />
-            </Link>
-          </h1>
-
+          <Link
+            href="/"
+            aria-label="메인페이지 이동"
+            className="flex items-center leading-[26px] text-white"
+          >
+            <Logo className="w-[71px]" />
+          </Link>
           <div className="relative" ref={dropdownRef}>
             {user ? (
               <button
