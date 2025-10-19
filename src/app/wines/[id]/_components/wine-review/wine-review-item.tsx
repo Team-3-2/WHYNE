@@ -240,7 +240,7 @@ const WineReviewItem = ({
           )}
 
           {/* 4. 리뷰 내용 */}
-          <p className="text-body-md leading-relaxed tracking-[-0.02em] text-gray-900">
+          <p className="whitespace-pre-wrap break-keep text-body-md leading-relaxed tracking-[-0.02em] text-gray-900">
             {review.content}
           </p>
 
