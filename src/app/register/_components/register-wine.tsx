@@ -94,6 +94,7 @@ const RegisterWine = ({
               layout="fill"
               alt="미리보기 이미지"
               className={REGISTER_STYLES.img}
+              draggable={false}
             />
             <Icon
               icon="CameraIcon"

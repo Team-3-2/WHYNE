@@ -19,6 +19,7 @@ const WineInfo = ({ name, region, image }: WineInfoProps) => {
               fill
               className="object-contain"
               sizes="62px"
+              draggable={false}
             />
           ) : (
             <Image
@@ -26,6 +27,7 @@ const WineInfo = ({ name, region, image }: WineInfoProps) => {
               fill
               className="object-contain"
               alt={`${name} 이미지 불러오기 실패`}
+              draggable={false}
             />
           )}
         </div>
