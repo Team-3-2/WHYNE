@@ -118,6 +118,6 @@ src
 
 ## 바로가기
 
-- [배포 바로가기](https://google.com/)
-- [스토리북 바로가기](https://68d3998e0b054d1207706cbb-tzevsxkvcq.chromatic.com/?path=/docs/my-profile-accountitem--docs)
+- [배포 바로가기](https://wine-phi-olive.vercel.app/)
+- [스토리북 바로가기](https://68d3998e0b054d1207706cbb-rwsgeadjmd.chromatic.com/?path=/story/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%84%B8%ED%8C%85-%ED%8F%B0%ED%8A%B8-%EC%BB%AC%EB%9F%AC--font-color)
 - [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
