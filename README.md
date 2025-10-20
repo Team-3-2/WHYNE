@@ -1,25 +1,52 @@
-# Wine
-(프로젝트 설명)
+# 🍷 WHYNE
+### WHYNE은 사용자가 다양한 와인 리뷰를 확인하고, 구매 여부를 쉽게 판단할 수 있는 와인 리뷰 플랫폼입니다.
 
-## 목표
-- 목표: 프로젝트 완성
+<img width="1800" height="600" alt="image" src="https://github.com/user-attachments/assets/cd2abace-5bfc-4243-ad41-b7944bbd4f45" />
 
-## 팀원 정보 및 역할
-- 준열: 팀 리딩, 랜딩 페이지, 와인 상세 페이지
-- 휘태: 로그인, 회원가입, 리뷰 남기기/와인 등록하기 모달
-- 연수: 마이페이지(내가 등록한 와인), notion 문서화
-- 지권: 마이페이지(내가 쓴 후기)
+<br>
 
-> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
 
-## Core Time
-- 데일리 스크럼  
-  - 월요일: 오후 3시  
-  - 화요일 일요일: 오후 1시 30분 (20~30분 진행)
-- 집중 코딩 (모각코)  
-  - 9:00 ~ 18:00 (zep 활용)
- 
-> [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
+## 🎯 목표
+> #### 주어진 요구사항을 충족하는 것을 넘어, 경쟁력 있는 특별한 UI / UX를 도입하고 사용자에게 최적의 와인 선택 경험을 제공하는 것
+
+<br>
+
+## 👥 팀 소개 
+
+<span align="right">
+  
+  🔗 [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
+
+</span>
+
+<div align="center">
+  
+|팀장 |팀원 |팀원 |팀원 |
+|:---:|:---:|:---:|:---:|
+| <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background: white;"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Dove.png" width="80" height="80" alt="🕊️"/><br><b><a href="https://github.com/junye0l">김준열</a></b><br><img src="https://img.shields.io/badge/ISTJ-50C878?style=for-the-badge&logoColor=white" alt="ISTJ"/><br><code>FE</code></div> | <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background: white;"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Bat.png" width="80" height="80" alt="🦇"/><br><b><a href="https://github.com/wlrnjs">서지권</a></b><br><img src="https://img.shields.io/badge/INTJ-5C0091?style=for-the-badge&logoColor=white" alt="INTJ"/><br><code>FE</code></div> | <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background: white;"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Baby%20Chick.png" width="80" height="80" alt="🐣"/><br><b><a href="https://github.com/suuuuya">이연수</a></b><br><img src="https://img.shields.io/badge/INFP-9B59B6?style=for-the-badge&logoColor=white" alt="INFP"/><br><code>FE</code></div> | <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background: white;"><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Black%20Cat.png" width="80" height="80" alt="🐈‍⬛"/><br><b><a href="https://github.com/Imhwitae">황휘태</a></b><br><img src="https://img.shields.io/badge/ISTJ-E74C3C?style=for-the-badge&logoColor=white" alt="ISTJ"/><br><code>FE</code></div> |
+
+</div>
+
+<br>
+
+## ⏰ Core Time
+
+<span align="right">
+  
+  🔗 [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
+
+</span>
+
+> 원활한 소통을 위해 매일 진행하며, 의미 없는 시간이 되지 않도록 **노션 문서화**로 기록합니다.
+
+#### 🗓️ 시간표
+  
+| 요일 | 시간 |
+|:---:|:---:|
+| 월요일 | **15:00** |
+| 화요일 ~ 일요일 | **13:30** |
+
+<br>
 
 ## Branch 전략
 - `main` → 배포
