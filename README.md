@@ -1,17 +1,18 @@
 # 🍷 WHYNE
+
 ### WHYNE은 사용자가 다양한 와인 리뷰를 확인하고, 구매 여부를 쉽게 판단할 수 있는 와인 리뷰 플랫폼입니다.
 
 <img width="1800" height="600" alt="image" src="https://github.com/user-attachments/assets/cd2abace-5bfc-4243-ad41-b7944bbd4f45" />
 
 <br>
 
-
 ## 🎯 목표
-> #### 주어진 요구사항을 충족하는 것을 넘어, 경쟁력 있는 특별한 UI / UX를 도입하고 사용자에게 최적의 와인 선택 경험을 제공하는 것
+
+> #### 주어진 요구사항을 충족하는 것을 넘어, 경쟁력 있는 특별한 UI / UX를 도입하고, 사용자에게 최적의 와인 선택 경험을 제공하는 것
 
 <br>
 
-## 👥 팀 소개 
+## 👥 팀 소개
 
 <span align="right">
   
@@ -40,15 +41,16 @@
 > 원활한 소통을 위해 매일 진행하며, 의미 없는 시간이 되지 않도록 **노션 문서화**로 기록합니다.
 
 #### 🗓️ 시간표
-  
-| 요일 | 시간 |
-|:---:|:---:|
-| 월요일 | **15:00** |
+
+|      요일       |   시간    |
+| :-------------: | :-------: |
+|     월요일      | **15:00** |
 | 화요일 ~ 일요일 | **13:30** |
 
 <br>
 
 ## Branch 전략
+
 - `main` → 배포
 - `develop` → 통합 브랜치
 - `feature/*`, `design/*`, `chore/*` → 작업 브랜치 → PR → develop → main
@@ -56,6 +58,7 @@
 > [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%EB%B8%8C%EB%9E%9C%EC%B9%98-%EC%BB%A8%EB%B2%A4%EC%85%98)
 
 ## 기술 스택
+
 - Next.js, React, TypeScript
 - Tailwind CSS
 - Storybook
@@ -65,12 +68,14 @@
 > [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
 
 ## 깃허브 액션
-- Vercel 배포  
-- Chromatic으로 Storybook 배포 (develop 기준)  
+
+- Vercel 배포
+- Chromatic으로 Storybook 배포 (develop 기준)
 
 > [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%EA%B9%83%ED%97%88%EB%B8%8C-%EC%95%A1%EC%85%98)
 
 ## 프로젝트 관리
+
 - README: 프로젝트 개요 / 기술 스택 / 실행 방법
 - Wiki: 세부 규칙, 가이드 문서, 브랜치 룰
 - Notion: 회의록, 멘토링 피드백, 참고 자료
@@ -79,6 +84,7 @@
 > [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B4%80%EB%A6%AC)
 
 ## 실행 방법
+
 ```bash
 # 패키지 설치
 npm install
@@ -107,9 +113,11 @@ src
  ┣ types        # 전역 타입 정의 (TypeScript 인터페이스, 타입)
  ┗ utils        # 공통 유틸리티 함수
 ```
+
 > [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki/%ED%8F%B4%EB%8D%94-%EA%B5%AC%EC%A1%B0)
 
 ## 바로가기
+
 - [배포 바로가기](https://google.com/)
 - [스토리북 바로가기](https://68d3998e0b054d1207706cbb-tzevsxkvcq.chromatic.com/?path=/docs/my-profile-accountitem--docs)
 - [Wiki 바로가기](https://github.com/Team-3-2/Wine/wiki)
