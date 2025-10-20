@@ -71,7 +71,8 @@ const LandingSection = ({
             src={imgSrc}
             alt={imgAlt}
             fill
-            sizes="(min-width: 1024px) 725px, 100vw"
+            draggable={false}
+            sizes="(min-width: 1024px) 725px, 100vw "
             className="object-cover"
           />
         </div>

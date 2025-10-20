@@ -20,6 +20,7 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
           fill
           className="object-cover"
           quality={60}
+          draggable={false}
         />
       </div>
 
@@ -55,6 +56,7 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                   quality={75}
                   sizes="(max-width: 743px) 220px, (max-width: 1279px) 280px, 320px"
                   className="object-contain"
+                  draggable={false}
                 />
               ) : (
                 <Image
@@ -63,13 +65,14 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                   sizes="(max-width: 743px) 220px, (max-width: 1279px) 280px, 320px"
                   className="object-contain"
                   alt={`${name} 이미지 불러오기 실패`}
+                  draggable={false}
                 />
               )}
             </div>
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-1 flex-col gap-6 pc:max-w-[496px]">
+        <div className="break-word flex min-w-0 flex-1 flex-col gap-6 pc:max-w-[480px]">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-gray-500">
               <Rating rating={wine.avgRating} size="md2" />
@@ -77,12 +80,12 @@ const WineHeader = ({ wine }: WineHeaderProps) => {
                 {reviewLabel(wine.reviewCount)}
               </span>
             </div>
-            <h1
+            <h2
               title={wine.name}
-              className="truncate text-title-page-md text-gray-900 tablet:text-title-page-md pc:text-title-page-md"
+              className="text-title-page-xs text-gray-900 tablet:text-title-page-sm pc:text-title-page-md"
             >
               {wine.name}
-            </h1>
+            </h2>
             <p
               title={wine.region}
               className="truncate text-body-sm text-gray-600 tablet:text-body-md"
