@@ -3,6 +3,7 @@
 import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
 import ReviewFormClient from "@/app/wines/[id]/_components/wine-review-form/review-form-client";
+import { cn } from "@/lib/utils";
 
 export default function WritePage() {
   const router = useRouter();
@@ -16,13 +17,25 @@ export default function WritePage() {
   if (!reviewId) return null;
 
   return (
-    <main className="min-h-screen bg-white">
-      <section className="container mx-auto flex max-w-[460px] flex-col gap-10 py-12 pt-24 tablet:max-w-[740px] pc:max-w-[1020px]">
-        <h1 className="text-heading-lg">리뷰 작성</h1>
+    <main
+      className={cn(
+        "min-h-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat py-[35px]",
+        "tablet:py-[70px]",
+        "pc:py-[70px]"
+      )}
+    >
+      <section
+        className={cn(
+          "container mt-[60px] flex flex-col gap-10 rounded-2xl bg-white px-[16px] py-8",
+          "tablet:max-w-[480px]",
+          "pc:max-w-[480px]"
+        )}
+      >
+        <h1 className="px-5 text-heading-lg">리뷰 작성</h1>
         <ReviewFormClient
           wineId={Number(reviewId)}
           mode="create"
-          className="max-w-none pb-[140px] tablet:pb-0 pc:pb-0"
+          className="max-w-none px-5 pb-[140px] tablet:pb-0 pc:pb-0"
         />
       </section>
     </main>

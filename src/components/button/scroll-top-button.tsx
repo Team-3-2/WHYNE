@@ -26,7 +26,7 @@ const ScrollTopButton = ({}: ScrollTopButtonProps) => {
       icon="ArrowTopIcon"
       iconSize="md"
       className={cn(
-        "h-[40px] w-[40px] rounded-full border-gray-300",
+        "h-[45px] w-[45px] rounded-full border-gray-300",
         "tablet:h-[50px] tablet:w-[50px]",
         "pc:h-[50px] pc:w-[50px]"
       )}
