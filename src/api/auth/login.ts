@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const opts = {
   maxAge: 60 * 60 * 24 * 30,
@@ -12,6 +13,7 @@ const opts = {
 const login = async (prevState: any, formData: FormData) => {
   const email = formData.get("email");
   const password = formData.get("password");
+  const redirectUrl = formData.get("redirect");
 
   if (!email || !password)
     return { isError: true, message: "이메일 또는 비밀번호를 입력하세요." };
@@ -36,9 +38,9 @@ const login = async (prevState: any, formData: FormData) => {
     cookieStore.set("refreshToken", `${data.refreshToken}`);
     cookieStore.set("login_type", "basic", opts);
 
-    return { isError: false, data: data };
+    redirect(redirectUrl as string);
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 

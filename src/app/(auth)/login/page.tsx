@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useRememberId } from "../_hooks/use-remember-id";
 import { getCookie, setCookie } from "cookies-next";
 import RecentLoginBadge from "../_components/recent-login-badge/recent-login-badge";
+import { useSearchParams } from "next/navigation";
 
 interface LoginFormData {
   email: string;
@@ -36,6 +37,7 @@ const Page = () => {
   const [loginType, setLoginType] = useState<string | null>(null);
   const [state, formAction, isPending] = useActionState(login, null);
   const { checked, setChecked, initialId, opts } = useRememberId();
+  const searchParams = useSearchParams();
 
   const email = watch("email");
 
@@ -118,6 +120,12 @@ const Page = () => {
                 message: "비밀번호는 최소 8자 이상입니다.",
               },
             })}
+          />
+          <input
+            className="hidden"
+            type="hidden"
+            name="redirect"
+            value={searchParams.get("redirect") || "/"}
           />
           <RememberId checked={checked} setChecked={setChecked} />
         </div>
