@@ -18,7 +18,8 @@ const PageModalBtnWrapper = ({
         "after:absolute after:block after:bg-gradient-to-t after:content-['']",
         "after:bottom-full after:left-0 after:h-[80px] after:w-full",
         "after:pointer-events-none after:from-white after:from-40%",
-        "tablet:sticky tablet:from-70% pc:sticky pc:from-70%",
+        "tablet:sticky tablet:from-70% tablet:px-0 pc:sticky pc:from-70%",
+        "pc:px-0",
         className
       )}
     >

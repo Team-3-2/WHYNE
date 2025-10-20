@@ -81,8 +81,8 @@ const ReviewSection = ({
       {/* 모바일/태블릿: 평점 분포 */}
       <div
         className={cn(
-          "mb-12",
-          "tablet:sticky tablet:top-[70px] tablet:z-10 tablet:mb-8 tablet:bg-white tablet:pb-4 tablet:pt-4",
+          "mb-[77px]",
+          "tablet:sticky tablet:top-[70px] tablet:z-[51] tablet:mb-[57px] tablet:bg-white tablet:pb-[30px] tablet:pt-[20px]",
           "pc:hidden"
         )}
       >
@@ -97,14 +97,14 @@ const ReviewSection = ({
       <div
         className={cn(
           "flex flex-col",
-          "pc:grid pc:grid-cols-[1fr_280px] pc:gap-x-8"
+          "pc:grid pc:grid-cols-[1fr_280px] pc:gap-x-[77px]"
         )}
       >
         {/* 왼쪽: 리뷰 목록 */}
         <div>
           <ReviewListHeader totalCount={reviews.length} />
 
-          <div className="space-y-3 tablet:space-y-4">
+          <div className={cn("break-words pc:ml-[52px]")}>
             {visibleReviews.map((review, index) => (
               <WineReviewItem
                 key={review.id}
