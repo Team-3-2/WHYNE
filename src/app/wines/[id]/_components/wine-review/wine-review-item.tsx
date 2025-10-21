@@ -175,14 +175,12 @@ const WineReviewItem = ({
             "pc:gap-[20px]"
           )}
         >
-          {/* 1. 별점 */}
           <div className="flex items-center justify-between">
             <div role="group" aria-label={`별점 ${review.rating}점`}>
               <Rating rating={review.rating} size="sm" />
             </div>
           </div>
 
-          {/* 2. 프로필 + 시간 + 좋아요 or 햄버거 버튼*/}
           <div className="flex items-center justify-between">
             <WineReviewRating createdAt={review.createdAt} user={review.user} />
             <div className="flex items-center gap-2">
@@ -206,7 +204,6 @@ const WineReviewItem = ({
             </div>
           </div>
 
-          {/* 3. 향 정보 */}
           {review.aroma && review.aroma.length > 0 && (
             <nav aria-label="와인 향">
               <ul className="flex flex-wrap items-center gap-1">
@@ -239,12 +236,9 @@ const WineReviewItem = ({
             </nav>
           )}
 
-          {/* 4. 리뷰 내용 */}
           <p className="whitespace-pre-wrap break-keep text-body-md leading-relaxed tracking-[-0.02em] text-gray-900">
             {review.content}
           </p>
-
-          {/* 5. 맛 평가 토글 영역 */}
           <div>
             <div
               id={`taste-${review.id}`}
@@ -272,7 +266,6 @@ const WineReviewItem = ({
             </div>
           </div>
 
-          {/* 6. 토글 */}
           <div className="flex w-full justify-center">
             <IconButton
               icon="ArrowDownIcon"
