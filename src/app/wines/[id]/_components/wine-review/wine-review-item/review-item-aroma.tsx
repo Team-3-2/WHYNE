@@ -6,7 +6,7 @@ import { Icon } from "@/components";
 const ReviewItemAroma = ({ review }: { review: Review }) => {
   return (
     <>
-      {Boolean(review.aroma?.length) && (
+      {review.aroma?.length > 0 && (
         <nav aria-label="와인 향">
           <ul className="flex flex-wrap items-center gap-1">
             {review.aroma.map((aroma, index) => {
