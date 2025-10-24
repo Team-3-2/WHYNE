@@ -42,7 +42,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <div
       className={cn(
-        "bg-gray-200 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat px-[16px] py-[35px]",
+        "flex-center min-h-screen bg-gray-200 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat px-[16px] py-[35px]",
         "tablet:py-[70px]",
         "pc:py-[70px]"
       )}

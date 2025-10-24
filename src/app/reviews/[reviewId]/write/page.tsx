@@ -19,7 +19,7 @@ export default function WritePage() {
   return (
     <main
       className={cn(
-        "min-h-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat py-[35px]",
+        "flex-center min-h-screen bg-gray-200 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat py-[35px]",
         "tablet:py-[70px]",
         "pc:py-[70px]"
       )}
