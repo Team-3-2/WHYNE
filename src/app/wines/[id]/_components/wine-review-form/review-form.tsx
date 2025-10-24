@@ -38,7 +38,6 @@ export default function ReviewForm({
     image: wineImage,
   } = wine;
 
-  // 상태 관리
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState("");
   const [selectedAromas, setSelectedAromas] = useState<AromaKey[]>([]);
@@ -68,7 +67,6 @@ export default function ReviewForm({
     }
   }, [initialData]);
 
-  // 맛 변경 핸들러
   const handleTasteChange = (index: number, newLevel: GaugeLevel) => {
     const newTastes = [...tastes];
     newTastes[index].data = newLevel;
@@ -114,7 +112,6 @@ export default function ReviewForm({
 
     if (hasError) return;
 
-    // 데이터 생성
     const reviewData: ReviewBase = {
       rating,
       lightBold: tastes[0].data,
@@ -140,15 +137,12 @@ export default function ReviewForm({
         className
       )}
     >
-      {/* 모든 컨텐츠 */}
       <div className="flex flex-col gap-8">
-        {/* 와인 정보 */}
         <div>
           <WineInfo name={wineName} region={wineRegion} image={wineImage} />
           <div className="mt-4 border-t border-gray-300" />
         </div>
 
-        {/* 별점 선택 */}
         <div className="flex items-center gap-4">
           <label className="text-body-sm text-gray-500">별점 선택</label>
           <RatingInput
@@ -158,7 +152,6 @@ export default function ReviewForm({
           />
         </div>
 
-        {/* 후기 입력 */}
         <div>
           <textarea
             value={content}
@@ -189,7 +182,6 @@ export default function ReviewForm({
           </div>
         </div>
 
-        {/* 와인의 맛 */}
         <div>
           <label className="mb-4 block text-heading-md">
             와인의 맛은 어떤가요?
@@ -201,7 +193,6 @@ export default function ReviewForm({
           />
         </div>
 
-        {/* 향 선택 */}
         <div className="tablet:pb-12 pc:pb-12">
           <label className="mb-4 block text-heading-md">
             기억에 남는 향이 있나요?
@@ -219,7 +210,6 @@ export default function ReviewForm({
           </div>
         </div>
 
-        {/* 버튼 */}
         <PageModalBtnWrapper>
           <Button
             onClick={handleSubmit}

@@ -13,7 +13,6 @@ interface WineReviewRatingProps {
 const WineReviewRating = ({ createdAt, user }: WineReviewRatingProps) => {
   return (
     <div className="flex items-center gap-3">
-      {/* 프로필 이미지 */}
       <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full">
         {isValidImageSrc(user.image) ? (
           <Image
@@ -33,7 +32,6 @@ const WineReviewRating = ({ createdAt, user }: WineReviewRatingProps) => {
         )}
       </div>
 
-      {/* 닉네임 + 시간 */}
       <div className="flex flex-col">
         <span className="text-body-lg font-bold text-gray-900">
           {user.nickname}
