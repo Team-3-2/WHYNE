@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import type { Review } from "@/types/wine";
 import ReviewItemHeader from "./wine-review-item/review-item-header";
