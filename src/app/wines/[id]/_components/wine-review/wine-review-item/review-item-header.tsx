@@ -4,20 +4,19 @@ import { memo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Rating,
-  Icon,
   LikeButton,
   DropdownMenu,
   IconButton,
   ConfirmModal,
 } from "@/components";
-import { cn, getAromaIconName } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import useToggle from "@/hooks/use-toggle";
 import useClickOutside from "@/hooks/use-click-outside";
 import useReviewLike from "@/hooks/api/reviews/use-review-like";
 import useReviewDelete from "@/hooks/api/reviews/use-review-delete";
 import { useToast } from "@/hooks/use-toast";
-import { aromaMap } from "@/components/flavor/aroma-map";
 import WineReviewRating from "../wine-review-rating";
+import ReviewItemAroma from "./review-item-aroma";
 import type { Review } from "@/types/wine";
 
 interface ReviewItemHeaderProps {
@@ -138,7 +137,7 @@ const ReviewItemHeader = ({
         <div className="flex items-center justify-between">
           <WineReviewRating createdAt={review.createdAt} user={review.user} />
           <div className="flex items-center">
-            {isMyReview ? (
+            {!isMyReview ? (
               <LikeButton
                 isLike={liked}
                 disabled={likePending}
@@ -156,38 +155,7 @@ const ReviewItemHeader = ({
             )}
           </div>
         </div>
-
-        {Boolean(review.aroma?.length) && (
-          <nav aria-label="와인 향">
-            <ul className="flex flex-wrap items-center gap-1">
-              {review.aroma.map((aroma, index) => {
-                const aromaInfo = aromaMap[aroma];
-                if (!aromaInfo) return null;
-
-                return (
-                  <li key={aroma} className="flex items-center">
-                    <div className="flex items-center gap-3 px-1">
-                      <Icon
-                        icon={getAromaIconName(aroma) as any}
-                        size="sm"
-                        className="text-gray-700"
-                        aria-hidden="true"
-                      />
-                      <span className="text-body-sm text-gray-500">
-                        {aromaInfo.label}
-                      </span>
-                    </div>
-                    {index < review.aroma.length - 1 && (
-                      <span className="text-gray-300" aria-hidden="true">
-                        •
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        )}
+        <ReviewItemAroma review={review} />
       </div>
 
       <ConfirmModal
