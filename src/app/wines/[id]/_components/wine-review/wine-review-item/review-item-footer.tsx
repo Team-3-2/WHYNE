@@ -38,10 +38,8 @@ const ReviewItemFooter = ({ review }: ReviewItemFooterProps) => {
         aria-label="맛 평가"
         aria-hidden={!isTasteOpen}
       >
-        <div className="overflow-hidden">
-          <div className="pb-2">
-            <WineTaste type="review" tastes={tastes} />
-          </div>
+        <div className="overflow-hidden pb-2">
+          <WineTaste type="review" tastes={tastes} />
         </div>
       </div>
 

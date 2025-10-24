@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useMemo, useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Rating,
@@ -48,7 +48,7 @@ const OptionMenu = memo(function OptionMenu({
         icon="HamburgerIcon"
         aria-label="옵션 메뉴"
         className="!h-6 !w-6 border-none hover:bg-inherit active:bg-inherit"
-        iconClassName="mobile:ic-sm tablet:ic-sm pc:ic-md"
+        iconClassName="ic-sm pc:ic-md"
         onClick={onToggle}
       />
       {isOpen && (
@@ -73,11 +73,10 @@ const ReviewItemHeader = ({
   const router = useRouter();
   const { reviewDeleteSuccess, reviewDeleteError } = useToast();
 
-  const derivedIsLiked = useMemo(() => {
-    if (typeof review.isLiked === "boolean") return review.isLiked;
-    if (!review.isLiked) return false;
-    return Object.keys(review.isLiked).length > 0;
-  }, [review.isLiked]);
+  const derivedIsLiked =
+    typeof review.isLiked === "boolean"
+      ? review.isLiked
+      : Boolean(review.isLiked && Object.keys(review.isLiked).length);
 
   const [liked, setLiked] = useState(derivedIsLiked);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -132,24 +131,21 @@ const ReviewItemHeader = ({
       <div
         className={cn("flex w-full flex-col gap-6", "tablet:gap-8", "pc:gap-6")}
       >
-        <div className="flex items-center justify-between">
-          <div role="group" aria-label={`별점 ${review.rating}점`}>
-            <Rating rating={review.rating} size="sm" />
-          </div>
+        <div role="group" aria-label={`별점 ${review.rating}점`}>
+          <Rating rating={review.rating} size="sm" />
         </div>
 
         <div className="flex items-center justify-between">
           <WineReviewRating createdAt={review.createdAt} user={review.user} />
-          <div className="flex items-center gap-2">
-            {!isMyReview && (
+          <div className="flex items-center">
+            {isMyReview ? (
               <LikeButton
                 isLike={liked}
                 disabled={likePending}
                 onClick={handleLikeClick}
                 aria-label={liked ? "좋아요 취소" : "좋아요"}
               />
-            )}
-            {isMyReview && (
+            ) : (
               <OptionMenu
                 isOpen={isMenuOpen}
                 onToggle={toggleMenu}
@@ -161,7 +157,7 @@ const ReviewItemHeader = ({
           </div>
         </div>
 
-        {review.aroma?.length ? (
+        {Boolean(review.aroma?.length) && (
           <nav aria-label="와인 향">
             <ul className="flex flex-wrap items-center gap-1">
               {review.aroma.map((aroma, index) => {
@@ -191,7 +187,7 @@ const ReviewItemHeader = ({
               })}
             </ul>
           </nav>
-        ) : null}
+        )}
       </div>
 
       <ConfirmModal
