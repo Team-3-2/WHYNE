@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import REGEX from "@/constants/regex";
 import { useActionState, useEffect } from "react";
 import signup from "@/api/auth/signup-action";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 
 interface SignupFormData {
@@ -25,13 +24,12 @@ const Page = () => {
     getValues,
     formState: { errors, isValid },
   } = useForm<SignupFormData>();
-  const router = useRouter();
   const { signupSuccess, signupError } = useToast();
   const [state, formAction, isPending] = useActionState(signup, null);
 
   useEffect(() => {
     if (state && !state.isError) {
-      router.push("/");
+      window.location.href = "/";
       signupSuccess();
     } else if (state && state.isError) {
       signupError();

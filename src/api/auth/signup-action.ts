@@ -33,11 +33,9 @@ const signup = async (prevState: any, formData: FormData) => {
     formData.append("email", email);
     formData.append("password", password);
 
-    const loginResult = await login(prevState, formData);
-
-    return loginResult;
+    await login(prevState, formData);
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 
