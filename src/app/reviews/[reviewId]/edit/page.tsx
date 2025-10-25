@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
 import ReviewFormClient from "@/app/wines/[id]/_components/wine-review-form/review-form-client";
@@ -16,8 +17,20 @@ export default function EditPage() {
   if (!reviewId) return null;
 
   return (
-    <main className="min-h-screen bg-gray-100 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat">
-      <section className="container mx-auto flex max-w-[460px] flex-col gap-10 py-12 pt-24 tablet:max-w-[740px] pc:max-w-[1020px]">
+    <main
+      className={cn(
+        "flex-center min-h-screen bg-gray-200 bg-[url('/images/common/bg-main.png')] bg-cover bg-no-repeat py-[35px]",
+        "tablet:py-[70px]",
+        "pc:py-[70px]"
+      )}
+    >
+      <section
+        className={cn(
+          "container mt-[60px] flex flex-col gap-10 rounded-2xl bg-white px-[16px] py-8",
+          "tablet:max-w-[480px]",
+          "pc:max-w-[480px]"
+        )}
+      >
         <h1 className="text-heading-lg">리뷰 수정</h1>
         <ReviewFormClient
           reviewId={reviewId}
