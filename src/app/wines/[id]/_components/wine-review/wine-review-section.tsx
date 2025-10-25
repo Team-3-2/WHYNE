@@ -78,7 +78,6 @@ const ReviewSection = ({
 
   return (
     <div>
-      {/* 모바일/태블릿: 평점 분포 */}
       <div
         className={cn(
           "mb-[77px]",
@@ -93,14 +92,12 @@ const ReviewSection = ({
         />
       </div>
 
-      {/* PC: 그리드 레이아웃 */}
       <div
         className={cn(
           "flex flex-col",
           "pc:grid pc:grid-cols-[1fr_280px] pc:gap-x-[77px]"
         )}
       >
-        {/* 왼쪽: 리뷰 목록 */}
         <div>
           <ReviewListHeader totalCount={reviews.length} />
 
@@ -116,7 +113,6 @@ const ReviewSection = ({
             ))}
           </div>
 
-          {/* 더보기 버튼 */}
           {hasMore && (
             <div className="mt-8 flex justify-center">
               <Button
@@ -128,7 +124,6 @@ const ReviewSection = ({
           )}
         </div>
 
-        {/* 오른쪽: PC 평점 분포 */}
         <div
           className={cn("hidden", "pc:sticky pc:top-[70px] pc:block pc:h-fit")}
         >

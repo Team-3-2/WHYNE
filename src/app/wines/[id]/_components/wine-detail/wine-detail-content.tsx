@@ -40,12 +40,10 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* 헤더 */}
       <section className="rounded-b-none bg-[url('/images/wines/bg-recommended.png')] bg-cover bg-repeat pt-[60px] tablet:rounded-b-none tablet:pt-[70px] pc:rounded-b-[88px] pc:pt-[70px]">
         <WineHeader wine={wine} />
       </section>
 
-      {/* 맛/향 섹션 */}
       <section className="mb-0 mt-12 bg-white tablet:mb-0 tablet:mt-16 pc:mb-12 pc:mt-16">
         <div className="container">
           <div className="flex flex-col gap-12 tablet:gap-20 pc:flex-row pc:gap-32">
@@ -66,12 +64,10 @@ const WineDetailContent = ({ wineId }: WineDetailContentProps) => {
         </div>
       </section>
 
-      {/* 구분선 */}
       <div className="container">
         <hr className="mt-[-5px] border-t border-gray-300 tablet:mt-0 pc:mt-0" />
       </div>
 
-      {/* 리뷰 섹션 */}
       <section className="bg-white pb-12 pt-14 tablet:pt-14 pc:pt-14">
         <div className="container">
           <ReviewSection
