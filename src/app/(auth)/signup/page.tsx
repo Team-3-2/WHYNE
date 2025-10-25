@@ -31,7 +31,7 @@ const Page = () => {
 
   useEffect(() => {
     if (state && !state.isError) {
-      router.push("/");
+      window.location.href = "/";
       signupSuccess();
     } else if (state && state.isError) {
       signupError();

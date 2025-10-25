@@ -13,7 +13,7 @@ const opts = {
 const login = async (prevState: any, formData: FormData) => {
   const email = formData.get("email");
   const password = formData.get("password");
-  const redirectUrl = formData.get("redirect");
+  const redirectUrl = formData.get("redirect") || "/";
 
   if (!email || !password)
     return { isError: true, message: "이메일 또는 비밀번호를 입력하세요." };
